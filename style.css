@@ -21,19 +21,23 @@ nav {
   background-color: #0066cc;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 10px 0;
 }
 
-nav a {
+nav a, .dropdown-toggle {
   color: white;
   text-decoration: none;
-  margin: 0 20px;
+  margin: 0 15px;
   font-weight: bold;
+  font-size: 16px;
+  font-family: 'Cairo', sans-serif;
   transition: color 0.3s;
   cursor: pointer;
 }
 
-nav a:hover {
+nav a:hover,
+.dropdown-menu a:hover {
   color: #ffdd57;
 }
 
@@ -50,12 +54,8 @@ section {
 section.active {
   display: block;
 }
+
 .button-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .button-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 15px;
@@ -64,41 +64,25 @@ section.active {
 
 .lecture-btn {
   display: block;
-  background-color: #004080;
-  color: #fff;
+  background-color: #007BFF;
+  color: white;
   text-align: center;
-  padding: 15px;
+  padding: 12px;
   border-radius: 8px;
   font-weight: bold;
   font-size: 16px;
   text-decoration: none;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.lecture-btn:hover {
-  background-color: #002d5c;
-  transform: translateY(-2px);
-}
-
-.lecture-btn {
-  display: inline-block;
-  padding: 10px 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
   margin: 6px;
-  background-color: #007BFF;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .lecture-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
   background-color: #0056b3;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
 }
-}
+
 h2 {
   color: #004080;
   font-size: 20px;
@@ -106,13 +90,6 @@ h2 {
   margin-bottom: 15px;
 }
 
-nav a {
-  font-size: 16px;
-  font-family: 'Cairo', sans-serif;
-}
-.emoji {
-  font-size: 1.2em;
-}
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -121,12 +98,14 @@ nav a {
   margin: 0 auto;
   padding: 0 20px;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 .logo-area {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .logo {
@@ -136,37 +115,28 @@ nav a {
   object-fit: cover;
   border: 3px solid white;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
-  margin-bottom: 5px;
 }
-
 
 .author-name {
   font-size: 1rem;
   font-weight: 700;
-  font-family: 'Cairo', sans-serif;
   color: white;
 }
 
 .author-name:hover {
- text-decoration: underline; 
- color: white;
+  text-decoration: underline;
 }
+
 .title-area {
   flex: 1;
   text-align: center;
   font-size: 1.5em;
 }
+
 /* القوائم المنسدلة */
 .dropdown {
   position: relative;
   display: inline-block;
-}
-
-.dropdown-toggle {
-  color: white;
-  font-weight: bold;
-  margin: 0 20px;
-  cursor: pointer;
 }
 
 .dropdown-menu {
@@ -186,10 +156,46 @@ nav a {
   text-decoration: none;
 }
 
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
 .dropdown-menu a:hover {
   background-color: #004d99;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+/* ميديا كويري للأجهزة الصغيرة */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-container {
+    flex-direction: column;
+  }
+
+  .logo-area {
+    margin-bottom: 10px;
+  }
+
+  .title-area {
+    font-size: 1.2em;
+  }
+
+  section {
+    padding: 20px;
+    margin: 20px 10px;
+  }
+
+  .lecture-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
