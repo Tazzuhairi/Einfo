@@ -98,17 +98,18 @@
         #topBtn:hover {
             background-color: #1abc9c;
         }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.6em;
-            }
-            .section {
-                padding: 20px 15px;
-            }
-            #topBtn {
-                padding: 10px 14px;
-                font-size: 14px;
-            }
+        .home-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #3498db;
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+      border-radius: 50%;
+      padding: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
         }
     </style>
 </head>
@@ -134,7 +135,7 @@
                 <li><strong>التوسع (الثمانينيات - التسعينيات):</strong> ظهور بروتوكول TCP/IP لتمكين الاتصال بين الأجهزة. إطلاق شبكة الويب العالمية (WWW) لتسهيل الوصول إلى المعلومات.</li>
                 <li><strong>العصر الحديث:</strong> تطور تقنيات النطاق العريض والهواتف المحمولة. تحول الإنترنت إلى أداة رئيسية للاتصال والتجارة والتعليم.</li>
             </ul>
-            <a href="#" class="back-to-top">العودة إلى الأعلى</a>
+           
         </section>
 
         <section id="web-generations" class="section">
@@ -188,10 +189,7 @@
                 </ul>
             </section>
 
-            <a href="#" class="back-to-top">العودة إلى الأعلى</a>
-        </section>
-
-        <section id="advanced-concepts" class="section">
+            <section id="advanced-concepts" class="section">
             <h2>مفاهيم متقدمة</h2>
 
             <section id="semantic-web">
@@ -212,7 +210,6 @@
                 </ul>
             </section>
 
-            <a href="#" class="back-to-top">العودة إلى الأعلى</a>
         </section>
 
         <section id="benefits" class="section">
@@ -224,24 +221,22 @@
                 <li><strong>الرعاية الصحية:</strong> تشخيص وعلاج عن بُعد.</li>
                 <li><strong>المعلومات:</strong> وصول فوري إلى معرفة واسعة.</li>
             </ol>
-            <a href="#" class="back-to-top">العودة إلى الأعلى</a>
         </section>
 
         <section id="conclusion" class="section">
             <h2>خاتمة</h2>
             <p>شهد الإنترنت تطورًا كبيرًا من بنية تحتية بسيطة إلى منصة معقدة تدعم الذكاء الاصطناعي والتفاعل الاجتماعي. مع استمرار التطور، سيظل الإنترنت أداة حيوية في حياتنا اليومية.</p>
-            <a href="#" class="back-to-top">العودة إلى الأعلى</a>
+            
         </section>
 
     </div>
-
     <button id="topBtn" onclick="scrollToTop()">↑</button>
-
+<a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
     <footer>
         <div class="container">
             <p>© 2025 ملخص محاضرة تطور الإنترنت وأجيال الويب</p>
         </div>
-    </footer>
+		    </footer>
 
     <script>
         function scrollToTop() {
