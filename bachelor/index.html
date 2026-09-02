@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="موقع تعليمي جامعي متخصص في نظم إدارة المحتوى، يحتوي على محاضرات نصية وصوتية وفيديوية واختبارات للطلبة في تخصص المعلومات وتقنيات المعرفة">
+  <meta name="keywords" content="نظم إدارة المحتوى, CMS, محاضرات جامعية, تكنولوجيا المعلومات, تعليم إلكتروني">
+  <meta name="author" content="د. طلال ناظم الزهيري">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>موقع الأستاذ الدكتور طلال ناظم الزهيري التعليمي</title>
+  <link rel="stylesheet" href="../shared/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- ====== أنماط شاشة تسجيل الدخول ====== -->
+  <style>
+    /* --- غطاء تسجيل الدخول --- */
+    #loginOverlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(135deg, #002244 0%, #003d7a 50%, #001833 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+    }
+    #loginOverlay.hidden { display: none; }
+
+    /* زخرفة خلفية */
+    #loginOverlay::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(232,160,0,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(0,102,204,0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .login-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 44px 40px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+      text-align: center;
+      position: relative;
+    }
+
+    /* شريط ذهبي علوي */
+    .login-box::before {
+      content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px;
+      background: linear-gradient(90deg, #e8a000, #ffd166, #e8a000);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .login-logo {
+      width: 76px; height: 76px; border-radius: 50%;
+      background: linear-gradient(135deg, #003366, #0066cc);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px; margin: 0 auto 18px;
+      box-shadow: 0 6px 24px rgba(0,51,102,0.35);
+    }
+    .login-title { font-size: 20px; font-weight: 800; color: #003366; margin-bottom: 4px; }
+    .login-sub   { font-size: 13px; color: #5a6a7e; margin-bottom: 28px; line-height: 1.6; }
+
+    .login-tabs  {
+      display: flex; gap: 0; margin-bottom: 24px;
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid #dde4ef;
+    }
+    .login-tab   {
+      flex: 1; padding: 10px; border: none; background: #f5f7fa;
+      color: #5a6a7e; cursor: pointer;
+      font-family: 'Cairo',sans-serif; font-size: 14px; font-weight: 600;
+      transition: all 0.25s;
+    }
+    .login-tab:first-child { border-left: 1px solid #dde4ef; }
+    .login-tab.active {
+      background: linear-gradient(135deg, #003366, #004d99);
+      color: #ffd166;
+    }
+
+    .login-input {
+      width: 100%; padding: 13px 16px; margin-bottom: 14px;
+      background: #f5f7fa; border: 1.5px solid #dde4ef;
+      border-radius: 10px; color: #1a2535;
+      font-family: 'Cairo',sans-serif; font-size: 14px;
+      box-sizing: border-box; transition: border 0.2s; outline: none; text-align: right;
+    }
+    .login-input:focus { border-color: #0066cc; background: #fff; box-shadow: 0 0 0 3px rgba(0,102,204,0.1); }
+    .login-input::placeholder { color: #aab0bb; }
+
+    .login-btn {
+      width: 100%; padding: 14px; border: none; border-radius: 10px;
+      background: linear-gradient(135deg, #003366, #004d99);
+      color: #ffd166; font-family: 'Cairo',sans-serif; font-size: 16px; font-weight: 800;
+      cursor: pointer; transition: all 0.25s; margin-top: 4px;
+      box-shadow: 0 4px 18px rgba(0,51,102,0.3); letter-spacing: 0.5px;
+    }
+    .login-btn:hover { background: linear-gradient(135deg, #002244, #003d7a); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,51,102,0.4); }
+    .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .login-error  { background: #fff5f5; border: 1px solid #fca5a5; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #c0392b; margin-top: 12px; display: none; }
+    .login-success{ background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #166534; margin-top: 12px; display: none; }
+
+    /* --- زر تسجيل الخروج في الهيدر --- */
+    .logout-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 20px;
+      border: 1px solid rgba(255,209,102,0.6);
+      background: rgba(232,160,0,0.15); color: #ffd166;
+      cursor: pointer; font-family: 'Cairo',sans-serif; font-size: 13px; font-weight: 600;
+      transition: all 0.2s; margin-top: 6px;
+    }
+    .logout-btn:hover { background: rgba(232,160,0,0.3); color: #fff; }
+    .user-badge {
+      font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 3px; display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== شاشة تسجيل الدخول ====== -->
+  <div id="loginOverlay">
+    <div class="login-box">
+      <div class="login-logo">👨‍🏫</div>
+      <div class="login-title">منصة د. طلال الزهيري التعليمية</div>
+      <div class="login-sub">سجّل دخولك للوصول إلى المحاضرات والاختبارات</div>
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchTab('login')">تسجيل الدخول</button>
+        <button class="login-tab"        onclick="switchTab('register')">حساب جديد</button>
+      </div>
+      <input class="login-input" type="email"    id="authEmail"    placeholder="البريد الإلكتروني" />
+      <input class="login-input" type="password" id="authPassword" placeholder="كلمة المرور (6 أحرف على الأقل)" />
+      <button class="login-btn" id="authBtn" onclick="handleAuth()">دخول</button>
+      <div class="login-error"   id="authError"></div>
+      <div class="login-success" id="authSuccess"></div>
+    </div>
+  </div>
+
+  <!-- شريط الإشعارات العلوي -->
+  <div class="top-bar">
+    <span>📚 مرحبا بكم في منصة الدكتور طلال الزهيري التعليمية — مرحلة البكالوريوس</span>
+    <a href="../index.html" style="color:inherit;text-decoration:underline;margin-right:14px;">↩ التبديل بين المراحل الدراسية</a>
+  </div>
+
+  <header>
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-wrapper">
+          <img src="../shared/logo.png" alt="شعار الموقع" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+          <div class="logo-fallback" style="display:none">ط</div>
+        </div>
+        <a href="audio/cv.talal.mp4" target="_blank" class="author-name">
+          السيرة العلمية: ا.د.طلال ناظم الزهيري
+        </a>
+        <span class="author-title">أستاذ في قسم المعلومات وتقنيات المعرفة</span>
+        <span class="user-badge" id="userBadge"></span>
+        <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="display:none">🚪 تسجيل الخروج</button>
+      </div>
+
+      <div class="title-area">
+        <div class="site-title">موقع الأستاذ الدكتور طلال ناظم الزهيري التعليمي</div>
+        <div class="site-subtitle">مقرر نُظم إدارة المحتوى — المرحلة الثالثة</div>
+        <div class="stats-row">
+          <div class="stat-item"><span class="stat-num">30</span><span class="stat-label">أسبوعاً دراسياً</span></div>
+          <div class="stat-item"><span class="stat-num">11+</span><span class="stat-label">محاضرة نصية</span></div>
+          <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">اختبار تفاعلي</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a onclick="showSection('home')" class="active-link" data-section="home">
+        <span class="nav-icon">🏠</span><span class="nav-label">الرئيسية</span>
+      </a>
+      <a onclick="showSection('instructions')" data-section="instructions">
+        <span class="nav-icon">📋</span><span class="nav-label">التعليمات</span>
+      </a>
+
+      <div class="dropdown">
+        <a class="dropdown-toggle" tabindex="0">
+          <span class="nav-icon">📄</span><span class="nav-label">المحاضرات النصية</span>
+          <span class="arrow">▾</span>
+        </a>
+        <div class="dropdown-menu">
+          <a onclick="showSection('term1')">📘 محاضرات الفصل الأول</a>
+          <a onclick="showSection('term2')">📗 محاضرات الفصل الثاني</a>
+          <a onclick="showSection('fulltext')">📥 تحميل الكتاب المنهجي</a>
+        </div>
+      </div>
+
+      <a onclick="showSection('audio-lectures')" data-section="audio-lectures">
+        <span class="nav-icon">🎧</span><span class="nav-label">المحاضرات الصوتية</span>
+      </a>
+      <a onclick="showSection('video-lectures')" data-section="video-lectures">
+        <span class="nav-icon">🎥</span><span class="nav-label">المحاضرات الفيديوية</span>
+      </a>
+      <a onclick="showSection('exams')" data-section="exams">
+        <span class="nav-icon">📝</span><span class="nav-label">الاختبارات</span>
+      </a>
+    </div>
+    <!-- شريط التقدم -->
+    <div class="nav-progress" id="navProgress"></div>
+  </nav>
+
+  <!-- مؤشر التحميل -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <main>
+
+    <!-- ====== الرئيسية ====== -->
+    <section id="home" class="active fade-in">
+      <div class="section-header">
+        <h2>🏠 الرئيسية</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="welcome-card">
+        <div class="welcome-icon">👨‍🏫</div>
+        <div class="welcome-text">
+          <p>عزيزي الطالب،</p>
+          <p>
+            في إطار السعي لتقديم تجربة تعليمية متميزة تخرج عن النمط التقليدي، نقدم لك محتوى هذا الموقع الذي يتضمن محاضرات علمية متكاملة لمقرر
+            <strong class="highlight-text">«نُظم إدارة المحتوى»</strong>،
+            المقرر تدريسه في المرحلة الثالثة – قسم المعلومات وتقنيات المعرفة.
+          </p>
+          <p>
+            يسعى هذا الأسلوب الحديث إلى تعزيز فهمك لمفاهيم <strong>إدارة المحتوى</strong>، وإبراز كيفية توظيف التقنيات الرقمية والمنصات الإلكترونية بصورة فعّالة.
+          </p>
+          <p>
+            نحثّك على مراجعة <a onclick="showSection('instructions')" class="inline-link">تعليمات الاستخدام</a> المرفقة للاستفادة المثلى من هذه الموارد.
+          </p>
+          <p class="signature">مع خالص التمنيات بالتوفيق والنجاح،<br><strong>الأستاذ الدكتور طلال ناظم الزهيري</strong></p>
+        </div>
+      </div>
+
+      <!-- بطاقات الأقسام السريعة -->
+      <div class="quick-access">
+        <h3 class="quick-title">⚡ وصول سريع</h3>
+        <div class="quick-grid">
+          <div class="quick-card" onclick="showSection('term1')">
+            <div class="qc-icon">📘</div>
+            <div class="qc-title">الفصل الأول</div>
+            <div class="qc-desc">11 محاضرة نصية متاحة</div>
+            <div class="qc-arrow">←</div>
+          </div>
+          <div class="quick-card" onclick="showSection('term2')">
+            <div class="qc-icon">📗</div>
+            <div class="qc-title">الفصل الثاني</div>
+            <div class="qc-desc">محاضرات Wordpress وJoomla وDrupal</div>
+            <div class="qc-arrow">←</div>
+          </div>
+          <div class="quick-card" onclick="showSection('audio-lectures')">
+            <div class="qc-icon">🎧</div>
+            <div class="qc-title">المحاضرات الصوتية</div>
+            <div class="qc-desc">استمع أثناء التنقل</div>
+            <div class="qc-arrow">←</div>
+          </div>
+		  <div class="quick-card" onclick="showSection('video-lectures')">
+            <div class="qc-icon">🎥</div>
+            <div class="qc-title">المحاضرات الفيديوية</div>
+            <div class="qc-desc">شاهد المقاطع التعليمية</div>
+            <div class="qc-arrow">←</div>
+          </div>
+          <div class="quick-card" onclick="showSection('exams')">
+            <div class="qc-icon">📝</div>
+            <div class="qc-title">الاختبارات</div>
+            <div class="qc-desc">اختبر معلوماتك الآن</div>
+            <div class="qc-arrow">←</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== التعليمات ====== -->
+    <section id="instructions" class="fade-in">
+      <div class="section-header">
+        <h2>📋 تعليمات الاستخدام</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <p class="intro-text">
+        لضمان تحقيق أقصى فائدة من هذا المحتوى، تُقدَّم المحاضرات بصيغ متعددة تلبيةً لأنماط التعلم المختلفة.
+      </p>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="ic-header"><span class="ic-icon">📄</span> المحاضرات النصية</div>
+          <p>يمكنك الوصول إليها من القائمة العلوية، وتتضمن فصلين دراسيين:</p>
+          <ul>
+            <li>📘 <strong>الفصل الأول:</strong> الأسابيع 1 إلى 13</li>
+            <li>📗 <strong>الفصل الثاني:</strong> الأسابيع 1 إلى 13</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <div class="ic-header"><span class="ic-icon">🎧</span> المحاضرات الصوتية</div>
+          <p>تسجيلات صوتية تُمكّنك من مراجعة المادة أثناء التنقل، وهي مرفقة بالنسخة النصية لكل محاضرة.</p>
+        </div>
+        <div class="info-card">
+          <div class="ic-header"><span class="ic-icon">🎥</span> المحاضرات الفيديوية</div>
+          <p>محاضرات مرئية مسجّلة تُعزز الفهم بشكل تفاعلي، متاحة للمشاهدة المباشرة أو التحميل.</p>
+        </div>
+        <div class="info-card">
+          <div class="ic-header"><span class="ic-icon">📝</span> الاختبارات التقويمية</div>
+          <p>في نهاية كل محاضرة أسئلة تقويمية لقياس الفهم وتعزيز التفكير النقدي والتحليلي.</p>
+        </div>
+      </div>
+
+      <div class="timeline-note">
+        <span class="tn-icon">📅</span>
+        <span>تم توزيع المحاضرات على <strong>30 أسبوعاً دراسياً</strong> (15 أسبوعاً لكل فصل)، مع اختبارات شفهية وتحريرية وتكليفات تدريبية تطبيقية.</span>
+      </div>
+    </section>
+
+    <!-- ====== محاضرات الفصل الأول ====== -->
+    <section id="term1" class="fade-in">
+      <div class="section-header">
+        <h2>📘 محاضرات الفصل الأول</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="section-desc">الأسابيع من الأول إلى الحادي عشر — انقر على المحاضرة للانتقال إليها</p>
+      <div class="lecture-grid">
+        <a href="text/wk-1.html" class="lecture-btn">
+          <span class="lb-num">01</span>
+          <span class="lb-title">مراحل تطور الإنترنت</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-2.html" class="lecture-btn">
+          <span class="lb-num">02</span>
+          <span class="lb-title">فوائد الإنترنت</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-3.html" class="lecture-btn">
+          <span class="lb-num">03</span>
+          <span class="lb-title">البرمجيات مفتوحة المصدر</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-4.html" class="lecture-btn">
+          <span class="lb-num">04</span>
+          <span class="lb-title">نظم المكتبات مفتوحة المصدر</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-5.html" class="lecture-btn">
+          <span class="lb-num">05</span>
+          <span class="lb-title">الاتجاهات التقنية للبرمجيات</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-6.html" class="lecture-btn">
+          <span class="lb-num">06</span>
+          <span class="lb-title">تصميم وتطوير مواقع الويب</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-7.html" class="lecture-btn">
+          <span class="lb-num">07</span>
+          <span class="lb-title">مراحل تطوير مواقع الويب</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-8.html" class="lecture-btn">
+          <span class="lb-num">08</span>
+          <span class="lb-title">معايير تصميم مواقع الويب</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-9.html" class="lecture-btn">
+          <span class="lb-num">09</span>
+          <span class="lb-title">إدارة المحتوى الرقمي</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-10.html" class="lecture-btn">
+          <span class="lb-num">10</span>
+          <span class="lb-title">تحسين محركات البحث</span>
+          <span class="lb-arrow">←</span>
+        </a>
+        <a href="text/wk-11.html" class="lecture-btn">
+          <span class="lb-num">11</span>
+          <span class="lb-title">نظم إدارة المحتوى</span>
+          <span class="lb-arrow">←</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ====== محاضرات الفصل الثاني ====== -->
+    <section id="term2" class="fade-in">
+      <div class="section-header">
+        <h2>📗 محاضرات الفصل الثاني</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="section-desc">الأسابيع من الأول إلى الثالث عشر — الأسابيع المتاحة مُميَّزة باللون</p>
+      <div class="lecture-group">
+        <div class="lecture-grid">
+          <a href="text/wk-21.html" class="lecture-btn available">
+            <span class="lb-num">01</span>
+            <span class="lb-title">نظام WordPress </span>
+            <span class="lb-arrow">←</span>
+          </a>
+          <a href="text/wk-22.html" class="lecture-btn available">
+            <span class="lb-num">02</span>
+            <span class="lb-title">نظام Joomla</span>
+            <span class="lb-arrow">←</span>
+          </a>
+          <a href="text/wk-23.html" class="lecture-btn available">
+            <span class="lb-num">03</span>
+            <span class="lb-title">نظام Drupal</span>
+            <span class="lb-arrow">←</span>
+          </a>
+          <a href="#" class="lecture-btn coming-soon"><span class="lb-num">04</span><span class="lb-title">محاضرة الأسبوع الرابع</span><span class="soon-badge">قريباً</span></a>
+          <a href="#" class="lecture-btn coming-soon"><span class="lb-num">05</span><span class="lb-title">محاضرة الأسبوع الخامس</span><span class="soon-badge">قريباً</span></a>
+          <a href="#" class="lecture-btn coming-soon"><span class="lb-num">06</span><span class="lb-title">محاضرة الأسبوع السادس</span><span class="soon-badge">قريباً</span></a>
+          <a href="#" class="lecture-btn coming-soon"><span class="lb-num">07</span><span class="lb-title">محاضرة الأسبوع السابع</span><span class="soon-badge">قريباً</span></a>
+		  <a href="#" class="lecture-btn coming-soon"><span class="lb-num">08</span><span class="lb-title">محاضرة الأسبوع الثامن</span><span class="soon-badge">قريباً</span></a>
+          <a href="#" class="lecture-btn coming-soon"><span class="lb-num">09</span><span class="lb-title">محاضرة الأسبوع التاسع</span><span class="soon-badge">قريباً</span></a>
+          <a href="#" class="lecture-btn coming-soon"><span class="lb-num">10</span><span class="lb-title">محاضرة الأسبوع العاشر</span><span class="soon-badge">قريباً</span></a>
+          <a href="#" class="lecture-btn coming-soon"><span class="lb-num">11</span><span class="lb-title">محاضرة الأسبوع الحادي عشر</span><span class="soon-badge">قريباً</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== الكتاب ====== -->
+    <section id="fulltext" class="fade-in">
+      <div class="section-header">
+        <h2>📥 تحميل الكتاب المقرر</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="book-card">
+        <div class="book-icon">📖</div>
+        <div class="book-info">
+          <div class="book-title">نُظم إدارة المحتوى</div>
+          <div class="book-author">أ.د. طلال ناظم الزهيري</div>
+          <div class="book-desc">الكتاب المنهجي المقرر للمرحلة الثالثة — قسم المعلومات وتقنيات المعرفة</div>
+          <a href="text/book.pdf" class="download-btn" download>
+            <span>⬇️</span> تحميل الكتاب PDF
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== المحاضرات الصوتية ====== -->
+    <section id="audio-lectures" class="fade-in">
+      <div class="section-header">
+        <h2>🎧 المحاضرات الصوتية</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="intro-text">تسجيلات صوتية للمحاضرات تُمكّنك من مراجعة المادة أثناء التنقل أو الاستماع التفاعلي.</p>
+
+      <!-- مشغل البودكاست المتكامل -->
+      <div class="podcast-player-wrap" id="podcastPlayerWrap" style="display:none;">
+        <div class="podcast-layout">
+          <!-- صورة البودكاست SVG -->
+          <div class="podcast-illustration">
+            <svg width="100%" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background studio -->
+              <rect x="0" y="0" width="420" height="300" rx="12" fill="#1a1a2e"/>
+              <rect x="0" y="0" width="420" height="130" rx="12" fill="#16213e"/>
+              <rect x="0" y="118" width="420" height="182" rx="0" fill="#1a1a2e"/>
+              <!-- Sound panels -->
+              <rect x="10" y="12" width="28" height="38" rx="3" fill="#0f3460" opacity="0.8"/>
+              <rect x="44" y="12" width="28" height="38" rx="3" fill="#0f3460" opacity="0.6"/>
+              <line x1="10" y1="22" x2="38" y2="22" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="10" y1="30" x2="38" y2="30" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="44" y1="22" x2="72" y2="22" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="44" y1="30" x2="72" y2="30" stroke="#1e3a5f" stroke-width="1.5"/>
+              <rect x="352" y="12" width="28" height="38" rx="3" fill="#0f3460" opacity="0.8"/>
+              <rect x="386" y="12" width="28" height="38" rx="3" fill="#0f3460" opacity="0.6"/>
+              <line x1="352" y1="22" x2="380" y2="22" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="352" y1="30" x2="380" y2="30" stroke="#1e3a5f" stroke-width="1.5"/>
+              <!-- PODCAST label -->
+              <text x="210" y="38" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#e94560" letter-spacing="4">PODCAST</text>
+              <circle cx="210" cy="18" r="11" fill="none" stroke="#e94560" stroke-width="1.5"/>
+              <circle cx="210" cy="18" r="5" fill="#e94560"/>
+              <!-- On Air -->
+              <rect x="168" y="55" width="84" height="22" rx="4" fill="#1a0000"/>
+              <rect x="171" y="57" width="78" height="18" rx="3" fill="#cc0000"/>
+              <text x="210" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#fff" letter-spacing="2">ON AIR</text>
+              <circle cx="178" cy="66" r="3.5" fill="#ff4444"/>
+              <!-- Desk -->
+              <rect x="55" y="185" width="310" height="13" rx="3" fill="#8B6914"/>
+              <rect x="62" y="198" width="296" height="6" rx="2" fill="#6B5010"/>
+              <rect x="75" y="204" width="10" height="40" rx="2" fill="#6B5010"/>
+              <rect x="335" y="204" width="10" height="40" rx="2" fill="#6B5010"/>
+              <!-- MAN -->
+              <rect x="80" y="133" width="64" height="56" rx="8" fill="#2c4a7c"/>
+              <polygon points="112,133 104,146 112,141 120,146" fill="#f0f0f0"/>
+              <polygon points="112,146 108,162 112,167 116,162" fill="#e94560"/>
+              <rect x="104" y="122" width="16" height="14" rx="4" fill="#d4956a"/>
+              <ellipse cx="112" cy="112" rx="22" ry="24" fill="#d4956a"/>
+              <ellipse cx="112" cy="94" rx="22" ry="10" fill="#2d1b00"/>
+              <rect x="90" y="94" width="44" height="12" rx="3" fill="#2d1b00"/>
+              <ellipse cx="105" cy="111" rx="4" ry="5" fill="#fff"/>
+              <ellipse cx="119" cy="111" rx="4" ry="5" fill="#fff"/>
+              <circle cx="105" cy="112" r="2.5" fill="#3d2b1a"/>
+              <circle cx="119" cy="112" r="2.5" fill="#3d2b1a"/>
+              <path d="M104 118 Q112 124 120 118" fill="none" stroke="#8B4513" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M90 105 Q96 102 102 105" fill="none" stroke="#2d1b00" stroke-width="2" stroke-linecap="round"/>
+              <path d="M122 105 Q128 102 134 105" fill="none" stroke="#2d1b00" stroke-width="2" stroke-linecap="round"/>
+              <!-- Man headphones -->
+              <path d="M90 108 Q82 98 88 90 Q100 82 112 86 Q124 82 136 90 Q142 98 134 108" fill="none" stroke="#222" stroke-width="5" stroke-linecap="round"/>
+              <rect x="84" y="104" width="10" height="14" rx="4" fill="#333"/>
+              <rect x="126" y="104" width="10" height="14" rx="4" fill="#333"/>
+              <!-- Man mic -->
+              <rect x="124" y="152" width="3" height="34" rx="1.5" fill="#888"/>
+              <rect x="118" y="149" width="15" height="6" rx="2" fill="#aaa"/>
+              <ellipse cx="125" cy="143" rx="8" ry="11" fill="#333"/>
+              <ellipse cx="125" cy="143" rx="6" ry="8" fill="#555"/>
+              <line x1="121" y1="139" x2="129" y2="139" stroke="#666" stroke-width="0.8"/>
+              <line x1="120" y1="143" x2="130" y2="143" stroke="#666" stroke-width="0.8"/>
+              <line x1="120" y1="147" x2="130" y2="147" stroke="#666" stroke-width="0.8"/>
+              <!-- Man arm -->
+              <path d="M144 155 Q158 168 155 183" fill="none" stroke="#2c4a7c" stroke-width="16" stroke-linecap="round"/>
+              <ellipse cx="155" cy="183" rx="10" ry="6" fill="#d4956a"/>
+              <!-- WOMAN -->
+              <rect x="276" y="135" width="64" height="54" rx="8" fill="#7c2c6e"/>
+              <path d="M308,135 Q300,145 308,152 Q316,145 308,135" fill="#f5c6ea"/>
+              <rect x="299" y="122" width="17" height="16" rx="5" fill="#e8b090"/>
+              <ellipse cx="308" cy="111" rx="24" ry="26" fill="#e8b090"/>
+              <ellipse cx="308" cy="91" rx="26" ry="12" fill="#3d1a00"/>
+              <rect x="282" y="89" width="52" height="18" rx="3" fill="#3d1a00"/>
+              <path d="M282 96 Q276 118 279 148" fill="none" stroke="#3d1a00" stroke-width="16" stroke-linecap="round"/>
+              <path d="M334 96 Q340 118 337 148" fill="none" stroke="#3d1a00" stroke-width="16" stroke-linecap="round"/>
+              <ellipse cx="301" cy="110" rx="4" ry="5" fill="#fff"/>
+              <ellipse cx="315" cy="110" rx="4" ry="5" fill="#fff"/>
+              <circle cx="301" cy="111" r="2.5" fill="#3d2b1a"/>
+              <circle cx="315" cy="111" r="2.5" fill="#3d2b1a"/>
+              <path d="M299 103 Q305 100 311 103" fill="none" stroke="#3d1a00" stroke-width="2" stroke-linecap="round"/>
+              <path d="M305 103 Q311 100 317 103" fill="none" stroke="#3d1a00" stroke-width="2" stroke-linecap="round"/>
+              <path d="M302 119 Q308 125 314 119" fill="#e94560"/>
+              <circle cx="282" cy="118" r="3" fill="#ffd700"/>
+              <circle cx="282" cy="123" r="2" fill="#ffd700"/>
+              <!-- Woman headphones -->
+              <path d="M284 106 Q276 96 282 88 Q294 80 308 84 Q322 80 334 88 Q340 96 332 106" fill="none" stroke="#222" stroke-width="5" stroke-linecap="round"/>
+              <rect x="277" y="102" width="10" height="14" rx="4" fill="#333"/>
+              <rect x="319" y="102" width="10" height="14" rx="4" fill="#333"/>
+              <!-- Woman mic -->
+              <rect x="289" y="152" width="3" height="34" rx="1.5" fill="#888"/>
+              <rect x="283" y="149" width="15" height="6" rx="2" fill="#aaa"/>
+              <ellipse cx="290" cy="143" rx="8" ry="11" fill="#333"/>
+              <ellipse cx="290" cy="143" rx="6" ry="8" fill="#555"/>
+              <line x1="286" y1="139" x2="294" y2="139" stroke="#666" stroke-width="0.8"/>
+              <line x1="285" y1="143" x2="295" y2="143" stroke="#666" stroke-width="0.8"/>
+              <line x1="285" y1="147" x2="295" y2="147" stroke="#666" stroke-width="0.8"/>
+              <!-- Woman arm -->
+              <path d="M276 158 Q263 170 265 183" fill="none" stroke="#7c2c6e" stroke-width="16" stroke-linecap="round"/>
+              <ellipse cx="265" cy="183" rx="10" ry="6" fill="#e8b090"/>
+              <!-- Laptop center -->
+              <rect x="178" y="166" width="64" height="20" rx="3" fill="#222"/>
+              <rect x="181" y="168" width="58" height="15" rx="2" fill="#1a3a5c"/>
+              <polyline id="svgWave" points="186,176 192,171 198,180 204,172 210,178 216,173 222,179 228,174 234,178 236,176" fill="none" stroke="#e94560" stroke-width="1.8"/>
+              <rect x="173" y="186" width="74" height="5" rx="2.5" fill="#333"/>
+              <!-- Studio lights -->
+              <rect x="86" y="0" width="14" height="7" rx="2" fill="#555"/>
+              <polygon points="80,7 100,7 96,20 84,20" fill="#ffcc00" opacity="0.9"/>
+              <rect x="320" y="0" width="14" height="7" rx="2" fill="#555"/>
+              <polygon points="314,7 334,7 330,20 318,20" fill="#ffcc00" opacity="0.9"/>
+              <!-- Recording light strip -->
+              <rect id="recStrip" x="0" y="292" width="420" height="4" rx="2" fill="#e94560" opacity="0.7"/>
+              <!-- Waveform animation bars (shown when playing) -->
+              <g id="waveAnim" opacity="0">
+                <rect x="190" y="255" width="4" height="16" rx="2" fill="#e94560"/>
+                <rect x="198" y="250" width="4" height="26" rx="2" fill="#e94560"/>
+                <rect x="206" y="258" width="4" height="10" rx="2" fill="#e94560"/>
+                <rect x="214" y="248" width="4" height="30" rx="2" fill="#e94560"/>
+                <rect x="222" y="254" width="4" height="18" rx="2" fill="#e94560"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- لوحة التحكم -->
+          <div class="podcast-controls">
+            <div class="now-playing-label">🎙️ يُشغَّل الآن</div>
+            <div class="now-playing-title" id="nowPlayingTitle">—</div>
+
+            <!-- شريط التقدم -->
+            <div class="progress-wrap">
+              <span class="time-current" id="timeCurrent">0:00</span>
+              <div class="progress-bar-outer" id="progressOuter">
+                <div class="progress-bar-fill" id="progressFill"></div>
+              </div>
+              <span class="time-total" id="timeTotal">0:00</span>
+            </div>
+
+            <!-- أزرار التحكم -->
+            <div class="ctrl-buttons">
+              <button class="ctrl-btn" id="btnSkipBack" title="رجوع 10 ثوانٍ">⏮ 10s</button>
+              <button class="ctrl-btn ctrl-play" id="btnPlay" title="تشغيل/إيقاف">▶</button>
+              <button class="ctrl-btn" id="btnSkipFwd" title="تقديم 10 ثوانٍ">10s ⏭</button>
+            </div>
+
+            <!-- مستوى الصوت -->
+            <div class="volume-row">
+              <span>🔈</span>
+              <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" class="volume-slider"/>
+              <span>🔊</span>
+            </div>
+
+            <!-- إغلاق المشغل -->
+            <button class="close-player-btn" id="closePlayer">✕ إغلاق المشغل</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- قائمة المحاضرات -->
+      <div class="lecture-grid">
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-1.mp3','كيف بدأ الانترنت')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">كيف بدأ الانترنت</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-2.mp3','اجيال الانترنت')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">اجيال الانترنت</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-3.mp3','البرمجيات مفتوحة المصدر')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">البرمجيات مفتوحة المصدر</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-4.mp3','نظم المكتبات المفتوحة')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">نظم المكتبات المفتوحة</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-5.mp3','مستقبل رقمنة المكتبات')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">مستقبل رقمنة المكتبات</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-6.mp3','تطوير مواقع الويب')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">تطوير مواقع الويب</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-7.mp3','مراحل تصميم المواقع')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">مراحل تصميم المواقع</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-8.mp3','معايير تصميم المواقع')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">معايير تصميم المواقع</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-9.mp3','ادارة المحتوى الرقمي')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">ادارة المحتوى الرقمي</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-10.mp3','تحسين محركات البحث')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">تحسين محركات البحث</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-11.mp3','نظم ادارة المحتوى')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">نظم ادارة المحتوى</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-12.mp3','نظام wordpress - 1')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">نظام wordpress - 1</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-13.mp3','نظام wordpress - 2')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">نظام wordpress - 2</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+		<button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-14.mp3','نظام Joomla')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">نظام جوملا</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+		<button class="lecture-btn audio-btn" onclick="playAudio('audio/internet-15.mp3','نظام Dropal')">
+          <span class="lb-icon">🎙️</span>
+          <span class="lb-title">نظام Dropal</span>
+          <span class="lb-arrow">▶</span>
+        </button>
+      </div>
+
+      <!-- العنصر الصوتي المخفي -->
+      <audio id="podcastAudio"></audio>
+
+      <style>
+        .podcast-player-wrap {
+          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+          border-radius: 16px;
+          padding: 0;
+          margin-bottom: 28px;
+          overflow: hidden;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+          border: 1px solid rgba(233,69,96,0.3);
+          animation: slideDown 0.4s ease;
+        }
+        @keyframes slideDown {
+          from { opacity:0; transform:translateY(-16px); }
+          to   { opacity:1; transform:translateY(0); }
+        }
+        .podcast-layout {
+          display: flex;
+          align-items: stretch;
+          gap: 0;
+        }
+        .podcast-illustration {
+          flex: 0 0 42%;
+          max-width: 42%;
+        }
+        .podcast-illustration svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        .podcast-controls {
+          flex: 1;
+          padding: 24px 28px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          justify-content: center;
+          direction: rtl;
+        }
+        .now-playing-label {
+          font-size: 12px;
+          color: #e94560;
+          font-weight: 600;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+        }
+        .now-playing-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #ffffff;
+          font-family: 'Cairo', sans-serif;
+          min-height: 28px;
+        }
+        .progress-wrap {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .time-current, .time-total {
+          font-size: 12px;
+          color: rgba(255,255,255,0.5);
+          font-family: monospace;
+          min-width: 36px;
+        }
+        .progress-bar-outer {
+          flex: 1;
+          height: 6px;
+          background: rgba(255,255,255,0.15);
+          border-radius: 3px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+        }
+        .progress-bar-fill {
+          height: 100%;
+          width: 0%;
+          background: #e94560;
+          border-radius: 3px;
+          transition: width 0.3s linear;
+        }
+        .ctrl-buttons {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          justify-content: center;
+        }
+        .ctrl-btn {
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.15);
+          color: #fff;
+          border-radius: 8px;
+          padding: 8px 14px;
+          cursor: pointer;
+          font-size: 13px;
+          transition: background 0.2s;
+        }
+        .ctrl-btn:hover { background: rgba(233,69,96,0.25); border-color: #e94560; }
+        .ctrl-play {
+          background: #e94560;
+          border-color: #e94560;
+          font-size: 18px;
+          padding: 10px 22px;
+          border-radius: 50px;
+        }
+        .ctrl-play:hover { background: #c73652; }
+        .volume-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .volume-slider {
+          flex: 1;
+          accent-color: #e94560;
+          cursor: pointer;
+        }
+        .close-player-btn {
+          background: transparent;
+          border: 1px solid rgba(255,255,255,0.2);
+          color: rgba(255,255,255,0.5);
+          border-radius: 8px;
+          padding: 6px 14px;
+          cursor: pointer;
+          font-size: 12px;
+          align-self: flex-start;
+          transition: all 0.2s;
+          font-family: 'Cairo', sans-serif;
+        }
+        .close-player-btn:hover { color: #e94560; border-color: #e94560; }
+        .audio-btn.playing {
+          border-color: #e94560 !important;
+          background: rgba(233,69,96,0.12) !important;
+        }
+        .audio-btn.playing .lb-arrow { color: #e94560; }
+        @media (max-width: 640px) {
+          .podcast-layout { flex-direction: column; }
+          .podcast-illustration { max-width: 100%; }
+        }
+      </style>
+
+      <script>
+        (function(){
+          var audio = document.getElementById('podcastAudio');
+          var wrap  = document.getElementById('podcastPlayerWrap');
+          var title = document.getElementById('nowPlayingTitle');
+          var fill  = document.getElementById('progressFill');
+          var cur   = document.getElementById('timeCurrent');
+          var tot   = document.getElementById('timeTotal');
+          var btnPlay = document.getElementById('btnPlay');
+          var wave  = document.getElementById('waveAnim');
+          var activeBtn = null;
+
+          function fmt(s){
+            var m = Math.floor(s/60);
+            var sc = Math.floor(s%60);
+            return m+':'+(sc<10?'0':'')+sc;
+          }
+
+          window.playAudio = function(src, name){
+            if(activeBtn){ activeBtn.classList.remove('playing'); }
+            // find the clicked button
+            var btns = document.querySelectorAll('.audio-btn');
+            btns.forEach(function(b){ if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(src)){ activeBtn = b; } });
+            if(activeBtn) activeBtn.classList.add('playing');
+
+            audio.src = src;
+            title.textContent = name;
+            wrap.style.display = 'block';
+            wrap.scrollIntoView({behavior:'smooth', block:'start'});
+            audio.play().catch(function(){});
+            btnPlay.textContent = '⏸';
+            if(wave) wave.style.opacity = '1';
+          };
+
+          btnPlay.addEventListener('click', function(){
+            if(audio.paused){
+              audio.play();
+              btnPlay.textContent = '⏸';
+              if(wave) wave.style.opacity = '1';
+            } else {
+              audio.pause();
+              btnPlay.textContent = '▶';
+              if(wave) wave.style.opacity = '0';
+            }
+          });
+
+          document.getElementById('btnSkipBack').addEventListener('click', function(){ audio.currentTime = Math.max(0, audio.currentTime-10); });
+          document.getElementById('btnSkipFwd').addEventListener('click', function(){ audio.currentTime = Math.min(audio.duration||0, audio.currentTime+10); });
+
+          audio.addEventListener('timeupdate', function(){
+            if(!isNaN(audio.duration) && audio.duration > 0){
+              fill.style.width = (audio.currentTime/audio.duration*100)+'%';
+              cur.textContent = fmt(audio.currentTime);
+            }
+          });
+          audio.addEventListener('loadedmetadata', function(){ tot.textContent = fmt(audio.duration); });
+          audio.addEventListener('ended', function(){
+            btnPlay.textContent = '▶';
+            if(wave) wave.style.opacity = '0';
+          });
+
+          document.getElementById('progressOuter').addEventListener('click', function(e){
+            var rect = this.getBoundingClientRect();
+            var ratio = (e.clientX - rect.left) / rect.width;
+            if(!isNaN(audio.duration)) audio.currentTime = ratio * audio.duration;
+          });
+
+          document.getElementById('volumeSlider').addEventListener('input', function(){ audio.volume = this.value; });
+
+          document.getElementById('closePlayer').addEventListener('click', function(){
+            audio.pause();
+            btnPlay.textContent = '▶';
+            if(wave) wave.style.opacity = '0';
+            wrap.style.display = 'none';
+            if(activeBtn){ activeBtn.classList.remove('playing'); activeBtn = null; }
+          });
+        })();
+      </script>
+    </section>
+
+    <!-- ====== المحاضرات الفيديوية ====== -->
+    <section id="video-lectures" class="fade-in">
+      <div class="section-header">
+        <h2>🎥 المحاضرات الفيديوية</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="intro-text">محاضرات مرئية مسجّلة — اضغط على أي محاضرة لتشغيلها مباشرةً داخل الصفحة.</p>
+
+      <!-- مشغّل الفيديو المدمج -->
+      <div class="video-player-wrap" id="videoPlayerWrap" style="display:none;">
+        <div class="video-top-bar">
+          <span class="video-now-label">🎥 يُشغَّل الآن</span>
+          <span class="video-now-title" id="videoNowTitle">—</span>
+          <button class="video-close-btn" id="videoCloseBtn" title="إغلاق">✕</button>
+        </div>
+        <div class="video-screen-wrap">
+          <video id="mainVideo" controls playsinline
+            style="width:100%;display:block;background:#000;max-height:520px;">
+          </video>
+        </div>
+        <div class="video-bottom-bar">
+          <button class="vctrl-btn" id="vBtnSkipBack" title="رجوع 10 ثوانٍ">⏮ 10s</button>
+          <button class="vctrl-btn" id="vBtnSkipFwd" title="تقديم 10 ثوانٍ">10s ⏭</button>
+          <div class="vspeed-wrap">
+            <span style="color:rgba(255,255,255,0.5);font-size:12px;">السرعة:</span>
+            <select id="vSpeedSelect" class="vspeed-select">
+              <option value="0.75">0.75×</option>
+              <option value="1" selected>1×</option>
+              <option value="1.25">1.25×</option>
+              <option value="1.5">1.5×</option>
+              <option value="2">2×</option>
+            </select>
+          </div>
+          <a id="vDownloadBtn" class="vctrl-btn vdownload" download title="تحميل المقطع">⬇ تحميل</a>
+        </div>
+      </div>
+
+      <!-- قائمة المحاضرات -->
+      <div class="lecture-grid">
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-1.mp4','كيف بدأت الإنترنت','01')">
+          <span class="lb-num">01</span><span class="lb-title">كيف بدأت الإنترنت</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-2.mp4','فوائد الإنترنت','02')">
+          <span class="lb-num">02</span><span class="lb-title">فوائد الإنترنت</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-3.mp4','البرمجيات مفتوحة المصدر','03')">
+          <span class="lb-num">03</span><span class="lb-title">البرمجيات مفتوحة المصدر</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-4.mp4','نظم المكتبات المفتوحة','04')">
+          <span class="lb-num">04</span><span class="lb-title">نظم المكتبات المفتوحة</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-5.mp4','مستقبل رقمنة المكتبات','05')">
+          <span class="lb-num">05</span><span class="lb-title">مستقبل رقمنة المكتبات</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-6.mp4','تطوير مواقع الويب','06')">
+          <span class="lb-num">06</span><span class="lb-title">تطوير مواقع الويب</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-7.mp4','مراحل تصميم المواقع','07')">
+          <span class="lb-num">07</span><span class="lb-title">مراحل تصميم المواقع</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-8.mp4','معايير تصميم المواقع','08')">
+          <span class="lb-num">08</span><span class="lb-title">معايير تصميم المواقع</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-9.mp4','ادارة المحتوى الرقمي','09')">
+          <span class="lb-num">09</span><span class="lb-title">ادارة المحتوى الرقمي</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-10.mp4','تحسين محركات البحث','10')">
+          <span class="lb-num">10</span><span class="lb-title">تحسين محركات البحث</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-11.mp4','نظم ادارة المحتوى','11')">
+          <span class="lb-num">11</span><span class="lb-title">نظم ادارة المحتوى</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-12.mp4','نظام wordpress - 1','12')">
+          <span class="lb-num">12</span><span class="lb-title">نظام wordpress - 1</span><span class="lb-arrow">▶</span>
+        </button>
+        <button class="lecture-btn video-btn available" onclick="playVideo('video/int-13.mp4','نظام wordpress - 2','13')">
+          <span class="lb-num">13</span><span class="lb-title">نظام wordpress - 2</span><span class="lb-arrow">▶</span>
+        </button>
+		<button class="lecture-btn video-btn available" onclick="playVideo('video/int-14.mp4','نظام Joomla','14')">
+          <span class="lb-num">14</span><span class="lb-title">نظام Joomla</span><span class="lb-arrow">▶</span>
+        </button>
+		<button class="lecture-btn video-btn available" onclick="playVideo('video/int-15.mp4','نظام Dropal','15')">
+          <span class="lb-num">15</span><span class="lb-title">نظام Dropal</span><span class="lb-arrow">▶</span>
+        </button>
+      </div>
+
+      <style>
+        .video-player-wrap {
+          background: #0d0d18;
+          border-radius: 14px;
+          overflow: hidden;
+          margin-bottom: 28px;
+          border: 1px solid rgba(99,179,237,0.25);
+          box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+          animation: slideDown 0.35s ease;
+        }
+        .video-top-bar {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 18px;
+          background: rgba(255,255,255,0.04);
+          border-bottom: 1px solid rgba(255,255,255,0.07);
+          direction: rtl;
+        }
+        .video-now-label {
+          font-size: 12px;
+          color: #63b3ed;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+        .video-now-title {
+          flex: 1;
+          font-size: 15px;
+          font-weight: 700;
+          color: #fff;
+          font-family: 'Cairo', sans-serif;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .video-close-btn {
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.15);
+          color: rgba(255,255,255,0.6);
+          border-radius: 6px;
+          padding: 4px 10px;
+          cursor: pointer;
+          font-size: 13px;
+          transition: all 0.2s;
+          white-space: nowrap;
+        }
+        .video-close-btn:hover { background: rgba(220,53,69,0.3); color:#fff; border-color:#e94560; }
+        .video-screen-wrap { background: #000; }
+        .video-bottom-bar {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 18px;
+          background: rgba(255,255,255,0.03);
+          border-top: 1px solid rgba(255,255,255,0.07);
+          direction: rtl;
+          flex-wrap: wrap;
+        }
+        .vctrl-btn {
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.15);
+          color: #fff;
+          border-radius: 7px;
+          padding: 6px 14px;
+          cursor: pointer;
+          font-size: 13px;
+          transition: background 0.2s;
+          text-decoration: none;
+          font-family: 'Cairo', sans-serif;
+        }
+        .vctrl-btn:hover { background: rgba(99,179,237,0.2); border-color:#63b3ed; }
+        .vdownload { color:#63b3ed; border-color:rgba(99,179,237,0.3); }
+        .vdownload:hover { background:rgba(99,179,237,0.15); }
+        .vspeed-wrap { display:flex; align-items:center; gap:6px; margin-right:auto; }
+        .vspeed-select {
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.15);
+          color: #fff;
+          border-radius: 6px;
+          padding: 5px 8px;
+          font-size: 13px;
+          cursor: pointer;
+          font-family: 'Cairo', sans-serif;
+        }
+        .video-btn.v-playing {
+          border-color: #63b3ed !important;
+          background: rgba(99,179,237,0.12) !important;
+        }
+        .video-btn.v-playing .lb-arrow { color: #63b3ed; }
+      </style>
+
+      <script>
+        (function(){
+          var video   = document.getElementById('mainVideo');
+          var wrap    = document.getElementById('videoPlayerWrap');
+          var nowTitle= document.getElementById('videoNowTitle');
+          var dlBtn   = document.getElementById('vDownloadBtn');
+          var activeVBtn = null;
+
+          window.playVideo = function(src, name, num){
+            if(activeVBtn) activeVBtn.classList.remove('v-playing');
+            var btns = document.querySelectorAll('.video-btn.available');
+            btns.forEach(function(b){
+              if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(src)){
+                activeVBtn = b;
+              }
+            });
+            if(activeVBtn) activeVBtn.classList.add('v-playing');
+
+            video.src = src;
+            nowTitle.textContent = num + ' — ' + name;
+            dlBtn.href = src;
+            dlBtn.setAttribute('download', name + '.mp4');
+            wrap.style.display = 'block';
+            wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+            video.play().catch(function(){});
+          };
+
+          document.getElementById('videoCloseBtn').addEventListener('click', function(){
+            video.pause();
+            video.src = '';
+            wrap.style.display = 'none';
+            if(activeVBtn){ activeVBtn.classList.remove('v-playing'); activeVBtn = null; }
+          });
+
+          document.getElementById('vBtnSkipBack').addEventListener('click', function(){
+            video.currentTime = Math.max(0, video.currentTime - 10);
+          });
+          document.getElementById('vBtnSkipFwd').addEventListener('click', function(){
+            video.currentTime = Math.min(video.duration || 0, video.currentTime + 10);
+          });
+          document.getElementById('vSpeedSelect').addEventListener('change', function(){
+            video.playbackRate = parseFloat(this.value);
+          });
+        })();
+      </script>
+    </section>
+
+    <!-- ====== الاختبارات ====== -->
+    <section id="exams" class="fade-in">
+      <div class="section-header">
+        <h2>📝 الاختبارات</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="intro-text">اختبارات قصيرة وشاملة لتقويم مدى فهمك، تشمل نماذج شفهية وتحريرية.</p>
+      <div class="lecture-grid">
+        <a href="qutions/qwk-1.html" class="lecture-btn exam-btn available"><span class="lb-num">01</span><span class="lb-title">اختبار: تطور الإنترنت</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-2.html" class="lecture-btn exam-btn available"><span class="lb-num">02</span><span class="lb-title">اختبار: أهمية الإنترنت</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-3.html" class="lecture-btn exam-btn available"><span class="lb-num">03</span><span class="lb-title">البرمجيات مفتوحة المصدر</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-4.html" class="lecture-btn exam-btn available"><span class="lb-num">04</span><span class="lb-title">نظم المكتبات مفتوحة المصدر</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-5.html" class="lecture-btn exam-btn available"><span class="lb-num">05</span><span class="lb-title">مستقبل البرمجيات مفتوحة المصدر</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-6.html" class="lecture-btn exam-btn available"><span class="lb-num">06</span><span class="lb-title">تصميم وتطوير مواقع الويب</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-7.html" class="lecture-btn exam-btn available"><span class="lb-num">07</span><span class="lb-title">مراحل تصميم مواقع الويب</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-8.html" class="lecture-btn exam-btn available"><span class="lb-num">08</span><span class="lb-title">معايير تصميم المواقع</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-9.html" class="lecture-btn exam-btn available"><span class="lb-num">09</span><span class="lb-title">ادارة المحتوى الرقمي</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-10.html" class="lecture-btn exam-btn available"><span class="lb-num">10</span><span class="lb-title">ادوات تحسين محركات البحث</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-11.html" class="lecture-btn exam-btn available"><span class="lb-num">11</span><span class="lb-title">نظم ادارة المحتوى</span><span class="lb-arrow">←</span></a>
+		<a href="qutions/qwk-12.html" class="lecture-btn exam-btn available"><span class="lb-num">12</span><span class="lb-title">نظام ادارة المحتوى Joomla</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-13.html" class="lecture-btn exam-btn available"><span class="lb-num">13</span><span class="lb-title">نظام ادارة المحتوى Wordpress</span><span class="lb-arrow">←</span></a>
+        <a href="qutions/qwk-14.html" class="lecture-btn exam-btn available"><span class="lb-num">14</span><span class="lb-title">نظام ادارة المحتوى Drupal</span><span class="lb-arrow">←</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- زر العودة للأعلى -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="العودة للأعلى">
+    ↑
+  </button>
+
+  <!-- زر الرئيسية العائم -->
+  <a class="home-fab" onclick="showSection('home')" title="الرئيسية">🏠</a>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2025 — موقع أ.د. طلال ناظم الزهيري التعليمي | قسم المعلومات وتقنيات المعرفة</p>
+    </div>
+  </footer>
+
+  <script src="../shared/script.js"></script>
+
+  <!-- ====== Firebase Authentication ====== -->
+  <script type="module">
+    import { initializeApp }                                          from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword,
+             createUserWithEmailAndPassword,
+             onAuthStateChanged, signOut }                           from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+    // ⚠️ ضع بيانات مشروعك هنا من Firebase Console
+    const firebaseConfig = {
+      apiKey:            "AIzaSyAewRT99S8Weq7GUtW7xZv1xdgFd8YInuQ",
+      authDomain:        "talallm.firebaseapp.com",
+      projectId:         "talallm",
+      storageBucket:     "talallm.firebasestorage.app",
+      messagingSenderId: "332906858035",
+      appId:             "1:332906858035:web:3aa09b5d2902bd2779c546",
+      measurementId:     "G-77Y3RBR851"
+    };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // --- حالة المستخدم ---
+    onAuthStateChanged(auth, (user) => {
+      const overlay   = document.getElementById('loginOverlay');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const userBadge = document.getElementById('userBadge');
+      if (user) {
+        overlay.classList.add('hidden');
+        logoutBtn.style.display = 'inline-flex';
+        userBadge.textContent   = '👤 ' + user.email;
+      } else {
+        overlay.classList.remove('hidden');
+        logoutBtn.style.display = 'none';
+        userBadge.textContent   = '';
+      }
+    });
+
+    // --- تبديل بين تسجيل الدخول وإنشاء حساب ---
+    let currentTab = 'login';
+    window.switchTab = function(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.login-tab').forEach((t, i) => {
+        t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
+      });
+      document.getElementById('authBtn').textContent = tab === 'login' ? 'دخول' : 'إنشاء حساب';
+      document.getElementById('authError').style.display   = 'none';
+      document.getElementById('authSuccess').style.display = 'none';
+    };
+
+    // --- تنفيذ تسجيل الدخول أو الإنشاء ---
+    window.handleAuth = async function() {
+      const email    = document.getElementById('authEmail').value.trim();
+      const password = document.getElementById('authPassword').value;
+      const btn      = document.getElementById('authBtn');
+      const errDiv   = document.getElementById('authError');
+      const sucDiv   = document.getElementById('authSuccess');
+
+      errDiv.style.display = 'none';
+      sucDiv.style.display = 'none';
+
+      if (!email || !password) {
+        errDiv.textContent     = '⚠️ الرجاء إدخال البريد الإلكتروني وكلمة المرور.';
+        errDiv.style.display   = 'block';
+        return;
+      }
+
+      btn.disabled    = true;
+      btn.textContent = '⏳ جارٍ التحميل...';
+
+      try {
+        if (currentTab === 'login') {
+          await signInWithEmailAndPassword(auth, email, password);
+        } else {
+          await createUserWithEmailAndPassword(auth, email, password);
+          sucDiv.textContent   = '✅ تم إنشاء الحساب بنجاح! مرحباً بك.';
+          sucDiv.style.display = 'block';
+        }
+      } catch (error) {
+        const msgs = {
+          'auth/user-not-found':      '❌ البريد الإلكتروني غير مسجل.',
+          'auth/wrong-password':      '❌ كلمة المرور غير صحيحة.',
+          'auth/email-already-in-use':'❌ البريد الإلكتروني مستخدم مسبقاً.',
+          'auth/weak-password':       '❌ كلمة المرور ضعيفة (6 أحرف على الأقل).',
+          'auth/invalid-email':       '❌ صيغة البريد الإلكتروني غير صحيحة.',
+          'auth/invalid-credential':  '❌ البريد أو كلمة المرور غير صحيحة.',
+        };
+        errDiv.textContent   = msgs[error.code] || ('❌ خطأ: ' + error.message);
+        errDiv.style.display = 'block';
+      } finally {
+        btn.disabled    = false;
+        btn.textContent = currentTab === 'login' ? 'دخول' : 'إنشاء حساب';
+      }
+    };
+
+    // --- تسجيل الخروج ---
+    window.handleLogout = async function() {
+      await signOut(auth);
+    };
+
+    // --- السماح بالضغط على Enter ---
+    document.getElementById('authPassword').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') window.handleAuth();
+    });
+  </script>
+</body>
+</html>
