@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معايير تصميم مواقع الويب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4cb5ae;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --content-color: #6c757d;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+             font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        nav {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav a i {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 80px;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .section-title i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--content-color);
+        }
+        
+        .highlight {
+            background-color: rgba(76, 181, 174, 0.1);
+            border-right: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        
+        .step-card {
+            flex-basis: calc(50% - 1rem);
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            transition: var(--transition);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-card:hover::before {
+            height: 100%;
+        }
+        
+        .step-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-card h3 span {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .phase-list {
+            list-style: none;
+        }
+        
+        .phase-list li {
+            margin-bottom: 0.8rem;
+            padding-right: 1.5rem;
+            position: relative;
+        }
+        
+        .phase-list li:before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .standard-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .standard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .standard-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .standard-card h3 i {
+            margin-left: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: right;
+            border: 1px solid #e9ecef;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: rgba(76, 181, 174, 0.1);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .step-card {
+                flex-basis: 100%;
+            }
+            
+            .standards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>معايير تصميم مواقع الويب</h1>
+            <p>ضمان الجودة والتوافق وسهولة الاستخدام في تصميم وتطوير المواقع الإلكترونية</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#intro"><i class="fas fa-home"></i> مقدمة</a></li>
+            <li><a href="#web-standards"><i class="fas fa-code"></i> معايير الويب</a></li>
+            <li><a href="#evaluation"><i class="fas fa-check-circle"></i> تقييم الجودة</a></li>
+            <li><a href="#elements"><i class="fas fa-star"></i> عناصر التقييم</a></li>
+            <li><a href="#ux"><i class="fas fa-user"></i> تجربة المستخدم</a></li>
+            <li><a href="#ui"><i class="fas fa-paint-brush"></i> واجهة المستخدم</a></li>
+        </ul>
+    </nav>
+    
+    <main class="container">
+        <section id="intro">
+            <h2 class="section-title">
+                <i class="fas fa-home"></i>
+                مقدمة
+            </h2>
+            <div class="content">
+                <p>تعد معايير مواقع الويب جانبًا مهمًا في تصميم وتطوير مواقع الويب الحديثة. تم وضع هذه المعايير من قبل منظمات مثل World Wide Web Consortium (W3C) وتهدف إلى ضمان قابلية التشغيل البيني وإمكانية الوصول والتوافق بين مواقع الويب عبر الأجهزة والأنظمة الأساسية والمتصفحات المختلفة.</p>
+                
+                <div class="highlight">
+                    <p>تتمثل إحدى الفوائد الأساسية لاستخدام معايير مواقع الويب في أنها تضمن إمكانية وصول جميع المستخدمين إلى مواقع الويب، بصرف النظر عن أجهزتهم أو متصفحاتهم. هذا مهم بشكل خاص للمستخدمين ذوي الإعاقة الذين قد يحتاجون إلى تقنيات مساعدة للوصول إلى الويب.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="web-standards">
+            <h2 class="section-title">
+                <i class="fas fa-code"></i>
+                معايير مواقع الويب
+            </h2>
+            <div class="content">
+                <p>هناك العديد من معايير مواقع الويب الرئيسية المستخدمة على نطاق واسع والمعترف بها في مجتمع تطوير الويب، بما في ذلك:</p>
+                
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h3><i class="fab fa-html5"></i> لغة ترميز النص التشعبي (HTML)</h3>
+                        <p>هي لغة الترميز القياسية المستخدمة لإنشاء صفحات الويب وهيكل المحتوى في تلك الصفحات. تحدد HTML بنية صفحة الويب ومحتواها، وتوفر الأساس للتصميم والتخطيط.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fab fa-css3-alt"></i> أوراق الأنماط المتتالية (CSS)</h3>
+                        <p>هي لغة ورقة الأنماط القياسية المستخدمة لتحديد المظهر المرئي لصفحات الويب، بما في ذلك التخطيط والألوان والخطوط وعناصر التصميم الأخرى.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fab fa-js"></i> JavaScript</h3>
+                        <p>هي لغة برمجة تسمح بإنشاء عناصر ديناميكية وتفاعلية على صفحات الويب، مثل النماذج والنوافذ المنبثقة والرسوم المتحركة.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-universal-access"></i> معايير الوصول إلى الويب</h3>
+                        <p>تهدف هذه المعايير إلى إتاحة الوصول إلى مواقع الويب لجميع المستخدمين، بما في ذلك ذوي الإعاقة. يتضمن ذلك إرشادات لإنشاء محتوى يسهل الوصول إليه.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>بالإضافة إلى معايير مواقع الويب الرئيسية هذه، هناك أيضًا العديد من المعايير والإرشادات الأخرى التي تغطي مجموعة واسعة من الموضوعات، بما في ذلك تحسين الأداء والأمان وتجربة المستخدم.</p>
+                </div>
+                
+                <p>في الختام، تعد معايير مواقع الويب جانبًا مهمًا في تصميم وتطوير مواقع الويب الحديثة. من خلال الالتزام بهذه المعايير، يمكن للمؤسسات ضمان إمكانية الوصول إلى مواقع الويب الخاصة بها وقابلة للتشغيل البيني ومتوافقة عبر مجموعة واسعة من الأجهزة والأنظمة الأساسية.</p>
+            </div>
+        </section>
+        
+        <section id="evaluation">
+            <h2 class="section-title">
+                <i class="fas fa-check-circle"></i>
+                تقييم جودة المواقع
+            </h2>
+            <div class="content">
+                <p>تقييم الموقع هو عملية مهمة لتقييم فعالية وجودة موقع الويب. تساعد هذه العملية المؤسسات على تحديد مجالات التحسين والتأكد من أن مواقعها الإلكترونية تلبي احتياجات المستخدمين وأصحاب المصلحة.</p>
+                
+                <p>تنقسم مراحل تقييم موقع الويب عادةً إلى عدة خطوات أساسية، على النحو التالي:</p>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>التخطيط</h3>
+                        <p>تتضمن المرحلة الأولى من تقييم الموقع التخطيط وتحديد أهداف وغايات التقييم. يتضمن ذلك تحديد الجمهور وأصحاب المصلحة، وتحديد المقاييس التي سيتم استخدامها.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>جمع البيانات</h3>
+                        <p>في هذه المرحلة، يتم جمع البيانات من مصادر مختلفة، بما في ذلك أدوات تحليل الويب وتعليقات المستخدمين وتقييمات الخبراء.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>التحليل</h3>
+                        <p>يتم تحليل البيانات التي تم جمعها لتحديد نقاط القوة والضعف في الموقع. يتضمن ذلك تحديد مجالات التحسين وتقييم مدى تلبية الموقع لأهدافه.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>4</span>التوصيات</h3>
+                        <p>بناءً على التحليل، يتم تقديم توصيات للتحسين. قد يشمل ذلك تغييرات في محتوى موقع الويب أو تصميمه أو وظيفته أو تجربة المستخدم.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>5</span>التنفيذ</h3>
+                        <p>يتم تنفيذ التحسينات الموصى بها، ويتم تحديث الموقع الإلكتروني لتلبية احتياجات المستخدمين وأصحاب المصلحة بشكل أفضل.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>6</span>المراقبة والتقييم</h3>
+                        <p>بمجرد تنفيذ التحسينات، تتم مراقبة الموقع وتقييمه بمرور الوقت لضمان تحقيق النتائج المرجوة.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>7</span>الصيانة</h3>
+                        <p>يتم إجراء تقييمات منتظمة لضمان استمرار الموقع في تلبية احتياجات المستخدمين وأصحاب المصلحة.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>في الختام، يعد تقييم موقع الويب عملية حاسمة تساعد المؤسسات على ضمان تلبية مواقعها على الويب لاحتياجات المستخدمين وأصحاب المصلحة. باتباع هذه المراحل الرئيسية، يمكن للمؤسسات تحديد مجالات التحسين واتخاذ قرارات تستند إلى البيانات.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="elements">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i>
+                عناصر تقييم المواقع
+            </h2>
+            <div class="content">
+                <p>هناك العديد من العناصر الأساسية التي يجب مراعاتها عند تقييم موقع الويب، بما في ذلك ما يلي:</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>العنصر</th>
+                            <th>الوصف</th>
+                            <th>الأهمية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>تجربة المستخدم</td>
+                            <td>تقييم تجربة المستخدم الإجمالية للموقع الإلكتروني، بما في ذلك التنقل والتصميم والوظائف</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>المحتوى</td>
+                            <td>تقييم ملاءمة وجودة ودقة المعلومات والموارد المتوفرة على الموقع</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>إمكانية الوصول</td>
+                            <td>ضمان أن جميع المستخدمين، بصرف النظر عن قدراتهم، يمكنهم الوصول إلى الموقع واستخدامه</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>الأداء</td>
+                            <td>تقييم موقع الويب من حيث السرعة وقابلية التوسع والموثوقية</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>تحسين محرك البحث (SEO)</td>
+                            <td>تحسين ظهور الموقع في نتائج محركات البحث باستخدام الكلمات المفتاحية والعلامات الوصفية</td>
+                            <td>متوسطة</td>
+                        </tr>
+                        <tr>
+                            <td>التحليلات</td>
+                            <td>استخدام أدوات التحليل لتتبع مقاييس مثل حركة مرور الموقع ومشاركة المستخدم</td>
+                            <td>متوسطة</td>
+                        </tr>
+                        <tr>
+                            <td>الأمان</td>
+                            <td>حماية الموقع ومستخدميه وبياناته من التهديدات والهجمات السيبرانية</td>
+                            <td>عالية</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight">
+                    <p>في الختام، يعد تقييم موقع الويب عملية حاسمة يجب إجراؤها بانتظام لضمان استمرار موقع الويب في تلبية احتياجات المستخدمين وأصحاب المصلحة ودعم أهداف المنظمة.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="ux">
+            <h2 class="section-title">
+                <i class="fas fa-user"></i>
+                تجربة المستخدم (UX)
+            </h2>
+            <div class="content">
+                <p>تعد تجربة المستخدم User experience (UX) عنصرًا مهمًا في تصميم موقع الويب ويمكن أن تكون أداة تقييم فعالة لتقييم الفعالية الكلية لموقع الويب. تشير تجربة المستخدم لموقع الويب إلى السهولة والكفاءة التي يمكن للمستخدمين من خلالها التفاعل مع الموقع، وهي تشمل جميع جوانب تجربة المستخدم، بما في ذلك تصميم الموقع والتنقل والمحتوى والوظائف.</p>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>التنقل السهل</h3>
+                        <p>يجب أن يكون موقع الويب سهل التنقل، مع هيكل واضح ومسارات سهلة للمستخدمين للعثور على المعلومات التي يحتاجونها.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>المحتوى الواضح</h3>
+                        <p>يجب أن يكون المحتوى واضحًا وموجزًا، باستخدام لغة يسهل فهمها من قبل الجمهور المستهدف.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>التصميم الجذاب</h3>
+                        <p>يجب أن يكون التصميم مرئيًا جذابًا ومتناسقًا، مع استخدام الألوان والخطوط والصور بشكل مناسب.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>4</span>الوظائف سريعة الاستجابة</h3>
+                        <p>يجب أن تكون وظائف الموقع سريعة الاستجابة وسهلة الاستخدام، مع وقت تحميل سريع وأداء موثوق.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>تتمثل إحدى المزايا الرئيسية لاستخدام تجربة المستخدم كأداة تقييم في أنها تركز على منظور المستخدم. من خلال تقييم تجربة المستخدم للموقع، يمكن للمصممين اكتساب فهم أفضل لكيفية تفاعل المستخدمين مع الموقع وتحديد المجالات التي يمكن إجراء تحسينات فيها لتحسين تجربة المستخدم.</p>
+                </div>
+                
+                <p>لتقييم تجربة المستخدم لموقع الويب، يمكن للمصممين استخدام مجموعة متنوعة من الأدوات والتقنيات، بما في ذلك اختبار المستخدم والتحليلات. يتضمن اختبار المستخدم مراقبة المستخدمين أثناء تفاعلهم مع الموقع، ويمكن أن يوفر رؤى قيمة حول كيفية تنقل المستخدمين في الموقع وأين يواجهون الصعوبات.</p>
+            </div>
+        </section>
+        
+        <section id="ui">
+            <h2 class="section-title">
+                <i class="fas fa-paint-brush"></i>
+                واجهة المستخدم (UI)
+            </h2>
+            <div class="content">
+                <p>تعد واجهة المستخدم User interface (UI) عنصرًا مهمًا في تصميم موقع الويب، ويمكن استخدامها كأداة تقييم لتقييم فعالية موقع الويب. تشير واجهة المستخدم إلى العناصر الرسومية والمرئية لموقع الويب، بما في ذلك تخطيط وتصميم وأسلوب الموقع. إنها الواجهة التي يتفاعل معها المستخدمون للتنقل في الموقع والعثور على المعلومات التي يحتاجون إليها.</p>
+                
+                <p>تعد واجهة المستخدم ضرورية لأنها يمكن أن تؤثر بشكل مباشر على تجربة المستخدم على موقع الويب. إذا كانت واجهة مستخدم موقع الويب سيئة التصميم أو يصعب استخدامها، فقد يصاب المستخدمون بالإحباط وقد تتأثر تجربتهم على الموقع. لذلك، يعد تقييم واجهة مستخدم موقع الويب أمرًا ضروريًا لضمان حصول المستخدمين على تجربة إيجابية على موقع الويب.</p>
+                
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h3><i class="fas fa-palette"></i> التصميم المرئي</h3>
+                        <p>يجب أن يكون التصميم جذابًا بصريًا وسهلاً للقراءة، بأسلوب وتصميم متسقين في جميع أنحاء الموقع.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-mobile-alt"></i> الاستجابة</h3>
+                        <p>يجب أن يتكيف الموقع مع أحجام الشاشات المختلفة، من أجهزة الحاسوب المكتبية إلى الأجهزة المحمولة.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-tint"></i> نظام الألوان</h3>
+                        <p>يجب استخدام نظام ألوان متناسق ومتناقض لضمان سهولة القراءة وإمكانية الوصول.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-font"></i> الطباعة</h3>
+                        <p>يجب اختيار الخطوط المناسبة بحجم مقروء وألوان مناسبة لضمان تجربة قراءة مريحة.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>عند تقييم واجهة مستخدم موقع الويب، من المهم مراعاة تخطيط الموقع وطباعة ونظام الألوان والرسومات. يجب أن تكون هذه العناصر جذابة بصريًا وسهلة القراءة، بأسلوب وتصميم متسقين في جميع أنحاء الموقع.</p>
+                </div>
+                
+                <p>في الختام، تعد واجهة المستخدم عنصرًا أساسيًا في تصميم موقع الويب، ويمكن استخدامها كأداة تقييم لتقييم فعالية موقع الويب. من خلال التركيز على العناصر الرسومية والمرئية للموقع واستخدام مجموعة من الأدوات والتقنيات، يمكن للمصممين اكتساب فهم أفضل لكيفية تفاعل المستخدمين مع الموقع وتحديد المجالات التي يمكن إجراء تحسينات فيها لتحسين تجربة المستخدم.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 معايير تصميم مواقع الويب. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المحتوى Drupal - دليل شامل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0073b6;
+            --secondary-color: #29a8e0;
+            --accent-color: #f15a24;
+            --light-color: #f1f1f1;
+            --dark-color: #191e23;
+            --success-color: #46b450;
+            --warning-color: #ffb900;
+            --danger-color: #dc3232;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            margin: 2rem auto;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        section:last-child {
+            margin-bottom: 0;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-right: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        /* Sidebar */
+        .sidebar-widget {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-widget:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sidebar-widget h3 {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1rem;
+            margin: -1.5rem -1.5rem 1.5rem;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.8rem;
+            text-align: right;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: var(--light-color);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .tab {
+            padding: 1rem 1.5rem;
+            background: var(--light-color);
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-left: 0.2rem;
+        }
+        
+        .tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            width: 100%;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0 5px 5px 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Accordion */
+        .accordion {
+            margin: 1.5rem 0;
+        }
+        
+        .accordion-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .accordion-header {
+            padding: 1rem;
+            background: var(--light-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .accordion-content.active {
+            padding: 1rem;
+            max-height: 300px;
+            border: 1px solid var(--light-color);
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fab fa-drupal"></i>
+                <h1>Drupal دليل شامل</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#intro">مقدمة</a></li>
+                    <li><a href="#setup">التثبيت</a></li>
+                    <li><a href="#users">المستخدمون</a></li>
+                    <li><a href="#content">المحتوى</a></li>
+                    <li><a href="#modules">الوحدات</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>نظام إدارة المحتوى Drupal</h2>
+            <p>دليل شامل لتعلم واحتراف نظام إدارة المحتوى القوي والمرن للمواقع المتقدمة</p>
+            <a href="#intro" class="btn">ابدأ الرحلة</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="content">
+            <!-- Introduction Section -->
+            <section id="intro">
+                <h2>تمهيد</h2>
+                <p>Drupal هو نظام إدارة محتوى (CMS) موجود منذ أكثر من عقدين. تم إصداره لأول مرة في عام 2001 وأصبح منذ ذلك الحين أحد أكثر أنظمة إدارة المحتوى مفتوحة المصدر استخدامًا في العالم. تشتهر Drupal بمرونتها وقابليتها للتطوير والأمان، مما يجعلها خيارًا شائعًا لمواقع الويب من جميع الأحجام، من المدونات الشخصية إلى مواقع الويب الحكومية والشركات.</p>
+                
+                <p>يرتبط تاريخ Drupal ارتباطًا وثيقًا بتطور حركة المصادر المفتوحة وصعود الإنترنت. مع نمو الإنترنت وزيادة الحاجة إلى إدارة المحتوى عبر الإنترنت، زاد الطلب على أنظمة إدارة المحتوى سهلة الاستخدام والقابلة للتخصيص.</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">570K+</div>
+                        <div class="stat-label">موقع يستخدمونه</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">سنة من التطوير</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">48K+</div>
+                        <div class="stat-label">وحدة متاحة</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Setup Section -->
+            <section id="setup">
+                <h2>تحميل وتثبيت نظام Drupal</h2>
+                <p>هناك ثلاث طرق اساسية يمكن من خلالها تحميل وتثبيت النظام سواء تم التثبيت على الحاسب الشخصي او موقع الاستضافة او على متصفح الانترنت.</p>
+                
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-header">التثبيت على الخادم المحلي</div>
+                        <div class="card-body">
+                            <p>لتثبيت Drupal، ستحتاج إلى إعداد خادم ويب وتشغيله، إلى جانب قاعدة بيانات لتخزين بيانات Drupal الخاصة بك. تدعم معظم خوادم الويب Drupal، لكن يوصى باستخدام Apache أو Nginx.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">التثبيت على خادم الاستضافة</div>
+                        <div class="card-body">
+                            <p>يقدم معظم مزودي الاستضافة أدوات آلية لتثبيت Drupal، مثل المثبت بنقرة واحدة أو لوحة التحكم. اتبع التعليمات التي قدمها مزود الاستضافة لتثبيت Drupal.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">تثبيت Drupal حزمة Bitnami</div>
+                        <div class="card-body">
+                            <p>يوفر Bitnami إصدارًا مُعدًا مسبقًا وجاهزًا للتشغيل من Drupal يمكن تثبيته على مجموعة متنوعة من الأنظمة الأساسية، بما في ذلك Windows و MacOS و Linux.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Roles Section -->
+            <section id="users">
+                <h2>أدوار مستخدمي نظام Drupal</h2>
+                <p>في Drupal، يتم تعيين المستخدمين لأدوار مختلفة تحدد ما يمكنهم وما لا يمكنهم فعله على موقعك. يتم تحديد دور كل مستخدم Drupal من خلال الصلاحيات التي تم تعيينها لهذا الدور.</p>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="anonymous">مستخدم مجهول</div>
+                    <div class="tab" data-tab="authenticated">مستخدم مصدق عليه</div>
+                    <div class="tab" data-tab="editor">المحرر</div>
+                    <div class="tab" data-tab="admin">المسؤول</div>
+                </div>
+                
+                <div class="tab-content active" id="anonymous">
+                    <h3>مستخدم مجهول</h3>
+                    <p>يتم تعيين هذا الدور للمستخدمين الذين لم يسجلوا الدخول إلى موقعك. بشكل افتراضي، يمكن للمستخدمين المجهولين فقط عرض المحتوى العام على موقعك.</p>
+                </div>
+                
+                <div class="tab-content" id="authenticated">
+                    <h3>مستخدم مصدق عليه</h3>
+                    <p>يتم تعيين هذا الدور للمستخدمين الذين قاموا بتسجيل الدخول إلى موقعك. يمتلك المستخدمون المصادقون صلاحيات أكثر من المستخدمين المجهولين، مثل القدرة على التعليق على المحتوى أو الوصول إلى المحتوى المقيد.</p>
+                </div>
+                
+                <div class="tab-content" id="editor">
+                    <h3>المحرر</h3>
+                    <p>يتم تعيين هذا الدور للمستخدمين المسؤولين عن إنشاء وإدارة المحتوى على موقعك. يتمتع المحررون بالقدرة على إنشاء المحتوى وتحريره وحذفه، بالإضافة إلى إدارة التعليقات ومكونات الموقع الأخرى.</p>
+                </div>
+                
+                <div class="tab-content" id="admin">
+                    <h3>المسؤول</h3>
+                    <p>يتم تعيين هذا الدور للمستخدمين الذين لديهم سيطرة كاملة على موقعك. يمكن للمسؤولين إجراء تغييرات على تكوين الموقع وتثبيت الوحدات النمطية وإدارة المستخدمين والصلاحيات.</p>
+                </div>
+            </section>
+
+            <!-- Content Management Section -->
+            <section id="content">
+                <h2>انشاء وادارة المحتوى في Drupal</h2>
+                <p>Drupal هو نظام إدارة محتوى يوفر واجهة مرنة وسهلة الاستخدام لإنشاء المحتوى وإدارته. فيما يلي نظرة عامة على عملية إنشاء المحتوى وإدارته في Drupal:</p>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>إنشاء أنواع المحتوى</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>في Drupal، يتم تنظيم المحتوى في "أنواع المحتوى". قبل البدء في إنشاء المحتوى، ستحتاج إلى إنشاء نوع واحد أو أكثر من أنواع المحتوى الخاصة بموقعك. على سبيل المثال، يمكنك إنشاء نوع محتوى "منشور مدونة" ونوع محتوى "صفحة" ونوع محتوى "منتج".</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>إضافة الحقول إلى أنواع المحتوى</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>بمجرد إنشاء أنواع المحتوى الخاصة بك، يمكنك إضافة حقول إلى كل نوع لتخزين معلومات محددة. على سبيل المثال، يمكنك إضافة حقل "العنوان" وحقل "النص الأساسي" وحقل "الصورة" إلى نوع محتوى "منشور المدونة".</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>إنشاء محتوى</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>لإنشاء محتوى، انتقل إلى قسم "المحتوى" في موقع Drupal الخاص بك وانقر على "إضافة محتوى". اختر نوع المحتوى المناسب واملأ الحقول. يمكنك أيضًا إضافة صور وملفات وسائط أخرى إلى المحتوى الخاص بك.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modules Section -->
+            <section id="modules">
+                <h2>الوحدات والمكونات الإضافية في Drupal</h2>
+                <p>يعد تحسين وظائف موقع Drupal الخاص بك باستخدام الوحدات والمكونات الإضافية جانبًا رئيسيًا لتخصيص موقعك وتحسينه. الوحدات والمكونات الإضافية عبارة عن مكونات برمجية مسبقة الصنع تعمل على توسيع الوظائف الأساسية لـ Drupal وإضافة ميزات جديدة إلى موقعك.</p>
+                
+                <h3>أشهر الوحدات في Drupal:</h3>
+                <ul>
+                    <li>Views - لإنشاء عروض مخصصة للمحتوى</li>
+                    <li>Token - لاستخدام الرموز في النصوص والإعدادات</li>
+                    <li>Webform - لإنشاء نماذج متقدمة</li>
+                    <li>Pathauto - لإنشاء عناوين URL تلقائية</li>
+                    <li>CTools - أدوات مساعدة للمطورين</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-widget">
+                <h3>مواقع شهيرة تستخدم Drupal</h3>
+                <ul>
+                    <li>جامعة هارفارد</li>
+                    <li>موقع البيت الأبيض</li>
+                    <li>موقع ولاية جورجيا الأمريكية</li>
+                    <li>موقع مدينة لوس أنجلوس</li>
+                    <li>موقع الحكومة الأسترالية</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>مميزات Drupal</h3>
+                <ul>
+                    <li>المرونة والتعددية</li>
+                    <li>قابلية التوسع الكبيرة</li>
+                    <li>أمان قوي</li>
+                    <li>مجتمع مطورين كبير</li>
+                    <li>دعم متعدد اللغات</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>أدوات مساعدة</h3>
+                <ul>
+                    <li><a href="#">تحميل Drupal</a></li>
+                    <li><a href="#">معرض الوحدات</a></li>
+                    <li><a href="#">دليل المبتدئين</a></li>
+                    <li><a href="#">منتدى الدعم</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن Drupal</h3>
+                    <p>Drupal هو نظام إدارة محتوى مفتوح المصدر يُستخدم على نطاق واسع لنشر المحتوى على الويب. تم إصداره في عام 2001 وأصبح منذ ذلك الحين أحد أنظمة CMS الأكثر شعبية في العالم للمواقع المتقدمة.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#intro">مقدمة</a></li>
+                        <li><a href="#setup">التثبيت</a></li>
+                        <li><a href="#users">أدوار المستخدم</a></li>
+                        <li><a href="#content">إدارة المحتوى</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>مصادر إضافية</h3>
+                    <ul>
+                        <li><a href="#">الوثائق الرسمية</a></li>
+                        <li><a href="#">دروس تعليمية</a></li>
+                        <li><a href="#">مجتمع Drupal</a></li>
+                        <li><a href="#">مستودع الوحدات</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 دليل Drupal الشامل. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isActive = content.classList.contains('active');
+                
+                // Close all accordion items
+                document.querySelectorAll('.accordion-content').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.accordion-header i').forEach(icon => {
+                    icon.className = 'fas fa-chevron-down';
+                });
+                
+                // Open clicked item if it was closed
+                if (!isActive) {
+                    content.classList.add('active');
+                    header.querySelector('i').className = 'fas fa-chevron-up';
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

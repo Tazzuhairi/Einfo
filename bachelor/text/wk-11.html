@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظم إدارة المحتوى (CMS)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4cb5ae;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --content-color: #6c757d;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        nav {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav a i {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 80px;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .section-title i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--content-color);
+        }
+        
+        .highlight {
+            background-color: rgba(76, 181, 174, 0.1);
+            border-right: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        
+        .step-card {
+            flex-basis: calc(50% - 1rem);
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            transition: var(--transition);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-card:hover::before {
+            height: 100%;
+        }
+        
+        .step-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-card h3 span {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .phase-list {
+            list-style: none;
+        }
+        
+        .phase-list li {
+            margin-bottom: 0.8rem;
+            padding-right: 1.5rem;
+            position: relative;
+        }
+        
+        .phase-list li:before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .standard-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .standard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .standard-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .standard-card h3 i {
+            margin-left: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .feature-table th, .feature-table td {
+            padding: 1rem;
+            text-align: right;
+            border: 1px solid #e9ecef;
+        }
+        
+        .feature-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .feature-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .feature-table tr:hover {
+            background-color: rgba(76, 181, 174, 0.1);
+        }
+        
+        .cms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .cms-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--accent-color);
+            text-align: center;
+        }
+        
+        .cms-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cms-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .step-card {
+                flex-basis: 100%;
+            }
+            
+            .standards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>نظم إدارة المحتوى (CMS)</h1>
+            <p>الأدوات والتقنيات لإدارة ونشر المحتوى الرقمي بفعالية</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#intro"><i class="fas fa-home"></i> تمهيد</a></li>
+            <li><a href="#structure"><i class="fas fa-sitemap"></i> البنية الأساسية</a></li>
+            <li><a href="#user-roles"><i class="fas fa-users"></i> أدوار المستخدمين</a></li>
+            <li><a href="#content-types"><i class="fas fa-file-alt"></i> أنواع المحتوى</a></li>
+            <li><a href="#templates"><i class="fas fa-paint-brush"></i> القوالب</a></li>
+            <li><a href="#modules"><i class="fas fa-puzzle-piece"></i> الوحدات والإضافات</a></li>
+            <li><a href="#media"><i class="fas fa-photo-video"></i> مكتبة الوسائط</a></li>
+            <li><a href="#seo"><i class="fas fa-search"></i> تحسين محركات البحث</a></li>
+            <li><a href="#version"><i class="fas fa-code-branch"></i> التحكم بالإصدار</a></li>
+            <li><a href="#examples"><i class="fas fa-box"></i> أمثلة على أنظمة CMS</a></li>
+        </ul>
+    </nav>
+    
+    <main class="container">
+        <section id="intro">
+            <h2 class="section-title">
+                <i class="fas fa-home"></i>
+                تمهيد
+            </h2>
+            <div class="content">
+                <p>تؤدي (CMS) Content Management System أنظمة إدارة المحتوى دورًا مهمًا في إدارة ونشر المحتوى الرقمي. سواء كنت مبتدئًا أو محترفًا متمرسًا، فإن ادراك المفاهيم الرئيسية لأنظمة ادارة المحتوى يعد أمر ضروري للاستخدام الفعال لهذه التكنولوجيا.</p>
+                
+                <div class="highlight">
+                    <p>تم تخصيص هذا الفصل لاستكشاف المفاهيم الأساسية لنظام إدارة المحتوى، بما في ذلك تاريخ تقنية CMS والأنواع المختلفة للأنظمة المتاحة، وكيف يمكن استخدامها لإدارة المحتوى الرقمي ونشره.</p>
+                </div>
+                
+                <h3>أهمية دراسة أنظمة إدارة المحتوى:</h3>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>فهم الأساسيات</h3>
+                        <p>يقدم هذا الفصل مقدمة شاملة للمفاهيم الأساسية لنظام إدارة المحتوى، وهو أمر ضروري لأي شخص يتطلع إلى اكتساب فهم أساسي لهذه التكنولوجيا.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>التقدم الوظيفي</h3>
+                        <p>تعد المعرفة بنظام إدارة المحتوى مهارة قيّمة لطلاب علوم المعلومات، حيث إنها عنصر حاسم في تطوير الويب الحديث والتسويق الرقمي.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>الصلة بسوق العمل</h3>
+                        <p>يؤدي نظام إدارة المحتوى دورًا مهمًا في إدارة المحتوى الرقمي وتستخدمه مجموعة واسعة من المؤسسات، مما يجعله مجالًا مهمًا للدراسة.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>4</span>التحضير للمستقبل</h3>
+                        <p>مع استمرار تطور المحتوى الرقمي والتكنولوجيا، سيساعد فهم أساسيات CMS في إعداد الطلاب للتطورات المستقبلية في هذا المجال.</p>
+                    </div>
+                </div>
+                
+                <p>بشكل عام، تزود دراسة الفصل الخاص بـ "أنظمة إدارة المحتوى" الطلاب بالمعرفة والمهارات التي يحتاجونها للنجاح في حياتهم المهنية ومواكبة اتجاهات التطوير المستقبلي.</p>
+            </div>
+        </section>
+        
+        <section id="structure">
+            <h2 class="section-title">
+                <i class="fas fa-sitemap"></i>
+                البنية الأساسية لأنظمة إدارة المحتوى
+            </h2>
+            <div class="content">
+                <p>نظام إدارة المحتوى (CMS) هو تطبيق برمجي يتيح للمستخدمين إنشاء المحتوى الرقمي وإدارته ونشره دون الحاجة إلى معرفة تقنية واسعة. مع صعود التسويق الرقمي والوجود عبر الإنترنت، أصبح CMS جزءًا لا يتجزأ من العديد من الشركات والمؤسسات.</p>
+                
+                <h3>المفاهيم الأساسية لأنظمة إدارة المحتوى:</h3>
+                
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h3><i class="fas fa-users-cog"></i> أدوار المستخدم</h3>
+                        <p>عادةً ما يكون لنظام إدارة المحتوى أدوار مستخدم مختلفة، مثل المسؤولين والمحررين والمؤلفين والمشتركين، لكل دور صلاحيات وقدرات محددة.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-file"></i> أنواع المحتوى</h3>
+                        <p>يمكن إنشاء أنواع مختلفة من المحتوى داخل نظام إدارة المحتوى، بما في ذلك الصفحات والمشاركات والصور ومقاطع الفيديو والمزيد.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-paint-brush"></i> القوالب</h3>
+                        <p>غالبًا ما تأتي أنظمة إدارة المحتوى مع مجموعة من القوالب التي يمكن استخدامها لإنشاء تخطيط وتصميم موقع الويب.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-puzzle-piece"></i> الوحدات النمطية</h3>
+                        <p>تسمح أنظمة إدارة المحتوى غالبًا بإضافة الوحدات النمطية والمكونات الإضافية التي تعمل على توسيع وظائف النظام.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-photo-video"></i> مكتبة الوسائط</h3>
+                        <p>عادةً ما يحتوي نظام إدارة المحتوى على مكتبة وسائط حيث يمكن تخزين وإدارة الصور ومقاطع الفيديو وملفات الوسائط الأخرى.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-search"></i> تحسين محركات البحث</h3>
+                        <p>تحتوي معظم أنظمة إدارة المحتوى على ميزات تحسين محركات البحث (SEO)، مما يسمح للمستخدمين بتحسين موقع الويب الخاص بهم لمحركات البحث.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-code-branch"></i> التحكم في الإصدار</h3>
+                        <p>غالبًا ما تتضمن أنظمة إدارة المحتوى التحكم في الإصدار، مما يسمح للمستخدمين بتتبع التغييرات التي يتم إجراؤها على المحتوى بمرور الوقت.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>يعد CMS أداة قوية تسهل على المستخدمين غير التقنيين إنشاء المحتوى الرقمي وإدارته ونشره. بفضل ميزاته ووظائفه المتنوعة، يمكن لنظام إدارة المحتوى توفير الوقت وتحسين الكفاءة وضمان موقع ويب ذو مظهر احترافي.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="user-roles">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>
+                أدوار مستخدمي الأنظمة
+            </h2>
+            <div class="content">
+                <p>تعد أدوار المستخدم مفهومًا أساسيًا في أنظمة إدارة المحتوى (CMS) حيث توفر إطارًا لتنظيم وتفويض المسؤوليات داخل نظام إدارة المحتوى. يعد فهم أدوار المستخدم أمرًا مهمًا للشركات والمؤسسات التي تستخدم نظام إدارة المحتوى، حيث تساعد في ضمان عملية إنشاء محتوى تعاونية ومنظمة وفعالة.</p>
+                
+                <h3>أدوار المستخدم الشائعة في أنظمة إدارة المحتوى:</h3>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>المسؤولون</h3>
+                        <p>يتمتعون بالتحكم الكامل في نظام إدارة المحتوى، بما في ذلك القدرة على إدارة المستخدمين وتثبيت المكونات الإضافية والوحدات وتهيئة الإعدادات.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>المحررون</h3>
+                        <p>يتمتعون بالقدرة على إدارة المحتوى ونشره، لكن لا يتمتعون عادةً بإمكانية الوصول إلى الوظائف الإدارية لنظام إدارة المحتوى.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>المؤلفون</h3>
+                        <p>مسؤولون عن إنشاء محتوى داخل نظام إدارة المحتوى، مثل كتابة منشورات مدونة أو إضافة صفحات إلى موقع الويب.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>4</span>المشتركون</h3>
+                        <p>هم عادةً المستخدمين النهائيين لموقع الويب، وليس لديهم أي قدرة على إنشاء أو إدارة المحتوى داخل نظام إدارة المحتوى.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>5</span>المساهمون</h3>
+                        <p>مشابهون للمؤلفين، لكن لديهم عادةً قدرات محدودة أكثر في نظام إدارة المحتوى.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>6</span>الوسطاء</h3>
+                        <p>مسؤولون عن إدارة المحتوى الذي ينشئه المستخدم، مثل التعليقات أو المنتديات.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>من المهم ملاحظة أن المسؤوليات والقدرات الدقيقة لكل دور مستخدم يمكن أن تختلف بين أنظمة إدارة المحتوى، ويمكن أيضًا تخصيصها لتلبية احتياجات الشركات والمؤسسات الفردية.</p>
+                </div>
+                
+                <p>في الختام، تؤدي أدوار المستخدم دورًا مهمًا في هيكل وتشغيل أنظمة إدارة المحتوى، مما يوفر إطارًا لتنظيم وتفويض المسؤوليات. من خلال فهم أدوار المستخدم، يمكن للشركات والمؤسسات ضمان عملية إنشاء محتوى تعاونية ومنظمة وفعالة، وتوفير الوقت وتحسين الجودة الشاملة لموقعهم على الويب.</p>
+            </div>
+        </section>
+        
+        <section id="content-types">
+            <h2 class="section-title">
+                <i class="fas fa-file-alt"></i>
+                أنواع المحتوى
+            </h2>
+            <div class="content">
+                <p>تعد أنواع المحتوى مفهومًا رئيسيًا في أنظمة إدارة المحتوى (CMS)، لأنها توفر هيكلًا لتنظيم وإدارة أنواع مختلفة من المحتوى الرقمي داخل نظام إدارة المحتوى. يعد فهم أنواع المحتوى أمرًا مهمًا للشركات والمؤسسات التي تستخدم نظام إدارة المحتوى، حيث تساعد في ضمان تناسق المحتوى وتنظيمه وسهولة إدارته.</p>
+                
+                <h3>أنواع المحتوى الشائعة في أنظمة إدارة المحتوى:</h3>
+                
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h3><i class="fas fa-file"></i> الصفحات</h3>
+                        <p>تعد الصفحات عادةً اللبنات الأساسية لموقع الويب، وتوفر الأساس لهيكله والتنقل فيه.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-newspaper"></i> المقالات</h3>
+                        <p>تُستخدم عادةً لإنشاء محتوى المدونة وإدارته، مثل تحديثات الأخبار.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-image"></i> الصور</h3>
+                        <p>هي نوع شائع من المحتوى الرقمي، ويمكن استخدامها لتوضيح الصفحات والمنشورات.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-video"></i> مقاطع الفيديو</h3>
+                        <p>يمكن استخدامها لتوفير محتوى جذاب وإضافة اهتمام بصري إلى موقع ويب.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-shopping-cart"></i> المنتجات</h3>
+                        <p>إذا كان نظام إدارة المحتوى يتضمن وظائف التجارة الإلكترونية، فقد يتضمن نوع محتوى لإدارة المنتجات.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-quote-right"></i> الشهادات</h3>
+                        <p>هي نوع من المحتوى يمكن استخدامه لعرض ملاحظات العملاء أو المستخدمين.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-calendar-alt"></i> الأحداث</h3>
+                        <p>يمكن استخدامها لإنشاء وإدارة معلومات حول الأحداث القادمة، مثل المؤتمرات أو ورش العمل.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>يمكن أن تختلف أنواع المحتوى الدقيقة التي يمكن إنشاؤها داخل نظام إدارة المحتوى، ويمكن أيضًا تخصيصها لتلبية احتياجات الشركات والمؤسسات الفردية.</p>
+                </div>
+                
+                <p>في الختام، تؤدي أنواع المحتوى دورًا مهمًا في تنظيم وإدارة المحتوى الرقمي ضمن نظام إدارة المحتوى. من خلال فهم الأنواع المختلفة للمحتوى المتاح، يمكن للشركات والمؤسسات التأكد من أن محتواها متسق ومنظم وسهل الإدارة، مما يؤدي إلى تحسين الجودة الشاملة لموقعهم على الويب.</p>
+            </div>
+        </section>
+        
+        <section id="templates">
+            <h2 class="section-title">
+                <i class="fas fa-paint-brush"></i>
+                القوالب
+            </h2>
+            <div class="content">
+                <p>تعد القوالب مفهومًا رئيسيًا في أنظمة إدارة المحتوى (CMS)، لأنها توفر طريقة موحدة لعرض أنواع مختلفة من المحتوى على موقع ويب. يعد فهم القوالب أمرًا مهمًا للشركات والمؤسسات التي تستخدم نظام إدارة المحتوى، لأنها تساعد في ضمان أن يكون لموقع الويب شكلًا وشعورًا متسقين، ويسهل إدارته.</p>
+                
+                <h3>المفاهيم الأساسية المتعلقة بالقوالب في أنظمة إدارة المحتوى:</h3>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>التصميم</h3>
+                        <p>تحدد القوالب التصميم العام وتخطيط موقع الويب، بما في ذلك الرأس والتذييل والعناصر المشتركة الأخرى.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>مناطق المحتوى</h3>
+                        <p>تتضمن القوالب عادةً منطقة محتوى واحدة أو أكثر، حيث يمكن إضافة المحتوى وعرضه.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>قابلية إعادة الاستخدام</h3>
+                        <p>يمكن استخدام القوالب بشكل متكرر لعرض أنواع مختلفة من المحتوى على موقع الويب، مما يوفر مظهرًا وأسلوبًا متسقًا.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>4</span>التخصيص</h3>
+                        <p>يمكن تخصيص القوالب لتلبية الاحتياجات المحددة للشركة أو المؤسسة.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>5</span>الوراثة</h3>
+                        <p>تستخدم بعض أنظمة إدارة المحتوى مفهومًا يسمى توريث القوالب، والذي يسمح للقوالب بأن تستند إلى قوالب أخرى.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>6</span>المحتوى الديناميكي</h3>
+                        <p>يمكن تصميم القوالب لعرض المحتوى الديناميكي، مثل التاريخ والوقت أو عدد التعليقات على منشور مدونة.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>تلعب القوالب دورًا مهمًا في تصميم وإدارة مواقع الويب ضمن نظام إدارة المحتوى. من خلال فهم كيفية عمل النماذج، يمكن للشركات والمؤسسات التأكد من أن موقع الويب الخاص بهم له شكل وأسلوب متسقان، ويسهل إدارته، ويوفر تجربة مستخدم رائعة لجمهورهم.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="modules">
+            <h2 class="section-title">
+                <i class="fas fa-puzzle-piece"></i>
+                الوحدات والإضافات
+            </h2>
+            <div class="content">
+                <p>الوحدات والمكونات الإضافية هما مفهومان مهمان في أنظمة إدارة المحتوى (CMS) يوفران طريقة لتوسيع وظائف CMS. يعد فهم الوحدات والمكونات الإضافية أمرًا مهمًا للشركات والمؤسسات التي تستخدم نظام إدارة المحتوى، لأنها توفر طريقة لإضافة ميزات جديدة، وتحسين الميزات الحالية، وتخصيص نظام إدارة المحتوى لتلبية الاحتياجات المحددة للشركة أو المؤسسة.</p>
+                
+                <h3>المفاهيم الأساسية المتعلقة بالوحدات والمكونات الإضافية:</h3>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>الوحدات النمطية</h3>
+                        <p>عبارة عن حزم مكونة مسبقًا من التعليمات البرمجية التي تضيف وظائف محددة إلى نظام إدارة المحتوى.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>الإضافات</h3>
+                        <p>تشبه الوحدات النمطية، ولكنها تُستخدم على وجه التحديد في أنظمة إدارة المحتوى التي تعتمد على برامج مفتوحة المصدر.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>التخصيص</h3>
+                        <p>يمكن تخصيص كل من الوحدات والمكونات الإضافية لتلبية الاحتياجات المحددة للعمل أو المؤسسة.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>4</span>التثبيت</h3>
+                        <p>عادةً ما يكون تثبيت الوحدات والمكونات الإضافية عملية بسيطة، ويمكن إجراؤها مباشرةً من داخل نظام إدارة المحتوى.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>5</span>التوافق</h3>
+                        <p>من المهم التأكد من أن الوحدات النمطية والمكونات الإضافية المستخدمة متوافقة مع CMS والإصدار المحدد المستخدم.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>6</span>التحديثات</h3>
+                        <p>قد تتطلب الوحدات النمطية والمكونات الإضافية تحديثات لمواصلة العمل مع CMS، أو لمعالجة الثغرات الأمنية.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>توفر الوحدات والمكونات الإضافية طريقة قوية لتوسيع وظائف CMS وتسهيل إدارة موقع الويب. من خلال فهم كيفية عملها، يمكن للشركات والمؤسسات الاستفادة من هذه الأداة القوية لإنشاء موقع ويب يلبي الاحتياجات المحددة لأعمالهم أو مؤسستهم.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="media">
+            <h2 class="section-title">
+                <i class="fas fa-photo-video"></i>
+                مكتبة الوسائط
+            </h2>
+            <div class="content">
+                <p>تعد مكتبة الوسائط مكونًا مهمًا لنظام إدارة المحتوى (CMS) حيث توفر مستودعًا مركزيًا لجميع أصول الوسائط المستخدمة على موقع الويب، مثل الصور ومقاطع الفيديو والملفات الصوتية. يعد فهم مكتبة الوسائط أمرًا مهمًا للشركات والمؤسسات التي تستخدم نظام إدارة المحتوى، حيث توفر طريقة لإدارة وتنظيم والوصول إلى أصول الوسائط اللازمة لإنشاء موقع ويب مقنع.</p>
+                
+                <h3>المفاهيم الأساسية المتعلقة بمكتبة الوسائط:</h3>
+                
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h3><i class="fas fa-database"></i> إدارة الأصول</h3>
+                        <p>توفر مكتبة الوسائط وسيلة لتخزين وإدارة جميع أصول الوسائط المستخدمة على موقع الويب.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-archive"></i> المستودع المركزي</h3>
+                        <p>مكتبة الوسائط هي مستودع مركزي لجميع أصول الوسائط المستخدمة على موقع الويب.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-search"></i> البحث والتصفية</h3>
+                        <p>قد تتضمن مكتبة الوسائط ميزات مثل البحث والتصفية، والتي يمكن أن تساعد في العثور بسرعة على أصول الوسائط المطلوبة.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-eye"></i> المعاينة والتحرير</h3>
+                        <p>قد توفر مكتبة الوسائط طريقة لمعاينة أصول الوسائط وتحريرها مباشرةً من داخل نظام إدارة المحتوى.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-tachometer-alt"></i> التحسين</h3>
+                        <p>قد تتضمن مكتبة الوسائط ميزات لتحسين أصول الوسائط، مثل ضغط الصور أو تغيير حجم مقاطع الفيديو.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-code-branch"></i> التحكم في الإصدار</h3>
+                        <p>قد توفر بعض مكتبات الوسائط التحكم في الإصدار، مما يسمح بتخزين وإدارة إصدارات متعددة من أصل وسائط.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-user-lock"></i> التحكم في الوصول</h3>
+                        <p>يمكن التحكم في الوصول إلى مكتبة الوسائط من خلال أدوار المستخدم والصلاحيات.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>تعد مكتبة الوسائط عنصرًا حاسمًا في نظام إدارة المحتوى، حيث توفر طريقة لإدارة وتنظيم والوصول إلى أصول الوسائط اللازمة لإنشاء موقع ويب مقنع. من خلال فهم كيفية عمل مكتبة الوسائط، يمكن للشركات والمؤسسات الاستفادة من هذه الأداة القوية لتحسين إدارة موقع الويب الخاص بهم وإنشاء تجربة مستخدم أفضل لجمهورهم.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="seo">
+            <h2 class="section-title">
+                <i class="fas fa-search"></i>
+                مُحسّنات محرّكات البحث
+            </h2>
+            <div class="content">
+                <p>يعد نظام إدارة المحتوى (CMS) أداة قوية يمكن أن تساعد الشركات والمؤسسات على إنشاء مواقع الويب الخاصة بهم وإدارتها. ومع ذلك، من أجل تحقيق أقصى استفادة من نظام إدارة المحتوى، من المهم فهم كيفية تحسين موقع الويب لمحركات البحث، حيث يمكن أن يساعد ذلك في زيادة حركة المرور العضوية إلى الموقع وزيادة ظهور النشاط التجاري عبر الإنترنت.</p>
+                
+                <h3>المفاهيم الأساسية المتعلقة بـ CMS و SEO:</h3>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>أدوات تحسين محركات البحث المضمنة</h3>
+                        <p>توفر العديد من منصات CMS أدوات تحسين محركات البحث المضمنة، مثل القدرة على تعيين عنوان الصفحة، والوصف التعريفي، وعلامات الرأس.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>خرائط مواقع XML</h3>
+                        <p>خريطة موقع XML هي ملف يوفر معلومات حول الصفحات وهيكل موقع الويب لمحركات البحث.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>إدارة المحتوى</h3>
+                        <p>تعد القدرة على إدارة وتنظيم المحتوى في نظام إدارة المحتوى أمرًا بالغ الأهمية لنجاح تحسين محركات البحث.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>4</span>تصميم متوافق مع الأجهزة المحمولة</h3>
+                        <p>يعد موقع الويب المتوافق مع الجوّال أمرًا بالغ الأهمية لنجاح مُحسّنات محرّكات البحث.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>5</span>إدارة عناوين URL</h3>
+                        <p>تعد بنية عنوان URL لموقع الويب أمرًا بالغ الأهمية لتحسين محركات البحث.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>6</span>تكامل التحليلات</h3>
+                        <p>يمكن أن يساعد دمج التحليلات مع نظام إدارة المحتوى في تتبع أداء موقع الويب وتحديد مجالات التحسين.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>يمكن أن يكون نظام إدارة المحتوى (CMS) أداة قوية لتحسين محركات البحث، حيث يوفر القدرة على إدارة موقع الويب وتحسينه لمحركات البحث. من خلال فهم كيفية عمل CMS و SEO معًا، يمكن للشركات والمؤسسات الاستفادة من هذا المزيج القوي لجذب المزيد من الزيارات العضوية إلى موقع الويب الخاص بهم وزيادة ظهورهم عبر الإنترنت.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="version">
+            <h2 class="section-title">
+                <i class="fas fa-code-branch"></i>
+                التحكم بالإصدار
+            </h2>
+            <div class="content">
+                <p>يعد التحكم في الإصدار جانبًا مهمًا من جوانب إدارة المحتوى في نظام إدارة المحتوى (CMS). يسمح للفرق بتتبع التغييرات التي تم إجراؤها على المحتوى، والعودة إلى الإصدارات السابقة إذا لزم الأمر، والتعاون بشكل أكثر فعالية.</p>
+                
+                <h3>المفاهيم الأساسية المتعلقة بالتحكم في الإصدار:</h3>
+                
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h3><i class="fas fa-history"></i> تنقيحات المحتوى</h3>
+                        <p>يوفر نظام إدارة المحتوى عادةً طريقة لتتبع المراجعات التي تم إجراؤها على المحتوى، بحيث يمكن للفرق رؤية التغييرات التي تم إجراؤها بمرور الوقت.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-check-circle"></i> سير عمل الموافقة</h3>
+                        <p>توفر العديد من منصات CMS سير عمل الموافقة، والذي يسمح للفرق بإدارة التغييرات على المحتوى من خلال سلسلة من المراحل.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-users"></i> التعاون</h3>
+                        <p>يوفر نظام إدارة المحتوى موقعًا مركزيًا للفرق للتعاون في إنشاء المحتوى وإدارته.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-archive"></i> محفوظات المحتوى</h3>
+                        <p>يوفر نظام إدارة المحتوى عادةً طريقة لعرض محفوظات التغييرات التي تم إجراؤها على المحتوى.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>يعد التحكم في الإصدار جانبًا مهمًا لإدارة المحتوى في نظام إدارة المحتوى. إنه يزود الفرق بالأدوات والعمليات التي يحتاجونها لإدارة التغييرات على المحتوى، والتعاون بشكل أكثر فاعلية، والتأكد من أن النسخة النهائية من المحتوى دقيقة ومحدثة.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="examples">
+            <h2 class="section-title">
+                <i class="fas fa-box"></i>
+                نماذج لأنظمة إدارة المحتوى
+            </h2>
+            <div class="content">
+                <p>هناك العديد من أنظمة إدارة المحتوى (CMS) المختلفة المتاحة، ولكل منها نقاط قوتها وضعفها. سيعتمد نظام إدارة المحتوى المناسب لمؤسسة معينة على احتياجاتها ومتطلباتها المحددة، مثل حجم موقع الويب وتعقيد المحتوى والجمهور المستهدف.</p>
+                
+                <h3>منصات CMS الأكثر شيوعًا:</h3>
+                
+                <div class="cms-grid">
+                    <div class="cms-card">
+                        <i class="fab fa-wordpress"></i>
+                        <h3>WordPress</h3>
+                        <p>نظام إدارة محتوى مفتوح المصدر واسع الاستخدام يشتهر بسهولة استخدامه ومجتمع كبير من المطورين. إنه مناسب تمامًا للمواقع الصغيرة والمتوسطة الحجم.</p>
+                    </div>
+                    
+                    <div class="cms-card">
+                        <i class="fab fa-joomla"></i>
+                        <h3>Joomla</h3>
+                        <p>نظام إدارة محتوى مفتوح المصدر يشتهر بمرونته وسهولة استخدامه. إنه مناسب تمامًا لمواقع الويب ذات المتطلبات الأكثر تعقيدًا.</p>
+                    </div>
+                    
+                    <div class="cms-card">
+                        <i class="fab fa-drupal"></i>
+                        <h3>Drupal</h3>
+                        <p>نظام إدارة محتوى قوي ومفتوح المصدر ومناسب تمامًا لمواقع الويب الكبيرة والمعقدة، مثل مواقع الشركات والمواقع الحكومية.</p>
+                    </div>
+                    
+                    <div class="cms-card">
+                        <i class="fab fa-magento"></i>
+                        <h3>Magento</h3>
+                        <p>نظام إدارة محتوى شهير للتجارة الإلكترونية وهو مناسب تمامًا للمتاجر عبر الإنترنت من جميع الأحجام.</p>
+                    </div>
+                    
+                    <div class="cms-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Shopify</h3>
+                        <p>نظام إدارة محتوى للتجارة الإلكترونية قائم على السحابة ومناسب تمامًا للمتاجر الصغيرة والمتوسطة الحجم عبر الإنترنت.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>وبالنظر لأهميتها وشيوعها عالميًا، يتم التركيز على أنظمة إدارة المحتوى الثلاث الأولى (WordPress، Joomla، Drupal) في الفصول اللاحقة.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 نظم إدارة المحتوى (CMS). جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

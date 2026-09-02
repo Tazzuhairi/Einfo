@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المحتوى WordPress - دليل شامل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0073aa;
+            --secondary-color: #23282d;
+            --accent-color: #00a0d2;
+            --light-color: #f1f1f1;
+            --dark-color: #191e23;
+            --success-color: #46b450;
+            --warning-color: #ffb900;
+            --danger-color: #dc3232;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            margin: 2rem auto;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        section:last-child {
+            margin-bottom: 0;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-right: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        /* Sidebar */
+        .sidebar-widget {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-widget:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sidebar-widget h3 {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1rem;
+            margin: -1.5rem -1.5rem 1.5rem;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.8rem;
+            text-align: right;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: var(--light-color);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .tab {
+            padding: 1rem 1.5rem;
+            background: var(--light-color);
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-left: 0.2rem;
+        }
+        
+        .tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            width: 100%;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0 5px 5px 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Accordion */
+        .accordion {
+            margin: 1.5rem 0;
+        }
+        
+        .accordion-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .accordion-header {
+            padding: 1rem;
+            background: var(--light-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .accordion-content.active {
+            padding: 1rem;
+            max-height: 300px;
+            border: 1px solid var(--light-color);
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fab fa-wordpress"></i>
+                <h1>WordPress دليل شامل</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#intro">مقدمة</a></li>
+                    <li><a href="#setup">الإعداد</a></li>
+                    <li><a href="#users">المستخدمون</a></li>
+                    <li><a href="#content">المحتوى</a></li>
+                    <li><a href="#seo">SEO</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>نظام إدارة المحتوى WordPress</h2>
+            <p>دليل شامل لتعلم واحتراف نظام إدارة المحتوى الأكثر شيوعًا في العالم</p>
+            <a href="#intro" class="btn">ابدأ الرحلة</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="content">
+            <!-- Introduction Section -->
+            <section id="intro">
+                <h2>تمهيد</h2>
+                <p>يعد WordPress أحد أكثر أنظمة إدارة المحتوى (CMS) استخدامًا في العالم، وتشير التقديرات إلى أن أكثر من 35٪ من جميع مواقع الويب على الإنترنت يتم تشغيلها بواسطة WordPress. ترجع هذه الشعبية إلى عدد من العوامل، بما في ذلك سهولة الاستخدام والمرونة ومجتمع كبير من المطورين.</p>
+                
+                <p>في هذا الفصل، سوف نستكشف المفاهيم والميزات الرئيسية لـ WordPress، بما في ذلك أدوار المستخدم وأنواع المحتوى والقوالب والإضافات ومكتبة الوسائط. سنناقش أيضًا أساسيات تحسين محركات البحث والتحكم في الإصدار في WordPress، ونقدم النصائح وأفضل الممارسات لتحقيق أقصى استفادة من نظام إدارة المحتوى القوي هذا.</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">35%</div>
+                        <div class="stat-label">من مواقع الإنترنت</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">60M+</div>
+                        <div class="stat-label">موقع يستخدمونه</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">إضافة مجانية</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Setup Section -->
+            <section id="setup">
+                <h2>إعداد الموقع باستخدام WordPress</h2>
+                <p>بمجرد أن تقرر استخدام WordPress كنظام إدارة محتوى خاص بك، فإن الخطوة الأولى هي إعداد موقعك وتكوينه. قد تبدو عملية إنشاء موقع WordPress شاقة، ولكن مع القليل من التوجيه، فهي في الواقع بسيطة للغاية.</p>
+                
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-header">اختيار الاستضافة</div>
+                        <div class="card-body">
+                            <p>الخطوة الأولى هي اختيار مزود استضافة الويب. هناك العديد من مزودي خدمات استضافة الويب للاختيار من بينهم، ولكن من المهم اختيار مزود موثوق به ويقدم دعمًا ممتازًا.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">تثبيت WordPress</div>
+                        <div class="card-body">
+                            <p>يقدم العديد من موفري خدمات استضافة الويب تثبيتات WordPress بنقرة واحدة، مما يجعل عملية إعداد موقعك أسهل.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">اختيار السمة</div>
+                        <div class="card-body">
+                            <p>بمجرد التثبيت، يجب اختيار سمة سريعة الاستجابة، مما يعني أنها ستبدو رائعة على أي جهاز، من أجهزة حاسوب سطح المكتب إلى الأجهزة المحمولة.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Roles Section -->
+            <section id="users">
+                <h2>أدوار مستخدمي WordPress</h2>
+                <p>يستخدم WordPress نظامًا قائمًا على الأدوار للتحكم في وصول المستخدم إلى الواجهة الخلفية لموقع الويب. فيما يلي أدوار المستخدم المختلفة المتوفرة في WordPress وإمكانياتها:</p>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="admin">المشرف العام</div>
+                    <div class="tab" data-tab="editor">المسؤول</div>
+                    <div class="tab" data-tab="author">المحرر</div>
+                    <div class="tab" data-tab="contributor">المؤلف</div>
+                </div>
+                
+                <div class="tab-content active" id="admin">
+                    <h3>المشرف العام</h3>
+                    <p>يتمتع المشرف العام بأعلى مستوى من الوصول والتحكم في شبكة المواقع بالكامل. تتضمن بعض المسؤوليات والقدرات الرئيسية للمسؤول المتميز ما يلي:</p>
+                    <ul>
+                        <li>إدارة المواقع: إنشاء وحذف وإدارة جميع المواقع داخل الشبكة</li>
+                        <li>إدارة المستخدم: إضافة وحذف وإدارة جميع المستخدمين داخل الشبكة</li>
+                        <li>إعدادات الشبكة: الوصول إلى جميع إعدادات الشبكة</li>
+                        <li>النسخ الاحتياطي: إجراء عمليات نسخ احتياطي على مستوى الشبكة</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="editor">
+                    <h3>المسؤول</h3>
+                    <p>دور المسؤول في WordPress هو ثاني أعلى مستوى للوصول والتحكم. يتمتع المسؤول بالتحكم الكامل في الموقع ويمكنه أداء جميع المهام المتعلقة بإدارة موقع WordPress على الويب.</p>
+                </div>
+                
+                <div class="tab-content" id="author">
+                    <h3>المحرر</h3>
+                    <p>دور المحرر في WordPress مسؤول عن إدارة ونشر المحتوى على موقع WordPress. يتمتع المحرر بالقدرة على إدارة المحتوى والتعليقات والوسائط.</p>
+                </div>
+                
+                <div class="tab-content" id="contributor">
+                    <h3>المؤلف</h3>
+                    <p>دور المؤلفون في WordPress مسؤولون عن إنشاء ونشر منشوراتهم الخاصة على موقع WordPress. المؤلف لديه القدرة على إدارة المحتوى والوسائط الخاصة به فقط.</p>
+                </div>
+            </section>
+
+            <!-- Content Management Section -->
+            <section id="content">
+                <h2>إنشاء وإدارة المحتوى في WordPress</h2>
+                <p>إحدى الفوائد الرئيسية لاستخدام WordPress كنظام إدارة محتوى هي سهولة استخدامه لإنشاء المحتوى وإدارته. يجعل WordPress من السهل على المستخدمين من جميع مستويات المهارة إضافة وإدارة المحتوى الخاص بهم، دون الحاجة إلى الخبرة الفنية.</p>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>إنشاء محتوى جديد</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>لإنشاء محتوى في WordPress، تحتاج أولاً إلى تسجيل الدخول إلى لوحة معلومات WordPress الخاصة بك. من هناك، يمكنك إنشاء منشورات أو صفحات جديدة وإضافة الصور والوسائط وتنسيق المحتوى الخاص بك باستخدام محرر مرئي بسيط.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>إدارة المحتوى</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>تعد إدارة المحتوى الخاص بك في WordPress أمرًا سهلاً أيضًا، وذلك بفضل واجهته البديهية وأدوات التحرير القوية. يمكنك بسهولة تعديل المحتوى الموجود لديك وتحديثه، وإضافة الوسائط أو إزالتها، وحتى جدولة المحتوى ليتم حذفه تلقائيًا بعد فترة زمنية معينة.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>سجل المراجعة</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p>ميزة أخرى مفيدة في WordPress هي سجل المراجعة، والذي يسمح لك بمشاهدة واستعادة الإصدارات السابقة من المحتوى. هذا مفيد بشكل خاص عند العمل مع مؤلفين متعددين.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEO Section -->
+            <section id="seo">
+                <h2>تحسين محركات البحث (SEO) في WordPress</h2>
+                <p>تحسين محرك البحث (SEO) هو عملية تحسين ظهور موقع الويب الخاص بك في صفحات نتائج محرك البحث (SERPs) من خلال طرق مجانية يمكن أن يحسن موقع الويب ويزيد من حركة المرور إلى موقعك، ويساعدك في النهاية على الوصول إلى المزيد من العملاء المحتملين.</p>
+                
+                <h3>أفضل ممارسات SEO لـ WordPress:</h3>
+                <ul>
+                    <li>استخدم العناوين والأوصاف الغنية بالكلمات الرئيسية لصفحاتك ومنشوراتك</li>
+                    <li>استخدم علامات الرأس H1 و H2 و H3 لتنظيم المحتوى</li>
+                    <li>استخدم توسيمات غنية بالكلمات الرئيسية للصور ومقاطع الفيديو</li>
+                    <li>استخدم الارتباط الداخلي لمساعدة محركات البحث على فهم بنية موقعك</li>
+                    <li>استخدم خرائط مواقع XML لمساعدة محركات البحث في العثور على جميع صفحاتك</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-widget">
+                <h3>مواقع شهيرة تستخدم WordPress</h3>
+                <ul>
+                    <li>موقع ولاية نيويورك</li>
+                    <li>محطة أخبار BBC</li>
+                    <li>محطة أخبار CNN</li>
+                    <li>شركة والت ديزني</li>
+                    <li>محطة أخبار MTV</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>مميزات WordPress</h3>
+                <ul>
+                    <li>واجهة سهلة الاستخدام</li>
+                    <li>التخصيص العالي</li>
+                    <li>تحسين لمحركات البحث</li>
+                    <li>استجابة للهاتف المحمول</li>
+                    <li>مجتمع دعم كبير</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>أدوات مساعدة</h3>
+                <ul>
+                    <li><a href="#">تحميل WordPress</a></li>
+                    <li><a href="#">معرض السمات</a></li>
+                    <li><a href="#">دليل المبتدئين</a></li>
+                    <li><a href="#">منتدى الدعم</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن WordPress</h3>
+                    <p>WordPress هو نظام إدارة محتوى مفتوح المصدر يُستخدم على نطاق واسع لنشر المحتوى على الويب. تم إصداره في عام 2003 وأصبح منذ ذلك الحين النظام الأساسي الأكثر شعبية لإنشاء مواقع الويب.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#intro">مقدمة</a></li>
+                        <li><a href="#setup">الإعداد</a></li>
+                        <li><a href="#users">أدوار المستخدم</a></li>
+                        <li><a href="#content">إدارة المحتوى</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>مصادر إضافية</h3>
+                    <ul>
+                        <li><a href="#">الوثائق الرسمية</a></li>
+                        <li><a href="#">دروس تعليمية</a></li>
+                        <li><a href="#">مجتمع WordPress</a></li>
+                        <li><a href="#">مستودع الإضافات</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 دليل WordPress الشامل. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isActive = content.classList.contains('active');
+                
+                // Close all accordion items
+                document.querySelectorAll('.accordion-content').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.accordion-header i').forEach(icon => {
+                    icon.className = 'fas fa-chevron-down';
+                });
+                
+                // Open clicked item if it was closed
+                if (!isActive) {
+                    content.classList.add('active');
+                    header.querySelector('i').className = 'fas fa-chevron-up';
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

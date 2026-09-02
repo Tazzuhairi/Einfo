@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أدوات تحسين محركات البحث (SEO)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4cb5ae;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --content-color: #6c757d;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        nav {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav a i {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 80px;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .section-title i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--content-color);
+        }
+        
+        .highlight {
+            background-color: rgba(76, 181, 174, 0.1);
+            border-right: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        
+        .step-card {
+            flex-basis: calc(50% - 1rem);
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            transition: var(--transition);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-card:hover::before {
+            height: 100%;
+        }
+        
+        .step-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-card h3 span {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .phase-list {
+            list-style: none;
+        }
+        
+        .phase-list li {
+            margin-bottom: 0.8rem;
+            padding-right: 1.5rem;
+            position: relative;
+        }
+        
+        .phase-list li:before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .standard-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .standard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .standard-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .standard-card h3 i {
+            margin-left: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .feature-table th, .feature-table td {
+            padding: 1rem;
+            text-align: right;
+            border: 1px solid #e9ecef;
+        }
+        
+        .feature-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .feature-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .feature-table tr:hover {
+            background-color: rgba(76, 181, 174, 0.1);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .step-card {
+                flex-basis: 100%;
+            }
+            
+            .standards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>أدوات تحسين محركات البحث (SEO)</h1>
+            <p>الاستراتيجيات والتقنيات والأدوات لتحسين رؤية مواقع الويب وترتيبها في صفحات نتائج البحث</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#intro"><i class="fas fa-home"></i> تمهيد</a></li>
+            <li><a href="#concept"><i class="fas fa-lightbulb"></i> مفهوم SEO</a></li>
+            <li><a href="#search-engines"><i class="fas fa-search"></i> محركات البحث</a></li>
+            <li><a href="#browsers"><i class="fas fa-window-maximize"></i> المتصفحات</a></li>
+            <li><a href="#content-optimization"><i class="fas fa-edit"></i> تحسين المحتوى</a></li>
+            <li><a href="#technical-tools"><i class="fas fa-tools"></i> أدوات تقنية</a></li>
+        </ul>
+    </nav>
+    
+    <main class="container">
+        <section id="intro">
+            <h2 class="section-title">
+                <i class="fas fa-home"></i>
+                تمهيد
+            </h2>
+            <div class="content">
+                <p>يقدم الفصل الخاص بتحسين محركات البحث (SEO) فحصًا متعمقًا للاستراتيجيات والتقنيات الرئيسية المستخدمة لتحسين رؤية مواقع الويب وترتيبها في صفحات نتائج محرك البحث (SERPs). يبدأ الفصل بنظرة عامة على كيفية عمل محركات البحث، بما في ذلك الخوارزميات وعوامل الترتيب التي تستخدمها محركات البحث لتحديد مدى ملاءمة وجودة مواقع الويب.</p>
+                
+                <div class="highlight">
+                    <p>ينتقل الفصل بعد ذلك لتغطية العناصر الرئيسية لتحسين محركات البحث الفعالة، بما في ذلك البحث عن الكلمات المفتاحية وتحليلها، والتحسين على الصفحة، وبناء الروابط، وتتبع وتحليل حركة مرور الموقع.</p>
+                </div>
+                
+                <p>بالإضافة إلى ذلك، يقدم الفصل نصائح عملية وأفضل الممارسات لتحسين مواقع الويب لمحركات البحث، بما في ذلك استخدام الكلمات المفتاحية والأوصاف التعريفية وعلامات الرأس، فضلاً عن تنفيذ التصميم سريع الاستجابة وبنية الموقع.</p>
+                
+                <p>بشكل عام، يقدم هذا الفصل نظرة عامة شاملة على المفاهيم الأساسية وأفضل الممارسات في تحسين محركات البحث، مما يجعلها موردًا أساسيًا لأي شخص يتطلع إلى تحسين رؤية موقع الويب الخاص به وترتيبه في نتائج محرك البحث.</p>
+            </div>
+        </section>
+        
+        <section id="concept">
+            <h2 class="section-title">
+                <i class="fas fa-lightbulb"></i>
+                مفهوم تحسين محركات البحث
+            </h2>
+            <div class="content">
+                <p>تحسين محرك البحث (SEO) Search Engine Optimization هو عملية تحسين موقع الويب لرفع ترتيبه في صفحات نتائج محرك البحث (SERPs) وزيادة الرؤية وحركة المرور إلى الموقع. يتضمن إجراء تغييرات فنية وإبداعية على موقع الويب الخاص بك لمساعدة محركات البحث على فهم موضوع موقعك لوضعه في ترتيب أعلى في نتائج البحث.</p>
+                
+                <h3>المكونات الرئيسية لتحسين محركات البحث:</h3>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>البحث عن الكلمات المفتاحية</h3>
+                        <p>عملية تحديد الكلمات المفتاحية والعبارات التي يستخدمها الأشخاص للبحث عن منتجات وخدمات مثل خدماتك.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>تحسين على الصفحة</h3>
+                        <p>التغييرات التي تجريها على موقع الويب الخاص بك لتحسين ترتيبه في نتائج البحث، بما في ذلك تحسين المحتوى والعناوين والأوصاف.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>تحسين خارج الصفحة</h3>
+                        <p>الإجراءات التي تتخذها خارج موقع الويب الخاص بك لتحسين ترتيبه، مثل إنشاء روابط خلفية من مواقع ويب أخرى ذات صلة.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>4</span>التحسين التقني</h3>
+                        <p>تحسين العناصر الفنية الأساسية لموقع الويب والتي يمكن أن تؤثر على ترتيبه، مثل البنية والسرعة والأمان.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>5</span>إنشاء المحتوى</h3>
+                        <p>عملية إنتاج محتوى ذي قيمة تم تحسينه لمحركات البحث والجمهور المستهدف.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>6</span>قياس النتائج وتحليلها</h3>
+                        <p>تتبع وتحليل نتائج جهود تحسين محركات البحث باستخدام أدوات مثل Google Analytics.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>تحسين محركات البحث مجال يتطور باستمرار، وتتغير أفضل الممارسات دائمًا. ومع ذلك، من خلال التركيز على هذه المكونات الرئيسية، يمكنك تحسين ظهور موقعك على الويب في نتائج البحث، والوصول إلى جمهور أوسع، وجذب المزيد من الزيارات والمبيعات إلى موقعك.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="search-engines">
+            <h2 class="section-title">
+                <i class="fas fa-search"></i>
+                محركات البحث
+            </h2>
+            <div class="content">
+                <p>محرك البحث [Search Engine] هو أداة تمكن المستخدمين من العثور على المعلومات في بيئة الإنترنت. يعمل محرك البحث عن طريق الزحف إلى صفحات الويب وفهرستها وترتيبها. يستخدم محرك البحث برامج آلية تسمى العناكب أو الروبوتات للزحف إلى مليارات الصفحات وفهرسة المحتويات ومن ثم تخزينها في قاعدة بيانات ضخمة.</p>
+                
+                <div class="highlight">
+                    <p>عندما يقوم المستخدم بإجراء بحث، يستخدم محرك البحث خوارزميات معقدة لمطابقة الكلمات المفتاحية في استعلام المستخدم مع الصفحات المفهرسة لاسترجاعها وترتيبها بناءً على مدى الصلة بالموضوع والشهرة.</p>
+                </div>
+                
+                <h3>أشهر محركات البحث:</h3>
+                
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <i class="fab fa-google"></i>
+                        <h3>Google</h3>
+                        <p>محرك البحث الأكثر استخدامًا، حيث يمتلك أكثر من 92٪ من حصة سوق محركات البحث العالمية.</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <i class="fab fa-microsoft"></i>
+                        <h3>Bing</h3>
+                        <p>محرك البحث من مايكروسوفت، ثاني أكبر محرك بحث من حيث الحصة السوقية.</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <i class="fab fa-yahoo"></i>
+                        <h3>Yahoo</h3>
+                        <p>من أوائل محركات البحث التي ظهرت على الإنترنت، يستخدم تقنية Bing للبحث.</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <i class="fas fa-search"></i>
+                        <h3>Baidu</h3>
+                        <p>محرك البحث الرئيسي في الصين، يسيطر على السوق الصينية بشكل شبه كامل.</p>
+                    </div>
+                </div>
+                
+                <p>تستخدم محركات البحث خوارزميات معقدة لتصنيف مدى ملاءمة صفحات الويب استجابةً لاستعلام المستخدم. تأخذ هذه الخوارزميات في الاعتبار عوامل مختلفة، مثل تكرار الكلمات المفتاحية وقربها، وأهمية المحتوى، وقوة موقع الويب وشعبيته، وسجل بحث المستخدم، من بين أمور أخرى.</p>
+                
+                <p>أحدثت محركات البحث ثورة في طريقة عثور الأشخاص على المعلومات على الإنترنت. بنقرات قليلة فقط، يمكن للمستخدمين الوصول إلى قدر هائل من المعلومات حول أي موضوع يمكن تخيله.</p>
+            </div>
+        </section>
+        
+        <section id="browsers">
+            <h2 class="section-title">
+                <i class="fas fa-window-maximize"></i>
+                المتصفحات
+            </h2>
+            <div class="content">
+                <p>المتصفح [Browser] هو تطبيق برمجي يمكّن المستخدمين من الوصول إلى شبكة الويب العالمية وخدمات الإنترنت الأخرى. عندما يقوم المستخدم بإدخال عنوان ويب أو عنوان URL في المتصفح، يرسل المتصفح طلبًا إلى الخادم حيث يتم استضافة موقع الويب.</p>
+                
+                <div class="highlight">
+                    <p>تتمثل إحدى الميزات الرئيسية للمتصفحات في قدرتها على دعم معايير الويب. تضمن معايير الويب أن تظهر صفحات الويب وتتصرف بنفس الطريقة عبر المتصفحات والأجهزة المختلفة.</p>
+                </div>
+                
+                <h3>أشهر المتصفحات:</h3>
+                
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <i class="fab fa-chrome"></i>
+                        <h3>Google Chrome</h3>
+                        <p>المتصفح الأكثر شعبية في العالم، طورته جوجل ويتميز بالسرعة والأمان.</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <i class="fab fa-firefox"></i>
+                        <h3>Mozilla Firefox</h3>
+                        <p>متصفح مفتوح المصدر يركز على الخصوصية والحماية.</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <i class="fab fa-safari"></i>
+                        <h3>Apple Safari</h3>
+                        <p>متصفح آبل الرسمي لأجهزة ماك وiOS، معروف بكفاءة استهلاك الطاقة.</p>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <i class="fab fa-edge"></i>
+                        <h3>Microsoft Edge</h3>
+                        <p>المتصفح الرسمي من مايكروسوفت، مبني على تقنية Chromium.</p>
+                    </div>
+                </div>
+                
+                <p>تجدر الإشارة هنا إلى أن محرك البحث ومتصفح الويب شيئان مختلفان يعملان معًا لمساعدتك في الوصول إلى المعلومات على الإنترنت. يمكن أن يساعدك محرك البحث في العثور على المعلومات التي تبحث عنها، ولكنك تحتاج إلى متصفح ويب للوصول فعليًا إلى صفحات الويب وعرضها.</p>
+                
+                <p>في السنوات الأخيرة، أصبحت المتصفحات ذات أهمية متزايدة للوصول إلى التطبيقات المستندة إلى الويب، مثل البريد الإلكتروني والوسائط الاجتماعية والتخزين السحابي. حلت هذه التطبيقات محل تطبيقات سطح المكتب التقليدية، مما جعل المتصفحات أداة أساسية للاستخدام الشخصي والمهني.</p>
+            </div>
+        </section>
+        
+        <section id="content-optimization">
+            <h2 class="section-title">
+                <i class="fas fa-edit"></i>
+                إجراءات تحسين المحتوى
+            </h2>
+            <div class="content">
+                <p>المحتوى، سواء أكان نصيًا أو مصورًا أو صوتيًا أو مرئيًا، هو الجانب الأكثر أهمية في أي موقع ويب وهدف المستخدم الذي يبحث عنه. لذلك، يجب أن تبدأ أي عملية تحسين لمحركات البحث تهدف إلى تحسين ترتيب الموقع في صفحات نتائج البحث بتحسين المحتوى واستخدام الأدوات التي تدعم هذا الهدف.</p>
+                
+                <h3>الخصائص الشكلية للمحتوى:</h3>
+                
+                <div class="steps">
+                    <div class="step-card">
+                        <h3><span>1</span>العناوين الرئيسية</h3>
+                        <p>يجب تحديد العنوان باستخدام ميزة "العنوان" في شريط الأدوات. محركات البحث تعطي وزناً أكبر للكلمات الرئيسية في العنوان.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>2</span>العناوين الفرعية</h3>
+                        <p>تحظى باهتمام أقل من محركات البحث مقارنة بالعناوين الرئيسية ولكن أكثر من النص العادي. تسمح بتنشيط ميزات أخرى مثل الروابط الداخلية.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <h3><span>3</span>الارتباط التشعبي</h3>
+                        <p>أدوات تَنَقُل تُعيد توجيه المتصفحات من محتوى إلى آخر. تلعب دورًا رئيسيًا في تعزيز ظهور موقع الويب في محركات البحث.</p>
+                    </div>
+                </div>
+                
+                <h3>الخصائص الفنية للمستند الرقمي:</h3>
+                
+                <table class="feature-table">
+                    <thead>
+                        <tr>
+                            <th>الحقل</th>
+                            <th>الوصف</th>
+                            <th>الأهمية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>حقل العنوان</td>
+                            <td>يقدم حلولاً إضافية لتحسين الاسترجاع والظهور في محركات البحث</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>حقل الموضوع</td>
+                            <td>يحتوي على واصفات موضوعية تعبر عن المحتوى الموضوعي للمستند</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>حقل الوسوم</td>
+                            <td>كلمات مفتاحية إضافية يجتهد الباحثين في إدراجها كجزء من ملخصات بحوثهم</td>
+                            <td>متوسطة</td>
+                        </tr>
+                        <tr>
+                            <td>حقل التصنيفات</td>
+                            <td>يحدد التصنيف الموضوعي لمحتوى المستند الرقمي وأين يمكن أن يكون</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>حقل التعليقات</td>
+                            <td>حقل اختياري يمكن أن يحتوي على تعليقات تعريفية بالمستند</td>
+                            <td>منخفضة</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight">
+                    <p>خرائط الكلمات المفتاحية [Keyword Mapping] هي أداة مهمة لتحسين محركات البحث لأنها تساعدك على فهم كيفية ارتباط الكلمات المفتاحية ببعضها البعض وكيف يمكنك استخدامها لجذب حركة المرور إلى موقع الويب.</p>
+                </div>
+                
+                <p>البيانات الوصفية [Metadata] هي البيانات التي توفر معلومات حول البيانات الأخرى. في سياق تحسين محركات البحث، تشير البيانات الوصفية إلى المعلومات المخزنة في كود HTML لصفحة الويب وتوفر لمحركات البحث معلومات حول محتوى الصفحة.</p>
+            </div>
+        </section>
+        
+        <section id="technical-tools">
+            <h2 class="section-title">
+                <i class="fas fa-tools"></i>
+                أدوات تحسين محركات البحث الفنية
+            </h2>
+            <div class="content">
+                <p>مُحسّنات محرّكات البحث الفنية تشير إلى تحسين العناصر التقنية لموقع الويب، مثل الكود والهيكل وتكوين الخادم، لتحسين رؤيته والوصول إليه في محركات البحث.</p>
+                
+                <h3>أهم أدوات تحسين محركات البحث:</h3>
+                
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h3><i class="fab fa-google"></i> Google Search Console</h3>
+                        <p>أداة مجانية مقدمة من Google تتيح لمالكي مواقع الويب مراقبة أداء مواقعهم في بحث Google وتلقي إشعارات حول أي أخطاء في الزحف أو مشكلات أمنية.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-chart-line"></i> Google Analytics</h3>
+                        <p>أداة مجانية مقدمة من Google تتيح لأصحاب مواقع الويب تتبع حركة المرور وسلوك الزائرين إلى مواقعهم.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-frog"></i> Screaming Frog SEO Spider</h3>
+                        <p>زاحف موقع ويب يقوم بتحليل بنية ومحتوى موقع ويب لتحديد مشكلات تحسين محركات البحث التقنية.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-chart-bar"></i> Ahrefs</h3>
+                        <p>أداة فعالة لتحسين محركات البحث توفر نظرة ثاقبة لملف تعريف الروابط الخلفية لموقع الويب، وتصنيفات الكلمات الرئيسية، والأداء العام في محركات البحث.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-search-dollar"></i> SEMrush</h3>
+                        <p>أداة تحسين محركات البحث الكل في واحد توفر رؤى حول أداء موقع الويب في محركات البحث، بالإضافة إلى أداء المنافسين وترتيب الكلمات الرئيسية.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h3><i class="fas fa-tasks"></i> Moz Pro</h3>
+                        <p>أداة تحسين محركات البحث الكل في واحد توفر رؤى حول أداء موقع الويب في محركات البحث وتصنيفات الكلمات الرئيسية وملف تعريف الارتباط الخلفي.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <p>يمكن أن تساعد أدوات تحسين محركات البحث الفنية هذه مالكي مواقع الويب في تحديد ومعالجة أي مشكلات فنية قد تؤثر على أداء مواقعهم في محركات البحث. باستخدام هذه الأدوات، يمكن لمالكي مواقع الويب تحسين رؤية مواقعهم والوصول إليها وزيادة فرصهم في الترتيب الجيد في صفحات نتائج محرك البحث (SERPs).</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 أدوات تحسين محركات البحث (SEO). جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
