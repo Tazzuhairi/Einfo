@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>أسئلة تفاعلية - أهمية الإنترنت</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f4f7f9;
+      color: #2c3e50;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    header {
+      background: linear-gradient(90deg, #34495e, #2c3e50);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.2em;
+    }
+    section {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+    section:hover {
+      transform: translateY(-3px);
+    }
+    h2 {
+      color: #2c3e50;
+      font-size: 1.5em;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    .question {
+      margin-bottom: 25px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      border-left: 4px solid #3498db;
+    }
+    .result {
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .correct {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .incorrect {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: 'Cairo', sans-serif;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      font-size: 16px;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-family: 'Cairo', sans-serif;
+    }
+    textarea {
+      min-height: 100px;
+    }
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-left: 8px;
+    }
+    .home-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #3498db;
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+      border-radius: 50%;
+      padding: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+    .home-icon:hover {
+      background-color: #2980b9;
+    }
+    #topBtn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 100;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      font-size: 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    }
+    #topBtn:hover {
+      background-color: #1abc9c;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>الأسئلة التفاعلية حول أهمية الإنترنت في القطاعات المختلفة</h1>
+</header>
+
+<section>
+  <h2>أسئلة اختيار من متعدد</h2>
+  
+  <div class="question">
+    <p>1. ما هو أهم تأثير للإنترنت في مجال التعليم؟</p>
+    <form>
+      <label><input type="radio" name="q1" value="1"> توفير مصادر تعلم متنوعة عبر الإنترنت</label>
+      <label><input type="radio" name="q1" value="0"> تقليل عدد المعلمين في المدارس</label>
+      <label><input type="radio" name="q1" value="0"> إلغاء الحاجة إلى الكتب الورقية تمامًا</label>
+      <label><input type="radio" name="q1" value="0"> جعل التعليم أقل تكلفة بشكل كامل</label>
+      <button type="button" onclick="checkAnswer('q1', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q1"></div>
+    </form>
+  </div>
+
+  <div class="question">
+    <p>2. أي من هذه المنصات يستخدم للتعليم عبر الإنترنت؟</p>
+    <form>
+      <label><input type="radio" name="q2" value="0"> Facebook</label>
+      <label><input type="radio" name="q2" value="1"> Coursera</label>
+      <label><input type="radio" name="q2" value="0"> WhatsApp</label>
+      <label><input type="radio" name="q2" value="0"> Netflix</label>
+      <button type="button" onclick="checkAnswer('q2', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q2"></div>
+    </form>
+  </div>
+
+  <div class="question">
+    <p>3. ما الفائدة الرئيسية للإنترنت في مجال التجارة؟</p>
+    <form>
+      <label><input type="radio" name="q3" value="0"> تقليل عدد المتاجر التقليدية</label>
+      <label><input type="radio" name="q3" value="1"> الوصول إلى جمهور عالمي</label>
+      <label><input type="radio" name="q3" value="0"> إلغاء الحاجة إلى الشحن</label>
+      <label><input type="radio" name="q3" value="0"> جعل المنتجات مجانية</label>
+      <button type="button" onclick="checkAnswer('q3', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q3"></div>
+    </form>
+  </div>
+
+  <div class="question">
+    <p>4. أي من هذه يعتبر من سلبيات الإنترنت؟</p>
+    <form>
+      <label><input type="radio" name="q4" value="0"> تحسين جودة التعليم</label>
+      <label><input type="radio" name="q4" value="0"> تسهيل التواصل العالمي</label>
+      <label><input type="radio" name="q4" value="1"> التنمر عبر الإنترنت</label>
+      <label><input type="radio" name="q4" value="0"> زيادة فرص العمل</label>
+      <button type="button" onclick="checkAnswer('q4', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q4"></div>
+    </form>
+  </div>
+</section>
+
+<section>
+  <h2>أسئلة إكمال الفراغ</h2>
+  
+  <div class="question">
+    <p>5. من أشهر منصات التعليم عبر الإنترنت: ______ و Udemy و edX.</p>
+    <input type="text" id="q5_input" placeholder="اكتب الإجابة هنا...">
+    <button onclick="checkTextAnswer('q5_input', 'Coursera', 'res_q5')">تحقق من الإجابة</button>
+    <div class="result" id="res_q5"></div>
+  </div>
+
+  <div class="question">
+    <p>6. منصة ______ تستخدم عادة للتواصل المهني بين الزملاء.</p>
+    <input type="text" id="q6_input" placeholder="اكتب الإجابة هنا...">
+    <button onclick="checkTextAnswer('q6_input', 'LinkedIn', 'res_q6')">تحقق من الإجابة</button>
+    <div class="result" id="res_q6"></div>
+  </div>
+
+  <div class="question">
+    <p>7. ______ هو أحد أشكال التسويق الرقمي الذي يركز على تحسين ظهور المواقع في محركات البحث.</p>
+    <input type="text" id="q7_input" placeholder="اكتب الإجابة هنا...">
+    <button onclick="checkTextAnswer('q7_input', 'SEO', 'res_q7')">تحقق من الإجابة</button>
+    <div class="result" id="res_q7"></div>
+  </div>
+
+  <div class="question">
+    <p>8. من مخاطر الإنترنت: ______ عبر الإنترنت والذي يمكن أن يضر عاطفياً بالضحايا.</p>
+    <input type="text" id="q8_input" placeholder="اكتب الإجابة هنا...">
+    <button onclick="checkTextAnswer('q8_input', 'التنمر', 'res_q8')">تحقق من الإجابة</button>
+    <div class="result" id="res_q8"></div>
+  </div>
+</section>
+
+<section>
+  <h2>أسئلة صح أو خطأ</h2>
+  
+  <div class="question">
+    <p>9. الإنترنت جعل التعليم أكثر سهولة ومرونة.</p>
+    <form>
+      <label><input type="radio" name="q9" value="1"> صح</label>
+      <label><input type="radio" name="q9" value="0"> خطأ</label>
+      <button type="button" onclick="checkAnswer('q9', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q9"></div>
+    </form>
+  </div>
+
+  <div class="question">
+    <p>10. التجارة الإلكترونية تقتصر على الشركات الكبيرة فقط.</p>
+    <form>
+      <label><input type="radio" name="q10" value="0"> صح</label>
+      <label><input type="radio" name="q10" value="1"> خطأ</label>
+      <button type="button" onclick="checkAnswer('q10', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q10"></div>
+    </form>
+  </div>
+
+  <div class="question">
+    <p>11. الإنترنت لا يؤثر سلباً على الخصوصية الشخصية.</p>
+    <form>
+      <label><input type="radio" name="q11" value="0"> صح</label>
+      <label><input type="radio" name="q11" value="1"> خطأ</label>
+      <button type="button" onclick="checkAnswer('q11', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q11"></div>
+    </form>
+  </div>
+
+  <div class="question">
+    <p>12. وسائل التواصل الاجتماعي تساعد في بناء مجتمعات عبر الإنترنت.</p>
+    <form>
+      <label><input type="radio" name="q12" value="1"> صح</label>
+      <label><input type="radio" name="q12" value="0"> خطأ</label>
+      <button type="button" onclick="checkAnswer('q12', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q12"></div>
+    </form>
+  </div>
+</section>
+
+<section>
+  <h2>أسئلة مقالية</h2>
+  
+  <div class="question">
+    <p>13. ناقش تأثير الإنترنت على قطاع التعليم مع ذكر أمثلة على أدوات وتقنيات مستخدمة.</p>
+    <textarea id="q13_input" placeholder="اكتب إجابتك هنا..."></textarea>
+    <button onclick="showSampleAnswer('q13_sample', 'res_q13')">عرض إجابة نموذجية</button>
+    <div class="result" id="res_q13"></div>
+    <div id="q13_sample" style="display: none; margin-top: 15px; padding: 10px; background-color: #e9f7ef; border-radius: 5px;">
+      <p><strong>الإجابة النموذجية:</strong></p>
+      <p>أحدث الإنترنت ثورة في قطاع التعليم من خلال توفير مصادر تعلم متنوعة عبر الإنترنت مثل منصات Coursera وUdemy وedX التي تقدم دورات في مختلف المجالات. كما سهل الإنترنت التعلم عن بعد من خلال أدوات مثل Zoom وGoogle Classroom للتواصل بين المعلمين والطلاب. بالإضافة إلى ذلك، وفر الإنترنت موارد تعليمية مفتوحة مثل الكتب الإلكترونية والمكتبات الرقمية. التقنيات الحديثة مثل الواقع الافتراضي والمعزز جعلت التعلم أكثر تفاعلية وتشويقاً. كما سهل الإنترنت التعاون بين الطلاب من مختلف أنحاء العالم من خلال منصات التعلم التعاوني.</p>
+    </div>
+  </div>
+
+  <div class="question">
+    <p>14. اشرح الجوانب الإيجابية والسلبية للإنترنت في مجال الاتصالات والتواصل الاجتماعي.</p>
+    <textarea id="q14_input" placeholder="اكتب إجابتك هنا..."></textarea>
+    <button onclick="showSampleAnswer('q14_sample', 'res_q14')">عرض إجابة نموذجية</button>
+    <div class="result" id="res_q14"></div>
+    <div id="q14_sample" style="display: none; margin-top: 15px; padding: 10px; background-color: #e9f7ef; border-radius: 5px;">
+      <p><strong>الإجابة النموذجية:</strong></p>
+      <p><strong>الجوانب الإيجابية:</strong>
+      <br>- سهل الإنترنت التواصل الفوري مع الأصدقاء والعائلة عبر المسافات الطويلة باستخدام تطبيقات مثل WhatsApp وFaceTime
+      <br>- وفر منصات للتواصل المهني مثل LinkedIn لبناء الشبكات المهنية
+      <br>- سهل مشاركة المعلومات والأخبار بسرعة عبر منصات مثل Twitter وFacebook
+      <br>- مكّن من إنشاء مجتمعات افتراضية حول اهتمامات مشتركة</p>
+      
+      <p><strong>الجوانب السلبية:</strong>
+      <br>- زيادة حالات التنمر والمضايقات عبر الإنترنت بسبب إمكانية إخفاء الهوية
+      <br>- انتشار المعلومات المضللة والأخبار الكاذبة بسرعة
+      <br>- إدمان وسائل التواصل الاجتماعي وتأثيره على الصحة النفسية
+      <br>- انتهاكات الخصوصية وجمع البيانات الشخصية من قبل الشركات</p>
+    </div>
+  </div>
+</section>
+
+<button id="topBtn" onclick="scrollToTop()">↑</button>
+<a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
+
+<script>
+  function checkAnswer(questionName, correctValue) {
+    const selected = document.querySelector(`input[name="${questionName}"]:checked`);
+    const resultDiv = document.getElementById(`res_${questionName}`);
+    
+    if (!selected) {
+      resultDiv.textContent = "الرجاء اختيار إجابة";
+      resultDiv.className = "result incorrect";
+      return;
+    }
+    
+    if (selected.value == correctValue) {
+      resultDiv.textContent = "إجابة صحيحة! ✓";
+      resultDiv.className = "result correct";
+    } else {
+      resultDiv.textContent = "إجابة خاطئة! ✗";
+      resultDiv.className = "result incorrect";
+    }
+  }
+
+  function checkTextAnswer(inputId, correctAnswer, resultId) {
+    const userAnswer = document.getElementById(inputId).value.trim();
+    const resultDiv = document.getElementById(resultId);
+    
+    if (!userAnswer) {
+      resultDiv.textContent = "الرجاء كتابة إجابة";
+      resultDiv.className = "result incorrect";
+      return;
+    }
+    
+    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+      resultDiv.textContent = "إجابة صحيحة! ✓";
+      resultDiv.className = "result correct";
+    } else {
+      resultDiv.textContent = `إجابة خاطئة! الإجابة الصحيحة هي: ${correctAnswer}`;
+      resultDiv.className = "result incorrect";
+    }
+  }
+
+  function showSampleAnswer(sampleId, resultId) {
+    const sampleDiv = document.getElementById(sampleId);
+    const resultDiv = document.getElementById(resultId);
+    
+    sampleDiv.style.display = "block";
+    resultDiv.textContent = "تم عرض إجابة نموذجية للاسترشاد";
+    resultDiv.className = "result";
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

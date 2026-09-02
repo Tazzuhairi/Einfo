@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار تفاعلي — مراحل تصميم وتطوير المواقع الإلكترونية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+body{
+  font-family:'Cairo',sans-serif;
+  background:#f0f4f8;
+  margin:0;
+  color:#1e293b;
+}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#166088,#4a6fa5);
+  padding:50px 20px;
+  text-align:center;
+  color:#fff;
+}
+.hero h1{margin:0;font-size:28px;}
+.hero p{opacity:.9;margin:8px 0 0;}
+
+/* PROGRESS */
+.progress{
+  background:#fff;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.07);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.bar{
+  flex:1;
+  height:8px;
+  background:#e2e8f0;
+  margin:0 12px;
+  border-radius:4px;
+  overflow:hidden;
+}
+.fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#4a6fa5,#4cb5ae);
+  border-radius:4px;
+  transition:width .4s ease;
+}
+.progress span{font-size:14px;font-weight:600;color:#4a6fa5;}
+
+/* CONTAINER */
+.container{max-width:850px;margin:auto;padding:24px 20px;}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:22px;
+  margin-bottom:20px;
+  border:1px solid #e2e8f0;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+  transition:box-shadow .2s;
+}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.09);}
+
+.card p.q{font-weight:700;font-size:16px;margin:0 0 14px;color:#1e293b;}
+
+/* BADGE */
+.badge{
+  display:inline-block;
+  background:#4a6fa5;
+  color:#fff;
+  border-radius:50%;
+  width:26px;height:26px;
+  line-height:26px;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  margin-left:8px;
+}
+
+/* OPTIONS */
+.option{
+  display:flex;
+  align-items:center;
+  padding:10px 14px;
+  margin:6px 0;
+  border:1.5px solid #e2e8f0;
+  border-radius:10px;
+  cursor:pointer;
+  transition:background .2s,border-color .2s;
+  gap:10px;
+}
+.option:hover{background:#eff6ff;border-color:#bfdbfe;}
+.option input{accent-color:#4a6fa5;width:16px;height:16px;flex-shrink:0;}
+
+/* CHECKBOX */
+.option-check{
+  display:flex;
+  align-items:center;
+  padding:10px 14px;
+  margin:6px 0;
+  border:1.5px solid #e2e8f0;
+  border-radius:10px;
+  cursor:pointer;
+  transition:background .2s,border-color .2s;
+  gap:10px;
+}
+.option-check:hover{background:#eff6ff;border-color:#bfdbfe;}
+.option-check input{accent-color:#4a6fa5;width:16px;height:16px;flex-shrink:0;}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+
+button.check{
+  padding:9px 20px;
+  border:none;
+  background:#4a6fa5;
+  color:#fff;
+  border-radius:9px;
+  cursor:pointer;
+  font-family:'Cairo',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  transition:background .2s,transform .1s;
+}
+button.check:hover{background:#166088;}
+button.check:active{transform:scale(.97);}
+
+button.tf{
+  padding:9px 24px;
+  border:1.5px solid #4a6fa5;
+  background:#fff;
+  color:#4a6fa5;
+  border-radius:9px;
+  cursor:pointer;
+  font-family:'Cairo',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  transition:background .2s,color .2s;
+}
+button.tf:hover{background:#4a6fa5;color:#fff;}
+
+/* INPUT */
+input.fill-blank{
+  width:100%;
+  padding:10px 14px;
+  border:1.5px solid #e2e8f0;
+  border-radius:9px;
+  font-family:'Cairo',sans-serif;
+  font-size:15px;
+  box-sizing:border-box;
+  margin-bottom:10px;
+  transition:border-color .2s;
+}
+input.fill-blank:focus{outline:none;border-color:#4a6fa5;}
+
+textarea.open-q{
+  width:100%;
+  padding:12px 14px;
+  border:1.5px solid #e2e8f0;
+  border-radius:9px;
+  font-family:'Cairo',sans-serif;
+  font-size:14px;
+  box-sizing:border-box;
+  resize:vertical;
+  min-height:110px;
+  transition:border-color .2s;
+}
+textarea.open-q:focus{outline:none;border-color:#4a6fa5;}
+
+/* FEEDBACK */
+.feedback{
+  margin-top:12px;
+  font-weight:700;
+  font-size:15px;
+  padding:8px 14px;
+  border-radius:8px;
+  display:none;
+}
+.feedback.correct{background:#d1fae5;color:#065f46;}
+.feedback.wrong{background:#fee2e2;color:#991b1b;}
+
+/* SORT */
+.sort-list{list-style:none;padding:0;margin:0;}
+.sort-item{
+  padding:10px 14px;
+  margin:6px 0;
+  background:#f8fafc;
+  border:1.5px solid #e2e8f0;
+  border-radius:9px;
+  cursor:grab;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+  user-select:none;
+  transition:background .15s,box-shadow .15s;
+}
+.sort-item:active{cursor:grabbing;background:#eff6ff;box-shadow:0 4px 12px rgba(0,0,0,.1);}
+.sort-item .drag-icon{color:#94a3b8;font-size:18px;}
+
+/* RESULT */
+#result{
+  display:none;
+  text-align:center;
+  padding:40px 30px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+  margin-top:20px;
+}
+#result h2{font-size:28px;color:#166088;margin-bottom:10px;}
+#result p{font-size:16px;color:#64748b;}
+.score-circle{
+  width:120px;height:120px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#166088,#4cb5ae);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  margin:20px auto;
+  color:#fff;
+  font-size:32px;
+  font-weight:900;
+  box-shadow:0 6px 20px rgba(22,96,136,.3);
+}
+.score-circle small{font-size:14px;font-weight:400;}
+
+.btn-result{
+  padding:12px 30px;
+  border:none;
+  background:linear-gradient(135deg,#166088,#4a6fa5);
+  color:#fff;
+  border-radius:10px;
+  cursor:pointer;
+  font-family:'Cairo',sans-serif;
+  font-size:16px;
+  font-weight:700;
+  margin-top:10px;
+}
+
+/* HINT */
+.hint{
+  font-size:13px;
+  color:#94a3b8;
+  margin-bottom:8px;
+  font-style:italic;
+}
+
+/* ANSWERED LOCK */
+.locked{pointer-events:none;opacity:.75;}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+  <h1>اختبار تفاعلي</h1>
+  <p>مراحل تصميم وتطوير المواقع الإلكترونية — الأسبوع السابع</p>
+</div>
+
+<div class="progress">
+  <span>التقدم</span>
+  <div class="bar"><div id="fill" class="fill"></div></div>
+  <span id="pct">0%</span>
+</div>
+
+<div class="container">
+
+<!-- Q1 -->
+<div class="card" id="card1">
+  <p class="q"><span class="badge">1</span> ما الهدف الأساسي من مرحلة التخطيط والاستراتيجية؟</p>
+  <label class="option"><input type="radio" name="q1" value="b"> تصميم واجهة المستخدم</label>
+  <label class="option"><input type="radio" name="q1" value="a"> فهم أهداف الموقع والجمهور المستهدف وتحديد الرؤية الشاملة</label>
+  <label class="option"><input type="radio" name="q1" value="c"> كتابة الأكواد البرمجية</label>
+  <div class="btn-row"><button class="check" onclick="mcq('q1','a',1)">تحقق</button></div>
+  <div id="f1" class="feedback"></div>
+</div>
+
+<!-- Q2 -->
+<div class="card" id="card2">
+  <p class="q"><span class="badge">2</span> ما الأداة المستخدمة لتوضيح هيكل ومحتوى الموقع بشكل بياني؟</p>
+  <label class="option"><input type="radio" name="q2" value="a"> النموذج الأولي</label>
+  <label class="option"><input type="radio" name="q2" value="c"> قاعدة البيانات</label>
+  <label class="option"><input type="radio" name="q2" value="b"> خريطة الموقع</label>
+  <div class="btn-row"><button class="check" onclick="mcq('q2','b',2)">تحقق</button></div>
+  <div id="f2" class="feedback"></div>
+</div>
+
+<!-- Q3 -->
+<div class="card" id="card3">
+  <p class="q"><span class="badge">3</span> مرحلة إنشاء المحتوى تشمل إنتاج النصوص والصور ومقاطع الفيديو والصوت.</p>
+  <div class="btn-row">
+    <button class="tf" onclick="tf(true,true,3)">✓ صح</button>
+    <button class="tf" onclick="tf(false,true,3)">✗ خطأ</button>
+  </div>
+  <div id="f3" class="feedback"></div>
+</div>
+
+<!-- Q4 -->
+<div class="card" id="card4">
+  <p class="q"><span class="badge">4</span> يتم في مرحلة التصميم تحويل المتطلبات إلى كود برمجي مباشرةً دون إنشاء نماذج أولية.</p>
+  <div class="btn-row">
+    <button class="tf" onclick="tf(true,false,4)">✓ صح</button>
+    <button class="tf" onclick="tf(false,false,4)">✗ خطأ</button>
+  </div>
+  <div id="f4" class="feedback"></div>
+</div>
+
+<!-- Q5 -->
+<div class="card" id="card5">
+  <p class="q"><span class="badge">5</span> أكمل الجملة: مرحلة التطوير تحوّل التصاميم إلى منتج ______</p>
+  <p class="hint">힌트: كلمة واحدة تعني قابل للعمل</p>
+  <input class="fill-blank" id="q5" placeholder="اكتب إجابتك هنا...">
+  <div class="btn-row"><button class="check" onclick="fill('q5',['وظيفي','نهائي','عملي','فعلي'],5)">تحقق</button></div>
+  <div id="f5" class="feedback"></div>
+</div>
+
+<!-- Q6 -->
+<div class="card" id="card6">
+  <p class="q"><span class="badge">6</span> ما نوع الاختبار الذي يتحقق من أن الموقع يعمل كما هو متوقع في بيئة الإنتاج الحقيقية؟</p>
+  <input class="fill-blank" id="q6" placeholder="اكتب نوع الاختبار...">
+  <div class="btn-row"><button class="check" onclick="fill('q6',['اختبار النظام','اختبار قبول المستخدم','اختبار التكامل','اختبار الوحدة','اختبار الوظيفي','الاختبار الوظيفي'],6)">تحقق</button></div>
+  <div id="f6" class="feedback"></div>
+</div>
+
+<!-- Q7 -->
+<div class="card" id="card7">
+  <p class="q"><span class="badge">7</span> اختر جميع الإجراءات الأمنية التي تُطبَّق في مرحلة النشر:</p>
+  <label class="option-check"><input type="checkbox" class="cq7" value="1"> جدران الحماية (Firewalls)</label>
+  <label class="option-check"><input type="checkbox" class="cq7" value="1"> عناصر التحكم في الوصول</label>
+  <label class="option-check"><input type="checkbox" class="cq7" value="1"> إجراءات النسخ الاحتياطي</label>
+  <label class="option-check"><input type="checkbox" class="cq7" value="0"> تصميم الشعار</label>
+  <div class="btn-row"><button class="check" onclick="multi7()">تحقق</button></div>
+  <div id="f7" class="feedback"></div>
+</div>
+
+<!-- Q8 -->
+<div class="card" id="card8">
+  <p class="q"><span class="badge">8</span> ما المرحلة التي تتضمن تحسين محركات البحث (SEO) وتحسين الكلمات المفتاحية؟</p>
+  <label class="option"><input type="radio" name="q8" value="b"> مرحلة التطوير</label>
+  <label class="option"><input type="radio" name="q8" value="a"> مرحلة إنشاء المحتوى</label>
+  <label class="option"><input type="radio" name="q8" value="c"> مرحلة الصيانة</label>
+  <div class="btn-row"><button class="check" onclick="mcq('q8','a',8)">تحقق</button></div>
+  <div id="f8" class="feedback"></div>
+</div>
+
+<!-- Q9 — SORT -->
+<div class="card" id="card9">
+  <p class="q"><span class="badge">9</span> رتّب مراحل تطوير الموقع بالترتيب الصحيح (اسحب وأفلت):</p>
+  <ul class="sort-list" id="sortList">
+    <li class="sort-item" draggable="true" data-order="3"><span class="drag-icon">⠿</span> التصميم</li>
+    <li class="sort-item" draggable="true" data-order="1"><span class="drag-icon">⠿</span> التخطيط والاستراتيجية</li>
+    <li class="sort-item" draggable="true" data-order="5"><span class="drag-icon">⠿</span> الاختبار والتحسين</li>
+    <li class="sort-item" draggable="true" data-order="2"><span class="drag-icon">⠿</span> إنشاء المحتوى</li>
+    <li class="sort-item" draggable="true" data-order="4"><span class="drag-icon">⠿</span> التطوير</li>
+    <li class="sort-item" draggable="true" data-order="6"><span class="drag-icon">⠿</span> النشر</li>
+    <li class="sort-item" draggable="true" data-order="7"><span class="drag-icon">⠿</span> الصيانة والتحديث</li>
+  </ul>
+  <div class="btn-row"><button class="check" onclick="checkSort()">تحقق من الترتيب</button></div>
+  <div id="f9" class="feedback"></div>
+</div>
+
+<!-- Q10 -->
+<div class="card" id="card10">
+  <p class="q"><span class="badge">10</span> سؤال تحليلي: لماذا تُعدّ مرحلة الصيانة والتحديث مكوناً مستمراً وليس نهاية دورة حياة الموقع؟</p>
+  <textarea class="open-q" id="q10" placeholder="اكتب إجابتك هنا..."></textarea>
+  <div class="btn-row">
+    <button class="check" onclick="openQ()">تسليم الإجابة</button>
+    <button class="check" id="btnModel" onclick="toggleModel()" style="background:#5091cd;">💡 إظهار الإجابة النموذجية</button>
+  </div>
+  <div id="f10" class="feedback"></div>
+
+  <div id="modelAnswer" style="display:none; margin-top:18px; border-radius:12px; overflow:hidden; border:1.5px solid #e2e8f0;">
+
+    <div style="background:linear-gradient(135deg,#1e40af,#0369a1); padding:12px 18px;">
+      <span style="color:#fff; font-weight:700; font-size:15px;">📋 الإجابة النموذجية — من الكتاب المقرر (ص 69–70)</span>
+    </div>
+
+    <div style="background:#f0fdf4; padding:16px 18px;">
+      <p style="font-weight:700; font-size:15px; color:#065f46; margin:0 0 12px;">✅ لماذا الصيانة مستمرة وليست نهاية؟</p>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+
+        <div style="background:#fff; border-right:4px solid #22c55e; border-radius:8px; padding:10px 14px;">
+          <span style="font-weight:700; color:#15803d;">١. ضمان الموثوقية والأمان والأداء المستمر</span>
+          <p style="margin:4px 0 0; font-size:14px; color:#374151;">الهدف الجوهري من هذه المرحلة هو ضمان استمرار موثوقية الموقع وأمانه وأدائه، ودعم الاحتياجات المتطورة للمستخدمين باستمرار، وليس فقط عند الإطلاق الأول.</p>
+        </div>
+
+        <div style="background:#fff; border-right:4px solid #22c55e; border-radius:8px; padding:10px 14px;">
+          <span style="font-weight:700; color:#15803d;">٢. مراقبة المشكلات وإصلاحها فور ظهورها</span>
+          <p style="margin:4px 0 0; font-size:14px; color:#374151;">تتمّ مراقبة الموقع باستمرار للكشف عن أي مشكلات أو عيوب تظهر أثناء الاستخدام الفعلي، وإجراء الإصلاحات اللازمة فوراً، بما يشمل معالجة الثغرات الأمنية وتحسينات الأداء وإدخال ميزات جديدة.</p>
+        </div>
+
+        <div style="background:#fff; border-right:4px solid #22c55e; border-radius:8px; padding:10px 14px;">
+          <span style="font-weight:700; color:#15803d;">٣. صيانة البنية التحتية للموقع</span>
+          <p style="margin:4px 0 0; font-size:14px; color:#374151;">لا تقتصر الصيانة على محتوى الموقع، بل تمتد إلى البنية الأساسية كالخوادم وقواعد البيانات والمكونات التقنية الأخرى، وتتضمن تطبيق إجراءات أمنية دورية كجدران الحماية وضوابط الوصول والنسخ الاحتياطي المنتظم للبيانات.</p>
+        </div>
+
+        <div style="background:#fff; border-right:4px solid #22c55e; border-radius:8px; padding:10px 14px;">
+          <span style="font-weight:700; color:#15803d;">٤. التحسين المستمر للملاءمة والفائدة</span>
+          <p style="margin:4px 0 0; font-size:14px; color:#374151;">تتضمن هذه المرحلة التحسين الدائم للموقع عبر إدخال ميزات ووظائف جديدة، وتطوير الميزات الحالية، وحذف ما لم يعد مطلوباً. هذا التحسين المستمر هو ما يجعل الموقع ملائماً ومفيداً للمستخدمين على المدى البعيد ويدعم أهداف المؤسسة.</p>
+        </div>
+
+        <div style="background:#fff; border-right:4px solid #22c55e; border-radius:8px; padding:10px 14px;">
+          <span style="font-weight:700; color:#15803d;">٥. دورة حياة لا تنتهي بالنشر</span>
+          <p style="margin:4px 0 0; font-size:14px; color:#374151;">تؤكد المرحلة أن دورة حياة الموقع لا تنتهي بالنشر، بل تستمر مادام الموقع يخدم مستخدميه. باتباع نهج منظم ومنضبط للصيانة، تضمن المؤسسات أن منتجاتها تبقى فعالة وقادرة على دعم الأهداف المتجددة بمرور الوقت.</p>
+        </div>
+
+      </div>
+
+      <div style="margin-top:14px; background:#fef3c7; border-radius:8px; padding:10px 14px; border-right:4px solid #f59e0b;">
+        <span style="font-weight:700; color:#92400e; font-size:13px;">💡 خلاصة تحليلية:</span>
+        <p style="margin:4px 0 0; font-size:13px; color:#78350f;">مرحلة الصيانة والتحديث ليست نهاية المشروع بل هي <strong>دورة لا تنقطع</strong>؛ لأن التكنولوجيا تتطور، واحتياجات المستخدمين تتغير، والتهديدات الأمنية تتجدد. الموقع الذي لا يُصان يتدهور حتماً، في حين أن الصيانة المنهجية تحوّله إلى أصل رقمي متجدد باستمرار.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="btn-row" style="justify-content:center;margin-top:10px;">
+  <button class="btn-result" onclick="result()">📊 عرض النتيجة النهائية</button>
+</div>
+
+<div id="result">
+  <h2>نتيجة الاختبار</h2>
+  <div class="score-circle">
+    <span id="scoreNum">0</span>
+    <small>من 10</small>
+  </div>
+  <p id="scoreMsg"></p>
+</div>
+
+</div><!-- /container -->
+
+<script>
+let answered = 0;
+let correct = 0;
+const answeredCards = new Set();
+
+function update() {
+  const pct = Math.round(answered / 10 * 100);
+  document.getElementById("fill").style.width = pct + "%";
+  document.getElementById("pct").innerText = pct + "%";
+}
+
+function lockCard(id) {
+  const card = document.getElementById("card" + id);
+  if (card) card.classList.add("locked");
+}
+
+function showFeedback(id, isCorrect, msg) {
+  const el = document.getElementById("f" + id);
+  el.style.display = "block";
+  el.className = "feedback " + (isCorrect ? "correct" : "wrong");
+  el.innerText = isCorrect
+    ? "✔ إجابة صحيحة! " + (msg || "")
+    : "✘ إجابة خاطئة. " + (msg || "");
+}
+
+function mcq(name, ans, id) {
+  if (answeredCards.has(id)) return;
+  const sel = document.querySelector('input[name="' + name + '"]:checked');
+  if (!sel) { alert("الرجاء اختيار إجابة أولاً"); return; }
+  answeredCards.add(id);
+  answered++;
+  const isCorrect = sel.value === ans;
+  if (isCorrect) correct++;
+  showFeedback(id, isCorrect);
+  lockCard(id);
+  update();
+}
+
+function tf(v, ans, id) {
+  if (answeredCards.has(id)) return;
+  answeredCards.add(id);
+  answered++;
+  const isCorrect = v === ans;
+  if (isCorrect) correct++;
+  showFeedback(id, isCorrect);
+  lockCard(id);
+  update();
+}
+
+function fill(inputId, arr, id) {
+  if (answeredCards.has(id)) return;
+  const v = document.getElementById(inputId).value.trim().toLowerCase();
+  if (!v) { alert("الرجاء كتابة إجابتك أولاً"); return; }
+  answeredCards.add(id);
+  answered++;
+  const isCorrect = arr.map(a => a.toLowerCase()).includes(v);
+  if (isCorrect) correct++;
+  showFeedback(id, isCorrect, isCorrect ? "" : "الإجابات المقبولة: " + arr.join(" / "));
+  lockCard(id);
+  update();
+}
+
+function multi7() {
+  if (answeredCards.has(7)) return;
+  answeredCards.add(7);
+  answered++;
+  const checks = document.querySelectorAll('.cq7');
+  let ok = true;
+  checks.forEach(c => { if (c.value === "0" && c.checked) ok = false; });
+  const selected = Array.from(checks).filter(c => c.checked && c.value === "1").length;
+  if (selected < 3) ok = false;
+  if (ok) correct++;
+  showFeedback(7, ok, ok ? "" : "الإجراءات الصحيحة: جدران الحماية، عناصر التحكم في الوصول، النسخ الاحتياطي.");
+  lockCard(7);
+  update();
+}
+
+function openQ() {
+  if (answeredCards.has(10)) return;
+  const v = document.getElementById("q10").value.trim();
+  if (!v) { alert("الرجاء كتابة إجابتك أولاً"); return; }
+  answeredCards.add(10);
+  answered++;
+  correct++; // awarded for participation
+  showFeedback(10, true, "تم تسليم إجابتك. تُمنح النقطة للمشاركة.");
+  lockCard(10);
+  update();
+}
+
+function toggleModel() {
+  const el = document.getElementById("modelAnswer");
+  const btn = document.getElementById("btnModel");
+  if (el.style.display === "none" || el.style.display === "") {
+    el.style.display = "block";
+    btn.textContent = "🙈 إخفاء الإجابة النموذجية";
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    el.style.display = "none";
+    btn.textContent = "💡 إظهار الإجابة النموذجية";
+  }
+}
+
+/* ---- SORT / DRAG ---- */
+let dragged = null;
+const list = document.getElementById("sortList");
+
+list.addEventListener("dragstart", e => {
+  dragged = e.target.closest(".sort-item");
+  setTimeout(() => dragged.style.opacity = ".4", 0);
+});
+list.addEventListener("dragend", e => {
+  dragged.style.opacity = "1";
+  dragged = null;
+});
+list.addEventListener("dragover", e => {
+  e.preventDefault();
+  const over = e.target.closest(".sort-item");
+  if (over && over !== dragged) {
+    const rect = over.getBoundingClientRect();
+    const mid = rect.top + rect.height / 2;
+    if (e.clientY < mid) list.insertBefore(dragged, over);
+    else list.insertBefore(dragged, over.nextSibling);
+  }
+});
+
+function checkSort() {
+  if (answeredCards.has(9)) return;
+  answeredCards.add(9);
+  answered++;
+  const items = list.querySelectorAll(".sort-item");
+  let isCorrect = true;
+  const correctOrder = [1, 2, 3, 4, 5, 6, 7];
+  items.forEach((item, idx) => {
+    if (parseInt(item.dataset.order) !== correctOrder[idx]) isCorrect = false;
+  });
+  if (isCorrect) correct++;
+  showFeedback(9, isCorrect,
+    isCorrect ? "" :
+    "الترتيب الصحيح: التخطيط → المحتوى → التصميم → التطوير → الاختبار → النشر → الصيانة");
+  lockCard(9);
+  update();
+}
+
+function result() {
+  document.getElementById("result").style.display = "block";
+  document.getElementById("scoreNum").innerText = correct;
+  const pct = Math.round(correct / 10 * 100);
+  let msg = "";
+  if (pct >= 90) msg = "🏆 ممتاز! أداء رائع، أنت متمكن من المادة.";
+  else if (pct >= 70) msg = "👍 جيد جداً! مع قليل من المراجعة ستصل إلى القمة.";
+  else if (pct >= 50) msg = "📚 مقبول. راجع محاضرة الأسبوع السابع مجدداً.";
+  else msg = "💪 لا بأس، راجع المحاضرة بتأنٍّ وحاول مرة أخرى.";
+  document.getElementById("scoreMsg").innerText = msg;
+  document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+}
+</script>
+
+</body>
+</html>

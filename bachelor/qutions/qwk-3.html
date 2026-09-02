@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار تفاعلي — البرمجيات مفتوحة المصدر</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #f0f4f8;
+  --surface:   #ffffff;
+  --surface2:  #f8fafc;
+  --border:    rgba(0,0,0,0.08);
+  --accent:    #2563eb;
+  --accent2:   #0891b2;
+  --green:     #16a34a;
+  --red:       #dc2626;
+  --amber:     #d97706;
+  --text:      #1e293b;
+  --muted:     #64748b;
+  --radius:    12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  direction: rtl;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(135deg, #1e40af 0%, #0369a1 50%, #1e40af 100%);
+  padding: 60px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,255,255,0.12) 0%, transparent 70%);
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #e0f2fe;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+}
+.hero h1 {
+  font-size: clamp(22px, 5vw, 38px);
+  font-weight: 900;
+  line-height: 1.3;
+  position: relative;
+  margin-bottom: 14px;
+  color: #fff;
+}
+.hero h1 span { color: #bae6fd; }
+.hero-sub {
+  color: rgba(255,255,255,0.78);
+  font-size: 15px;
+  position: relative;
+  margin-bottom: 32px;
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.hstat {
+  background: rgba(255,255,255,0.22);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  min-width: 100px;
+}
+.hstat-num { font-size: 22px; font-weight: 900; color: #fff; }
+.hstat-lbl { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrapper {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 14px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.progress-label { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.progress-track {
+  flex: 1;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+.progress-pct { font-size: 13px; font-weight: 700; color: var(--accent); min-width: 36px; text-align: left; }
+
+/* ===== MAIN CONTAINER ===== */
+.container { max-width: 860px; margin: 0 auto; padding: 36px 20px 80px; }
+
+/* ===== SECTION CARDS ===== */
+.quiz-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  background: #f8fafc;
+}
+.section-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.section-icon.blue  { background: rgba(37,99,235,0.1); }
+.section-icon.cyan  { background: rgba(8,145,178,0.1); }
+.section-icon.green { background: rgba(22,163,74,0.1); }
+.section-icon.amber { background: rgba(217,119,6,0.1); }
+.section-icon.purple{ background: rgba(124,58,237,0.1); }
+.section-icon.rose  { background: rgba(225,29,72,0.1); }
+
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.section-count { margin-right: auto; font-size: 12px; color: var(--muted); background: #e2e8f0; padding: 3px 10px; border-radius: 999px; }
+
+.section-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; }
+
+/* ===== QUESTION CARD ===== */
+.qcard {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: border-color 0.3s;
+}
+.qcard.answered { border-color: rgba(37,99,235,0.3); }
+.qcard.correct-card  { border-color: rgba(22,163,74,0.4); background: #f0fdf4; }
+.qcard.incorrect-card{ border-color: rgba(220,38,38,0.4); background: #fff5f5; }
+
+.q-num {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.q-text {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+/* Radio options */
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  background: #ffffff;
+  user-select: none;
+  color: var(--text);
+}
+.option:hover { background: #eff6ff; border-color: #93c5fd; }
+.option input[type="radio"] { display: none; }
+.option-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.option.selected .option-dot { border-color: var(--accent); background: var(--accent); }
+.option.selected .option-dot::after { content:''; width:6px; height:6px; border-radius:50%; background:#fff; display:block; }
+.option.opt-correct { background: #f0fdf4; border-color: #86efac; color: #166534; }
+.option.opt-incorrect { background: #fff5f5; border-color: #fca5a5; color: #991b1b; }
+.option.opt-show-correct { background: #f0fdf4; border-color: #86efac; }
+.option.disabled { cursor: not-allowed; pointer-events: none; }
+
+/* True/False */
+.tf-options { display: flex; gap: 10px; }
+.tf-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tf-btn:hover { background: #eff6ff; border-color: #93c5fd; }
+.tf-btn.selected { background: #eff6ff; border-color: var(--accent); color: var(--accent); }
+.tf-btn.tf-correct { background: #f0fdf4; border-color: #86efac; color: #166534; }
+.tf-btn.tf-incorrect { background: #fff5f5; border-color: #fca5a5; color: #991b1b; }
+.tf-btn.disabled { cursor: not-allowed; pointer-events: none; }
+
+/* Fill input */
+.fill-wrap { position: relative; margin-top: 4px; }
+.fill-input {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  direction: rtl;
+}
+.fill-input:focus { outline: none; border-color: var(--accent); background: #eff6ff; }
+.fill-input.fi-correct { border-color: #86efac; background: #f0fdf4; color: #166534; }
+.fill-input.fi-incorrect { border-color: #fca5a5; background: #fff5f5; color: #991b1b; }
+.fill-input:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* Matching */
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.match-col-head { font-size: 12px; color: var(--muted); font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; text-align: center; }
+.match-items { display: flex; flex-direction: column; gap: 6px; }
+.match-item {
+  padding: 9px 13px;
+  border-radius: 7px;
+  font-size: 13px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text);
+}
+.match-item.match-left:hover,
+.match-item.match-right:hover { background: #eff6ff; border-color: #93c5fd; }
+.match-item.active { background: #eff6ff; border-color: var(--accent); color: var(--accent); }
+.match-item.matched-correct { background: #f0fdf4; border-color: #86efac; color: #166534; cursor: default; }
+.match-item.matched-incorrect { background: #fff5f5; border-color: #fca5a5; color: #991b1b; cursor: default; }
+
+/* Sort */
+.sort-list { display: flex; flex-direction: column; gap: 6px; }
+.sort-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 14px;
+  user-select: none;
+  color: var(--text);
+}
+.sort-handle { color: #cbd5e1; font-size: 16px; cursor: grab; flex-shrink: 0; }
+.sort-num { width: 24px; height: 24px; border-radius: 50%; background: #dbeafe; color: var(--accent); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sort-item.sort-correct { background: #f0fdf4; border-color: #86efac; }
+.sort-item.sort-incorrect { background: #fff5f5; border-color: #fca5a5; }
+.sort-item.dragging { opacity: 0.4; }
+.sort-item.drag-over { border-color: var(--accent2); background: #ecfeff; }
+
+/* Essay */
+.essay-textarea {
+  width: 100%;
+  min-height: 100px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  resize: vertical;
+  line-height: 1.8;
+  direction: rtl;
+}
+.essay-textarea:focus { outline: none; border-color: var(--accent); }
+.model-answer {
+  margin-top: 12px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #166534;
+  display: none;
+}
+.model-answer.visible { display: block; animation: fadeIn 0.3s ease; }
+.model-label { font-size: 11px; color: var(--green); font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+
+/* Check button */
+.check-btn {
+  margin-top: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 20px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.check-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.check-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.check-btn.secondary {
+  background: #f1f5f9;
+  color: var(--text);
+  border: 1px solid #e2e8f0;
+}
+.check-btn.secondary:hover { background: #e2e8f0; }
+
+/* Feedback */
+.feedback {
+  margin-top: 10px;
+  padding: 9px 14px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+.feedback.visible { display: flex; animation: fadeIn 0.3s ease; }
+.feedback.fb-correct   { background: #f0fdf4; color: #166534; border: 1px solid #86efac; }
+.feedback.fb-incorrect { background: #fff5f5; color: #991b1b; border: 1px solid #fca5a5; }
+.feedback.fb-partial   { background: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
+
+/* ===== SCORECARD ===== */
+.scorecard {
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px 28px;
+  text-align: center;
+  margin-top: 32px;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.scorecard.visible { display: block; }
+.score-ring {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 36px; font-weight: 900;
+  position: relative;
+  color: var(--text);
+}
+.score-ring::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 6px solid #e2e8f0;
+}
+.score-ring-fill {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 6px solid transparent;
+}
+.score-title { font-size: 22px; font-weight: 900; margin-bottom: 8px; color: var(--text); }
+.score-sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+.score-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.sb-item {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 14px 10px;
+  border: 1px solid #e2e8f0;
+}
+.sb-num { font-size: 24px; font-weight: 900; }
+.sb-lbl { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.sb-item.green .sb-num { color: var(--green); }
+.sb-item.red   .sb-num { color: var(--red); }
+.sb-item.amber .sb-num { color: var(--amber); }
+.sb-item.blue  .sb-num { color: var(--accent); }
+
+.retry-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 32px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.retry-btn:hover { opacity: 0.85; }
+
+/* ===== SUBMIT SECTION ===== */
+.submit-wrap {
+  text-align: center;
+  padding: 32px 0 16px;
+}
+.submit-btn {
+  background: linear-gradient(135deg, #1d4ed8, #0891b2);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 48px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(59,130,246,0.25);
+}
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(59,130,246,0.35); }
+
+/* ===== BACK LINK ===== */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 8px 0 0;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f0f4f8; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+@media(max-width:600px){
+  .match-grid { grid-template-columns: 1fr; }
+  .tf-options { flex-direction: column; }
+  .hero-stats { gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🖥️ الأسبوع الثالث — قسم المعلومات وتقنيات المعرفة</div>
+  <h1>اختبار تفاعلي<br><span>البرمجيات مفتوحة المصدر</span></h1>
+  <p class="hero-sub">10 أسئلة متنوعة — اختيار، صح/خطأ، إكمال، مطابقة، ترتيب، ومقالي</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">10</div><div class="hstat-lbl">سؤالاً</div></div>
+    <div class="hstat"><div class="hstat-num">6</div><div class="hstat-lbl">أنواع</div></div>
+    <div class="hstat"><div class="hstat-num" id="heroAnswered">0</div><div class="hstat-lbl">أُجيب عنه</div></div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrapper">
+  <span class="progress-label">التقدم</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<div class="container">
+
+  <a href="../index.html" class="back-link">🏠 العودة للصفحة الرئيسية</a>
+
+  <!-- ========== Q1-Q2: اختيار من متعدد ========== -->
+  <div class="quiz-section" style="margin-top:24px">
+    <div class="section-head">
+      <div class="section-icon blue">🔘</div>
+      <div>
+        <div class="section-title">اختيار من متعدد</div>
+        <div style="font-size:12px;color:var(--muted);">اختر الإجابة الصحيحة الواحدة</div>
+      </div>
+      <div class="section-count">سؤالان</div>
+    </div>
+    <div class="section-body">
+
+      <!-- Q1 -->
+      <div class="qcard" id="qcard1">
+        <div class="q-num">سؤال ١</div>
+        <div class="q-text">ما الذي يُميّز البرمجيات مفتوحة المصدر (OSS) عن البرمجيات التجارية المغلقة؟</div>
+        <div class="options" id="opts1">
+          <label class="option" onclick="selectOption(this,'opts1')"><input type="radio" name="q1" value="0"><div class="option-dot"></div>تُباع بسعر أقل دائماً</label>
+          <label class="option" onclick="selectOption(this,'opts1')"><input type="radio" name="q1" value="1"><div class="option-dot"></div>إتاحة الشيفرة المصدرية للعموم للاستخدام والتعديل والتوزيع</label>
+          <label class="option" onclick="selectOption(this,'opts1')"><input type="radio" name="q1" value="0"><div class="option-dot"></div>لا تحتاج إلى مطورين متخصصين</label>
+          <label class="option" onclick="selectOption(this,'opts1')"><input type="radio" name="q1" value="0"><div class="option-dot"></div>تعمل فقط على أنظمة Linux</label>
+        </div>
+        <button class="check-btn" onclick="checkMCQ(1,1)">تحقق من الإجابة</button>
+        <div class="feedback" id="fb1"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="qcard" id="qcard2">
+        <div class="q-num">سؤال ٢</div>
+        <div class="q-text">أي من التراخيص التالية يشترط أن تبقى أي نسخة معدّلة من البرنامج مفتوحة المصدر أيضاً؟</div>
+        <div class="options" id="opts2">
+          <label class="option" onclick="selectOption(this,'opts2')"><input type="radio" name="q2" value="0"><div class="option-dot"></div>ترخيص MIT</label>
+          <label class="option" onclick="selectOption(this,'opts2')"><input type="radio" name="q2" value="0"><div class="option-dot"></div>ترخيص Apache 2.0</label>
+          <label class="option" onclick="selectOption(this,'opts2')"><input type="radio" name="q2" value="1"><div class="option-dot"></div>ترخيص GPL</label>
+          <label class="option" onclick="selectOption(this,'opts2')"><input type="radio" name="q2" value="0"><div class="option-dot"></div>ترخيص BSD</label>
+        </div>
+        <button class="check-btn" onclick="checkMCQ(2,1)">تحقق من الإجابة</button>
+        <div class="feedback" id="fb2"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== Q3-Q4: صح أو خطأ ========== -->
+  <div class="quiz-section">
+    <div class="section-head">
+      <div class="section-icon green">✅</div>
+      <div>
+        <div class="section-title">صح أو خطأ</div>
+        <div style="font-size:12px;color:var(--muted);">حدد صحة أو خطأ كل عبارة</div>
+      </div>
+      <div class="section-count">سؤالان</div>
+    </div>
+    <div class="section-body">
+
+      <!-- Q3 -->
+      <div class="qcard" id="qcard3">
+        <div class="q-num">سؤال ٣</div>
+        <div class="q-text">ترخيص MIT هو الأكثر تقييداً بين تراخيص OSS لأنه يمنع الاستخدام التجاري.</div>
+        <div class="tf-options">
+          <button class="tf-btn" onclick="selectTF(this,3,'true')">✔ صح</button>
+          <button class="tf-btn" onclick="selectTF(this,3,'false')">✘ خطأ</button>
+        </div>
+        <button class="check-btn" onclick="checkTF(3,'false','MIT هو الأكثر مرونة وبساطة، ويسمح بالاستخدام التجاري الحر دون شروط كثيرة.')">تحقق</button>
+        <div class="feedback" id="fb3"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="qcard" id="qcard4">
+        <div class="q-num">سؤال ٤</div>
+        <div class="q-text">يُعدّ نظام Linux أحد أبرز نماذج البرمجيات مفتوحة المصدر الناجحة، ويُستخدم على نطاق واسع في الخوادم.</div>
+        <div class="tf-options">
+          <button class="tf-btn" onclick="selectTF(this,4,'true')">✔ صح</button>
+          <button class="tf-btn" onclick="selectTF(this,4,'false')">✘ خطأ</button>
+        </div>
+        <button class="check-btn" onclick="checkTF(4,'true','صحيح تماماً. Linux نظام تشغيل مفتوح المصدر يُشغّل معظم خوادم الإنترنت والأنظمة السحابية في العالم.')">تحقق</button>
+        <div class="feedback" id="fb4"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== Q5-Q6: إكمال الفراغ ========== -->
+  <div class="quiz-section">
+    <div class="section-head">
+      <div class="section-icon cyan">✏️</div>
+      <div>
+        <div class="section-title">أكمل الفراغ</div>
+        <div style="font-size:12px;color:var(--muted);">اكتب الكلمة أو العبارة المناسبة</div>
+      </div>
+      <div class="section-count">سؤالان</div>
+    </div>
+    <div class="section-body">
+
+      <!-- Q5 -->
+      <div class="qcard" id="qcard5">
+        <div class="q-num">سؤال ٥</div>
+        <div class="q-text">ترخيص <span style="color:#60a5fa">_______</span> يسمح بدمج المكتبات مفتوحة المصدر في مشاريع مغلقة بشروط معينة، وهو اختصار لـ Lesser GNU Public License.</div>
+        <div class="fill-wrap">
+          <input class="fill-input" id="fill5" placeholder="اكتب إجابتك هنا..." dir="ltr">
+        </div>
+        <button class="check-btn" onclick="checkFill(5,['lgpl','LGPL'])">تحقق</button>
+        <div class="feedback" id="fb5"></div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="qcard" id="qcard6">
+        <div class="q-num">سؤال ٦</div>
+        <div class="q-text">نشأت فكرة البرمجيات مفتوحة المصدر في عقد <span style="color:#60a5fa">_______</span> من القرن الماضي وتطورت لتشمل آلاف المشاريع.</div>
+        <div class="fill-wrap">
+          <input class="fill-input" id="fill6" placeholder="اكتب العقد (مثال: الثمانينات)" dir="rtl">
+        </div>
+        <button class="check-btn" onclick="checkFill(6,['السبعينات','السبعينيات','السبعينات','70s','1970s','سبعينيات','السبعينات'])">تحقق</button>
+        <div class="feedback" id="fb6"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== Q7: مطابقة ========== -->
+  <div class="quiz-section">
+    <div class="section-head">
+      <div class="section-icon amber">🔗</div>
+      <div>
+        <div class="section-title">طابق بين العمودين</div>
+        <div style="font-size:12px;color:var(--muted);">اضغط على عنصر من كل عمود لمطابقتهما</div>
+      </div>
+      <div class="section-count">سؤال واحد</div>
+    </div>
+    <div class="section-body">
+      <div class="qcard" id="qcard7">
+        <div class="q-num">سؤال ٧</div>
+        <div class="q-text">طابق كل برنامج مفتوح المصدر مع وصفه الصحيح:</div>
+
+        <div class="match-grid">
+          <div>
+            <div class="match-col-head">📦 البرنامج</div>
+            <div class="match-items" id="matchLeft">
+              <div class="match-item match-left" data-id="A" onclick="matchSelect('left','A',this)">Linux</div>
+              <div class="match-item match-left" data-id="B" onclick="matchSelect('left','B',this)">MySQL</div>
+              <div class="match-item match-left" data-id="C" onclick="matchSelect('left','C',this)">Python</div>
+              <div class="match-item match-left" data-id="D" onclick="matchSelect('left','D',this)">Apache</div>
+            </div>
+          </div>
+          <div>
+            <div class="match-col-head">📝 الوصف</div>
+            <div class="match-items" id="matchRight">
+              <div class="match-item match-right" data-id="2" onclick="matchSelect('right','2',this)">خادم ويب يخدم ملايين المواقع</div>
+              <div class="match-item match-right" data-id="1" onclick="matchSelect('right','1',this)">نظام تشغيل يدير الخوادم والحواسيب</div>
+              <div class="match-item match-right" data-id="4" onclick="matchSelect('right','4',this)">لغة برمجة تُستخدم في الذكاء الاصطناعي</div>
+              <div class="match-item match-right" data-id="3" onclick="matchSelect('right','3',this)">قاعدة بيانات تستخدمها مواقع ضخمة</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="check-btn secondary" onclick="checkMatch()" id="matchCheckBtn" style="margin-top:14px">تحقق من المطابقة</button>
+        <div class="feedback" id="fb7"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Q8: ترتيب ========== -->
+  <div class="quiz-section">
+    <div class="section-head">
+      <div class="section-icon purple">↕️</div>
+      <div>
+        <div class="section-title">رتّب الخيارات</div>
+        <div style="font-size:12px;color:var(--muted);">اسحب العناصر لترتيبها من الأكثر إلى الأقل تقييداً</div>
+      </div>
+      <div class="section-count">سؤال واحد</div>
+    </div>
+    <div class="section-body">
+      <div class="qcard" id="qcard8">
+        <div class="q-num">سؤال ٨</div>
+        <div class="q-text">رتّب التراخيص التالية من <strong style="color:#f59e0b">الأكثر تقييداً</strong> إلى <strong style="color:#22c55e">الأقل تقييداً</strong> (اسحب للترتيب):</div>
+        <div class="sort-list" id="sortList">
+          <div class="sort-item" draggable="true" data-val="MIT">
+            <span class="sort-handle">⠿</span>
+            <span class="sort-num">1</span>
+            <span>MIT — ترخيص مرن جداً</span>
+          </div>
+          <div class="sort-item" draggable="true" data-val="GPL">
+            <span class="sort-handle">⠿</span>
+            <span class="sort-num">2</span>
+            <span>GPL — يتطلب بقاء الكود مفتوحاً</span>
+          </div>
+          <div class="sort-item" draggable="true" data-val="LGPL">
+            <span class="sort-handle">⠿</span>
+            <span class="sort-num">3</span>
+            <span>LGPL — أقل تقييداً من GPL للمكتبات</span>
+          </div>
+          <div class="sort-item" draggable="true" data-val="Apache">
+            <span class="sort-handle">⠿</span>
+            <span class="sort-num">4</span>
+            <span>Apache 2.0 — يسمح بالاستخدام التجاري</span>
+          </div>
+        </div>
+        <button class="check-btn" onclick="checkSort()" style="margin-top:10px">تحقق من الترتيب</button>
+        <div class="feedback" id="fb8"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Q9: اختيار متعدد الإجابات ========== -->
+  <div class="quiz-section">
+    <div class="section-head">
+      <div class="section-icon rose">☑️</div>
+      <div>
+        <div class="section-title">اختيار متعدد الإجابات</div>
+        <div style="font-size:12px;color:var(--muted);">اختر جميع الإجابات الصحيحة</div>
+      </div>
+      <div class="section-count">سؤال واحد</div>
+    </div>
+    <div class="section-body">
+      <div class="qcard" id="qcard9">
+        <div class="q-num">سؤال ٩</div>
+        <div class="q-text">من المبادئ الأساسية للبرمجيات مفتوحة المصدر حسب المحاضرة؟ <em style="color:var(--muted);font-size:12px">(اختر كل ما ينطبق)</em></div>
+        <div class="options" id="opts9" style="gap:8px">
+          <label class="option" onclick="toggleMulti(this)"><input type="checkbox" value="1"><div class="option-dot" style="border-radius:4px"></div>حرية الوصول للكود المصدري</label>
+          <label class="option" onclick="toggleMulti(this)"><input type="checkbox" value="0"><div class="option-dot" style="border-radius:4px"></div>إلزامية شراء ترخيص تجاري</label>
+          <label class="option" onclick="toggleMulti(this)"><input type="checkbox" value="1"><div class="option-dot" style="border-radius:4px"></div>حرية التعديل حسب الحاجة</label>
+          <label class="option" onclick="toggleMulti(this)"><input type="checkbox" value="1"><div class="option-dot" style="border-radius:4px"></div>حرية التوزيع للنسخ المعدلة أو الأصلية</label>
+          <label class="option" onclick="toggleMulti(this)"><input type="checkbox" value="0"><div class="option-dot" style="border-radius:4px"></div>منع أي تغيير في الكود</label>
+          <label class="option" onclick="toggleMulti(this)"><input type="checkbox" value="1"><div class="option-dot" style="border-radius:4px"></div>وجود مجتمع داعم من المستخدمين والمطورين</label>
+        </div>
+        <button class="check-btn" onclick="checkMulti(9)">تحقق من الإجابة</button>
+        <div class="feedback" id="fb9"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Q10: مقالي ========== -->
+  <div class="quiz-section">
+    <div class="section-head">
+      <div class="section-icon blue">📝</div>
+      <div>
+        <div class="section-title">سؤال تحليلي</div>
+        <div style="font-size:12px;color:var(--muted);">أجب بأسلوبك الخاص ثم قارن بالنموذج</div>
+      </div>
+      <div class="section-count">سؤال واحد</div>
+    </div>
+    <div class="section-body">
+      <div class="qcard" id="qcard10">
+        <div class="q-num">سؤال ١٠</div>
+        <div class="q-text">تخيّل أنك مستشار تقني في مؤسسة تعليمية تفكر في التحول نحو OSS. اذكر ثلاثة مبررات تدعم هذا القرار وتحدياً واحداً يجب مراعاته.</div>
+        <textarea class="essay-textarea" id="essay10" placeholder="اكتب إجابتك التحليلية هنا..."></textarea>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+          <button class="check-btn" onclick="submitEssay()">تسليم الإجابة</button>
+          <button class="check-btn secondary" onclick="showModel()">عرض إجابة نموذجية</button>
+        </div>
+        <div class="model-answer" id="modelAns">
+          <div class="model-label">📋 الإجابة النموذجية</div>
+          <strong>المبررات:</strong><br>
+          ١. <strong>خفض التكاليف:</strong> تُقلّص OSS الإنفاق على تراخيص البرمجيات التجارية المكلفة، مما يتيح تخصيص الموازنة لتطوير البنية التحتية.<br>
+          ٢. <strong>المرونة والتخصيص:</strong> يمكن تعديل البرامج لتتناسب مع احتياجات المؤسسة التعليمية تحديداً، كأنظمة إدارة المحتوى أو بوابات الطلاب.<br>
+          ٣. <strong>الأمان المجتمعي:</strong> يراجع المجتمع العالمي الكود باستمرار مما يُسهم في اكتشاف الثغرات وإصلاحها بسرعة.<br><br>
+          <strong>التحدي:</strong> ضعف الدعم الفني الرسمي مقارنة بالحلول التجارية، مما قد يستلزم توظيف كفاءات تقنية داخلية أو الاستعانة بمجتمع المطورين.
+        </div>
+        <div class="feedback" id="fb10"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-wrap">
+    <button class="submit-btn" onclick="submitAll()">📊 عرض النتيجة النهائية</button>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="scorecard" id="scorecard">
+    <div class="score-ring" id="scoreRing">
+      <span id="scorePercent">0%</span>
+    </div>
+    <div class="score-title" id="scoreTitle">—</div>
+    <div class="score-sub" id="scoreSub">—</div>
+    <div class="score-breakdown">
+      <div class="sb-item green"><div class="sb-num" id="sbCorrect">0</div><div class="sb-lbl">✔ إجابات صحيحة</div></div>
+      <div class="sb-item red"  ><div class="sb-num" id="sbWrong">0</div><div class="sb-lbl">✘ إجابات خاطئة</div></div>
+      <div class="sb-item amber"><div class="sb-num" id="sbSkipped">0</div><div class="sb-lbl">⏭ لم يُجب عنه</div></div>
+      <div class="sb-item blue" ><div class="sb-num" id="sbTotal">10</div><div class="sb-lbl">إجمالي الأسئلة</div></div>
+    </div>
+    <button class="retry-btn" onclick="retryAll()">🔄 إعادة المحاولة</button>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ===== STATE =====
+var answered = {};   // qNum -> 'correct'|'incorrect'|'skipped'
+var tfSelected = {}; // qNum -> 'true'|'false'
+var matchState = { leftSel: null, leftEl: null, pairs: {} };
+var draggingEl = null;
+var multiAnswered = false;
+var essayDone = false;
+
+function updateProgress(){
+  var total = 10;
+  var done = Object.keys(answered).length;
+  var pct = Math.round(done/total*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressPct').textContent = pct+'%';
+  document.getElementById('heroAnswered').textContent = done;
+}
+
+// ===== MCQ =====
+function selectOption(el, groupId){
+  var opts = document.getElementById(groupId).querySelectorAll('.option');
+  opts.forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function checkMCQ(qNum, correctVal){
+  var sel = document.querySelector('input[name="q'+qNum+'"]:checked');
+  var fb  = document.getElementById('fb'+qNum);
+  var btn = document.querySelector('#qcard'+qNum+' .check-btn');
+  if(!sel){ showFeedback(fb,'partial','⚠ اختر إجابة أولاً'); return; }
+
+  var opts = document.getElementById('opts'+qNum).querySelectorAll('.option');
+  opts.forEach(o => {
+    o.classList.add('disabled');
+    if(parseInt(o.querySelector('input').value) === correctVal) o.classList.add('opt-show-correct');
+  });
+
+  if(parseInt(sel.value) === correctVal){
+    sel.closest('.option').classList.add('opt-correct');
+    showFeedback(fb,'correct','✔ إجابة صحيحة! أحسنت.');
+    markAnswered(qNum,'correct');
+  } else {
+    sel.closest('.option').classList.add('opt-incorrect');
+    showFeedback(fb,'incorrect','✘ إجابة خاطئة. الإجابة الصحيحة مميّزة باللون الأخضر.');
+    markAnswered(qNum,'incorrect');
+  }
+  btn.disabled = true;
+}
+
+// ===== T/F =====
+function selectTF(el, qNum, val){
+  if(tfSelected['locked'+qNum]) return;
+  tfSelected[qNum] = val;
+  var btns = document.querySelectorAll('#qcard'+qNum+' .tf-btn');
+  btns.forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function checkTF(qNum, correctVal, explanation){
+  var fb  = document.getElementById('fb'+qNum);
+  var btn = document.querySelector('#qcard'+qNum+' .check-btn');
+  if(!tfSelected[qNum]){ showFeedback(fb,'partial','⚠ اختر صح أو خطأ أولاً'); return; }
+
+  tfSelected['locked'+qNum] = true;
+  var btns = document.querySelectorAll('#qcard'+qNum+' .tf-btn');
+  btns.forEach(b => {
+    b.classList.add('disabled');
+    if((b.textContent.includes('صح') && correctVal==='true') ||
+       (b.textContent.includes('خطأ') && correctVal==='false'))
+      b.classList.add('tf-correct');
+  });
+
+  if(tfSelected[qNum] === correctVal){
+    showFeedback(fb,'correct','✔ صحيح! '+explanation);
+    markAnswered(qNum,'correct');
+  } else {
+    showFeedback(fb,'incorrect','✘ خطأ. '+explanation);
+    markAnswered(qNum,'incorrect');
+  }
+  btn.disabled = true;
+}
+
+// ===== FILL =====
+function checkFill(qNum, correctVals){
+  var inp = document.getElementById('fill'+qNum);
+  var fb  = document.getElementById('fb'+qNum);
+  var btn = document.querySelector('#qcard'+qNum+' .check-btn');
+  var val = inp.value.trim();
+  if(!val){ showFeedback(fb,'partial','⚠ اكتب إجابتك أولاً'); return; }
+
+  var isCorrect = correctVals.some(c => c.toLowerCase() === val.toLowerCase());
+  inp.disabled = true;
+  btn.disabled = true;
+  if(isCorrect){
+    inp.classList.add('fi-correct');
+    showFeedback(fb,'correct','✔ إجابة صحيحة!');
+    markAnswered(qNum,'correct');
+  } else {
+    inp.classList.add('fi-incorrect');
+    showFeedback(fb,'incorrect','✘ خطأ. الإجابة الصحيحة: ' + correctVals[0]);
+    markAnswered(qNum,'incorrect');
+  }
+}
+
+// ===== MATCHING =====
+var matchCorrect = { A:'1', B:'3', C:'4', D:'2' };
+
+function matchSelect(side, id, el){
+  if(el.classList.contains('matched-correct') || el.classList.contains('matched-incorrect')) return;
+
+  if(side === 'left'){
+    // deselect previous left
+    document.querySelectorAll('.match-left.active').forEach(e => e.classList.remove('active'));
+    matchState.leftSel = id;
+    matchState.leftEl  = el;
+    el.classList.add('active');
+    // try match if right already selected
+    var rightSel = document.querySelector('.match-right.active');
+    if(rightSel) matchPair(rightSel.dataset.id, rightSel);
+  } else {
+    if(!matchState.leftSel){ 
+      document.querySelectorAll('.match-right.active').forEach(e=>e.classList.remove('active'));
+      el.classList.add('active'); 
+      return; 
+    }
+    matchPair(id, el);
+  }
+}
+
+function matchPair(rightId, rightEl){
+  var leftId = matchState.leftSel;
+  var leftEl = matchState.leftEl;
+  if(!leftEl) return;
+
+  var isCorrect = matchCorrect[leftId] === rightId;
+  var cls = isCorrect ? 'matched-correct' : 'matched-incorrect';
+  leftEl.classList.remove('active'); leftEl.classList.add(cls);
+  rightEl.classList.remove('active'); rightEl.classList.add(cls);
+  matchState.leftSel = null; matchState.leftEl = null;
+  matchState.pairs[leftId] = rightId;
+
+  // check if all matched
+  if(Object.keys(matchState.pairs).length === 4) autoCheckMatch();
+}
+
+function checkMatch(){
+  autoCheckMatch();
+}
+
+function autoCheckMatch(){
+  var total = Object.keys(matchCorrect).length;
+  var correct = 0;
+  for(var k in matchCorrect){
+    if(matchState.pairs[k] === matchCorrect[k]) correct++;
+  }
+  var fb = document.getElementById('fb7');
+  document.getElementById('matchCheckBtn').disabled = true;
+  if(correct === total){
+    showFeedback(fb,'correct','✔ ممتاز! جميع المطابقات صحيحة.');
+    markAnswered(7,'correct');
+  } else if(correct > 0){
+    showFeedback(fb,'partial','⚠ '+correct+' من '+total+' صحيحة. راجع الإجابات المحددة بالأحمر.');
+    markAnswered(7,'incorrect');
+  } else {
+    showFeedback(fb,'incorrect','✘ لا توجد مطابقات صحيحة.');
+    markAnswered(7,'incorrect');
+  }
+}
+
+// ===== SORT =====
+var sortCorrect = ['GPL','LGPL','Apache','MIT'];
+
+(function initSort(){
+  var list = document.getElementById('sortList');
+  // shuffle display
+  var items = Array.from(list.children);
+  for(var i=items.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));list.appendChild(items[j]);}
+  updateSortNums();
+
+  list.addEventListener('dragstart', e=>{
+    draggingEl = e.target.closest('.sort-item');
+    draggingEl.classList.add('dragging');
+  });
+  list.addEventListener('dragend', e=>{
+    if(draggingEl) draggingEl.classList.remove('dragging');
+    document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));
+    draggingEl = null;
+    updateSortNums();
+  });
+  list.addEventListener('dragover', e=>{
+    e.preventDefault();
+    var target = e.target.closest('.sort-item');
+    if(!target || target===draggingEl) return;
+    document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));
+    target.classList.add('drag-over');
+    var rect = target.getBoundingClientRect();
+    if(e.clientY < rect.top + rect.height/2){
+      list.insertBefore(draggingEl, target);
+    } else {
+      list.insertBefore(draggingEl, target.nextSibling);
+    }
+  });
+})();
+
+function updateSortNums(){
+  var items = document.querySelectorAll('#sortList .sort-item');
+  items.forEach((item, i) => item.querySelector('.sort-num').textContent = (i+1));
+}
+
+function checkSort(){
+  var items = document.querySelectorAll('#sortList .sort-item');
+  var order = Array.from(items).map(i=>i.dataset.val);
+  var fb = document.getElementById('fb8');
+  var btn = document.querySelector('#qcard8 .check-btn');
+  var correct = order.every((v,i) => v === sortCorrect[i]);
+
+  items.forEach((item,i) => {
+    item.classList.add(item.dataset.val === sortCorrect[i] ? 'sort-correct' : 'sort-incorrect');
+    item.setAttribute('draggable','false');
+  });
+  btn.disabled = true;
+
+  if(correct){
+    showFeedback(fb,'correct','✔ ترتيب صحيح تماماً! الأكثر تقييداً: GPL ← LGPL ← Apache ← MIT الأقل تقييداً.');
+    markAnswered(8,'correct');
+  } else {
+    showFeedback(fb,'incorrect','✘ الترتيب الصحيح من الأكثر إلى الأقل تقييداً: GPL — LGPL — Apache 2.0 — MIT');
+    markAnswered(8,'incorrect');
+  }
+}
+
+// ===== MULTI-SELECT =====
+function toggleMulti(el){
+  if(multiAnswered) return;
+  el.classList.toggle('selected');
+  var cb = el.querySelector('input[type="checkbox"]');
+  cb.checked = !cb.checked;
+  var dot = el.querySelector('.option-dot');
+  if(cb.checked){
+    dot.style.background = 'var(--accent)';
+    dot.style.borderColor = 'var(--accent)';
+    dot.innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+  } else {
+    dot.style.background = '';
+    dot.style.borderColor = '';
+    dot.innerHTML = '';
+  }
+}
+
+function checkMulti(qNum){
+  if(multiAnswered) return;
+  multiAnswered = true;
+  var opts = document.getElementById('opts'+qNum).querySelectorAll('.option');
+  var btn  = document.querySelector('#qcard'+qNum+' .check-btn');
+  var fb   = document.getElementById('fb'+qNum);
+  var correct = 0, total = 0, userCorrect = 0;
+
+  opts.forEach(o => {
+    var cb = o.querySelector('input');
+    var isRight = parseInt(cb.value) === 1;
+    if(isRight) total++;
+    o.classList.add('disabled');
+    if(cb.checked && isRight){ o.classList.add('opt-correct'); userCorrect++; correct++; }
+    else if(cb.checked && !isRight){ o.classList.add('opt-incorrect'); }
+    else if(!cb.checked && isRight){ o.classList.add('opt-show-correct'); }
+  });
+
+  btn.disabled = true;
+  if(userCorrect === total && !document.querySelector('#opts9 .opt-incorrect')){
+    showFeedback(fb,'correct','✔ ممتاز! اخترت جميع المبادئ الصحيحة.');
+    markAnswered(qNum,'correct');
+  } else {
+    showFeedback(fb,'partial','⚠ اخترت '+userCorrect+' من '+total+' إجابات صحيحة. المميّزة بالأخضر هي الصحيحة.');
+    markAnswered(qNum,'incorrect');
+  }
+}
+
+// ===== ESSAY =====
+function submitEssay(){
+  if(essayDone) return;
+  var val = document.getElementById('essay10').value.trim();
+  var fb  = document.getElementById('fb10');
+  if(!val){ showFeedback(fb,'partial','⚠ اكتب إجابتك أولاً'); return; }
+  essayDone = true;
+  document.getElementById('essay10').disabled = true;
+  document.querySelector('#qcard10 .check-btn').disabled = true;
+  showFeedback(fb,'correct','✔ تم تسليم إجابتك. قارنها بالنموذج للتحقق.');
+  markAnswered(10,'correct');
+}
+
+function showModel(){
+  var el = document.getElementById('modelAns');
+  el.classList.add('visible');
+  if(!answered[10]){ markAnswered(10,'skipped'); }
+}
+
+// ===== HELPERS =====
+function showFeedback(el, type, msg){
+  el.textContent = msg;
+  el.className = 'feedback visible fb-'+type;
+}
+
+function markAnswered(qNum, status){
+  answered[qNum] = status;
+  var card = document.getElementById('qcard'+qNum);
+  card.classList.add('answered');
+  if(status==='correct') card.classList.add('correct-card');
+  if(status==='incorrect') card.classList.add('incorrect-card');
+  updateProgress();
+}
+
+// ===== SUBMIT ALL =====
+function submitAll(){
+  // mark unanswered as skipped
+  for(var i=1;i<=10;i++){ if(!answered[i]) answered[i]='skipped'; }
+  updateProgress();
+
+  var correct  = Object.values(answered).filter(v=>v==='correct').length;
+  var wrong    = Object.values(answered).filter(v=>v==='incorrect').length;
+  var skipped  = Object.values(answered).filter(v=>v==='skipped').length;
+  var pct      = Math.round(correct/10*100);
+
+  document.getElementById('sbCorrect').textContent = correct;
+  document.getElementById('sbWrong').textContent   = wrong;
+  document.getElementById('sbSkipped').textContent = skipped;
+  document.getElementById('scorePercent').textContent = pct+'%';
+
+  var ring = document.getElementById('scoreRing');
+  var color = pct>=80 ? '#22c55e' : pct>=50 ? '#f59e0b' : '#ef4444';
+  ring.style.background = 'conic-gradient('+color+' '+pct+'%, rgba(255,255,255,0.05) 0%)';
+
+  var title, sub;
+  if(pct>=90){ title='🏆 ممتاز!'; sub='أداء رائع — أنت متمكن من المادة.'; }
+  else if(pct>=75){ title='🎯 جيد جداً'; sub='نتيجة جيدة — راجع الإجابات الخاطئة.'; }
+  else if(pct>=50){ title='📚 جيد'; sub='مقبول — يُنصح بمراجعة المحاضرة مجدداً.'; }
+  else { title='💡 تحتاج مراجعة'; sub='راجع محاضرة البرمجيات مفتوحة المصدر بتركيز أكبر.'; }
+
+  document.getElementById('scoreTitle').textContent = title;
+  document.getElementById('scoreSub').textContent   = sub;
+
+  var sc = document.getElementById('scorecard');
+  sc.classList.add('visible');
+  sc.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function retryAll(){
+  location.reload();
+}
+</script>
+</body>
+</html>
