@@ -3,103 +3,523 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الخوارزميات الأساسية في نظم المعلومات الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>الخوارزميات الأساسية في نظم المعلومات الذكية - الفصل الشامل</title>
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #2980b9;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --socratic-bg: #eef2f3;
+            --socratic-border: #2980b9;
+        }
+
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.8;
-            margin: 0; padding: 0;
-            color: #2c3e50;
-            background-color: #f4f7f9;
+            margin: 0;
+            padding: 0;
         }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 15px; }
+
         header {
-            background: linear-gradient(90deg, #34495e, #2c3e50);
-            color: white; padding: 30px 0; text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        h1 { margin: 0; font-size: 2.1em; }
-        .week-badge {
-            display: inline-block; margin-top: 10px;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
         }
+
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 950px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .toc {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
+            columns: 2;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
         h2 {
-            color: #2c3e50; border-bottom: 3px solid #3498db;
-            padding-bottom: 8px; margin-bottom: 20px;
+            color: var(--primary-color);
+            border-right: 5px solid var(--accent-color);
+            padding-right: 10px;
+            margin-top: 0;
         }
-        .section {
-            background: white; margin: 30px 0; padding: 25px;
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+        h3 {
+            color: var(--accent-color);
+            margin-top: 1.5rem;
         }
-        ul { padding-right: 20px; }
-        li { margin-bottom: 8px; }
-        .activity-box {
-            background: #eaf4fc; border-right: 4px solid #3498db;
-            border-radius: 8px; padding: 16px 20px; margin-top: 8px;
+
+        h4 {
+            color: #555;
+            margin-bottom: 0.5rem;
         }
-        .activity-box strong { color: #2471a3; }
-        .placeholder-note {
-            border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-            padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-top: 20px;
+
+        .socratic-box {
+            background-color: var(--socratic-bg);
+            border-right: 4px solid var(--socratic-border);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
         }
-        .placeholder-note strong { color: #2980b9; }
-        footer { text-align: center; padding: 25px; background: #2c3e50; color: white; margin-top: 40px; }
-        #topBtn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100;
-            background-color: #3498db; color: white; border: none;
-            padding: 12px 18px; font-size: 16px; border-radius: 50px;
-            cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+
+        .socratic-box strong {
+            font-style: normal;
+            color: var(--socratic-border);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
-        .home-icon {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #3498db; color: white; font-size: 20px;
-            text-decoration: none; border-radius: 50%; padding: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        ul, ol {
+            padding-right: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #81c784;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .algo-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            background: #fcfcfc;
+        }
+        
+        .algo-card h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.8rem;
+            text-align: right;
+        }
+
+        th {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>الخوارزميات الأساسية في نظم المعلومات الذكية</h1>
-            <span class="week-badge">الأسبوع 1 — نظم المعلومات الذكية</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>المحاور الفرعية</h2>
-            <ul>
-                <li>مفهوم الخوارزمية وعلاقتها بالبيانات والذكاء الاصطناعي</li>
-                <li>التصنيف</li>
-                <li>التجميع</li>
-                <li>التوصية</li>
-                <li>البحث والاسترجاع</li>
-                <li>معالجة اللغة الطبيعية</li>
-                <li>التعلم العميق</li>
-                <li>النماذج اللغوية الكبيرة</li>
-                <li>معايير اختيار الخوارزمية</li>
-            </ul>
-        </section>
+<header>
+    <h1>الخوارزميات الأساسية في نظم المعلومات الذكية</h1>
+    <p>الفصل الشامل — من الأساسيات النظرية إلى التصنيف، التجميع، والتعلم العميق</p>
+</header>
 
-        <section class="section">
-            <h2>ملاحظة</h2>
-            <div class="activity-box"><strong>◾</strong> —</div>
-        </section>
-
-        <div class="placeholder-note">
-            📝 هذا الهيكل مبني مباشرةً على التوصيف الأكاديمي المعتمد للمقرر. أضف هنا الشرح التفصيلي لكل محور
-            (نصوصاً وأمثلة وخاتمة) بنفس أسلوب محاضرات مرحلة البكالوريوس.
-        </div>
+<main>
+    <div class="toc">
+        <h2>📑 المحاور الفرعية</h2>
+        <ul>
+            <li>◾ <a href="#intro">تمهيد: الركيزة الأساسية للذكاء</a></li>
+            <li>◾ <a href="#concept">مفهوم الخوارزمية</a></li>
+            <li>◾ <a href="#triad">المثلث الذهبي: البيانات، الخوارزمية، والذكاء</a></li>
+            <li>◾ <a href="#why">لماذا تحتاج النظم الذكية إلى الخوارزميات؟</a></li>
+            <li>◾ <a href="#classification">أولاً: خوارزميات التصنيف (Classification)</a></li>
+            <li>◾ <a href="#clustering">ثانياً: خوارزميات التجميع (Clustering)</a></li>
+            <li>◾ <a href="#rec">ثالثاً: خوارزميات التوصية</a></li>
+            <li>◾ <a href="#search">رابعاً: البحث والاسترجاع</a></li>
+            <li>◾ <a href="#nlp">خامساً: معالجة اللغة الطبيعية (NLP)</a></li>
+            <li>◾ <a href="#dl">سادساً: التعلم العميق والشبكات العصبية</a></li>
+            <li>◾ <a href="#llm">سابعاً: النماذج اللغوية الكبيرة (LLMs)</a></li>
+            <li>◾ <a href="#criteria">معايير اختيار الخوارزمية</a></li>
+        </ul>
     </div>
 
-    <button id="topBtn" onclick="scrollToTop()">↑</button>
-    <a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
-    <footer>
-        <div class="container"><p>© 2025 ملخص محاضرة الخوارزميات الأساسية في نظم المعلومات الذكية</p></div>
-    </footer>
-    <script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+    <!-- Introduction -->
+    <section id="intro">
+        <h2>تمهيد: الركيزة الأساسية للذكاء</h2>
+        <p>تُعد الخوارزميات الركيزة الأساسية التي تستند إليها نظم المعلومات الذكية. فهي ليست مجرد أكواد برمجية، بل تمثل مجموعة الخطوات والإجراءات المنطقية التي تُستخدم لمعالجة البيانات، استخلاص الأنماط، وإنتاج نتائج تدعم اتخاذ القرار. إذا كان الذكاء الاصطناعي هو "الإطار العام" الذي يمنح الأنظمة القدرة على التعلم، فالخوارزميات هي "الآلية التنفيذية" التي تُنفذ هذا التعلم.</p>
+        <p>في سياق نظم المعلومات، لا تقتصر أهمية الخوارزميات على الجانب التقني فحسب، بل تمتد إلى تحسين كفاءة العمليات المعلوماتية، الفهرسة الآلية، التصنيف الموضوعي، وتحليل سلوك المستفيدين، مما جعلها عنصراً أساسياً في تطوير المكتبات الرقمية والمستودعات المؤسسية.</p>
+        
+        <div class="socratic-box">
+            <strong>🧠 تأمل سقراطي:</strong>
+            قبل أن نغوص في التفاصيل التقنية، اسأل نفسك: ما الفرق الجوهري بين نظام معلومات تقليدي يبحث عن كلمة مفتاحية محددة، ونظام معلومات ذكي يوصي لك بوثيقة لم تذكر فيها تلك الكلمة أبداً؟ أين يكمن دور الخوارزمية في هذا التحول من "المطابقة الحرفية" إلى "الفهم الدلالي"؟
+        </div>
+    </section>
+
+    <!-- Concept -->
+    <section id="concept">
+        <h2>1. مفهوم الخوارزمية (Algorithm)</h2>
+        <p>الخوارزمية هي مجموعة من الخطوات المنطقية المرتبة والمنتهية تُنفذ وفق تسلسل محدد لمعالجة البيانات أو حل مشكلة معينة. تبدأ بالمدخلات، وتعالجها وفق قواعد محددة، وتنتهي بالمخرجات. ولا ترتبط الخوارزمية بلغة برمجة معينة، بل تمثل الجانب المنطقي لحل المشكلة.</p>
+        <p><strong>خصائصها:</strong> واضحة الخطوات، محددة البداية والنهاية، قابلة للتطبيق، وتؤدي للنتائج نفسها في الظروف نفسها، مع تحقيق الكفاءة في الوقت والموارد.</p>
+        <p>في <strong>النظم التقليدية</strong>: تعتمد على قواعد ثابتة (مدخلات متشابهة = مخرجات متشابهة).<br>
+        في <strong>النظم الذكية</strong>: تتطور لتتعلم من البيانات، تكتشف الأنماط، وتحسن أداءها باستمرار.</p>
+    </section>
+
+    <!-- Triad -->
+    <section id="triad">
+        <h2>2. المثلث الذهبي: البيانات، الخوارزمية، والذكاء الاصطناعي</h2>
+        <p>ترتبط هذه العناصر الثلاثة بعلاقة تكاملية؛ فلا يمكن لأي نظام ذكي أن يحقق أهدافه إذا غاب أحدها:</p>
+        <ul>
+            <li><strong>البيانات (المادة الأولية):</strong> تفتقر للقيمة العملية بمفردها دون تحليل. جمع البيانات من مصادر متعددة وتنظيفها هو الخطوة الأولى.</li>
+            <li><strong>الخوارزميات (آلية المعالجة):</strong> تحلل البيانات، تستخلص القواعد، وتبني النماذج الذكية.</li>
+            <li><strong>الذكاء الاصطناعي (الإطار العام):</strong> يتيح للنظام التعلم، الاستنتاج، والتنبؤ بناءً على مخرجات الخوارزميات.</li>
+        </ul>
+        
+        <div class="socratic-box">
+            <strong>🧠 تأمل سقراطي:</strong>
+            تخيل أن لديك بيانات ضخمة جداً عن استعارة الكتب في مكتبتك، ولكنك لا تملك خوارزمية مناسبة لتحليلها. هل يمكنك القول إن مكتبتك "ذكية"؟ كيف تفسر العلاقة التكاملية بين هذه العناصر الثلاثة، ولماذا تُعد البيانات "عنصراً استراتيجياً" في عصر الذكاء الاصطناعي؟
+        </div>
+    </section>
+
+    <!-- Why -->
+    <section id="why">
+        <h2>3. لماذا تحتاج نظم المعلومات الذكية إلى الخوارزميات؟</h2>
+        <p>الخوارزميات هي "القلب النابض" الذي يدير العمليات الذكية. مع الزيادة الهائلة في حجم البيانات، أصبح التحليل اليدوي مستحيلاً. تقوم الخوارزميات بـ:</p>
+        <ol>
+            <li><strong>تصنيف البيانات:</strong> تنظيم الوثائق والرسائل الجامعية وفق موضوعاتها.</li>
+            <li><strong>اكتشاف الأنماط:</strong> رصد علاقات خفية بين اهتمامات المستفيدين والمصادر.</li>
+            <li><strong>التنبؤ:</strong> استشراف الكتب الأكثر طلباً أو الاتجاهات البحثية الناشئة.</li>
+            <li><strong>التوصيات الذكية:</strong> تخصيص المصادر لكل مستفيد بناءً على سلوكه.</li>
+            <li><strong>تحسين الاسترجاع:</strong> ترتيب نتائج البحث وفق درجة الصلة الدلالية.</li>
+            <li><strong>التعلم المستمر:</strong> التكيف مع البيانات الجديدة وتحسين دقة الفهرسة.</li>
+        </ol>
+    </section>
+
+    <!-- Classification -->
+    <section id="classification">
+        <h2>أولاً: خوارزميات التصنيف (Classification Algorithms)</h2>
+        <p>تهدف إلى إسناد عنصر (وثيقة، مستفيد) إلى <strong>فئة محددة مسبقاً</strong> اعتماداً على خصائصه. وتنتمي للتعلم الخاضع للإشراف (Supervised Learning) لأنها تتدرب على بيانات مصنفة مسبقاً.</p>
+
+        <div class="algo-card">
+            <h4>1. شجرة القرار (Decision Tree)</h4>
+            <p>تحاكي التفكير البشري عبر طرح سلسلة من الأسئلة المنطقية (عقد) حتى تصل للقرار (أوراق). مثلاً: لتصنيف كتاب، تسأل: هل العنوان يحتوي مصطلحات هندسية؟ هل الناشر كلية هندسة؟</p>
+            <p><strong>الميزة:</strong> سهلة الفهم والتفسير (توضح سبب الوصول للقرار).<br>
+            <strong>القيد:</strong> قد تعاني من الإفراط في التعلم (Overfitting) إذا تعقدت جداً.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>2. خوارزمية الجار الأقرب (KNN)</h4>
+            <p>فكرتها: "العناصر المتشابهة تنتمي لنفس الفئة". إذا وصلت رسالة ماجستير جديدة، تبحث الخوارزمية عن أقرب (K) رسائل سابقة لها في الخصائص (العنوان، الكلمات المفتاحية) وتصنفها بناءً على أغلبية جيرانها.</p>
+            <p><strong>الميزة:</strong> بسيطة ولا تبني نموذجاً معقداً.<br>
+            <strong>القيد:</strong> بطيئة مع البيانات الضخمة لأنها تقارن العنصر بكل عناصر القاعدة.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>3. الغابة العشوائية (Random Forest)</h4>
+            <p>تطوير لشجرة القرار؛ تنشئ مئات الأشجار المستقلة (كأنها لجنة من 50 خبيراً كلهم ينظر للبيانات من زاوية مختلفة) ثم تعتمد القرار بالأغلبية.</p>
+            <p><strong>الميزة:</strong> دقة عالية جداً وتقلل من مشكلة الإفراط في التعلم.<br>
+            <strong>القيد:</strong> تستهلك موارد حاسوبية أكبر وصعبة التفسير مقارنة بالشجرة الواحدة.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>4. مصنف بايز البسيط (Naïve Bayes)</h4>
+            <p>تعتمد على <strong>الاحتمالات الإحصائية</strong>. تحسب احتمال انتماء وثيقة لفئة معينة بناءً على تكرار كلماتها. تفترض (بشكل بسيط) أن جميع الخصائص مستقلة عن بعضها. ممتازة جداً مع البيانات النصية (مثل فلترة البريد المزعج).</p>
+            <p><strong>الميزة:</strong> سريعة جداً وتحتاج موارد قليلة.<br>
+            <strong>القيد:</strong> افتراض استقلالية الخصائص قد لا يكون صحيحاً دائماً في الواقع.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>5. آلة المتجهات الداعمة (SVM)</h4>
+            <p>تبحث عن <strong>أفضل حد فاصل</strong> (خط أو مستوى) يفصل بين الفئات بأكبر مسافة ممكنة. تركز على النقاط الحرجة (المتجهات الداعمة). تستخدم "الدوال النواتية" لفصل البيانات المتداخلة المعقدة.</p>
+            <p><strong>الميزة:</strong> دقيقة جداً حتى مع البيانات المتداخلة.<br>
+            <strong>القيد:</strong> بطيئة في التدريب مع البيانات الضخمة جداً.</p>
+        </div>
+    </section>
+
+    <!-- Clustering -->
+    <section id="clustering">
+        <h2>ثانياً: خوارزميات التجميع (Clustering Algorithms)</h2>
+        <p>على عكس التصنيف، التجميع لا يعرف الفئات مسبقاً. هو يحاول <strong>اكتشاف المجموعات الطبيعية</strong> المخفية داخل البيانات بناءً على التشابه. (ينتمي للتعلم غير الخاضع للإشراف Unsupervised Learning).</p>
+
+        <div class="algo-card">
+            <h4>1. خوارزمية المتوسطات (K-Means)</h4>
+            <p>تقسم البيانات إلى (K) مجموعات. تختار مراكز أولية، توزع العناصر على الأقرب، ثم تعيد حساب المراكز وتكرر العملية حتى تستقر. مثلاً: تقسيم 50 ألف كتاب إلى مجموعات موضوعية دون استخدام تصنيف ديوي.</p>
+            <p><strong>الميزة:</strong> سريعة وفعالة لاكتشاف الأنماط.<br>
+            <strong>القيد:</strong> يجب تحديد عدد المجموعات (K) مسبقاً، وتتأثر بالقيم الشاذة.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>2. التجميع الهرمي (Hierarchical Clustering)</h4>
+            <p>تبني شجرة من العلاقات (تصاعدياً بدمج المتشابهات). تُرسم على شكل مخطط شجري (Dendrogram) يوضح مستويات القرابة بين التخصصات العلمية.</p>
+            <p><strong>الميزة:</strong> لا تحتاج لتحديد عدد المجموعات مسبقاً، وتكشف البنية الهرمية.<br>
+            <strong>القيد:</strong> بطيئة جداً مع قواعد البيانات الكبيرة.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>3. التجميع المعتمد على الكثافة (DBSCAN)</h4>
+            <p>تبحث عن المناطق "الكثيفة" بالبيانات وتعتبرها مجموعات، وتعامل النقاط المعزولة كـ "قيم شاذة". مثلاً: اكتشاف أنماط البحث غير المألوفة أو السلوكيات غير المعتادة في المكتبة الرقمية.</p>
+            <p><strong>الميزة:</strong> تكتشف مجموعات بأشكال غير منتظمة، وتتجاهل الضوضاء تلقائياً.<br>
+            <strong>القيد:</strong> حساسة جداً لاختيار معايير الكثافة.</p>
+        </div>
+
+        <div class="socratic-box">
+            <strong>🧠 تأمل سقراطي:</strong>
+            إذا استخدمت خوارزمية K-Means لتجميع رواد مكتبتك، وأعطتك الخوارزمية 4 مجموعات رقمية، لكنك لا تعرف ما تمثله هذه المجموعات... من المسؤول عن "تسمية" و"فهم" هذه المجموعات؟ هل دور أمين المكتبة ينتهي عند جمع البيانات، أم يبدأ عندما تنتهي الخوارزمية من عملها؟
+        </div>
+    </section>
+
+    <!-- Recommendation -->
+    <section id="rec">
+        <h2>ثالثاً: خوارزميات التوصية</h2>
+        <p>تهدف إلى التنبؤ بتقييم المستخدم لعنصر معين أو تصفية العناصر للعثور على ما يهمه. في مؤسسات المعلومات، تحول المكتبة من "مستودع سلبي" إلى "أمين مكتبة شخصي".</p>
+
+        <div class="algo-card">
+            <h4>أ. التصفية التعاونية (Collaborative Filtering)</h4>
+            <p>تفترض أن المستخدمين الذين اتفقوا في الماضي، سيتفقون في المستقبل. لا تهتم بمحتوى الكتاب، بل بـ "سلوك" المستخدمين.</p>
+            <p><strong>القيد:</strong> تعاني من مشكلة "البداية الباردة" (Cold Start) عند انضمام مستخدم جديد.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>ب. التصفية القائمة على المحتوى (Content-Based)</h4>
+            <p>تقترح عناصر مشابهة لتلك التي أعجب بها المستخدم سابقاً، بناءً على خصائص العنصر (الكلمات المفتاحية، الموضوع).</p>
+            <p><strong>القيد:</strong> تقيد المستخدم في "دائرة مغلقة" من اهتماماته الحالية.</p>
+        </div>
+
+        <div class="socratic-box">
+            <strong>🧠 تأمل سقراطي:</strong>
+            إذا كان النظام يوصي لك دائماً بكتب مشابهة لما قرأته سابقاً، فهل هو يساعدك على "توسيع آفاقك المعرفية" أم يحبسك في ما يُعرف بـ "فقاعة التصفية" (Filter Bubble)؟ أين يقع الحد الفاصل بين "التخصيص المفيد" و"العزلة الفكرية"؟
+        </div>
+    </section>
+
+    <!-- Search & Retrieval -->
+    <section id="search">
+        <h2>رابعاً: البحث والاسترجاع</h2>
+        <p>لم يعد البحث يقتصر على "مطابقة الكلمات المفتاحية"، بل تطور ليشمل "الفهم الدلالي".</p>
+
+        <div class="algo-card">
+            <h4>أ. خوارزميات الترتيب الكلاسيكية (TF-IDF & BM25)</h4>
+            <p>تعتمد على الإحصائيات النصية. تحسب تكرار الكلمة في الوثيقة (TF) ومدى ندرتها في بقية المجموعة (IDF). خوارزمية <strong>BM25</strong> هي التطور الأحدث، حيث تأخذ في الاعتبار طول الوثيقة وتشبع التكرار.</p>
+            <p><strong>القيد:</strong> لا تفهم المرادفات أو السياق.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>ب. فهرسة المتجهات والبحث الدلالي (Vector Indexing)</h4>
+            <p>تقوم الخوارزمية بتحويل الكلمات والجمل إلى "أرقام متجهية" (Embeddings) في فضاء رياضي. الجمل المتشابهة في المعنى تقع قريبة من بعضها. عند البحث، يتم تحويل السؤال إلى متجه، والبحث عن أقرب الوثائق إليه.</p>
+            <p><strong>الميزة:</strong> تفهم أن "السيارة" و"المركبة" تحملان نفس المعنى.</p>
+        </div>
+    </section>
+
+    <!-- NLP -->
+    <section id="nlp">
+        <h2>خامساً: معالجة اللغة الطبيعية (NLP)</h2>
+        <p>تسعى NLP إلى سد الفجوة بين اللغة البشرية المعقدة والفهم الحاسوبي. في اللغة العربية، تواجه الخوارزميات تحديات فريدة بسبب ثراء اللغة واشتقاقها.</p>
+
+        <div class="algo-card">
+            <h4>التحديات العربية والحلول الخوارزمية</h4>
+            <ul>
+                <li><strong>التشكيل والغموض:</strong> استخدام نماذج سياقية (Contextual Models) لفهم المعنى من الجملة.</li>
+                <li><strong>الاشتقاق والجذور:</strong> خوارزميات "التجذيع" (Stemming) تعيد الكلمات إلى أصلها (كتب، كاتب، مكتبة).</li>
+                <li><strong>المرادفات:</strong> استخدام "المتجهات الدلالية" لربط المصطلحات العلمية ببعضها في الفهرسة الطبية أو القانونية.</li>
+            </ul>
+        </div>
+
+        <div class="socratic-box">
+            <strong>🧠 تأمل سقراطي:</strong>
+            عندما تقرأ الآلة جملة مثل: "ما أجمل السماء وهي تمطر"، هل تفهم "الجمال" كإحساس جمالي، أم تتعامل معه كمجرد "تكرار إحصائي" لكلمات معينة في سياقات إيجابية؟ أين ينتهي "الحساب الرياضي" ويبدأ "الفهم"؟
+        </div>
+    </section>
+
+    <!-- Deep Learning -->
+    <section id="dl">
+        <h2>سادساً: التعلم العميق والشبكات العصبية</h2>
+        <p>بدلاً من برمجة القواعد يدوياً، تسمح الشبكات العصبية للآلة بـ "تعلم" القواعد من خلال محاكاة طريقة عمل الخلايا العصبية في الدماغ البشري.</p>
+
+        <div class="algo-card">
+            <h4>أ. الشبكات التلافيفية (CNNs) - معالجة الصور</h4>
+            <p>تستخدم لاكتشاف الأنماط البصرية. تبدأ باكتشاف الحواف، ثم الأشكال، ثم وجوهاً أو أغلفة كتب.</p>
+            <p><strong>التطبيق:</strong> رقمنة المخطوطات، البحث بالصورة في الأرشيف.</p>
+        </div>
+
+        <div class="algo-card">
+            <h4>ب. الشبكات المتكررة (RNNs & LSTMs) - الصوت والتسلسل</h4>
+            <p>تتعامل مع البيانات كـ "تسلسل زمني" حيث يعتمد العنصر الحالي على السابق له.</p>
+            <p><strong>التطبيق:</strong> تحويل المحاضرات الصوتية إلى نصوص مكتوبة (Speech-to-Text).</p>
+        </div>
+
+        <div class="socratic-box">
+            <strong>🧠 تأمل سقراطي:</strong>
+            الشبكات العصبية تعمل كـ "صندوق أسود" (Black Box)؛ نحن نرى المدخلات والمخرجات، لكننا لا نفهم كيف وصلت الشبكة للقرار. إذا أخطأت الخوارزمية في تصنيف وثيقة سرية، كيف يمكننا "محاسبتها" أو تبرير قرارها للمستخدم؟
+        </div>
+    </section>
+
+    <!-- LLMs -->
+    <section id="llm">
+        <h2>سابعاً: النماذج اللغوية الكبيرة (LLMs)</h2>
+        <p>تمثل النماذج مثل (GPT, Llama, BERT) قفزة نوعية. هي "محركات توليد واستدلال" تعتمد على معمارية "المحولات" (Transformers) التي تقرأ النص كاملاً لفهم السياق العميق.</p>
+
+        <div class="algo-card">
+            <h4>التطبيقات في مؤسسات المعلومات</h4>
+            <ul>
+                <li><strong>التلخيص التلقائي:</strong> اختصار الرسائل الجامعية الطويلة في مستخلصات دقيقة.</li>
+                <li><strong>الفهرسة الآلية:</strong> توليد بيانات ببليوغرافية من النص الكامل للكتاب.</li>
+                <li><strong>المحادثة المعلوماتية:</strong> روبوتات دردشة تجيب على أسئلة المستفيدين بلغة طبيعية.</li>
+            </ul>
+            <p><strong>التحدي الأكبر:</strong> "الهلوسة" (Hallucination)؛ حيث يولد النموذج معلومات تبدو منطقية لكنها غير صحيحة واقعياً.</p>
+        </div>
+
+        <div class="socratic-box">
+            <strong>🧠 تأمل سقراطي:</strong>
+            إذا قام نموذج لغوي بإنشاء فهرس موضوعي أو الإجابة على سؤال باحث... هل يمكن اعتبار هذا النموذج "مفهرساً" يملك مسؤولية مهنية؟ أم أنه مجرد "ببغاء إحصائي" متطور يعيد صياغة ما تدرب عليه دون إدراك لمعنى الحقيقة؟
+        </div>
+    </section>
+
+    <!-- Criteria -->
+    <section id="criteria">
+        <h2>معايير اختيار الخوارزمية</h2>
+        <p>لا توجد خوارزمية "سحرية" تصلح لكل المشكلات. اختيار الخوارزمية هو قرار معلوماتي وإداري يعتمد على طبيعة البيانات، والهدف، والموارد المتاحة.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>المعيار</th>
+                    <th>التساؤل الجوهري</th>
+                    <th>الأثر على الاختيار</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>حجم البيانات</strong></td>
+                    <td>هل البيانات بالميغابايت أم بالتيرابايت؟</td>
+                    <td>البيانات الضخمة تتطلب خوارزميات سريعة (K-Means, Naïve Bayes) بدلاً من البطيئة (Hierarchical).</td>
+                </tr>
+                <tr>
+                    <td><strong>نوع البيانات</strong></td>
+                    <td>هل هي نصوص، صور، أم سلوكيات؟</td>
+                    <td>النصوص تتطلب NLP، الصور تتطلب CNNs، والسلوكيات تتطلب التصفية التعاونية.</td>
+                </tr>
+                <tr>
+                    <td><strong>الحاجة للتفسيرية</strong></td>
+                    <td>هل يجب تبرير القرار للمستخدم؟</td>
+                    <td>البيئات الأكاديمية تفضل "شجرة القرار" القابلة للتفسير، وتتجنب "الصندوق الأسود".</td>
+                </tr>
+                <tr>
+                    <td><strong>توفر البيانات المصنفة</strong></td>
+                    <td>هل نملك إجابات صحيحة مسبقة؟</td>
+                    <td>إذا نعم: تعلم خاضع للإشراف (تصنيف). إذا لا: تعلم غير خاضع (تجميع).</td>
+                </tr>
+                <tr>
+                    <td><strong>الموارد الحاسوبية</strong></td>
+                    <td>هل نملك خوادم قوية (GPUs)؟</td>
+                    <td>التعلم العميق يتطلب بنية تحتية ضخمة، بينما الإحصائية تعمل على أجهزة عادية.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="socratic-box">
+            <strong>🧠 تأمل سقراطي:</strong>
+            تخيل أنك مدير مكتبة رقمية، وخوارزمية "التعلم العميق" تعطي دقة 98% في تصنيف الكتب، لكنها لا تستطيع تفسير سبب تصنيف كتاب في "الفلسفة" بدلاً من "الدين". بينما "شجرة القرار" تعطي دقة 90% لكنها تشرح لك القرار بدقة. أيهما تختار؟ هل "الدقة المطلقة" دائماً هي الهدف الأسمى في علم المعلومات؟
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="conclusion">
+        <h2>🎯 خاتمة الفصل</h2>
+        <p>إن التنوع الهائل في الخوارزميات — من التوصية والاسترجاع، مروراً بالتصنيف والتجميع، ومعالجة اللغة والتعلم العميق، وصولاً إلى النماذج اللغوية الكبيرة — يعكس تحولاً جذرياً في دور أمين المكتبة وعالم المعلومات. لم يعد الدور يقتصر على "حفظ المعرفة وتنظيمها"، بل امتد إلى "فهم الآليات التي تُنتج وتُسترجع بها هذه المعرفة".</p>
+        <p>إن الفهم العميق لهذه الخوارزميات ومعايير اختيارها هو ما يميز "المهني المعلوماتي" القادر على قيادة التحول الرقمي في مؤسسته، عن مجرد "مستخدم" للتقنيات الحديثة. فالخوارزمية ليست غاية في حد ذاتها، بل هي وسيلة لبناء بيئات معلوماتية ذكية قادرة على دعم اتخاذ القرار وتطوير الخدمات.</p>
+    </section>
+</main>
+
+<footer>
+    <p>
+        <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+        <a href="#top">↑ العودة للأعلى</a>
+    </p>
+    <p>© 2025 ملخص محاضرة الخوارزميات الأساسية في نظم المعلومات الذكية - الفصل الشامل</p>
+</footer>
+
 </body>
 </html>
