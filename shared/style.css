@@ -741,3 +741,237 @@ footer {
   .quick-grid { grid-template-columns: 1fr; }
   .stats-row { display: none; }
 }
+
+/* =========================================
+   مشغّل البودكاست الصوتي الموحّد (Audio Player)
+   — مستخدم في جميع المراحل: بكالوريوس / ماجستير / دكتوراه
+   ========================================= */
+.podcast-player-wrap {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 28px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  border: 1px solid rgba(233,69,96,0.3);
+  animation: slideDown 0.4s ease;
+}
+@keyframes slideDown {
+  from { opacity:0; transform:translateY(-16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.podcast-layout {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.podcast-illustration {
+  flex: 0 0 42%;
+  max-width: 42%;
+}
+.podcast-illustration svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.podcast-controls {
+  flex: 1;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
+  direction: rtl;
+}
+.now-playing-label {
+  font-size: 12px;
+  color: #e94560;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.now-playing-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: 'Cairo', sans-serif;
+  min-height: 28px;
+}
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.time-current, .time-total {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  font-family: monospace;
+  min-width: 36px;
+}
+.progress-bar-outer {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #e94560;
+  border-radius: 3px;
+  transition: width 0.3s linear;
+}
+.ctrl-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+.ctrl-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+  font-family: 'Cairo', sans-serif;
+}
+.ctrl-btn:hover { background: rgba(233,69,96,0.25); border-color: #e94560; }
+.ctrl-play {
+  background: #e94560;
+  border-color: #e94560;
+  font-size: 18px;
+  padding: 10px 22px;
+  border-radius: 50px;
+}
+.ctrl-play:hover { background: #c73652; }
+.volume-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.volume-slider {
+  flex: 1;
+  accent-color: #e94560;
+  cursor: pointer;
+}
+.close-player-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.5);
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 12px;
+  align-self: flex-start;
+  transition: all 0.2s;
+  font-family: 'Cairo', sans-serif;
+}
+.close-player-btn:hover { color: #e94560; border-color: #e94560; }
+.audio-btn.playing {
+  border-color: #e94560 !important;
+  background: rgba(233,69,96,0.12) !important;
+}
+.audio-btn.playing .lb-arrow { color: #e94560; }
+@media (max-width: 640px) {
+  .podcast-layout { flex-direction: column; }
+  .podcast-illustration { max-width: 100%; }
+}
+
+/* =========================================
+   مشغّل الفيديو الموحّد (Video Player)
+   — مستخدم في جميع المراحل: بكالوريوس / ماجستير / دكتوراه
+   ========================================= */
+.video-player-wrap {
+  background: #0d0d18;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  border: 1px solid rgba(99,179,237,0.25);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: slideDown 0.35s ease;
+}
+.video-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  direction: rtl;
+}
+.video-now-label {
+  font-size: 12px;
+  color: #63b3ed;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.video-now-title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Cairo', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.video-close-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.video-close-btn:hover { background: rgba(220,53,69,0.3); color:#fff; border-color:#e94560; }
+.video-screen-wrap { background: #000; }
+.video-bottom-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  direction: rtl;
+  flex-wrap: wrap;
+}
+.vctrl-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 7px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+  text-decoration: none;
+  font-family: 'Cairo', sans-serif;
+}
+.vctrl-btn:hover { background: rgba(99,179,237,0.2); border-color:#63b3ed; }
+.vdownload { color:#63b3ed; border-color:rgba(99,179,237,0.3); }
+.vdownload:hover { background:rgba(99,179,237,0.15); }
+.vspeed-wrap { display:flex; align-items:center; gap:6px; margin-right:auto; }
+.vspeed-select {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Cairo', sans-serif;
+}
+.video-btn.v-playing {
+  border-color: #63b3ed !important;
+  background: rgba(99,179,237,0.12) !important;
+}
+.video-btn.v-playing .lb-arrow { color: #63b3ed; }
