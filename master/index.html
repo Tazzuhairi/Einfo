@@ -327,7 +327,125 @@
       <p class="intro-text">تسجيلات صوتية للمحاضرات تُمكّنك من مراجعة المادة أثناء التنقل أو الاستماع التفاعلي.</p>
 
       <div class="podcast-player-wrap" id="podcastPlayerWrap" style="display:none;">
-        <div class="podcast-controls" style="padding:24px 28px;">
+        <div class="podcast-layout">
+        <div class="podcast-illustration">
+            <svg width="100%" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background studio -->
+              <rect x="0" y="0" width="420" height="300" rx="12" fill="#1a1a2e"/>
+              <rect x="0" y="0" width="420" height="130" rx="12" fill="#16213e"/>
+              <rect x="0" y="118" width="420" height="182" rx="0" fill="#1a1a2e"/>
+              <!-- Sound panels -->
+              <rect x="10" y="12" width="28" height="38" rx="3" fill="#0f3460" opacity="0.8"/>
+              <rect x="44" y="12" width="28" height="38" rx="3" fill="#0f3460" opacity="0.6"/>
+              <line x1="10" y1="22" x2="38" y2="22" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="10" y1="30" x2="38" y2="30" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="44" y1="22" x2="72" y2="22" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="44" y1="30" x2="72" y2="30" stroke="#1e3a5f" stroke-width="1.5"/>
+              <rect x="352" y="12" width="28" height="38" rx="3" fill="#0f3460" opacity="0.8"/>
+              <rect x="386" y="12" width="28" height="38" rx="3" fill="#0f3460" opacity="0.6"/>
+              <line x1="352" y1="22" x2="380" y2="22" stroke="#1e3a5f" stroke-width="1.5"/>
+              <line x1="352" y1="30" x2="380" y2="30" stroke="#1e3a5f" stroke-width="1.5"/>
+              <!-- PODCAST label -->
+              <text x="210" y="38" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#e94560" letter-spacing="4">PODCAST</text>
+              <circle cx="210" cy="18" r="11" fill="none" stroke="#e94560" stroke-width="1.5"/>
+              <circle cx="210" cy="18" r="5" fill="#e94560"/>
+              <!-- On Air -->
+              <rect x="168" y="55" width="84" height="22" rx="4" fill="#1a0000"/>
+              <rect x="171" y="57" width="78" height="18" rx="3" fill="#cc0000"/>
+              <text x="210" y="70" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#fff" letter-spacing="2">ON AIR</text>
+              <circle cx="178" cy="66" r="3.5" fill="#ff4444"/>
+              <!-- Desk -->
+              <rect x="55" y="185" width="310" height="13" rx="3" fill="#8B6914"/>
+              <rect x="62" y="198" width="296" height="6" rx="2" fill="#6B5010"/>
+              <rect x="75" y="204" width="10" height="40" rx="2" fill="#6B5010"/>
+              <rect x="335" y="204" width="10" height="40" rx="2" fill="#6B5010"/>
+              <!-- MAN -->
+              <rect x="80" y="133" width="64" height="56" rx="8" fill="#2c4a7c"/>
+              <polygon points="112,133 104,146 112,141 120,146" fill="#f0f0f0"/>
+              <polygon points="112,146 108,162 112,167 116,162" fill="#e94560"/>
+              <rect x="104" y="122" width="16" height="14" rx="4" fill="#d4956a"/>
+              <ellipse cx="112" cy="112" rx="22" ry="24" fill="#d4956a"/>
+              <ellipse cx="112" cy="94" rx="22" ry="10" fill="#2d1b00"/>
+              <rect x="90" y="94" width="44" height="12" rx="3" fill="#2d1b00"/>
+              <ellipse cx="105" cy="111" rx="4" ry="5" fill="#fff"/>
+              <ellipse cx="119" cy="111" rx="4" ry="5" fill="#fff"/>
+              <circle cx="105" cy="112" r="2.5" fill="#3d2b1a"/>
+              <circle cx="119" cy="112" r="2.5" fill="#3d2b1a"/>
+              <path d="M104 118 Q112 124 120 118" fill="none" stroke="#8B4513" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M90 105 Q96 102 102 105" fill="none" stroke="#2d1b00" stroke-width="2" stroke-linecap="round"/>
+              <path d="M122 105 Q128 102 134 105" fill="none" stroke="#2d1b00" stroke-width="2" stroke-linecap="round"/>
+              <!-- Man headphones -->
+              <path d="M90 108 Q82 98 88 90 Q100 82 112 86 Q124 82 136 90 Q142 98 134 108" fill="none" stroke="#222" stroke-width="5" stroke-linecap="round"/>
+              <rect x="84" y="104" width="10" height="14" rx="4" fill="#333"/>
+              <rect x="126" y="104" width="10" height="14" rx="4" fill="#333"/>
+              <!-- Man mic -->
+              <rect x="124" y="152" width="3" height="34" rx="1.5" fill="#888"/>
+              <rect x="118" y="149" width="15" height="6" rx="2" fill="#aaa"/>
+              <ellipse cx="125" cy="143" rx="8" ry="11" fill="#333"/>
+              <ellipse cx="125" cy="143" rx="6" ry="8" fill="#555"/>
+              <line x1="121" y1="139" x2="129" y2="139" stroke="#666" stroke-width="0.8"/>
+              <line x1="120" y1="143" x2="130" y2="143" stroke="#666" stroke-width="0.8"/>
+              <line x1="120" y1="147" x2="130" y2="147" stroke="#666" stroke-width="0.8"/>
+              <!-- Man arm -->
+              <path d="M144 155 Q158 168 155 183" fill="none" stroke="#2c4a7c" stroke-width="16" stroke-linecap="round"/>
+              <ellipse cx="155" cy="183" rx="10" ry="6" fill="#d4956a"/>
+              <!-- WOMAN -->
+              <rect x="276" y="135" width="64" height="54" rx="8" fill="#7c2c6e"/>
+              <path d="M308,135 Q300,145 308,152 Q316,145 308,135" fill="#f5c6ea"/>
+              <rect x="299" y="122" width="17" height="16" rx="5" fill="#e8b090"/>
+              <ellipse cx="308" cy="111" rx="24" ry="26" fill="#e8b090"/>
+              <ellipse cx="308" cy="91" rx="26" ry="12" fill="#3d1a00"/>
+              <rect x="282" y="89" width="52" height="18" rx="3" fill="#3d1a00"/>
+              <path d="M282 96 Q276 118 279 148" fill="none" stroke="#3d1a00" stroke-width="16" stroke-linecap="round"/>
+              <path d="M334 96 Q340 118 337 148" fill="none" stroke="#3d1a00" stroke-width="16" stroke-linecap="round"/>
+              <ellipse cx="301" cy="110" rx="4" ry="5" fill="#fff"/>
+              <ellipse cx="315" cy="110" rx="4" ry="5" fill="#fff"/>
+              <circle cx="301" cy="111" r="2.5" fill="#3d2b1a"/>
+              <circle cx="315" cy="111" r="2.5" fill="#3d2b1a"/>
+              <path d="M299 103 Q305 100 311 103" fill="none" stroke="#3d1a00" stroke-width="2" stroke-linecap="round"/>
+              <path d="M305 103 Q311 100 317 103" fill="none" stroke="#3d1a00" stroke-width="2" stroke-linecap="round"/>
+              <path d="M302 119 Q308 125 314 119" fill="#e94560"/>
+              <circle cx="282" cy="118" r="3" fill="#ffd700"/>
+              <circle cx="282" cy="123" r="2" fill="#ffd700"/>
+              <!-- Woman headphones -->
+              <path d="M284 106 Q276 96 282 88 Q294 80 308 84 Q322 80 334 88 Q340 96 332 106" fill="none" stroke="#222" stroke-width="5" stroke-linecap="round"/>
+              <rect x="277" y="102" width="10" height="14" rx="4" fill="#333"/>
+              <rect x="319" y="102" width="10" height="14" rx="4" fill="#333"/>
+              <!-- Woman mic -->
+              <rect x="289" y="152" width="3" height="34" rx="1.5" fill="#888"/>
+              <rect x="283" y="149" width="15" height="6" rx="2" fill="#aaa"/>
+              <ellipse cx="290" cy="143" rx="8" ry="11" fill="#333"/>
+              <ellipse cx="290" cy="143" rx="6" ry="8" fill="#555"/>
+              <line x1="286" y1="139" x2="294" y2="139" stroke="#666" stroke-width="0.8"/>
+              <line x1="285" y1="143" x2="295" y2="143" stroke="#666" stroke-width="0.8"/>
+              <line x1="285" y1="147" x2="295" y2="147" stroke="#666" stroke-width="0.8"/>
+              <!-- Woman arm -->
+              <path d="M276 158 Q263 170 265 183" fill="none" stroke="#7c2c6e" stroke-width="16" stroke-linecap="round"/>
+              <ellipse cx="265" cy="183" rx="10" ry="6" fill="#e8b090"/>
+              <!-- Laptop center -->
+              <rect x="178" y="166" width="64" height="20" rx="3" fill="#222"/>
+              <rect x="181" y="168" width="58" height="15" rx="2" fill="#1a3a5c"/>
+              <polyline id="svgWave" points="186,176 192,171 198,180 204,172 210,178 216,173 222,179 228,174 234,178 236,176" fill="none" stroke="#e94560" stroke-width="1.8"/>
+              <rect x="173" y="186" width="74" height="5" rx="2.5" fill="#333"/>
+              <!-- Studio lights -->
+              <rect x="86" y="0" width="14" height="7" rx="2" fill="#555"/>
+              <polygon points="80,7 100,7 96,20 84,20" fill="#ffcc00" opacity="0.9"/>
+              <rect x="320" y="0" width="14" height="7" rx="2" fill="#555"/>
+              <polygon points="314,7 334,7 330,20 318,20" fill="#ffcc00" opacity="0.9"/>
+              <!-- Recording light strip -->
+              <rect id="recStrip" x="0" y="292" width="420" height="4" rx="2" fill="#e94560" opacity="0.7"/>
+              <!-- Waveform animation bars (shown when playing) -->
+              <g id="waveAnim" opacity="0">
+                <rect x="190" y="255" width="4" height="16" rx="2" fill="#e94560"/>
+                <rect x="198" y="250" width="4" height="26" rx="2" fill="#e94560"/>
+                <rect x="206" y="258" width="4" height="10" rx="2" fill="#e94560"/>
+                <rect x="214" y="248" width="4" height="30" rx="2" fill="#e94560"/>
+                <rect x="222" y="254" width="4" height="18" rx="2" fill="#e94560"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="podcast-controls">
           <div class="now-playing-label">🎙️ يُشغَّل الآن</div>
           <div class="now-playing-title" id="nowPlayingTitle">—</div>
           <div class="progress-wrap">
@@ -344,6 +462,7 @@
             <span>🔈</span><input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="1" class="volume-slider"/><span>🔊</span>
           </div>
           <button class="close-player-btn" id="closePlayer">✕ إغلاق المشغل</button>
+          </div>
         </div>
       </div>
 
@@ -554,105 +673,6 @@
       sectionOrder.length = 0;
       ['home','instructions','lectures','audio-lectures','video-lectures','exams'].forEach(s => sectionOrder.push(s));
     }
-  </script>
-
-  <!-- ====== مشغّل الصوت ====== -->
-  <script>
-    (function(){
-      var audio = document.getElementById('podcastAudio');
-      var wrap  = document.getElementById('podcastPlayerWrap');
-      var title = document.getElementById('nowPlayingTitle');
-      var fill  = document.getElementById('progressFill');
-      var cur   = document.getElementById('timeCurrent');
-      var tot   = document.getElementById('timeTotal');
-      var btnPlay = document.getElementById('btnPlay');
-      var activeBtn = null;
-
-      function fmt(s){ var m=Math.floor(s/60), sc=Math.floor(s%60); return m+':'+(sc<10?'0':'')+sc; }
-
-      window.playAudio = function(src, name){
-        if(activeBtn) activeBtn.classList.remove('playing');
-        var btns = document.querySelectorAll('.audio-btn');
-        btns.forEach(function(b){ if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(src)) activeBtn = b; });
-        if(activeBtn) activeBtn.classList.add('playing');
-        audio.src = src;
-        title.textContent = name;
-        wrap.style.display = 'block';
-        wrap.scrollIntoView({behavior:'smooth', block:'start'});
-        audio.play().catch(function(){});
-        btnPlay.textContent = '⏸';
-      };
-
-      audio.addEventListener('error', function(){
-        wrap.style.display = 'none';
-        if(activeBtn){ activeBtn.classList.remove('playing'); activeBtn = null; }
-        if(typeof showToast === 'function') showToast('🎧 لم يُضَف الملف الصوتي لهذا الأسبوع بعد');
-      });
-
-      btnPlay.addEventListener('click', function(){
-        if(audio.paused){ audio.play(); btnPlay.textContent='⏸'; }
-        else { audio.pause(); btnPlay.textContent='▶'; }
-      });
-      document.getElementById('btnSkipBack').addEventListener('click', function(){ audio.currentTime = Math.max(0, audio.currentTime-10); });
-      document.getElementById('btnSkipFwd').addEventListener('click', function(){ audio.currentTime = Math.min(audio.duration||0, audio.currentTime+10); });
-      audio.addEventListener('timeupdate', function(){
-        if(!isNaN(audio.duration) && audio.duration > 0){
-          fill.style.width = (audio.currentTime/audio.duration*100)+'%';
-          cur.textContent = fmt(audio.currentTime);
-        }
-      });
-      audio.addEventListener('loadedmetadata', function(){ tot.textContent = fmt(audio.duration); });
-      audio.addEventListener('ended', function(){ btnPlay.textContent = '▶'; });
-      document.getElementById('progressOuter').addEventListener('click', function(e){
-        var rect = this.getBoundingClientRect();
-        var ratio = (e.clientX - rect.left) / rect.width;
-        if(!isNaN(audio.duration)) audio.currentTime = ratio * audio.duration;
-      });
-      document.getElementById('volumeSlider').addEventListener('input', function(){ audio.volume = this.value; });
-      document.getElementById('closePlayer').addEventListener('click', function(){
-        audio.pause(); btnPlay.textContent='▶'; wrap.style.display='none';
-        if(activeBtn){ activeBtn.classList.remove('playing'); activeBtn = null; }
-      });
-    })();
-  </script>
-
-  <!-- ====== مشغّل الفيديو ====== -->
-  <script>
-    (function(){
-      var video = document.getElementById('mainVideo');
-      var wrap  = document.getElementById('videoPlayerWrap');
-      var nowTitle = document.getElementById('videoNowTitle');
-      var dlBtn = document.getElementById('vDownloadBtn');
-      var activeVBtn = null;
-
-      window.playVideo = function(src, name, num){
-        if(activeVBtn) activeVBtn.classList.remove('v-playing');
-        var btns = document.querySelectorAll('.video-btn.available');
-        btns.forEach(function(b){ if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(src)) activeVBtn = b; });
-        if(activeVBtn) activeVBtn.classList.add('v-playing');
-        video.src = src;
-        nowTitle.textContent = num + ' — ' + name;
-        dlBtn.href = src;
-        dlBtn.setAttribute('download', name + '.mp4');
-        wrap.style.display = 'block';
-        wrap.scrollIntoView({behavior:'smooth', block:'start'});
-        video.play().catch(function(){});
-      };
-
-      video.addEventListener('error', function(){
-        wrap.style.display = 'none';
-        if(activeVBtn){ activeVBtn.classList.remove('v-playing'); activeVBtn = null; }
-        if(typeof showToast === 'function') showToast('🎥 لم يُضَف ملف الفيديو لهذا الأسبوع بعد');
-      });
-
-      document.getElementById('videoCloseBtn').addEventListener('click', function(){
-        video.pause(); video.src=''; wrap.style.display='none';
-        if(activeVBtn){ activeVBtn.classList.remove('v-playing'); activeVBtn = null; }
-      });
-      document.getElementById('vBtnSkipBack').addEventListener('click', function(){ video.currentTime = Math.max(0, video.currentTime-10); });
-      document.getElementById('vBtnSkipFwd').addEventListener('click', function(){ video.currentTime = Math.min(video.duration||0, video.currentTime+10); });
-      document.getElementById('vSpeedSelect').addEventListener('change', function(){ video.playbackRate = parseFloat(this.value); });
-    })();
   </script>
 
   <!-- ====== Firebase Authentication ====== -->
