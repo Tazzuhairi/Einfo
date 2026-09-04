@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>أسئلة تفاعلية - التحول الرقمي وأبعاده</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif; background-color: #f4f7f9; color: #2c3e50;
+      max-width: 1200px; margin: auto; padding: 20px; font-size: 16px; line-height: 1.8;
+    }
+    header {
+      background: linear-gradient(90deg, #34495e, #2c3e50); color: white;
+      padding: 30px; text-align: center; border-radius: 10px; margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 { margin: 0; font-size: 2em; }
+    section {
+      background-color: white; padding: 25px; border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
+    }
+    h2 {
+      color: #2c3e50; font-size: 1.4em; border-bottom: 3px solid #3498db;
+      padding-bottom: 8px; margin-bottom: 20px;
+    }
+    .question {
+      margin-bottom: 25px; padding: 15px; background-color: #f9f9f9;
+      border-radius: 8px; border-left: 4px solid #3498db;
+    }
+    .covered-list { padding-right: 20px; margin-bottom: 0; }
+    .covered-list li { margin-bottom: 6px; }
+    .placeholder-note {
+      border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
+      padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-bottom: 20px;
+    }
+    .placeholder-note strong { color: #2980b9; }
+    label { display: block; margin: 8px 0; cursor: pointer; }
+    input[type="radio"] { margin-left: 8px; }
+    button {
+      background-color: #3498db; color: white; border: none; padding: 10px 15px;
+      border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Cairo', sans-serif; margin-top: 10px;
+    }
+    .result { margin-top: 10px; padding: 8px; border-radius: 4px; font-weight: bold; }
+    .correct { background-color: #d4edda; color: #155724; }
+    .incorrect { background-color: #f8d7da; color: #721c24; }
+    .home-icon {
+      position: fixed; bottom: 20px; right: 20px; background: #3498db; color: white;
+      font-size: 20px; text-decoration: none; border-radius: 50%; padding: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    #topBtn {
+      position: fixed; bottom: 20px; left: 20px; z-index: 100; background-color: #3498db;
+      color: white; border: none; padding: 12px 18px; font-size: 16px; border-radius: 50px;
+      cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+
+<header><h1>اختبار الأسبوع 7: التحول الرقمي وأبعاده</h1></header>
+
+<section>
+  <h2>المحاور المشمولة بالاختبار</h2>
+  <ul class="covered-list">
+                <li>مفهوم التحول الرقمي</li>
+                <li>مراحله</li>
+                <li>النضج الرقمي</li>
+                <li>الاستراتيجية الرقمية</li>
+                <li>القيادة الرقمية</li>
+                <li>الثقافة الرقمية</li>
+  </ul>
+</section>
+
+<section>
+  <h2>نموذج سؤال</h2>
+  <div class="placeholder-note">
+    📝 استبدل السؤال أدناه بأسئلة فعلية تغطي محاور «<strong>التحول الرقمي وأبعاده</strong>» أعلاه، بنفس تنسيق اختبارات مرحلة البكالوريوس.
+  </div>
+  <div class="question">
+    <p>1. (سؤال نموذجي) — عدّل هذا النص وأضف الخيارات المناسبة.</p>
+    <form>
+      <label><input type="radio" name="q1" value="1"> الخيار الأول</label>
+      <label><input type="radio" name="q1" value="0"> الخيار الثاني</label>
+      <label><input type="radio" name="q1" value="0"> الخيار الثالث</label>
+      <button type="button" onclick="checkAnswer('q1', 1)">تحقق من الإجابة</button>
+      <div class="result" id="res_q1"></div>
+    </form>
+  </div>
+</section>
+
+<button id="topBtn" onclick="scrollToTop()">↑</button>
+<a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
+
+<script>
+  function checkAnswer(questionName, correctValue) {
+    const selected = document.querySelector(`input[name="${questionName}"]:checked`);
+    const resultDiv = document.getElementById(`res_${questionName}`);
+    if (!selected) { resultDiv.textContent = "الرجاء اختيار إجابة"; resultDiv.className = "result incorrect"; return; }
+    if (selected.value == correctValue) { resultDiv.textContent = "إجابة صحيحة! ✓"; resultDiv.className = "result correct"; }
+    else { resultDiv.textContent = "إجابة خاطئة! ✗"; resultDiv.className = "result incorrect"; }
+  }
+  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+</script>
+</body>
+</html>
