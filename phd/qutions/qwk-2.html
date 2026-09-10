@@ -1,105 +1,379 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>أسئلة تفاعلية - مدخل إلى نظم المعلومات الذكية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif; background-color: #f4f7f9; color: #2c3e50;
-      max-width: 1200px; margin: auto; padding: 20px; font-size: 16px; line-height: 1.8;
-    }
-    header {
-      background: linear-gradient(90deg, #34495e, #2c3e50); color: white;
-      padding: 30px; text-align: center; border-radius: 10px; margin-bottom: 30px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1 { margin: 0; font-size: 2em; }
-    section {
-      background-color: white; padding: 25px; border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
-    }
-    h2 {
-      color: #2c3e50; font-size: 1.4em; border-bottom: 3px solid #3498db;
-      padding-bottom: 8px; margin-bottom: 20px;
-    }
-    .question {
-      margin-bottom: 25px; padding: 15px; background-color: #f9f9f9;
-      border-radius: 8px; border-left: 4px solid #3498db;
-    }
-    .covered-list { padding-right: 20px; margin-bottom: 0; }
-    .covered-list li { margin-bottom: 6px; }
-    .placeholder-note {
-      border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-      padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-bottom: 20px;
-    }
-    .placeholder-note strong { color: #2980b9; }
-    label { display: block; margin: 8px 0; cursor: pointer; }
-    input[type="radio"] { margin-left: 8px; }
-    button {
-      background-color: #3498db; color: white; border: none; padding: 10px 15px;
-      border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Cairo', sans-serif; margin-top: 10px;
-    }
-    .result { margin-top: 10px; padding: 8px; border-radius: 4px; font-weight: bold; }
-    .correct { background-color: #d4edda; color: #155724; }
-    .incorrect { background-color: #f8d7da; color: #721c24; }
-    .home-icon {
-      position: fixed; bottom: 20px; right: 20px; background: #3498db; color: white;
-      font-size: 20px; text-decoration: none; border-radius: 50%; padding: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    #topBtn {
-      position: fixed; bottom: 20px; left: 20px; z-index: 100; background-color: #3498db;
-      color: white; border: none; padding: 12px 18px; font-size: 16px; border-radius: 50px;
-      cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار تفاعلي - مدخل إلى نظم المعلومات الذكية</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: #f4f7f6;
+            color: #333;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+            border-right: 5px solid #3498db;
+            padding-right: 15px;
+            font-size: 1.4em;
+        }
+        .question-card {
+            background: #f9fbfb;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .question-card:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-color: #3498db;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .options label {
+            display: block;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background: #eaf2f8;
+            border-color: #3498db;
+        }
+        input[type="radio"] {
+            margin-left: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .btn {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f1f1f1;
+        }
+        .model-answer {
+            display: none;
+            margin-top: 15px;
+            background: #e8f8f5;
+            border-right: 5px solid #1abc9c;
+            padding: 15px;
+            border-radius: 8px;
+            color: #333;
+            line-height: 1.9;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<header><h1>اختبار الأسبوع 2: مدخل إلى نظم المعلومات الذكية</h1></header>
+<div class="container">
+    <header>
+        <h1>اختبار تفاعلي</h1>
+        <p>الفصل الأول: مدخل إلى نظم المعلومات الذكية</p>
+    </header>
 
-<section>
-  <h2>المحاور المشمولة بالاختبار</h2>
-  <ul class="covered-list">
-                <li>مفهوم نظم المعلومات وتطورها</li>
-                <li>خصائص النظم الذكية</li>
-                <li>مكونات النظام الذكي</li>
-                <li>دورة عمله</li>
-                <li>الفرق بين النظام التقليدي والنظام الذكي</li>
-  </ul>
-</section>
+    <main>
+        <h2>أسئلة اختيار من متعدد</h2>
+        
+        <div class="question-card">
+            <div class="question-text">1. ما الهدف الرئيسي من تحول نظم المعلومات من أتمتة العمليات إلى النظم الذكية؟</div>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> تقليل عدد الموظفين في المؤسسة</label>
+                <label><input type="radio" name="q1" value="b"> تحليل البيانات واستخلاص الأنماط ودعم اتخاذ القرار</label>
+                <label><input type="radio" name="q1" value="c"> الاعتماد الكامل على السجلات الورقية</label>
+                <label><input type="radio" name="q1" value="d"> إلغاء الحاجة إلى قواعد البيانات</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q1', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q1"></div>
+        </div>
 
-<section>
-  <h2>نموذج سؤال</h2>
-  <div class="placeholder-note">
-    📝 استبدل السؤال أدناه بأسئلة فعلية تغطي محاور «<strong>مدخل إلى نظم المعلومات الذكية</strong>» أعلاه، بنفس تنسيق اختبارات مرحلة البكالوريوس.
-  </div>
-  <div class="question">
-    <p>1. (سؤال نموذجي) — عدّل هذا النص وأضف الخيارات المناسبة.</p>
-    <form>
-      <label><input type="radio" name="q1" value="1"> الخيار الأول</label>
-      <label><input type="radio" name="q1" value="0"> الخيار الثاني</label>
-      <label><input type="radio" name="q1" value="0"> الخيار الثالث</label>
-      <button type="button" onclick="checkAnswer('q1', 1)">تحقق من الإجابة</button>
-      <div class="result" id="res_q1"></div>
-    </form>
-  </div>
-</section>
+        <div class="question-card">
+            <div class="question-text">2. في أي مرحلة تاريخية ظهرت "نظم دعم القرار والنظم الخبيرة" التي حاولت محاكاة خبرات المتخصصين؟</div>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> الخمسينيات والستينيات</label>
+                <label><input type="radio" name="q2" value="b"> السبعينيات</label>
+                <label><input type="radio" name="q2" value="c"> الثمانينيات</label>
+                <label><input type="radio" name="q2" value="d"> التسعينيات</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q2', 'c')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q2"></div>
+        </div>
 
-<button id="topBtn" onclick="scrollToTop()">↑</button>
-<a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
+        <div class="question-card">
+            <div class="question-text">3. ما المكون الذي يُعد "القلب الفكري" للنظام الذكي ويحتوي على الحقائق والقواعد المنطقية للاستدلال؟</div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> قاعدة البيانات</label>
+                <label><input type="radio" name="q3" value="b"> محرك التعلم</label>
+                <label><input type="radio" name="q3" value="c"> قاعدة المعرفة</label>
+                <label><input type="radio" name="q3" value="d"> واجهة التفاعل</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q3', 'c')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q3"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">4. ما الخاصية التي تميز النظم الذكية عن التقليدية في التعامل مع المتغيرات البيئية؟</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> تتطلب إعادة برمجة كاملة</label>
+                <label><input type="radio" name="q4" value="b"> القدرة على التكيف والتعلم المستمر</label>
+                <label><input type="radio" name="q4" value="c"> الاعتماد على التعليمات الثابتة</label>
+                <label><input type="radio" name="q4" value="d"> إيقاف النظام عند حدوث متغير</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q4', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q4"></div>
+        </div>
+
+        <h2>أسئلة إكمال الفراغ</h2>
+
+        <div class="question-card">
+            <div class="question-text">5. تُعد مرحلة معالجة البيانات الإلكترونية (EDP) التي ظهرت في الخمسينيات والستينيات مرحلة تركز على أتمتة العمليات ______.</div>
+            <input type="text" id="input-q5" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q5', ['الروتينية', 'المتكررة'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q5"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">6. في النظام الذكي، يُعد ______ هو الوسيط الذي يحول البيانات إلى معرفة قابلة للاستخدام عبر تطبيق قواعد منطقية.</div>
+            <input type="text" id="input-q6" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q6', ['محرك الاستدلال'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q6"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">7. المرحلة الأخيرة في دورة عمل النظام الذكي والتي تمنحه صفة الذكاء هي مرحلة التعلم و______ المستمر.</div>
+            <input type="text" id="input-q7" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q7', ['التحسين'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q7"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">8. على عكس النظم التقليدية التي تعتمد على واجهات وقوائم محددة، توفر النظم الذكية تفاعلاً باستخدام ______.</div>
+            <input type="text" id="input-q8" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q8', ['اللغة الطبيعية'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q8"></div>
+        </div>
+
+        <h2>أسئلة صح أو خطأ</h2>
+
+        <div class="question-card">
+            <div class="question-text">9. البيانات في صورتها الأولية تحقق قيمة حقيقية للمؤسسة دون الحاجة إلى معالجتها أو تنظيمها.</div>
+            <div class="options">
+                <label><input type="radio" name="q9" value="true"> صح</label>
+                <label><input type="radio" name="q9" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q9', 'false')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q9"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">10. النظم الذكية قادرة على استشراف المستقبل وتوقع الأحداث بناءً على تحليل الأنماط التاريخية.</div>
+            <div class="options">
+                <label><input type="radio" name="q10" value="true"> صح</label>
+                <label><input type="radio" name="q10" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q10', 'true')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q10"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">11. النظام التقليدي يتعلم من البيانات والتغذية الراجعة لتحسين أدائه باستمرار.</div>
+            <div class="options">
+                <label><input type="radio" name="q11" value="true"> صح</label>
+                <label><input type="radio" name="q11" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q11', 'false')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q11"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">12. أي خلل في البيانات الأولية (مصادر البيانات) قد يؤدي إلى نتائج مضللة مهما بلغت كفاءة الخوارزميات.</div>
+            <div class="options">
+                <label><input type="radio" name="q12" value="true"> صح</label>
+                <label><input type="radio" name="q12" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q12', 'true')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q12"></div>
+        </div>
+
+        <h2>أسئلة مقالية</h2>
+
+        <div class="question-card">
+            <div class="question-text">13. ناقش مراحل تطور نظم المعلومات، موضحاً كيف انتقلت من مجرد أدوات لأتمتة العمليات إلى منظومات معرفية ذكية.</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a13')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a13">
+                <strong>الإجابة النموذجية:</strong><br>
+                تطورت نظم المعلومات عبر سبع مراحل رئيسية: بدأت بالسجلات الورقية والإجراءات اليدوية، ثم انتقلت إلى معالجة البيانات الإلكترونية (EDP) لأتمتة العمليات الروتينية. في السبعينيات ظهرت نظم المعلومات الإدارية (MIS) لإنتاج التقارير، تلتها في الثمانينيات نظم دعم القرار والنظم الخبيرة. وفي التسعينيات ظهرت النظم المتكاملة (ERP, CRM) مع انتشار الإنترنت. ثم جاءت مرحلة الحوسبة السحابية والبيانات الضخمة، وصولاً إلى المرحلة الراهنة (نظم المعلومات الذكية) التي تدمج الذكاء الاصطناعي والتعلم الآلي للتعلم من البيانات، واكتشاف الأنماط، والتنبؤ بالأحداث، والتكيف الذاتي، مما حولها من أدوات معالجة إلى منظومات معرفية ذكية.
+            </div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">14. قارن بين النظام التقليدي والنظام الذكي من حيث: (أسلوب العمل، التكيف مع المتغيرات، وطريقة اتخاذ القرار).</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a14')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a14">
+                <strong>الإجابة النموذجية:</strong><br>
+                <ul>
+                    <li><strong>أسلوب العمل:</strong> النظام التقليدي يعتمد على تنفيذ تعليمات مبرمجة مسبقاً، بينما النظام الذكي يعتمد على التعلم والتحليل والتكيف.</li>
+                    <li><strong>التكيف مع المتغيرات:</strong> النظام التقليدي محدود ويتطلب إعادة البرمجة عند تغير الظروف، أما النظام الذكي فمرتفع ويعتمد على التعلم المستمر وتعديل النماذج التحليلية.</li>
+                    <li><strong>اتخاذ القرار:</strong> النظام التقليدي يقدم معلومات وتقارير فقط، بينما النظام الذكي يقدم توصيات مبنية على الأدلة، ويدعم أو ينفذ القرار ذاتياً.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>
+            <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+            <a href="#top">↑ العودة للأعلى</a>
+        </p>
+        <p>© 2026 مدخل إلى نظم المعلومات الذكية - اختبار تفاعلي</p>
+    </footer>
+</div>
 
 <script>
-  function checkAnswer(questionName, correctValue) {
-    const selected = document.querySelector(`input[name="${questionName}"]:checked`);
-    const resultDiv = document.getElementById(`res_${questionName}`);
-    if (!selected) { resultDiv.textContent = "الرجاء اختيار إجابة"; resultDiv.className = "result incorrect"; return; }
-    if (selected.value == correctValue) { resultDiv.textContent = "إجابة صحيحة! ✓"; resultDiv.className = "result correct"; }
-    else { resultDiv.textContent = "إجابة خاطئة! ✗"; resultDiv.className = "result incorrect"; }
-  }
-  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function checkMCQ(id, correctOption) {
+        const selected = document.querySelector(`input[name="${id}"]:checked`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        if (!selected) {
+            feedback.textContent = "الرجاء اختيار إجابة أولاً.";
+            feedback.style.color = "orange";
+        } else if (selected.value === correctOption) {
+            feedback.textContent = "إجابة صحيحة! أحسنت.";
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent = "إجابة خاطئة. حاول مرة أخرى أو راجع النص.";
+            feedback.style.color = "red";
+        }
+        feedback.style.display = "block";
+    }
+
+    function checkFill(id, acceptableAnswers) {
+        const input = document.getElementById(`input-${id}`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        const userAnswer = input.value.trim();
+        if (!userAnswer) {
+            feedback.textContent = "الرجاء كتابة الإجابة.";
+            feedback.style.color = "orange";
+        } else {
+            const isCorrect = acceptableAnswers.some(ans => userAnswer.includes(ans));
+            if (isCorrect) {
+                feedback.textContent = "إجابة صحيحة! أحسنت.";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = `إجابة خاطئة. الإجابة الصحيحة هي: ${acceptableAnswers[0]}`;
+                feedback.style.color = "red";
+            }
+        }
+        feedback.style.display = "block";
+    }
+
+    function checkTF(id, correctOption) {
+        const selected = document.querySelector(`input[name="${id}"]:checked`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        if (!selected) {
+            feedback.textContent = "الرجاء اختيار إجابة أولاً.";
+            feedback.style.color = "orange";
+        } else if (selected.value === correctOption) {
+            feedback.textContent = "إجابة صحيحة!";
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent = "إجابة خاطئة.";
+            feedback.style.color = "red";
+        }
+        feedback.style.display = "block";
+    }
+
+    function toggleAnswer(id) {
+        const answerDiv = document.getElementById(`answer-${id}`);
+        if (answerDiv.style.display === "block") {
+            answerDiv.style.display = "none";
+        } else {
+            answerDiv.style.display = "block";
+        }
+    }
 </script>
+
 </body>
 </html>
