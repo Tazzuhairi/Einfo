@@ -3,100 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظم دعم القرار الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>الحوكمة الرقمية والأخلاقيات في النظم الذكية</title>
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
-            margin: 0; padding: 0;
-            color: #2c3e50;
-            background-color: #f4f7f9;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
         }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 15px; }
-        header {
-            background: linear-gradient(90deg, #34495e, #2c3e50);
-            color: white; padding: 30px 0; text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
-        h1 { margin: 0; font-size: 2.1em; }
-        .week-badge {
-            display: inline-block; margin-top: 10px;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 3px solid #2b6cb0;
+            padding-bottom: 10px;
+            font-size: 2em;
         }
         h2 {
-            color: #2c3e50; border-bottom: 3px solid #3498db;
-            padding-bottom: 8px; margin-bottom: 20px;
+            color: #2b6cb0;
+            margin-top: 30px;
+            border-right: 5px solid #2b6cb0;
+            padding-right: 10px;
+            font-size: 1.5em;
         }
-        .section {
-            background: white; margin: 30px 0; padding: 25px;
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        h3 {
+            color: #2c5282;
+            margin-top: 20px;
         }
-        ul { padding-right: 20px; }
-        li { margin-bottom: 8px; }
-        .activity-box {
-            background: #eaf4fc; border-right: 4px solid #3498db;
-            border-radius: 8px; padding: 16px 20px; margin-top: 8px;
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05em;
         }
-        .activity-box strong { color: #2471a3; }
-        .placeholder-note {
-            border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-            padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-top: 20px;
+        .toc {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
-        .placeholder-note strong { color: #2980b9; }
-        footer { text-align: center; padding: 25px; background: #2c3e50; color: white; margin-top: 40px; }
-        #topBtn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100;
-            background-color: #3498db; color: white; border: none;
-            padding: 12px 18px; font-size: 16px; border-radius: 50px;
-            cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
         }
-        .home-icon {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #3498db; color: white; font-size: 20px;
-            text-decoration: none; border-radius: 50%; padding: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #2b6cb0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+        .socratic {
+            background: linear-gradient(135deg, #fffaf0 0%, #fefcbf 100%);
+            border-right: 5px solid #d69e2e;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #744210;
+        }
+        .socratic strong {
+            font-style: normal;
+            color: #975a16;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: right;
+        }
+        th {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .principle-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+        }
+        .principle-card strong {
+            color: #2b6cb0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #2b6cb0;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>نظم دعم القرار الذكية</h1>
-            <span class="week-badge">الأسبوع 10 — نظم المعلومات الذكية</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>المحاور الفرعية</h2>
-            <ul>
-                <li>نظم دعم القرار</li>
-                <li>نظم دعم الإدارة التنفيذية</li>
-                <li>النظم الخبيرة</li>
-                <li>ذكاء القرار</li>
-                <li>التنبؤ والمحاكاة</li>
-                <li>اتخاذ القرار المعتمد على البيانات</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2>ملاحظة</h2>
-            <div class="activity-box"><strong>◾</strong> —</div>
-        </section>
-
-        <div class="placeholder-note">
-            📝 هذا الهيكل مبني مباشرةً على التوصيف الأكاديمي المعتمد للمقرر. أضف هنا الشرح التفصيلي لكل محور
-            (نصوصاً وأمثلة وخاتمة) بنفس أسلوب محاضرات مرحلة البكالوريوس.
-        </div>
+<div class="container">
+    <h1 id="top">الحوكمة الرقمية والأخلاقيات في النظم الذكية</h1>
+    <div class="toc">
+        <h3>📑 محاور الفصل</h3>
+        <ul>
+            <li>◾ <a href="#intro">تمهيد: عندما تتفوق القوة على الحكمة</a></li>
+            <li>◾ <a href="#concept">أولًا: مفهوم الحوكمة الرقمية</a></li>
+            <li>◾ <a href="#objectives">ثانيًا: أهداف الحوكمة الرقمية</a></li>
+            <li>◾ <a href="#principles">ثالثًا: مبادئ الحوكمة الرقمية</a></li>
+            <li>◾ <a href="#data-gov">رابعًا: حوكمة البيانات</a></li>
+            <li>◾ <a href="#ethics">خامسًا: أخلاقيات الذكاء الاصطناعي</a></li>
+            <li>◾ <a href="#security">سادسًا: أمن المعلومات والأمن السيبراني</a></li>
+            <li>◾ <a href="#privacy">سابعًا: الخصوصية وحماية البيانات الشخصية</a></li>
+            <li>◾ <a href="#transparency">ثامنًا: الشفافية وقابلية التفسير (XAI)</a></li>
+            <li>◾ <a href="#standards">تاسعًا: المعايير والأطر الدولية</a></li>
+            <li>◾ <a href="#conclusion">خاتمة الفصل</a></li>
+        </ul>
     </div>
 
-    <button id="topBtn" onclick="scrollToTop()">↑</button>
-    <a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
-    <footer>
-        <div class="container"><p>© 2025 ملخص محاضرة نظم دعم القرار الذكية</p></div>
-    </footer>
-    <script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+    <!-- تمهيد -->
+    <section id="intro">
+        <h2>تمهيد: عندما تتفوق القوة على الحكمة</h2>
+        <p>أصبح الذكاء الاصطناعي قادراً على تحليل ملايين البيانات، واتخاذ قرارات مؤثرة، بل وتنفيذ إجراءات مستقلة. لكن هذه القوة الهائلة تطرح سؤالاً وجودياً: <strong>من يضبط إيقاع هذه القوة؟</strong> لم تعد كفاءة النظم الذكية تُقاس فقط بسرعة المعالجة، بل بمدى التزامها بالعدالة، والشفافية، والخصوصية، والمساءلة.</p>
+        <p>في مؤسسات المعلومات، حيث تتعامل الأنظمة مع بيانات بحثية حساسة، وسجلات مستفيدين، وإنتاج فكري محمي بحقوق ملكية، تصبح الحوكمة الرقمية ليست رفاهية تنظيمية، بل <strong>ضرورة وجودية</strong> تضمن التوازن بين إتاحة المعرفة وحماية الحقوق.</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت التقنية تتطور بسرعة "أُسّية" بينما تتطور التشريعات والأخلاق بسرعة "خطية"، فهل نحن نعيش في "فجوة حوكمة" تتسع كل يوم؟ ومن يتحمل مسؤولية الفوضى التي قد تنتج في هذه الفجوة؟
+        </div>
+    </section>
+
+    <!-- أولاً -->
+    <section id="concept">
+        <h2>أولًا: مفهوم الحوكمة الرقمية</h2>
+        <p>الحوكمة الرقمية (Digital Governance) هي الإطار التنظيمي والإداري الشامل الذي يضم السياسات، والضوابط، والإجراءات، والمعايير التي تنظم إدارة الموارد الرقمية، والبيانات، والأنظمة الذكية، بما يضمن تحقيق الأهداف المؤسسية مع تعزيز الشفافية والمساءلة وإدارة المخاطر.</p>
+        
+        <h3>تطور مفهوم الحوكمة الرقمية عبر أربع مراحل:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>المرحلة</th>
+                    <th>التركيز الأساسي</th>
+                    <th>السياق التقني</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>حوكمة تقنية المعلومات</strong></td><td>إدارة البنية التحتية وضمان استمرارية الأنظمة.</td><td>الحواسيب المركزية والشبكات المحلية.</td></tr>
+                <tr><td><strong>الخدمات الإلكترونية</strong></td><td>تنظيم الخدمات الرقمية وتحسين جودة الأداء.</td><td>انتشار الإنترنت والحكومة الإلكترونية.</td></tr>
+                <tr><td><strong>التحول الرقمي</strong></td><td>ربط التقنيات بالأهداف الاستراتيجية الشاملة.</td><td>السحابة، البيانات الضخمة، التكامل.</td></tr>
+                <tr><td><strong>الحوكمة الذكية</strong></td><td>حوكمة البيانات، والخوارزميات، والأنظمة الذكية.</td><td>الذكاء الاصطناعي، إنترنت الأشياء، الوكلاء.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            الحوكمة بطبيعتها "تنظيم وضبط"، بينما الابتكار بطبيعته "تجريب وكسر للقواعد". هل الحوكمة الرقمية الفعالة هي التي "تقيّد" الابتكار لحماية المجتمع، أم التي "تُطلقه" ضمن حدود مرنة؟ وأين يقع التوازن؟
+        </div>
+    </section>
+
+    <!-- ثانياً -->
+    <section id="objectives">
+        <h2>ثانيًا: أهداف الحوكمة الرقمية</h2>
+        <p>تسعى الحوكمة الرقمية إلى تحقيق توازن دقيق بين <strong>تمكين الابتكار</strong> و<strong>ضبط المخاطر</strong>. أهدافها تتجاوز الجوانب التقنية لتشمل الأبعاد الإدارية والقانونية والأخلاقية:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>الهدف الاستراتيجي</th>
+                    <th>الأثر في مؤسسات المعلومات</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td><strong>مواءمة التقنية مع الاستراتيجية</strong></td><td>ضمان أن الاستثمارات الرقمية تخدم رسالة المؤسسة.</td></tr>
+                <tr><td>2</td><td><strong>تعزيز الشفافية</strong></td><td>توثيق العمليات الرقمية وإظهار أسس القرارات.</td></tr>
+                <tr><td>3</td><td><strong>دعم المساءلة</strong></td><td>تحديد المسؤوليات بوضوح في بيئة الذكاء الاصطناعي.</td></tr>
+                <tr><td>4</td><td><strong>حماية البيانات</strong></td><td>ضمان سرية وسلامة وتوافر المعلومات.</td></tr>
+                <tr><td>5</td><td><strong>إدارة المخاطر الرقمية</strong></td><td>الاستباقية في مواجهة التهديدات السيبرانية.</td></tr>
+                <tr><td>6</td><td><strong>تحسين جودة الخدمات</strong></td><td>رفع كفاءة الخدمات الرقمية وتجربة المستفيد.</td></tr>
+                <tr><td>7</td><td><strong>الامتثال للتشريعات</strong></td><td>تقليل المخاطر القانونية والتنظيمية.</td></tr>
+                <tr><td>8</td><td><strong>بناء الثقة في الذكاء الاصطناعي</strong></td><td>ضمان عدالة الخوارزميات وشفافية مخرجاتها.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت الحوكمة تهدف إلى "بناء الثقة" في الأنظمة الذكية، فهل الثقة الحقيقية تُبنى عبر "الضوابط والرقابة"، أم عبر "الحرية والتجربة المباشرة"؟ وهل يمكن لنظام مُقيَّد بالحوكمة أن يكون "مبدعاً" في الوقت نفسه؟
+        </div>
+    </section>
+
+    <!-- ثالثاً -->
+    <section id="principles">
+        <h2>ثالثًا: مبادئ الحوكمة الرقمية</h2>
+        <p>تقوم الحوكمة الرقمية على عشرة مبادئ أساسية تشكل "الدستور الرقمي" للمؤسسة الذكية:</p>
+        
+        <div class="principle-card"><strong>1. الشفافية:</strong> وضوح السياسات والإجراءات وآليات عمل الخوارزميات.</div>
+        <div class="principle-card"><strong>2. المساءلة:</strong> تحديد المسؤوليات بوضوح، مع بقاء المسؤولية النهائية على الإنسان.</div>
+        <div class="principle-card"><strong>3. المسؤولية:</strong> التزام جميع الأطراف بالاستخدام الأخلاقي والقانوني للتقنيات.</div>
+        <div class="principle-card"><strong>4. أمن المعلومات:</strong> حماية السرية، والسلامة، والتوافر (مثلث CIA).</div>
+        <div class="principle-card"><strong>5. حماية الخصوصية:</strong> تنظيم جمع البيانات الشخصية واستخدامها وفق الأغراض المعلنة.</div>
+        <div class="principle-card"><strong>6. العدالة وعدم التحيز:</strong> مراجعة النماذج دورياً لمنع القرارات التمييزية.</div>
+        <div class="principle-card"><strong>7. الامتثال:</strong> الالتزام بالتشريعات والمعايير الوطنية والدولية.</div>
+        <div class="principle-card"><strong>8. إدارة المخاطر:</strong> التعرف المستمر على التهديدات التقنية والتنظيمية والأخلاقية.</div>
+        <div class="principle-card"><strong>9. الاستدامة:</strong> التخطيط طويل الأجل والاستخدام الرشيد للموارد الرقمية.</div>
+        <div class="principle-card"><strong>10. التحسين المستمر:</strong> التطوير الدائم بناءً على التقييم والتغذية الراجعة.</div>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            هذه المبادئ العشرة تبدو مثالية على الورق. ولكن عندما تتعارض "الشفافية" مع "أمن المعلومات"، أو تتعارض "العدالة" مع "الكفاءة"، أي المبادئ يُقدَّم على الآخر؟ ومن يملك السلطة لترتيب هذه الأولويات؟
+        </div>
+    </section>
+
+    <!-- رابعاً -->
+    <section id="data-gov">
+        <h2>رابعًا: حوكمة البيانات</h2>
+        <p>حوكمة البيانات (Data Governance) هي حجر الأساس في منظومة الحوكمة الرقمية. إذا كانت البيانات هي "وقود" الذكاء الاصطناعي، فإن حوكمة البيانات هي "مصفاة" هذا الوقود. بدون بيانات عالية الجودة ومتوازنة وخالية من التحيز، ستكون مخرجات أذكى الأنظمة مضللة.</p>
+        
+        <h3>المكونات الرئيسة لحوكمة البيانات:</h3>
+        <ul>
+            <li><strong>السياسات والمعايير:</strong> قواعد الجودة، والتصنيف، والحفظ، والمشاركة.</li>
+            <li><strong>الأدوار والمسؤوليات:</strong> من يُنشئ البيانات، من يديرها، من يحميها؟</li>
+            <li><strong>إدارة الجودة:</strong> القياس المستمر للدقة، والاكتمال، والاتساق.</li>
+            <li><strong>إدارة البيانات الوصفية (Metadata):</strong> تنظيم "البيانات عن البيانات" لتسهيل الاسترجاع.</li>
+            <li><strong>إدارة دورة الحياة:</strong> من الإنشاء إلى الأرشفة أو الإتلاف الآمن.</li>
+        </ul>
+        <p>في مؤسسات المعلومات، تضمن حوكمة البيانات جودة الفهارس، وكفاءة المستودعات الرقمية، وحماية بيانات المستفيدين، وموثوقية التحليلات الببليومترية.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت حوكمة البيانات تفرض "تنقية" البيانات من التحيز قبل تغذيتها للنماذج الذكية، فمن يحدد ما هو "التحيز" وما هو "الواقع"؟ أليس كل تصنيف للبيانات هو في جوهره "قرار أخلاقي" مُتنكِّر في ثوب "تقني"؟
+        </div>
+    </section>
+
+    <!-- خامساً -->
+    <section id="ethics">
+        <h2>خامسًا: أخلاقيات الذكاء الاصطناعي</h2>
+        <p>أخلاقيات الذكاء الاصطناعي (AI Ethics) هي الإطار القيمي الذي يوجه تصميم الأنظمة الذكية واستخدامها. لم تعد مسألة أكاديمية نظرية، بل أصبحت شرطاً أساسياً لثقة المجتمع في التقنيات التي تؤثر في التعليم، والصحة، والعدالة، والتوظيف.</p>
+        
+        <h3>المبادئ الأساسية لأخلاقيات الذكاء الاصطناعي:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>المبدأ</th>
+                    <th>الجوهر</th>
+                    <th>التحدي العملي</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>احترام الإنسان</strong></td><td>الإنسان محور العملية، والآلة في خدمته.</td><td>هل الأتمتة الشاملة تحترم كرامة العامل؟</td></tr>
+                <tr><td><strong>المنفعة وعدم الإضرار</strong></td><td>تحقيق النفع وتقليل الأضرار لأدنى حد.</td><td>من يحدد "المنفعة" ومن يتحمل "الضرر"؟</td></tr>
+                <tr><td><strong>العدالة والإنصاف</strong></td><td>منع التمييز بسبب الجنس أو العرق أو اللغة.</td><td>كيف نكتشف التحيز المخفي في البيانات التاريخية؟</td></tr>
+                <tr><td><strong>الشفافية والتفسير</strong></td><td>إمكانية فهم أسس القرارات الآلية.</td><td>هل يمكن تفسير شبكة عصبية بملايين المعاملات؟</td></tr>
+                <tr><td><strong>الخصوصية</strong></td><td>حماية البيانات الشخصية والسلوكية.</td><td>التوازن بين التخصيص والمراقبة.</td></tr>
+                <tr><td><strong>المساءلة</strong></td><td>تحديد المسؤول عن قرارات الأنظمة.</td><td>من المسؤول: المبرمج، المدير، أم الخوارزمية؟</td></tr>
+                <tr><td><strong>الأمن والموثوقية</strong></td><td>مقاومة الهجمات والأخطاء والتلاعب.</td><td>حماية النماذج من "التسميم" ببيانات مضللة.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            نقول إن "الإنسان يجب أن يبقى في الحلقة" (Human-in-the-Loop). ولكن إذا كانت الخوارزمية تتفوق على الإنسان في الدقة والسرعة والموضوعية، أليس إصرارنا على "الرقابة البشرية" مجرد "وهم بالسيطرة" يُرضي غرورنا أكثر مما يحمي المجتمع؟
+        </div>
+    </section>
+
+    <!-- سادساً -->
+    <section id="security">
+        <h2>سادسًا: أمن المعلومات والأمن السيبراني</h2>
+        <p>أمن المعلومات (Information Security) يحمي "المحتوى" بغض النظر عن شكله، بينما الأمن السيبراني (Cybersecurity) يحمي "البيئة الرقمية" بشبكاتها وأنظمتها. معاً يشكلان خط الدفاع الأول للمؤسسات الذكية.</p>
+        
+        <h3>مثلث أمن المعلومات (CIA Triad):</h3>
+        <ul>
+            <li><strong>السرية (Confidentiality):</strong> منع الوصول غير المصرح به عبر التشفير وإدارة الصلاحيات.</li>
+            <li><strong>السلامة (Integrity):</strong> ضمان عدم تعديل البيانات أو تلفها دون تصريح.</li>
+            <li><strong>التوافر (Availability):</strong> ضمان استمرارية الخدمات والأنظمة عند الحاجة.</li>
+        </ul>
+
+        <h3>أبرز التهديدات السيبرانية للنظم الذكية:</h3>
+        <ul>
+            <li>البرمجيات الخبيثة وبرامج الفدية (Ransomware).</li>
+            <li>هجمات التصيد الإلكتروني (Phishing).</li>
+            <li>هجمات حجب الخدمة (DDoS).</li>
+            <li><strong>التلاعب ببيانات تدريب الذكاء الاصطناعي</strong> (Data Poisoning).</li>
+            <li><strong>سرقة النماذج والخوارزميات</strong> (Model Theft).</li>
+            <li>التهديدات الداخلية (سوء استخدام الصلاحيات).</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            في سباق التسلح السيبراني، نستخدم "الذكاء الاصطناعي" للدفاع، ويستخدم المهاجمون "الذكاء الاصطناعي" للهجوم. هل نحن ندخل في "حرب باردة رقمية" لا ينتصر فيها أحد، بل يدفع ثمنها المستخدم العادي الذي تُراقب كل حركاته بحجة "حمايته"؟
+        </div>
+    </section>
+
+    <!-- سابعاً -->
+    <section id="privacy">
+        <h2>سابعًا: الخصوصية وحماية البيانات الشخصية</h2>
+        <p>الخصوصية (Privacy) هي حق الفرد في التحكم بمعلوماته، بينما حماية البيانات الشخصية (Personal Data Protection) هي الآليات التقنية والقانونية لضمان هذا الحق. في عصر الذكاء الاصطناعي، حيث تُحل محل هويتك الرقمية وتُحلل أنماط سلوكك، يصبح هذا الحق أكثر هشاشة من أي وقت مضى.</p>
+        
+        <h3>المبادئ الأساسية لحماية البيانات:</h3>
+        <ul>
+            <li><strong>المشروعية والشفافية:</strong> جمع البيانات بطريقة قانونية ومعلنة.</li>
+            <li><strong>تحديد الغرض:</strong> عدم استخدام البيانات لأغراض غير التي جُمعت من أجلها.</li>
+            <li><strong>تقليل البيانات:</strong> جمع الحد الأدنى اللازم فقط.</li>
+            <li><strong>تحديد مدة الاحتفاظ:</strong> الحذف الآمن عند انتهاء الحاجة.</li>
+            <li><strong>المساءلة:</strong> قدرة المؤسسة على إثبات التزامها.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            نقول إن "البيانات الشخصية ملك للفرد". ولكن في الواقع، عندما تستخدم مكتبة ذكية سجلات بحثك لتخصيص خدماتها لك، هل هي "تنتهك" خصوصيتك أم "تحترم" تفضيلاتك؟ أين ينتهي "التخصيص الذكي" ويبدأ "التنميط الرقمي"؟
+        </div>
+    </section>
+
+    <!-- ثامناً -->
+    <section id="transparency">
+        <h2>ثامنًا: الشفافية وقابلية التفسير (XAI)</h2>
+        <p>لا يكفي أن يكون القرار الذكي "صحيحاً"، بل يجب أن يكون "مفهوماً". الشفافية (Transparency) تعني وضوح آليات عمل النظام، بينما قابلية التفسير (Explainability / XAI) تعني قدرة النظام على تقديم مبررات منطقية لقراراته بلغة يفهمها الإنسان.</p>
+        
+        <h3>مستويات الشفافية في النظم الذكية:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>المستوى</th>
+                    <th>المقصود</th>
+                    <th>مثال تطبيقي</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>شفافية البيانات</strong></td><td>الإفصاح عن مصادر البيانات وجودتها.</td><td>ما البيانات التي دُرّب عليها نموذج التوصية؟</td></tr>
+                <tr><td><strong>شفافية الخوارزميات</strong></td><td>توضيح المبادئ العامة للمعالجة.</td><td>كيف يُرتب محرك البحث النتائج؟</td></tr>
+                <tr><td><strong>شفافية القرارات</strong></td><td>تفسير أسباب قرار محدد.</td><td>لماذا رُفض طلب الإعارة هذا؟</td></tr>
+                <tr><td><strong>شفافية الحوكمة</strong></td><td>وضوح السياسات والمسؤوليات.</td><td>من يراقب أداء النظام الذكي؟</td></tr>
+            </tbody>
+        </table>
+
+        <h3>التحدي الجوهري:</h3>
+        <p>كلما زاد تعقيد النموذج (كالتعلم العميق والنماذج اللغوية الكبيرة)، قلت قابليته للتفسير. نحن نواجه "مفاضلة" حقيقية بين <strong>الدقة</strong> و<strong>الوضوح</strong>. النماذج البسيطة قابلة للتفسير لكنها أقل دقة، والنماذج المعقدة عالية الدقة لكنها "صناديق سوداء".</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كان "الصندوق الأسود" الذكي يتخذ قرارات أدق من أي خبير بشري، لكن لا أحد يفهم "كيف"، فهل نقبل قراراته؟ أم نفضل قراراً بشرياً "مفهوماً" لكنه "خاطئ"؟ هل "الفهم" شرط مسبق لـ "الثقة" أم أن "النتائج" تكفي؟
+        </div>
+    </section>
+
+    <!-- تاسعاً -->
+    <section id="standards">
+        <h2>تاسعًا: المعايير والأطر الدولية</h2>
+        <p>لا تكفي المبادئ النظرية دون أطر عملية معترف بها دولياً. تعمل المنظمات الدولية على تطوير معايير تساعد المؤسسات على تطبيق الحوكمة الرقمية وفق أفضل الممارسات العالمية:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>المعيار / الإطار</th>
+                    <th>الجهة المصدرة</th>
+                    <th>التركيز الأساسي</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>ISO/IEC 27001</strong></td><td>المنظمة الدولية للمعايير</td><td>نظام إدارة أمن المعلومات (ISMS).</td></tr>
+                <tr><td><strong>ISO/IEC 27701</strong></td><td>المنظمة الدولية للمعايير</td><td>نظام إدارة الخصوصية (PIMS).</td></tr>
+                <tr><td><strong>COBIT</strong></td><td>ISACA</td><td>حوكمة وإدارة تقنية المعلومات.</td></tr>
+                <tr><td><strong>ITIL</strong></td><td>Axelos</td><td>إدارة خدمات تقنية المعلومات.</td></tr>
+                <tr><td><strong>NIST CSF</strong></td><td>المعهد الوطني الأمريكي</td><td>إدارة مخاطر الأمن السيبراني (التعرف، الحماية، الاكتشاف، الاستجابة، التعافي).</td></tr>
+                <tr><td><strong>توصيات UNESCO</strong></td><td>الأمم المتحدة</td><td>أخلاقيات الذكاء الاصطناعي (حقوق الإنسان، العدالة، التنوع).</td></tr>
+                <tr><td><strong>مبادئ OECD</strong></td><td>منظمة التعاون الاقتصادي</td><td>الذكاء الاصطناعي المسؤول (الشمول، الشفافية، المتانة).</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            المعايير الدولية تضعها "دول ومنظمات" تعكس ثقافات وقيماً محددة. هل يمكن لمعيار وُلد في "وادي السيليكون" أو "بروكسل" أن ينطبق بعدالة على مؤسسة معلوماتية في العالم العربي؟ أم أن "الحوكمة العادلة" تتطلب "معايير محلية" تنبثق من سياقنا الثقافي والقيمي؟
+        </div>
+    </section>
+
+    <!-- خاتمة -->
+    <section id="conclusion">
+        <h2>🎯 خاتمة الفصل</h2>
+        <p>يكتمل بهذا الفصل البعد "الأخلاقي والتنظيمي" لمنظومة النظم الذكية. لقد انتقلنا من سؤال <strong>"كيف نبني؟"</strong> (التقنيات، البيانات، النماذج) إلى سؤال <strong>"كيف نضبط؟"</strong> (الحوكمة، الأخلاقيات، الأمن، الخصوصية). إن القوة التقنية بلا حوكمة هي "قوة عمياء"، والحوكمة بلا فهم تقني هي "قيد أجوف".</p>
+        <p>التحدي الأكبر الذي يواجه مؤسسات المعلومات اليوم ليس "تبني الذكاء الاصطناعي"، بل <strong>"توطينه أخلاقياً"</strong> في بيئة تحترم الخصوصية، وتضمن العدالة، وتحافظ على الشفافية، وتُبقي الإنسان في مركز المسؤولية. وهذا ما سيقودنا إلى الفصول القادمة التي تستكشف آفاق المستقبل والتحديات الناشئة في عالم تتلاشى فيه الحدود بين الإنسان والآلة.</p>
+    </section>
+
+    <div class="footer">
+        <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+        <a href="#top">↑ العودة للأعلى</a>
+        <p>© 2026 الحوكمة الرقمية والأخلاقيات في النظم الذكية</p>
+    </div>
+</div>
+
 </body>
 </html>

@@ -3,100 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التحول الرقمي وأبعاده</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>نماذج واستراتيجيات التحول الرقمي</title>
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
-            margin: 0; padding: 0;
-            color: #2c3e50;
-            background-color: #f4f7f9;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
         }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 15px; }
-        header {
-            background: linear-gradient(90deg, #34495e, #2c3e50);
-            color: white; padding: 30px 0; text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
-        h1 { margin: 0; font-size: 2.1em; }
-        .week-badge {
-            display: inline-block; margin-top: 10px;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 3px solid #2b6cb0;
+            padding-bottom: 10px;
+            font-size: 2em;
         }
         h2 {
-            color: #2c3e50; border-bottom: 3px solid #3498db;
-            padding-bottom: 8px; margin-bottom: 20px;
+            color: #2b6cb0;
+            margin-top: 30px;
+            border-right: 5px solid #2b6cb0;
+            padding-right: 10px;
+            font-size: 1.5em;
         }
-        .section {
-            background: white; margin: 30px 0; padding: 25px;
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        h3 {
+            color: #2c5282;
+            margin-top: 20px;
         }
-        ul { padding-right: 20px; }
-        li { margin-bottom: 8px; }
-        .activity-box {
-            background: #eaf4fc; border-right: 4px solid #3498db;
-            border-radius: 8px; padding: 16px 20px; margin-top: 8px;
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05em;
         }
-        .activity-box strong { color: #2471a3; }
-        .placeholder-note {
-            border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-            padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-top: 20px;
+        .toc {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
-        .placeholder-note strong { color: #2980b9; }
-        footer { text-align: center; padding: 25px; background: #2c3e50; color: white; margin-top: 40px; }
-        #topBtn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100;
-            background-color: #3498db; color: white; border: none;
-            padding: 12px 18px; font-size: 16px; border-radius: 50px;
-            cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
         }
-        .home-icon {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #3498db; color: white; font-size: 20px;
-            text-decoration: none; border-radius: 50%; padding: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #2b6cb0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+        .socratic {
+            background: linear-gradient(135deg, #fffaf0 0%, #fefcbf 100%);
+            border-right: 5px solid #d69e2e;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #744210;
+        }
+        .socratic strong {
+            font-style: normal;
+            color: #975a16;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: right;
+        }
+        th {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #2b6cb0;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>التحول الرقمي وأبعاده</h1>
-            <span class="week-badge">الأسبوع 7 — نظم المعلومات الذكية</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>المحاور الفرعية</h2>
-            <ul>
-                <li>مفهوم التحول الرقمي</li>
-                <li>مراحله</li>
-                <li>النضج الرقمي</li>
-                <li>الاستراتيجية الرقمية</li>
-                <li>القيادة الرقمية</li>
-                <li>الثقافة الرقمية</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2>ملاحظة</h2>
-            <div class="activity-box"><strong>◾</strong> —</div>
-        </section>
-
-        <div class="placeholder-note">
-            📝 هذا الهيكل مبني مباشرةً على التوصيف الأكاديمي المعتمد للمقرر. أضف هنا الشرح التفصيلي لكل محور
-            (نصوصاً وأمثلة وخاتمة) بنفس أسلوب محاضرات مرحلة البكالوريوس.
-        </div>
+<div class="container">
+    <h1 id="top">نماذج واستراتيجيات التحول الرقمي</h1>
+    
+    <div class="toc">
+        <h3>📑 محاور الفصل</h3>
+        <ul>
+            <li>◾ <a href="#intro">تمهيد: لماذا نحتاج إلى أطر ومنهجيات؟</a></li>
+            <li>◾ <a href="#maturity">أولًا: نماذج النضج الرقمي (قياس الجاهزية)</a></li>
+            <li>◾ <a href="#togaf">ثانيًا: إطار TOGAF (الهندسة المعمارية)</a></li>
+            <li>◾ <a href="#cobit">ثالثًا: إطار COBIT (الحوكمة والسيطرة)</a></li>
+            <li>◾ <a href="#itil">رابعًا: إطار ITIL (إدارة الخدمات)</a></li>
+            <li>◾ <a href="#ea">خامسًا: هندسة المؤسسة (المنظومة الشاملة)</a></li>
+            <li>◾ <a href="#roadmap">سادسًا: خارطة الطريق الرقمية (الجسر التنفيذي)</a></li>
+            <li>◾ <a href="#conclusion">خاتمة الفصل</a></li>
+        </ul>
     </div>
 
-    <button id="topBtn" onclick="scrollToTop()">↑</button>
-    <a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
-    <footer>
-        <div class="container"><p>© 2025 ملخص محاضرة التحول الرقمي وأبعاده</p></div>
-    </footer>
-    <script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+    <!-- تمهيد -->
+    <section id="intro">
+        <h2>تمهيد: لماذا نحتاج إلى أطر ومنهجيات؟</h2>
+        <p>لا يكفي امتلاك أحدث التقنيات لتحقيق التحول الرقمي؛ فالعشوائية في التطبيق تؤدي إلى "جزر رقمية معزولة" وهدر للموارد. لذلك، برزت الحاجة إلى أطر مرجعية (Frameworks) ومنهجيات علمية تساعد المؤسسات على التخطيط، التنفيذ، والحوكمة بصورة منهجية.</p>
+        <p>في مؤسسات المعلومات، تضمن هذه الأطر توافق المبادرات الرقمية مع الأهداف الاستراتيجية، وإدارة المخاطر، وتحقيق أقصى قيمة من الاستثمارات التقنية، بدلاً من الانجراف وراء الموضات التقنية العابرة.</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت النماذج والأطر تُصمم لـ "تقليل المخاطر" و"تنظيم الفوضى"، فهل نحتاج أحياناً إلى "فوضى خلاقة" لكسر القواعد القديمة وابتكار نماذج عمل لم تخطر على بال مصممي هذه الأطر؟ أم أن الإطار الجيد هو الذي يترك مساحة للمفاجأة؟
+        </div>
+    </section>
+
+    <!-- أولاً -->
+    <section id="maturity">
+        <h2>أولًا: نماذج النضج الرقمي (قياس الجاهزية)</h2>
+        <p>نماذج النضج الرقمي (Digital Maturity Models) هي أدوات تقييم منهجية تساعد المؤسسات على معرفة "أين تقف الآن" و"إلى أين يجب أن تذهب". تعتمد على معايير تقيس التطور في القيادة، الاستراتيجية، التقنية، البيانات، والثقافة.</p>
+        
+        <h3>أشهر النماذج العالمية:</h3>
+        <ul>
+            <li><strong>نموذج ديلويت (Deloitte):</strong> هو إطار لتقييم التحول الرقمي والنضج الرقمي للمؤسسات، ويركز على مدى قدرة المؤسسة على توظيف التقنيات الرقمية ضمن استراتيجية متكاملة. ويهتم بعناصر مثل الاستراتيجية، والقيادة والثقافة التنظيمية، والتقنيات، والعمليات، وتجربة المستفيد، بهدف الانتقال من الاستخدام المنفرد للتقنية إلى بناء مؤسسة رقمية متكاملة.</li>
+            <li><strong>نموذج جارتنر (Gartner):</strong> هو إطار يُستخدم لفهم النضج الرقمي وقدرة المؤسسات على إدارة التحول الرقمي، ويركز بصورة خاصة على دور القيادة، والحوكمة، والاستثمار في التقنيات والقدرات الرقمية، ومدى قدرة المؤسسة على التكيف مع التغيرات التقنية والبيئية. وينظر إلى التحول الرقمي بوصفه تحولًا مؤسسيًا يتطلب مواءمة التقنية مع أهداف المؤسسة واحتياجات المستفيدين.</li>
+            <li><strong>نموذج كابجيميني (Capgemini):</strong> هو إطار لتقييم النضج الرقمي للمؤسسات يركز على قدرة المؤسسة على دمج التقنيات الرقمية في عملياتها وأنشطتها الأساسية. ويهتم بتطوير القدرات الرقمية، والتكامل التشغيلي، والقيادة والحوكمة، وتجربة المستفيد، مع التأكيد على بناء القدرات التي تمكن المؤسسة من تحقيق قيمة مستدامة من الاستثمار في التقنيات الرقمية.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كان "النضج" يعني الوصول إلى القمة في سلم تدريجي خطي، فهل يخلق هذا وهمًا بأن المؤسسات التي تتبنى تقنيات "مزعزعة" (Disruptive) بشكل فوضوي هي أقل نضجاً، بينما هي في الواقع أكثر تكيفاً مع واقع لا يتبع السلالم الخطية؟
+        </div>
+    </section>
+
+    <!-- ثانياً -->
+    <section id="togaf">
+        <h2>ثانيًا: إطار TOGAF (الهندسة المعمارية)</h2>
+        <p>إطار TOGAF (The Open Group Architecture Framework) هو المعيار العالمي لتطوير "هندسة المؤسسة". يهدف إلى مواءمة الأعمال، البيانات، التطبيقات، والبنية التقنية لضمان انسجامها مع الأهداف الاستراتيجية.</p>
+        
+        <h3>مجالات هندسة المؤسسة الأربعة في TOGAF:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>المجال</th>
+                    <th>التركيز الأساسي</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>هندسة الأعمال</strong></td><td>الاستراتيجية، الحوكمة، والعمليات التنظيمية.</td></tr>
+                <tr><td><strong>هندسة البيانات</strong></td><td>هياكل البيانات، تدفقها، وإدارتها.</td></tr>
+                <tr><td><strong>هندسة التطبيقات</strong></td><td>الأنظمة الفردية وتفاعلاتها وعلاقاتها.</td></tr>
+                <tr><td><strong>الهندسة التقنية</strong></td><td>البنية التحتية (شبكات، خوادم، سحابة).</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كان TOGAF يرسم "خريطة معمارية" شاملة ومفصلة لكل ركن في المؤسسة، فهل يضمن هذا لنا بناء "صرح رقمي" متكامل، أم أنه قد يحول المؤسسة إلى "متحف معماري" جامد يعجز عن الهدم والبناء السريع في ظل تسارع التقنيات؟
+        </div>
+    </section>
+
+    <!-- ثالثاً -->
+    <section id="cobit">
+        <h2>ثالثًا: إطار COBIT (الحوكمة والسيطرة)</h2>
+        <p>إطار COBIT (الذي طورته ISACA) يركز على <strong>حوكمة وإدارة تقنية المعلومات</strong>. يهدف إلى تحقيق التوازن بين "تعظيم القيمة" من التقنية و"تقليل المخاطر" وضمان الامتثال للقوانين.</p>
+        <p>يميز COBIT بوضوح بين <strong>الحوكمة</strong> (توجيه المؤسسة من قبل مجلس الإدارة) و<strong>الإدارة</strong> (التخطيط والتنفيذ اليومي من قبل الإدارة التنفيذية).</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كان COBIT يضع "الحوكمة والسيطرة وإدارة المخاطر" في صدارة أولوياته، فهل ننجح في خلق بيئة "آمنة وممتثلة"، أم أننا نخنق روح "المغامرة والابتكار" التي تتطلب أحياناً كسر القواعد والمخاطرة المحسوبة؟
+        </div>
+    </section>
+
+    <!-- رابعاً -->
+    <section id="itil">
+        <h2>رابعًا: إطار ITIL (إدارة الخدمات)</h2>
+        <p>إطار ITIL يركز على <strong>إدارة خدمات تقنية المعلومات (ITSM)</strong>. فلسفته الأساسية هي أن التقنية ليست مجرد أجهزة، بل هي "خدمة" تُقدم قيمة للمستفيد. يعتمد على "نظام قيمة الخدمة" (Service Value System) الذي يضمن التحسين المستمر.</p>
+        
+        <h3>أبرز مبادئ ITIL:</h3>
+        <ul>
+            <li><strong>التركيز على القيمة:</strong> كل نشاط يجب أن يخدم المستفيد النهائي.</li>
+            <li><strong>البدء من الواقع الحالي:</strong> الاستفادة مما هو موجود قبل البناء من الصفر.</li>
+            <li><strong>التطوير التدريجي:</strong> التحسين عبر دورات قصيرة بدلاً من المشاريع العملاقة.</li>
+            <li><strong>التفكير الشملي:</strong> رؤية الخدمة كمنظومة متكاملة وليس عمليات معزولة.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كان ITIL يعامل التقنية كـ "خدمة" تُقدم للمستفيد (Service Provider)، فهل يحد هذا من دور إدارة التقنية لتصبح مجرد "مطعم رقمي" يلبي الطلبات فحسب، بدلاً من أن تكون "شريكاً استراتيجياً" يبتكر القيمة ويغير قواعد اللعبة؟
+        </div>
+    </section>
+
+    <!-- خامساً -->
+    <section id="ea">
+        <h2>خامسًا: هندسة المؤسسة (المنظومة الشاملة)</h2>
+        <p>هندسة المؤسسة (Enterprise Architecture - EA) هي المفهوم الجامع الذي يربط بين الاستراتيجية، العمليات، البيانات، والتقنية. هي "الجسر" الذي يضمن أن كل استثمار تقني يخدم هدفاً مؤسسياً واضحاً، ويمنع الفوضى والازدواجية في الأنظمة.</p>
+        <p>في مؤسسات المعلومات، تضمن هندسة المؤسسة أن أنظمة الفهرسة، والمستودعات الرقمية، ومنصات التعلم، تتحدث "لغة واحدة" وتتبادل البيانات بسلاسة لخدمة المستفيد.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            هندسة المؤسسة تسعى لـ "المواءمة" التامة بين الأعمال والتقنية. ولكن في عصر الذكاء الاصطناعي، من يقود من؟ هل التقنية تخدم رؤية الأعمال الحالية، أم أن التقنية هي من يخلق "أعمالاً" ورؤى لم تكن موجودة أصلاً؟
+        </div>
+    </section>
+
+    <!-- سادساً -->
+    <section id="roadmap">
+        <h2>سادسًا: خارطة الطريق الرقمية (الجسر التنفيذي)</h2>
+        <p>خارطة الطريق الرقمية (Digital Roadmap) هي الوثيقة الديناميكية التي تترجم الرؤية الاستراتيجية إلى "مبادرات تنفيذية" بجدول زمني واضح، موارد محددة، ومؤشرات أداء (KPIs). هي الأداة التي تربط بين "أين نحن" و"أين نريد أن نكون".</p>
+        
+        <h3>مكونات خارطة الطريق:</h3>
+        <ul>
+            <li><strong>تقييم الوضع الحالي:</strong> بناءً على نماذج النضج.</li>
+            <li><strong>المبادرات والأولويات:</strong> المشاريع قصيرة، متوسطة، وطويلة المدى.</li>
+            <li><strong>الجدول الزمني والموارد:</strong> الميزانيات، الكوادر، والبنية التحتية.</li>
+            <li><strong>إدارة المخاطر:</strong> خطط الطوارئ والتكيف مع المتغيرات.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            خارطة الطريق تُرسم لسنوات قادمة في عالم تتغير فيه المعطيات التقنية كل بضعة أشهر. هل نحن نستخدم الخريطة لـ "نقود السيارة" بأمان نحو الهدف، أم أننا نستخدمها كـ "وهم للسيطرة" على مستقبل لا يمكن التنبؤ به؟ وكيف نضمن أن تبقى الخريطة "حية" لا "جامدة"؟
+        </div>
+    </section>
+
+    <!-- خاتمة -->
+    <section id="conclusion">
+        <h2>🎯 خاتمة الفصل</h2>
+        <p>يتضح أن التحول الرقمي الناجح لا يعتمد على "الحدس" أو "المبادرات الفردية"، بل هو رحلة منهجية تتطلب التقييم (نماذج النضج)، والهندسة (TOGAF و EA)، والحوكمة (COBIT)، وإدارة الخدمات (ITIL)، وصولاً إلى التنفيذ المرحلي (خارطة الطريق). هذه الأطر ليست قيوداً بيروقراطية، بل هي "بوصلة" تحمي المؤسسة من التيه في محيط التقنيات المتلاطم.</p>
+        <p>وفي الفصل التالي، سننتقل من "الأطر النظرية" إلى "الواقع التطبيقي"، حيث نستعرض خصائص ومكونات "المؤسسات المعلوماتية الذكية" التي تمثل الوجهة النهائية لهذه الرحلة التحولية.</p>
+    </section>
+
+    <div class="footer">
+        <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+        <a href="#top">↑ العودة للأعلى</a>
+        <p>© 2026 نماذج واستراتيجيات التحول الرقمي</p>
+    </div>
+</div>
+
 </body>
 </html>

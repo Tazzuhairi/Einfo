@@ -3,101 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الحوكمة الرقمية والأخلاقيات في النظم الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>تحليل وتصميم نظم المعلومات الذكية</title>
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
-            margin: 0; padding: 0;
-            color: #2c3e50;
-            background-color: #f4f7f9;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
         }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 15px; }
-        header {
-            background: linear-gradient(90deg, #34495e, #2c3e50);
-            color: white; padding: 30px 0; text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
-        h1 { margin: 0; font-size: 2.1em; }
-        .week-badge {
-            display: inline-block; margin-top: 10px;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 3px solid #2b6cb0;
+            padding-bottom: 10px;
+            font-size: 2em;
         }
         h2 {
-            color: #2c3e50; border-bottom: 3px solid #3498db;
-            padding-bottom: 8px; margin-bottom: 20px;
+            color: #2b6cb0;
+            margin-top: 30px;
+            border-right: 5px solid #2b6cb0;
+            padding-right: 10px;
+            font-size: 1.5em;
         }
-        .section {
-            background: white; margin: 30px 0; padding: 25px;
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        h3 {
+            color: #2c5282;
+            margin-top: 20px;
         }
-        ul { padding-right: 20px; }
-        li { margin-bottom: 8px; }
-        .activity-box {
-            background: #eaf4fc; border-right: 4px solid #3498db;
-            border-radius: 8px; padding: 16px 20px; margin-top: 8px;
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05em;
         }
-        .activity-box strong { color: #2471a3; }
-        .placeholder-note {
-            border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-            padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-top: 20px;
+        .toc {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
-        .placeholder-note strong { color: #2980b9; }
-        footer { text-align: center; padding: 25px; background: #2c3e50; color: white; margin-top: 40px; }
-        #topBtn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100;
-            background-color: #3498db; color: white; border: none;
-            padding: 12px 18px; font-size: 16px; border-radius: 50px;
-            cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
         }
-        .home-icon {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #3498db; color: white; font-size: 20px;
-            text-decoration: none; border-radius: 50%; padding: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #2b6cb0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+        .socratic {
+            background: linear-gradient(135deg, #fffaf0 0%, #fefcbf 100%);
+            border-right: 5px solid #d69e2e;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #744210;
+        }
+        .socratic strong {
+            font-style: normal;
+            color: #975a16;
+        }
+        .figure-ref {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #2d3748;
+            font-size: 0.9em;
+            padding: 3px 10px;
+            border-radius: 15px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: right;
+        }
+        th {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #2b6cb0;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>الحوكمة الرقمية والأخلاقيات في النظم الذكية</h1>
-            <span class="week-badge">الأسبوع 11 — نظم المعلومات الذكية</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>المحاور الفرعية</h2>
-            <ul>
-                <li>الحوكمة الرقمية وأهدافها ومبادئها</li>
-                <li>حوكمة البيانات</li>
-                <li>أخلاقيات الذكاء الاصطناعي</li>
-                <li>الأمن السيبراني</li>
-                <li>الخصوصية</li>
-                <li>الشفافية وقابلية التفسير</li>
-                <li>المعايير والأطر الدولية</li>
-            </ul>
-        </section>
+<div class="container">
+    <h1 id="top">تحليل وتصميم نظم المعلومات الذكية</h1>
+    <h2 style="text-align: center; border: none; color: #4a5568;">من هندسة البرمجيات التقليدية إلى هندسة الكيانات المعرفية المتكيفة</h2>
 
-        <section class="section">
-            <h2>ملاحظة</h2>
-            <div class="activity-box"><strong>◾</strong> —</div>
-        </section>
-
-        <div class="placeholder-note">
-            📝 هذا الهيكل مبني مباشرةً على التوصيف الأكاديمي المعتمد للمقرر. أضف هنا الشرح التفصيلي لكل محور
-            (نصوصاً وأمثلة وخاتمة) بنفس أسلوب محاضرات مرحلة البكالوريوس.
-        </div>
+    <div class="toc">
+        <h3>📑 محاور الفصل</h3>
+        <ul>
+            <li>◾ <a href="#intro">تمهيد: عندما يصبح النظام "كائناً" يتعلم</a></li>
+            <li>◾ <a href="#concept">أولًا: مفهوم هندسة نظم المعلومات الذكية</a></li>
+            <li>◾ <a href="#diff">ثانيًا: النظم التقليدية مقابل النظم الذكية</a></li>
+            <li>◾ <a href="#sdlc">ثالثًا: دورة حياة التطوير (الكيان الحي)</a></li>
+            <li>◾ <a href="#req">رابعًا: تحليل المتطلبات (تصميم البوصلة)</a></li>
+            <li>◾ <a href="#model">خامسًا: نمذجة النظم (لغة التواصل)</a></li>
+            <li>◾ <a href="#arch">سادسًا: تصميم المعمارية (الهيكل العظمي)</a></li>
+            <li>◾ <a href="#dbkb">سابعًا: قواعد البيانات والمعرفة (الذاكرة والعقل)</a></li>
+            <li>◾ <a href="#ui">ثامناً: واجهات المستخدم الذكية (نقطة الالتقاء)</a></li>
+            <li>◾ <a href="#standards">تاسعاً: معايير التصميم (قواعد البقاء)</a></li>
+            <li>◾ <a href="#workflow">عاشراً: سير العمل والأتمتة (الجهاز العصبي)</a></li>
+            <li>◾ <a href="#conclusion">خاتمة الفصل</a></li>
+        </ul>
     </div>
 
-    <button id="topBtn" onclick="scrollToTop()">↑</button>
-    <a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
-    <footer>
-        <div class="container"><p>© 2025 ملخص محاضرة الحوكمة الرقمية والأخلاقيات في النظم الذكية</p></div>
-    </footer>
-    <script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+    <!-- تمهيد -->
+    <section id="intro">
+        <h2>تمهيد: عندما يصبح النظام "كائناً" يتعلم</h2>
+        <p>لم يعد نجاح النظم الذكية يُقاس بجمال الكود البرمجي أو قوة الخوادم فحسب، بل بـ "سلامة المنهجية الهندسية" التي بُني عليها. النظام الذكي ليس مجرد أداة تنفذ أوامر، بل هو بيئة معرفية قادرة على التعلم، الاستدلال، والتكيف. لذلك، انتقلت هندسة النظم من "تحديد الوظائف" إلى "تصميم السلوكيات"، ومن "معالجة البيانات" إلى "إنتاج المعرفة".</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            في الهندسة التقليدية، نبني "جسوراً" ثابتة تتحمل الأوزان.但在 الهندسة الذكية، نحن نبني "جسوراً" تعيد تشكيل نفسها بناءً على حركة المرور. ألسنا هنا نتحول من "مهندسين معماريين" إلى "مربين" لكائنات رقمية؟
+        </div>
+    </section>
+
+    <!-- أولاً -->
+    <section id="concept">
+        <h2>أولًا: مفهوم هندسة نظم المعلومات الذكية</h2>
+        <p>هندسة نظم المعلومات الذكية هي المنهجية العلمية الشاملة التي تدمج بين مبادئ هندسة البرمجيات، والذكاء الاصطناعي، وإدارة المعرفة، وإدارة البيانات. هدفها ليس فقط بناء نظام يعمل، بل بناء نظام <strong>يتفاعل مع بيئته، ويتعلم من بياناته، ويحسن أداءه ذاتياً</strong> لدعم اتخاذ القرار في بيئات متغيرة.</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت الهندسة التقليدية تضمن أن النظام "لن ينكسر" تحت الضغط، فهل تضمن الهندسة الذكية أن النظام "لن ينحرف" عن المسار الأخلاقي والمؤسسي عندما يتعلم من تلقاء نفسه؟
+        </div>
+    </section>
+
+    <!-- ثانياً -->
+    <section id="diff">
+        <h2>ثانيًا: النظم التقليدية مقابل النظم الذكية</h2>
+        <p>الفرق الجوهري ليس في "السرعة" أو "الحجم"، بل في "طبيعة العقل" الذي يدير النظام. النظم التقليدية تعتمد على "اليقين المبرمج"، بينما النظم الذكية تعتمد على "الاحتمالات المستنتجة".</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>وجه المقارنة</th>
+                    <th>نظم المعلومات التقليدية</th>
+                    <th>نظم المعلومات الذكية</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>الهدف الرئيس</strong></td><td>أتمتة العمليات ومعالجة البيانات.</td><td>إنتاج المعرفة ودعم القرار الذكي.</td></tr>
+                <tr><td><strong>آلية العمل</strong></td><td>قواعد وإجراءات ثابتة (If-Then).</td><td>خوارزميات تعلم آلي واستدلال.</td></tr>
+                <tr><td><strong>نوع البيانات</strong></td><td>بيانات مهيكلة (قواعد بيانات).</td><td>بيانات مهيكلة، غير مهيكلة، ومتعددة المصادر.</td></tr>
+                <tr><td><strong>اتخاذ القرار</strong></td><td>تقديم تقارير لمتخذ القرار البشري.</td><td>تقديم توصيات، تنبؤات، وقرارات ذاتية.</td></tr>
+                <tr><td><strong>التعلم والتكيف</strong></td><td>لا يتعلم إلا ببرمجة جديدة.</td><td>يتعلم من البيانات والتغذية الراجعة ديناميكياً.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            النظام التقليدي يفعل "ما نريده بالضبط". النظام الذكي يفعل "ما يتعلم أنه الأفضل". في اللحظة التي يتعارض فيها "ما نريده" مع "ما يتعلمه النظام"، من يملك الحق في السيطرة؟
+        </div>
+    </section>
+
+    <!-- ثالثاً -->
+    <section id="sdlc">
+        <h2>ثالثًا: دورة حياة التطوير (الكيان الحي)</h2>
+        <p>دورة حياة تطوير النظم الذكية (SDLC) هي امتداد للدورات التقليدية، لكنها تضيف مراحل حيوية تتعلق بـ "تغذية النماذج بالبيانات"، و"تدريب خوارزميات التعلم"، و"التقييم المستمر للأداء المعرفي". هي ليست خطاً مستقيماً ينتهي بالتشغيل، بل هي <strong>حلقة مستمرة</strong> من التطور.</p>
+        <p><span class="figure-ref">📌 يُرجى الرجوع إلى "الشكل (12)" في الكتاب المنهجي المطبوع للاطلاع على المخطط التفصيلي لدورة حياة النظام.</span></p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            في الدورات التقليدية، نحتفل بـ "يوم الإطلاق" (Launch Day). في النظم الذكية، الإطلاق هو مجرد "يوم الولادة" الحقيقي. هل نحن مستعدون لتحمل مسؤولية "تربية" النظام بعد إطلاقه في بيئة العمل؟
+        </div>
+    </section>
+
+    <!-- رابعاً -->
+    <section id="req">
+        <h2>رابعًا: تحليل المتطلبات (تصميم البوصلة)</h2>
+        <p>تحليل المتطلبات في النظم الذكية يتجاوز السؤال التقليدي "ماذا يفعل النظام؟" إلى أسئلة أعمق: "ما هي مصادر البيانات؟"، "ما هي قواعد المعرفة؟"، "وما هو مستوى الاستقلالية المسموح بها للنظام؟". نحن لا نحدد "الوجهة" فحسب، بل نحدد "البوصلة" التي سيستخدمها النظام للوصول إليها.</p>
+        <p><span class="figure-ref">📌 يُرجى الرجوع إلى "الشكل (13)" في الكتاب المنهجي المطبوع للاطلاع على مخطط مرحلة تحليل المتطلبات.</span></p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            كيف نكتب "متطلبات وظيفية" لنظام سيكتب وظائفه بنفسه غداً؟ ألسنا نواجه مفارقة محاولة "تقييد المجهول" بأدوات "المعلوم"؟
+        </div>
+    </section>
+
+    <!-- خامساً -->
+    <section id="model">
+        <h2>خامسًا: نمذجة النظم (لغة التواصل)</h2>
+        <p>النمذجة (مثل مخططات UML) هي الجسر بين المحلل والمبرمج. في النظم الذكية، لا نكتفي بنمذجة "تدفق البيانات"، بل نرسم "خريطة المعرفة"، و"سلوك محركات الاستدلال"، و"تفاعل خوارزميات التعلم".</p>
+        <ul>
+            <li><strong>حالات الاستخدام (Use Case):</strong> ماذا يفعل النظام للمستخدم؟</li>
+            <li><strong>الأنشطة (Activity):</strong> كيف يتدفق العمل والقرار؟</li>
+            <li><strong>التسلسل (Sequence):</strong> كيف تتحاور المكونات الزمنية؟</li>
+            <li><strong>الفئات (Class):</strong> ما هو الهيكل المنطقي للكائنات؟</li>
+        </ul>
+        <p><span class="figure-ref">📌 يُرجى الرجوع إلى "الشكل (14)" في الكتاب المنهجي المطبوع للاطلاع على أهم نماذج نظم المعلومات الذكية.</span></p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            صُممت لغة UML لتمثيل "المنطق الحتمي" (Deterministic). هل يمكن لمربعات وأسهم ثابتة أن تعكس حقيقة "الشبكة العصبية" التي تتخذ قراراتها في فضاء احتمالي ضبابي؟
+        </div>
+    </section>
+
+    <!-- سادساً -->
+    <section id="arch">
+        <h2>سادسًا: تصميم المعمارية (الهيكل العظمي)</h2>
+        <p>معمارية النظام الذكي تفصل بين "واجهة المستخدم"، و"منطق الأعمال"، و"محركات الذكاء الاصطناعي"، و"مستودعات البيانات". هذا الفصل (Decoupling) يضمن مرونة النظام، وقابليته للتوسع، وإمكانية تحديث خوارزميات الذكاء دون الإخلال ببنية النظام الأساسية.</p>
+        <p><span class="figure-ref">📌 يُرجى الرجوع إلى "الشكل (15)" في الكتاب المنهجي المطبوع للاطلاع على خطوات تصميم المعمارية.</span></p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            عندما نفصل "محرك الذكاء" عن "واجهة المستخدم"، نخاطر بتحويل النظام إلى "صندوق أسود". هل نحن نضحي بـ "شفافية القرار" من أجل "كفاءة المعالجة"؟
+        </div>
+    </section>
+
+    <!-- سابعاً -->
+    <section id="dbkb">
+        <h2>سابعًا: قواعد البيانات والمعرفة (الذاكرة والعقل)</h2>
+        <p>النظام الذكي يمتلك "ذاكرتين": <strong>قواعد البيانات</strong> (التي تخزن الحقائق والبيانات الخام)، و<strong>قواعد المعرفة</strong> (التي تخزن القواعد، الخبرات، والعلاقات المنطقية للاستدلال). التكامل بينهما هو ما يحول "البيانات الصامتة" إلى "معرفة ناطقة".</p>
+        <p><span class="figure-ref">📌 يُرجى الرجوع إلى "الشكل (16)" في الكتاب المنهجي المطبوع للاطلاع على مراحل التعامل مع البيانات والمعرفة.</span></p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت "قواعد المعرفة" تُبنى بناءً على "بيانات الماضي"، أليس النظام الذكي في جوهره "مسجوناً" في سجن تاريخنا؟ وكيف نعلمه "استيعاب الاستثناءات" التي لم تحدث من قبل؟
+        </div>
+    </section>
+
+    <!-- ثامناً -->
+    <section id="ui">
+        <h2>ثامناً: واجهات المستخدم الذكية (نقطة الالتقاء)</h2>
+        <p>الواجهة الذكية لا تعرض البيانات فحسب، بل <strong>تترجمها إلى سياق</strong>. تعتمد على التفاعل باللغة الطبيعية، التخصيص الديناميكي، لوحات المعلومات التفاعلية، وتقديم التوصيات البصرية التي تدعم القرار مباشرة.</p>
+        <p><span class="figure-ref">📌 يُرجى الرجوع إلى "الشكل (17)" في الكتاب المنهجي المطبوع للاطلاع على مبادئ تصميم واجهة المستخدم.</span></p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت الواجهة الذكية "تتنبأ" بما أريد وتعرضه لي قبل أن أطلب، فهل هي "تخدم" فضولي، أم أنها "تشكله" وتحد من أفق اكتشافاتي؟
+        </div>
+    </section>
+
+    <!-- تاسعاً -->
+    <section id="standards">
+        <h2>تاسعاً: معايير التصميم (قواعد البقاء)</h2>
+        <p>لكي ينجو النظام الذكي ويتطور، يجب أن يلتزم بمعايير صارمة: القابلية للتوسع، المرونة، الاعتمادية، الأمن السيبراني، الخصوصية، التشغيل البيني (Interoperability)، والذكاء التكيفي.</p>
+        <p><span class="figure-ref">📌 يُرجى الرجوع إلى "الشكل (18)" في الكتاب المنهجي المطبوع للاطلاع على المخطط الشامل لمعايير التصميم.</span></p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            نطلب من النظام أن يكون "مرناً وقابلاً للتكيف" وفي نفس الوقت "آمناً ومحصناً". أليست "المرونة" هي عدو "الأمن"؟ كيف نبني "قلعة" لا تنغلق على نفسها؟
+        </div>
+    </section>
+
+    <!-- عاشراً -->
+    <section id="workflow">
+        <h2>عاشراً: سير العمل والأتمتة (الجهاز العصبي)</h2>
+        <p>تصميم سير العمل (Workflow) هو تحويل النماذج النظرية إلى "جهاز عصبي" ينفذ المهام. يعتمد على تحليل العمليات، إعادة تصميمها، أتمتتها، وإدارة مساراتها. في النظم الذكية، الأتمتة لا تعني فقط "سرعة التنفيذ"، بل تعني "القدرة على اتخاذ قرارات مرحلية" أثناء سير العمل.</p>
+        <p><span class="figure-ref">📌 يُرجى الرجوع إلى "الشكل (19)" في الكتاب المنهجي المطبوع للاطلاع على مراحل تصميم واتمتة العمليات.</span></p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            عندما نؤتمت سير العمل، نزيل "الاحتكاك البشري" (Human Friction). ولكن، أليس هذا "الاحتكاك" هو نفسه "اللحظة الأخلاقية" التي يتوقف فيها الإنسان للتفكير؟ هل نضحي بـ "الحكمة" من أجل "السرعة"؟
+        </div>
+    </section>
+
+    <!-- خاتمة -->
+    <section id="conclusion">
+        <h2>🎯 خاتمة الفصل</h2>
+        <p>تحليل وتصميم نظم المعلومات الذكية ليس عملية تقنية بحتة، بل هو <strong>"فلسفة تطبيقية"</strong> لكيفية بناء كيانات رقمية تتعايش معنا، تتعلم منا، وتسهم في صنع قرارنا. إن الالتزام بالمناهج الهندسية، والنمذجة الدقيقة، والمعايير الصارمة، هو الضمان الوحيد ألا تتحول هذه "العقول الرقمية" إلى صناديق سوداء تعيث فساداً في مؤسساتنا.</p>
+        <p>وبعد أن فهمنا "كيف نبني" هذه النظم، ينتقل بنا الكتاب في الفصول القادمة لنناقش "كيف نوظفها" في بيئات مؤسسات المعلومات الذكية، و"كيف نحميها" عبر الحوكمة الرقمية والأخلاقيات.</p>
+    </section>
+
+    <div class="footer">
+        <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+        <a href="#top">↑ العودة للأعلى</a>
+        <p>© 2026 تحليل وتصميم نظم المعلومات الذكية</p>
+    </div>
+</div>
+
 </body>
 </html>

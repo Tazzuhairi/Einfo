@@ -3,100 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نماذج واستراتيجيات التحول الرقمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>المؤسسات المعلوماتية الذكية</title>
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
-            margin: 0; padding: 0;
-            color: #2c3e50;
-            background-color: #f4f7f9;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
         }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 15px; }
-        header {
-            background: linear-gradient(90deg, #34495e, #2c3e50);
-            color: white; padding: 30px 0; text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
-        h1 { margin: 0; font-size: 2.1em; }
-        .week-badge {
-            display: inline-block; margin-top: 10px;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 3px solid #2b6cb0;
+            padding-bottom: 10px;
+            font-size: 2em;
         }
         h2 {
-            color: #2c3e50; border-bottom: 3px solid #3498db;
-            padding-bottom: 8px; margin-bottom: 20px;
+            color: #2b6cb0;
+            margin-top: 30px;
+            border-right: 5px solid #2b6cb0;
+            padding-right: 10px;
+            font-size: 1.5em;
         }
-        .section {
-            background: white; margin: 30px 0; padding: 25px;
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        h3 {
+            color: #2c5282;
+            margin-top: 20px;
         }
-        ul { padding-right: 20px; }
-        li { margin-bottom: 8px; }
-        .activity-box {
-            background: #eaf4fc; border-right: 4px solid #3498db;
-            border-radius: 8px; padding: 16px 20px; margin-top: 8px;
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05em;
         }
-        .activity-box strong { color: #2471a3; }
-        .placeholder-note {
-            border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-            padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-top: 20px;
+        .toc {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
-        .placeholder-note strong { color: #2980b9; }
-        footer { text-align: center; padding: 25px; background: #2c3e50; color: white; margin-top: 40px; }
-        #topBtn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100;
-            background-color: #3498db; color: white; border: none;
-            padding: 12px 18px; font-size: 16px; border-radius: 50px;
-            cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
         }
-        .home-icon {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #3498db; color: white; font-size: 20px;
-            text-decoration: none; border-radius: 50%; padding: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #2b6cb0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+        .socratic {
+            background: linear-gradient(135deg, #fffaf0 0%, #fefcbf 100%);
+            border-right: 5px solid #d69e2e;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #744210;
+        }
+        .socratic strong {
+            font-style: normal;
+            color: #975a16;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: right;
+        }
+        th {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #2b6cb0;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>نماذج واستراتيجيات التحول الرقمي</h1>
-            <span class="week-badge">الأسبوع 8 — نظم المعلومات الذكية</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>المحاور الفرعية</h2>
-            <ul>
-                <li>نماذج النضج الرقمي</li>
-                <li>TOGAF</li>
-                <li>COBIT</li>
-                <li>ITIL</li>
-                <li>هندسة المؤسسة</li>
-                <li>خارطة الطريق الرقمية</li>
-            </ul>
-        </section>
+<div class="container">
+    <h1 id="top">المؤسسات المعلوماتية الذكية</h1>
+    <h2 style="text-align: center; border: none; color: #4a5568;">من حراسة المحتوى إلى صناعة البيئات المعرفية المتكاملة</h2>
 
-        <section class="section">
-            <h2>ملاحظة</h2>
-            <div class="activity-box"><strong>◾</strong> —</div>
-        </section>
-
-        <div class="placeholder-note">
-            📝 هذا الهيكل مبني مباشرةً على التوصيف الأكاديمي المعتمد للمقرر. أضف هنا الشرح التفصيلي لكل محور
-            (نصوصاً وأمثلة وخاتمة) بنفس أسلوب محاضرات مرحلة البكالوريوس.
-        </div>
+    <div class="toc">
+        <h3>📑 محاور الفصل</h3>
+        <ul>
+            <li>◾ <a href="#intro">تمهيد: من الأتمتة إلى الكائنات المعرفية المتكيفة</a></li>
+            <li>◾ <a href="#libraries">أولًا: المكتبات الذكية (البيئة المعرفية المتكيفة)</a></li>
+            <li>◾ <a href="#universities">ثانيًا: الجامعات الذكية (منظومة التعليم والبحث الذكي)</a></li>
+            <li>◾ <a href="#archives">ثالثًا: الأرشيفات الذكية (حفظ الذاكرة في العصر الخوارزمي)</a></li>
+            <li>◾ <a href="#centers">رابعًا: مراكز المعلومات الذكية (من التزويد إلى الاستشراف)</a></li>
+            <li>◾ <a href="#cities">خامسًا: المدن الذكية (البيئة الحضرية المتكاملة)</a></li>
+            <li>◾ <a href="#conclusion">خاتمة الفصل والانتقال لما بعده</a></li>
+        </ul>
     </div>
 
-    <button id="topBtn" onclick="scrollToTop()">↑</button>
-    <a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
-    <footer>
-        <div class="container"><p>© 2025 ملخص محاضرة نماذج واستراتيجيات التحول الرقمي</p></div>
-    </footer>
-    <script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+    <!-- تمهيد -->
+    <section id="intro">
+        <h2>تمهيد: من الأتمتة إلى الكائنات المعرفية المتكيفة</h2>
+        <p>لم تعد مؤسسات المعلومات (مكتبات، أرشيفات، مراكز) مجرد "مستودعات" لحفظ المحتوى وإتاحتها، بل تحولت إلى "منظومات معرفية حية" تعتمد على الذكاء الاصطناعي، والبيانات الضخمة، وإنترنت الأشياء. لم يعد النجاح يُقاس بحجم المجموعات، بل بالقدرة على تحليل البيانات، توليد المعرفة، واستشراف احتياجات المستفيدين قبل أن يطلبوا.</p>
+        <p>هذا الفصل يستعرض كيف تتحول هذه المؤسسات من كيانات جامدة إلى بيئات ذكية متكيفة، وصولاً إلى "المدينة الذكية" التي تمثل الإطار الأوسع الذي تتكامل فيه هذه المؤسسات لخدمة المجتمع.</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت المؤسسة المعلوماتية تتحول من "حارس للمحتوى" إلى "صانع للذكاء" يتنبأ بسلوكنا، فهل يتحول المستفيد من "باحث حر" يكتشف المعرفة بالصدفة، إلى "مستهلك سلبي" تُقدم له المعرفة مُفصّلة ومُوجّهة مسبقاً؟
+        </div>
+    </section>
+
+    <!-- أولاً -->
+    <section id="libraries">
+        <h2>أولًا: المكتبات الذكية (البيئة المعرفية المتكيفة)</h2>
+        <p>المكتبة الذكية ليست مجرد مكتبة رقمية، بل هي بيئة تتعلم من تفاعلات المستفيدين، تفهم السياق الدلالي لاستفساراتهم، وتقدم خدمات مخصصة وتوصيات استباقية. تعتمد على دمج الذكاء الاصطناعي، إنترنت الأشياء (IoT)، والواقع المعزز لخلق تجربة سلسة.</p>
+        
+        <h3>أبرز التقنيات والتطبيقات:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>التقنية / التطبيق</th>
+                    <th>الدور في المكتبة الذكية</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>الذكاء الاصطناعي والنماذج اللغوية</strong></td><td>محركات بحث دلالية، مساعدات افتراضية، وتصنيف آلي.</td></tr>
+                <tr><td><strong>إنترنت الأشياء (IoT) و RFID</strong></td><td>الجرد الآلي، الإعارة الذاتية، وتتبع المقتنيات.</td></tr>
+                <tr><td><strong>التحليلات التنبؤية</strong></td><td>توقع احتياجات الباحثين، وتحسين سياسات تنمية المجموعات.</td></tr>
+                <tr><td><strong>الواقع الافتراضي والمعزز (VR/AR)</strong></td><td>جولات افتراضية، وعرض المصادر التاريخية بشكل تفاعلي.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت خوارزميات التوصية في المكتبة الذكية تتنبأ بدقة بما تريد قراءته بناءً على سجلاتك السابقة، فهل نقتل "صدفة الاكتشاف" (Serendipity) التي كانت تُغير مسارات العلماء والمفكرين؟ أم أن الكفاءة أهم من العشوائية؟
+        </div>
+    </section>
+
+    <!-- ثانياً -->
+    <section id="universities">
+        <h2>ثانيًا: الجامعات الذكية (منظومة التعليم والبحث الذكي)</h2>
+        <p>الجامعة الذكية هي منظومة رقمية متكاملة تعيد تصميم العملية التعليمية والبحثية والإدارية. لا تقتصر على منصات التعلم الإلكتروني، بل تمتد إلى "التعلم التكيفي" الذي يعدل المسار التعليمي حسب قدرات الطالب، و"الإنذار المبكر" للتنبؤ بالتعثر الدراسي، و"التوأم الرقمي" لإدارة الحرم الجامعي.</p>
+        
+        <h3>مقومات الجامعة الذكية:</h3>
+        <ul>
+            <li><strong>الإدارة المعتمدة على البيانات:</strong> لوحات معلومات لحظية لاتخاذ القرارات الاستراتيجية.</li>
+            <li><strong>البحث العلمي الذكي:</strong> استخدام الذكاء الاصطناعي لتحليل الاستشهادات واكتشاف الاتجاهات البحثية الناشئة.</li>
+            <li><strong>الخدمات الاستباقية:</strong> أنظمة ذكية لإدارة الجدولة، الإرشاد الأكاديمي، والموارد.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كان الذكاء الاصطناعي يتنبأ بفشل الطالب ويعدل مساره التعليمي تلقائياً لضمان "نجاحه"، فهل نهندس "التفوق" على حساب "الصراع الفكري" الذي يُنتج العبقرية؟ ومن يقرر معايير هذا "النجاح" المُبرمج؟
+        </div>
+    </section>
+
+    <!-- ثالثاً -->
+    <section id="archives">
+        <h2>ثالثًا: الأرشيفات الذكية (حفظ الذاكرة في العصر الخوارزمي)</h2>
+        <p>الأرشيف الذكي يتجاوز "رقمنة الأوراق" إلى "فهم المحتوى". باستخدام معالجة اللغة الطبيعية (NLP) والتعرف الضوئي على الحروف (OCR)، تصبح الوثائق التاريخية قابلة للبحث الدلالي. كما تضمن تقنيات مثل "سلسلة الكتل" (Blockchain) سلامة الوثائق وعدم التلاعب بها عبر الزمن.</p>
+        
+        <h3>نقلة النوعية في الأرشيف:</h3>
+        <ul>
+            <li><strong>الفهرسة الآلية:</strong> استخراج البيانات الوصفية وربط الوثائق بالرسوم البيانية المعرفية (Knowledge Graphs).</li>
+            <li><strong>البحث الدلالي:</strong> البحث بالمعنى والسياق التاريخي، وليس فقط بالكلمات المفتاحية.</li>
+            <li><strong>الحفظ طويل الأمد:</strong> حماية الذاكرة الرقمية من تقادم البرمجيات والأجهزة.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت الخوارزميات هي من تقوم بتصنيف الوثائق التاريخية واستخراج مفاهيمها تلقائياً، فهل نحن نسمح للآلة بأن تكتب "الذاكرة الجمعية" للأمة؟ وما هي التحيزات الخفية التي قد تُجمَّد في أرشيفنا الرقمي للأبد؟
+        </div>
+    </section>
+
+    <!-- رابعاً -->
+    <section id="centers">
+        <h2>رابعًا: مراكز المعلومات الذكية (من التزويد إلى الاستشراف)</h2>
+        <p>مركز المعلومات الذكي لم يعد ينتظر "سؤال" المستفيد ليقدم له "إجابة"، بل أصبح ينتج "الاستخبارات المعرفية" (Knowledge Intelligence). من خلال دمج ذكاء الأعمال (BI) والتنقيب في البيانات، يقدم المركز لوحات معلومات تفاعلية، وتقارير تنبؤية، وخدمات إحاطة ذكية تدعم متخذي القرار مباشرة.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            عندما يتحول مركز المعلومات من "مُجيب على الأسئلة" إلى "مُشكل للجدول الأعمال" (Agenda Setter) عبر تقاريره التنبؤية، أين ينتهي دور "الدعم الموضوعي" ويبدأ دور "التوجيه الخفي" لقرارات القيادة؟
+        </div>
+    </section>
+
+    <!-- خامساً -->
+    <section id="cities">
+        <h2>خامسًا: المدن الذكية (البيئة الحضرية المتكاملة)</h2>
+        <p>المدينة الذكية هي "الكائن العملاق" الذي تتكامل داخله المكتبات، الجامعات، الأرشيفات، ومراكز المعلومات. تعتمد على شبكة هائلة من الحساسات (IoT)، والبيانات الضخمة، والجيل الخامس (5G)، و"التوأم الرقمي" (Digital Twin) لمحاكاة الواقع وإدارة الموارد (الماء، الطاقة، النقل) بكفاءة واستدامة.</p>
+        
+        <h3>دور المؤسسات المعلوماتية في المدينة الذكية:</h3>
+        <ul>
+            <li>إدارة "رأس المال المعرفي" للمدينة ودعم الابتكار.</li>
+            <li>توفير البيانات المفتوحة (Open Data) لتعزيز الشفافية والمشاركة المجتمعية.</li>
+            <li>دعم التعلم مدى الحياة وخدمة كافة فئات المجتمع رقمياً.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            في "المدينة الذكية" حيث كل خطوة، واستهلاك، وتفاعل يُسجل ويُحلل لتحسين الخدمات؛ أين هو "الملاذ الآمن" للخصوصية البشرية؟ وهل نحن مستعدون للتضحية بـ "حقنا في أن نكون غير مرئيين" مقابل "راحة وكفاءة" الخدمات؟
+        </div>
+    </section>
+
+    <!-- خاتمة -->
+    <section id="conclusion">
+        <h2>🎯 خاتمة الفصل والانتقال لما بعده</h2>
+        <p>يتضح أن "المؤسسات المعلوماتية الذكية" ليست رفاهية تقنية، بل هي ضرورة وجودية في اقتصاد المعرفة. سواء كانت مكتبة تتكيف مع باحث، أو جامعة تتنبأ بمسارات طلابها، أو أرشيف يحفظ الذاكرة بخوارزميات دقيقة، أو مدينة تتنفس بيانات؛ فإن الجوهر واحد: <strong>تحويل البيانات إلى معرفة، والمعرفة إلى قرار، والقرار إلى قيمة إنسانية.</strong></p>
+        <p>ولكن هذا التكامل الذكي يطرح تحديات جوهرية حول "السلطة"، و"الحوكمة"، و"أخلاقيات القرار". لذا، سينتقل بنا <strong>الباب الرابع: النظم الذكية وصنع القرار</strong>، من دراسة "البيئة المؤسسية" إلى تحليل "كيفية اتخاذ القرار" في ظل هيمنة الخوارزميات، وكيف نؤسس لحوكمة رقمية تضمن بقاء الإنسان في مركز السيطرة.</p>
+    </section>
+
+    <div class="footer">
+        <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+        <a href="#top">↑ العودة للأعلى</a>
+        <p>© 2026 المؤسسات المعلوماتية الذكية</p>
+    </div>
+</div>
+
 </body>
 </html>

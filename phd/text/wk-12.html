@@ -3,104 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحليل وتصميم نظم المعلومات الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>تطوير وتنفيذ وتشغيل نظم المعلومات الذكية</title>
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
-            margin: 0; padding: 0;
-            color: #2c3e50;
-            background-color: #f4f7f9;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
         }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 15px; }
-        header {
-            background: linear-gradient(90deg, #34495e, #2c3e50);
-            color: white; padding: 30px 0; text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
-        h1 { margin: 0; font-size: 2.1em; }
-        .week-badge {
-            display: inline-block; margin-top: 10px;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 3px solid #2b6cb0;
+            padding-bottom: 10px;
+            font-size: 2em;
         }
         h2 {
-            color: #2c3e50; border-bottom: 3px solid #3498db;
-            padding-bottom: 8px; margin-bottom: 20px;
+            color: #2b6cb0;
+            margin-top: 30px;
+            border-right: 5px solid #2b6cb0;
+            padding-right: 10px;
+            font-size: 1.5em;
         }
-        .section {
-            background: white; margin: 30px 0; padding: 25px;
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        h3 {
+            color: #2c5282;
+            margin-top: 20px;
         }
-        ul { padding-right: 20px; }
-        li { margin-bottom: 8px; }
-        .activity-box {
-            background: #eaf4fc; border-right: 4px solid #3498db;
-            border-radius: 8px; padding: 16px 20px; margin-top: 8px;
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05em;
         }
-        .activity-box strong { color: #2471a3; }
-        .placeholder-note {
-            border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-            padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-top: 20px;
+        .toc {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
-        .placeholder-note strong { color: #2980b9; }
-        footer { text-align: center; padding: 25px; background: #2c3e50; color: white; margin-top: 40px; }
-        #topBtn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100;
-            background-color: #3498db; color: white; border: none;
-            padding: 12px 18px; font-size: 16px; border-radius: 50px;
-            cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
         }
-        .home-icon {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #3498db; color: white; font-size: 20px;
-            text-decoration: none; border-radius: 50%; padding: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #2b6cb0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+        .socratic {
+            background: linear-gradient(135deg, #fffaf0 0%, #fefcbf 100%);
+            border-right: 5px solid #d69e2e;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #744210;
+        }
+        .socratic strong {
+            font-style: normal;
+            color: #975a16;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: right;
+        }
+        th {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #2b6cb0;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>تحليل وتصميم نظم المعلومات الذكية</h1>
-            <span class="week-badge">الأسبوع 12 — نظم المعلومات الذكية</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>المحاور الفرعية</h2>
-            <ul>
-                <li>مفهوم هندسة النظم الذكية</li>
-                <li>الفرق بين النظم التقليدية والذكية</li>
-                <li>دورة الحياة</li>
-                <li>تحليل المتطلبات</li>
-                <li>النمذجة</li>
-                <li>المعمارية</li>
-                <li>قواعد البيانات والمعرفة</li>
-                <li>الواجهات الذكية</li>
-                <li>معايير التصميم</li>
-                <li>أتمتة العمليات</li>
-            </ul>
-        </section>
+<div class="container">
+    <h1 id="top">تطوير وتنفيذ وتشغيل نظم المعلومات الذكية</h1>
+    <h2 style="text-align: center; border: none; color: #4a5568;">من التصميم النظري إلى الكيان الرقمي المتعلم والمستدام</h2>
 
-        <section class="section">
-            <h2>ملاحظة</h2>
-            <div class="activity-box"><strong>◾</strong> —</div>
-        </section>
-
-        <div class="placeholder-note">
-            📝 هذا الهيكل مبني مباشرةً على التوصيف الأكاديمي المعتمد للمقرر. أضف هنا الشرح التفصيلي لكل محور
-            (نصوصاً وأمثلة وخاتمة) بنفس أسلوب محاضرات مرحلة البكالوريوس.
-        </div>
+    <div class="toc">
+        <h3>📑 محاور الفصل</h3>
+        <ul>
+            <li>◾ <a href="#intro">تمهيد: إحياء النظام</a></li>
+            <li>◾ <a href="#env">أولًا: بيئات التطوير والأدوات</a></li>
+            <li>◾ <a href="#lang">ثانيًا: لغات البرمجة وأطر العمل</a></li>
+            <li>◾ <a href="#integration">ثالثًا: تكامل مكونات الذكاء الاصطناعي</a></li>
+            <li>◾ <a href="#testing">رابعًا: اختبار النظم الذكية</a></li>
+            <li>◾ <a href="#deploy">خامسًا: النشر والتشغيل</a></li>
+            <li>◾ <a href="#maintain">سادسًا: الصيانة والتطوير المستمر</a></li>
+            <li>◾ <a href="#conclusion">خاتمة الفصل</a></li>
+        </ul>
     </div>
 
-    <button id="topBtn" onclick="scrollToTop()">↑</button>
-    <a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
-    <footer>
-        <div class="container"><p>© 2025 ملخص محاضرة تحليل وتصميم نظم المعلومات الذكية</p></div>
-    </footer>
-    <script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+    <!-- تمهيد -->
+    <section id="intro">
+        <h2>تمهيد: إحياء النظام</h2>
+        <p>بعد اكتمال مراحل التحليل والتصميم، ننتقل من "رسم المخططات" إلى "بناء الكيان". تطوير نظم المعلومات الذكية لم يعد مجرد كتابة شيفرة برمجية، بل هو عملية هندسية معقدة تشمل دمج خوارزميات التعلم الآلي، إدارة قواعد المعرفة، ضمان الجودة، والأمن السيبراني، ضمن دورة حياة ديناميكية لا تنتهي عند التشغيل، بل تبدأ عندها.</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            في الهندسة التقليدية، نبني "جسراً" ثابتاً يتحمل الأوزان. لكن في الهندسة الذكية، نحن نربي "كائناً" يتعلم ويتكيف. هل يجعلنا هذا "مهندسين" بالمعنى الكلاسيكي، أم أننا أصبحنا "مربين" لأنظمة رقمية ذات سلوك متطور؟
+        </div>
+    </section>
+
+    <!-- أولاً -->
+    <section id="env">
+        <h2>أولًا: بيئات التطوير والأدوات</h2>
+        <p>بيئة التطوير الحديثة ليست مجرد محرر نصوص، بل هي "منظومة متكاملة" تدعم دورة حياة النظام بأكملها. تعتمد كفاءة هذه البيئات على قدرتها على دمج البرمجة، إدارة البيانات، الذكاء الاصطناعي، والحوسبة السحابية بسلاسة.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>المكون</th>
+                    <th>الدور في النظام الذكي</th>
+                    <th>أمثلة شائعة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>بيئات البرمجة (IDEs)</strong></td><td>كتابة الشيفرة، اكتشاف الأخطاء، وإدارة المشاريع.</td><td>VS Code, PyCharm, IntelliJ</td></tr>
+                <tr><td><strong>إدارة قواعد البيانات</strong></td><td>تخزين، تنظيم، وتأمين البيانات المهيكلة وغير المهيكلة.</td><td>PostgreSQL, MongoDB, MySQL</td></tr>
+                <tr><td><strong>منصات الذكاء الاصطناعي</strong></td><td>بناء، تدريب، واختبار نماذج التعلم الآلي.</td><td>TensorFlow, PyTorch, Scikit-learn</td></tr>
+                <tr><td><strong>إدارة الإصدارات</strong></td><td>تتبع التغييرات والعمل الجماعي دون تضارب.</td><td>Git, GitHub, GitLab</td></tr>
+                <tr><td><strong>الحوسبة السحابية</strong></td><td>توفير موارد حاسوبية مرنة وقابلة للتوسع.</td><td>AWS, Azure, Google Cloud</td></tr>
+                <tr><td><strong>أدوات التكامل والنشر (CI/CD)</strong></td><td>أتمتة البناء، الاختبار، والنشر المستمر.</td><td>Docker, Kubernetes, Jenkins</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            عندما نعتمد بشكل متزايد على منصات سحابية جاهزة ومكتبات ذكاء اصطناعي مسبقة الصنع، هل نحن "نسرّع الابتكار" حقاً، أم أننا نبني "أبراجاً من الرمل" على أسس لا نفهم تفاصيلها الداخلية؟
+        </div>
+    </section>
+
+    <!-- ثانياً -->
+    <section id="lang">
+        <h2>ثانيًا: لغات البرمجة وأطر العمل</h2>
+        <p>اختيار اللغة وإطار العمل ليس مسألة ذوق، بل هو قرار استراتيجي يحدد أداء النظام، قابليته للتوسع، وسهولة دمج مكونات الذكاء الاصطناعي.</p>
+        <ul>
+            <li><strong>لغات التطبيقات والذكاء:</strong> Python (الأكثر شيوعاً للذكاء الاصطناعي)، Java و C# (للأنظمة المؤسسية المستقرة)، C++ (للأداء العالي والرؤية الحاسوبية).</li>
+            <li><strong>واجهات المستخدم (Front-End):</strong> HTML/CSS, JavaScript, React, Vue.js لبناء تجارب تفاعلية وسريعة.</li>
+            <li><strong>الخوادم والمنطق (Back-End):</strong> Node.js, Django, Flask, Spring Boot لإدارة البيانات وخدمات الويب (APIs).</li>
+            <li><strong>مكتبات الذكاء الاصطناعي:</strong> TensorFlow, PyTorch (للتعلم العميق)، NLTK, spaCy (لمعالجة اللغة)، OpenCV (للرؤية الحاسوبية).</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت مكتبات الذكاء الاصطناعي تتيح بناء نماذج معقدة ببضعة أسطر من الكود، فهل هذا يعني "دمقرطة" الذكاء، أم أنه يخلق جيلاً من المطورين يستخدمون أدوات لا يدركون تماماً كيف تعمل أو ما هي تحيزاتها؟
+        </div>
+    </section>
+
+    <!-- ثالثاً -->
+    <section id="integration">
+        <h2>ثالثًا: تكامل مكونات الذكاء الاصطناعي</h2>
+        <p>دمج الذكاء الاصطناعي ليس مجرد "إضافة ميزة"، بل هو عملية هندسية دقيقة لضمان أن النموذج الذكي يتناغم مع قواعد البيانات، منطق الأعمال، وواجهات المستخدم.</p>
+        <p>تمر هذه العملية بمراحل متسلسلة: <strong>تحديد المتطلبات</strong> ← <strong>إعداد البيانات وتنقيتها</strong> ← <strong>تدريب النموذج</strong> ← <strong>دمجه عبر واجهات برمجة التطبيقات (APIs)</strong> ← <strong>مراقبة الأداء وإعادة التدريب</strong> الدوري لضمان استمرار الدقة وتجنب "انحراف النموذج" (Model Drift).</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            النموذج الذكي يتعلم ويتغير بعد التشغيل. إذا كان النظام يعدل "منطقه" الداخلي بناءً على بيانات جديدة، فكيف نضمن أنه لم ينحرف عن "القيم والأهداف" الأصلية التي صُمم من أجلها؟
+        </div>
+    </section>
+
+    <!-- رابعاً -->
+    <section id="testing">
+        <h2>رابعًا: اختبار النظم الذكية</h2>
+        <p>اختبار النظام الذكي يتجاوز البحث عن "أخطاء برمجية" (Bugs) ليشمل تقييم "جودة الذكاء" وسلوك النموذج في ظروف غير متوقعة.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>نوع الاختبار</th>
+                    <th>الهدف الجوهري</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>اختبار الوحدات والتكامل</strong></td><td>ضمان عمل كل جزء بشكل منفصل وتناغمه مع بقية النظام.</td></tr>
+                <tr><td><strong>اختبار النماذج الذكية</strong></td><td>قياس الدقة، الاستدعاء، والتحيز في مخرجات الخوارزمية.</td></tr>
+                <tr><td><strong>اختبار الأداء والأمان</strong></td><td>تحمل الأحمال العالية، وحماية البيانات من الاختراق أو التلاعب.</td></tr>
+                <tr><td><strong>اختبار سهولة الاستخدام</strong></td><td>تقييم تجربة المستخدم ووضوح تفاعله مع الميزات الذكية.</td></tr>
+                <tr><td><strong>اختبار ما بعد التحديث</strong></td><td>التأكد من أن تحسين نموذج ذكي لم يكسر وظائف أخرى في النظام.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            في البرمجة التقليدية، نختبر ما إذا كان الكود يفعل "ما قلنا له أن يفعله". في الذكاء الاصطناعي، كيف نختبر ما إذا كان النموذج يفعل "ما ينبغي أن يفعله" أخلاقياً ومنطقياً، خاصة عندما يكون مسار قراره "صندوقاً أسود"؟
+        </div>
+    </section>
+
+    <!-- خامساً -->
+    <section id="deploy">
+        <h2>خامسًا: النشر والتشغيل</h2>
+        <p>النشر هو لحظة الانتقال من "بيئة المعمل" إلى "ساحة المعركة" الواقعية. يتطلب هذا تهيئة البنية التحتية (سحابية أو محلية)، نقل البيانات بأمان، تشغيل تجريبي (Pilot)، وإدارة التغيير البشري عبر تدريب المستخدمين وتقليل مقاومتهم للنظام الجديد.</p>
+        <p>لا يكفي أن يعمل النظام تقنياً؛ بل يجب أن يُقبل ثقافياً وتنظيمياً من قبل من سيستخدمونه يومياً.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            غالباً ما يُنظر إلى "يوم النشر" على أنه خط النهاية للمشروع. ولكن في النظم التي تتعلم باستمرار، أليس "يوم النشر" هو في الحقيقة "يوم الولادة" الحقيقي، حيث تبدأ الرحلة الأصعب في التكيف مع واقع فوضوي لم يكن موجوداً في بيئة التطوير؟
+        </div>
+    </section>
+
+    <!-- سادساً -->
+    <section id="maintain">
+        <h2>سادسًا: الصيانة والتطوير المستمر</h2>
+        <p>في النظم التقليدية، الصيانة تعني "إصلاح ما تعطل". أما في النظم الذكية، فالصيانة هي "عملية حيوية مستمرة" تشمل:</p>
+        <ul>
+            <li><strong>الصيانة التصحيحية والتكيفية:</strong> إصلاح الأخطاء ومواكبة تغيرات بيئة العمل.</li>
+            <li><strong>إعادة تدريب النماذج (Retraining):</strong> تغذية النموذج ببيانات حديثة لمنع تدهور دقته مع مرور الوقت.</li>
+            <li><strong>تحديث قواعد المعرفة:</strong> لضمان بقاء الاستدلالات متوافقة مع أحدث الحقائق والسياسات.</li>
+            <li><strong>مراقبة الأمن والأداء:</strong> تحديث دفاعات النظام ضد تهديدات سيبرانية متطورة باستمرار.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت "صيانة" النظام الذكي تتطلب إعادة تدريبه على بيانات جديدة، فمن يملك السلطة ليقرر أن "معتقدات" النظام القديمة قد أصبحت خاطئة ويجب استبدالها؟ هل نحن نصلح الآلة، أم نعيد تشكيل وعيها؟
+        </div>
+    </section>
+
+    <!-- خاتمة -->
+    <section id="conclusion">
+        <h2>🎯 خاتمة الفصل</h2>
+        <p>تطوير وتنفيذ نظم المعلومات الذكية ليس خطاً مستقيماً ينتهي بالتشغيل، بل هو "حلقة تكرارية" (Iterative Loop) من البناء، الاختبار، النشر، التعلم، والتحسين. إن نجاح هذه النظم لا يقاس فقط بقوة الخوارزميات أو جمال الواجهات، بل بقدرتها على الاندماج العضوي في نسيج المؤسسة، ومواءمة سلوكها المتعلم مع الأهداف الاستراتيجية والقيم الأخلاقية للإنسان.</p>
+        <p>وهكذا، نغلق باب "البناء والتشغيل"، لننتقل في الأبواب التالية لاستكشاف كيف يمكن لهذه النظم أن تُحدث ثورة حقيقية في بيئات مؤسسات المعلومات المحددة، من المكتبات والأرشيفات إلى المدن الذكية الشاملة.</p>
+    </section>
+
+    <div class="footer">
+        <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+        <a href="#top">↑ العودة للأعلى</a>
+        <p>© 2026 تطوير وتنفيذ وتشغيل نظم المعلومات الذكية</p>
+    </div>
+</div>
+
 </body>
 </html>
