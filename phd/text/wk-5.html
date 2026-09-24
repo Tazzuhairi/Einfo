@@ -4,100 +4,291 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>البيانات الضخمة والتحليلات الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
-            margin: 0; padding: 0;
-            color: #2c3e50;
-            background-color: #f4f7f9;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
         }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 15px; }
-        header {
-            background: linear-gradient(90deg, #34495e, #2c3e50);
-            color: white; padding: 30px 0; text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
-        h1 { margin: 0; font-size: 2.1em; }
-        .week-badge {
-            display: inline-block; margin-top: 10px;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 3px solid #2b6cb0;
+            padding-bottom: 10px;
+            font-size: 2em;
         }
         h2 {
-            color: #2c3e50; border-bottom: 3px solid #3498db;
-            padding-bottom: 8px; margin-bottom: 20px;
+            color: #2b6cb0;
+            margin-top: 30px;
+            border-right: 5px solid #2b6cb0;
+            padding-right: 10px;
+            font-size: 1.5em;
         }
-        .section {
-            background: white; margin: 30px 0; padding: 25px;
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        h3 {
+            color: #2c5282;
+            margin-top: 20px;
         }
-        ul { padding-right: 20px; }
-        li { margin-bottom: 8px; }
-        .activity-box {
-            background: #eaf4fc; border-right: 4px solid #3498db;
-            border-radius: 8px; padding: 16px 20px; margin-top: 8px;
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05em;
         }
-        .activity-box strong { color: #2471a3; }
-        .placeholder-note {
-            border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-            padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-top: 20px;
+        .toc {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
-        .placeholder-note strong { color: #2980b9; }
-        footer { text-align: center; padding: 25px; background: #2c3e50; color: white; margin-top: 40px; }
-        #topBtn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100;
-            background-color: #3498db; color: white; border: none;
-            padding: 12px 18px; font-size: 16px; border-radius: 50px;
-            cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
         }
-        .home-icon {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #3498db; color: white; font-size: 20px;
-            text-decoration: none; border-radius: 50%; padding: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #2b6cb0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+        .socratic {
+            background: linear-gradient(135deg, #fffaf0 0%, #fefcbf 100%);
+            border-right: 5px solid #d69e2e;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #744210;
+        }
+        .socratic strong {
+            font-style: normal;
+            color: #975a16;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: right;
+        }
+        th {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #2b6cb0;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>البيانات الضخمة والتحليلات الذكية</h1>
-            <span class="week-badge">الأسبوع 5 — نظم المعلومات الذكية</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>المحاور الفرعية</h2>
-            <ul>
-                <li>البيانات الضخمة وخصائصها</li>
-                <li>بحيرات البيانات</li>
-                <li>مستودعات البيانات</li>
-                <li>تنقيب البيانات</li>
-                <li>التحليلات التنبؤية والتوجيهية</li>
-                <li>لوحات المعلومات</li>
-                <li>ذكاء الأعمال</li>
-            </ul>
-        </section>
+<div class="container">
+    <h1 id="top">البيانات الضخمة والتحليلات الذكية</h1>
+    <h2 style="text-align: center; border: none; color: #4a5568;">الفصل الثاني: البيانات، التخزين، التنقيب، التحليلات، لوحات المعلومات وذكاء الأعمال</h2>
 
-        <section class="section">
-            <h2>ملاحظة</h2>
-            <div class="activity-box"><strong>◾</strong> —</div>
-        </section>
-
-        <div class="placeholder-note">
-            📝 هذا الهيكل مبني مباشرةً على التوصيف الأكاديمي المعتمد للمقرر. أضف هنا الشرح التفصيلي لكل محور
-            (نصوصاً وأمثلة وخاتمة) بنفس أسلوب محاضرات مرحلة البكالوريوس.
-        </div>
+    <div class="toc">
+        <h3>📑 محاور الفصل</h3>
+        <ul>
+            <li>◾ <a href="#intro">تمهيد: من تخزين البيانات إلى استخراج القيمة</a></li>
+            <li>◾ <a href="#bigdata">أولًا: مفهوم البيانات الضخمة</a></li>
+            <li>◾ <a href="#characteristics">ثانيًا: الخصائص المميزة (الأبعاد السبعة)</a></li>
+            <li>◾ <a href="#lakes">ثالثًا: بحيرات البيانات (المرونة والتخزين الخام)</a></li>
+            <li>◾ <a href="#warehouses">رابعًا: مستودعات البيانات (البنية والتنظيم)</a></li>
+            <li>◾ <a href="#mining">خامسًا: تنقيب البيانات (اكتشاف المخبأ)</a></li>
+            <li>◾ <a href="#predictive">سادسًا: التحليلات التنبؤية (استشراف المستقبل)</a></li>
+            <li>◾ <a href="#prescriptive">سابعًا: التحليلات التوجيهية (صناعة القرار)</a></li>
+            <li>◾ <a href="#dashboards">ثامنًا: لوحات المعلومات (الواجهة البصرية)</a></li>
+            <li>◾ <a href="#bi">تاسعًا: ذكاء الأعمال (المنظومة المتكاملة)</a></li>
+        </ul>
     </div>
 
-    <button id="topBtn" onclick="scrollToTop()">↑</button>
-    <a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
-    <footer>
-        <div class="container"><p>© 2025 ملخص محاضرة البيانات الضخمة والتحليلات الذكية</p></div>
-    </footer>
-    <script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+    <!-- تمهيد -->
+    <section id="intro">
+        <h2>تمهيد: من تخزين البيانات إلى استخراج القيمة</h2>
+        <p>لم تعد البيانات مجرد سجلات رقمية تُحفظ في خوادم المؤسسات، بل تحولت إلى المورد الاستراتيجي الأول في الاقتصاد الرقمي. ومع التوسع في الأجهزة الذكية وإنترنت الأشياء، لم يعد الاهتمام منصباً على "كيفية التخزين" فحسب، بل على "كيفية استخراج القيمة" من خلال تقنيات التحليل المتقدم وتنقيب البيانات.</p>
+        <p>وفي مؤسسات المعلومات، برزت الحاجة إلى أدوات قادرة على تحويل الكم الهائل من البيانات البحثية والببليوغرافية وسجلات الاستخدام إلى معرفة تدعم التخطيط، والتنبؤ، واتخاذ القرار، مما يجعل البيانات الوقود الأساسي لنظم المعلومات الذكية.</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت البيانات هي "النفط الجديد" في الاقتصاد المعرفي، فهل تتحول مؤسسات المعلومات من "حراس للمعرفة" إلى "مصانع لاستخراج البيانات"؟ وأين يقع الخط الفاصل بين "توظيف البيانات لخدمة المستفيد" و"استغلال المستفيد كمنتج للبيانات"؟
+        </div>
+    </section>
+
+    <!-- أولاً -->
+    <section id="bigdata">
+        <h2>أولًا: مفهوم البيانات الضخمة</h2>
+        <p>البيانات الضخمة (Big Data) ليست مجرد قواعد بيانات عملاقة، بل هي مجموعات ضخمة، متنوعة، ومتدفقة من البيانات التي تتجاوز قدرات أدوات الإدارة التقليدية. تشمل البيانات المهيكلة (قواعد البيانات)، وشبه المهيكلة (XML, JSON)، وغير المهيكلة (نصوص، صور، فيديو، منشورات تواصل اجتماعي).</p>
+        <p>تكمن أهميتها في القدرة على ربط مصادر متعددة لاكتشاف أنماط خفية، مما يوفر رؤية شاملة تحسن جودة القرارات، وتكشف الاتجاهات المستقبلية، وتعزز القدرة التنافسية للمؤسسات.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت البيانات الضخمة تمنحنا القدرة على رؤية "الصورة الكاملة" من خلال ربط ملايين النقاط، فهل يهدد هذا الشمول حق الفرد في أن يكون مجرد "نقطة غير مرئية" (الخصوصية)؟ وهل نحن على استعداد للتضليل بالشفافية المطلقة؟
+        </div>
+    </section>
+
+    <!-- ثانياً -->
+    <section id="characteristics">
+        <h2>ثانيًا: الخصائص المميزة (الأبعاد السبعة)</h2>
+        <p>لا تُقاس البيانات الضخمة بحجمها فحسب، بل بمجموعة من الخصائص المعقدة التي تحدد التقنيات اللازمة لإدارتها:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>الخاصية (V)</th>
+                    <th>المفهوم والتأثير</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>الحجم (Volume)</strong></td><td>الكميات الهائلة التي تتجاوز قدرات التخزين التقليدية (من تيرابايت إلى إكسابايت).</td></tr>
+                <tr><td><strong>السرعة (Velocity)</strong></td><td>المعدل اللحظي لتولد البيانات والحاجة لمعالجتها فورياً لاتخاذ قرارات آنية.</td></tr>
+                <tr><td><strong>التنوع (Variety)</strong></td><td>تعدد الصيغ: مهيكلة، شبه مهيكلة، وغير مهيكلة (نصوص، صور، أصوات).</td></tr>
+                <tr><td><strong>الموثوقية (Veracity)</strong></td><td>جودة البيانات ودقتها؛ فبيانات غير دقيقة تقود حتماً إلى قرارات مضللة.</td></tr>
+                <tr><td><strong>القيمة (Value)</strong></td><td>القدرة على تحويل البيانات الخام إلى رؤى استراتيجية وميزة تنافسية.</td></tr>
+                <tr><td><strong>التباين (Variability)</strong></td><td>تغير خصائص البيانات وتدفقها بشكل غير ثابت مع مرور الوقت.</td></tr>
+                <tr><td><strong>التعقيد (Complexity)</strong></td><td>تشابك مصادر البيانات وصعوبة دمجها وربطها لاكتشاف الأنماط.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            من بين هذه الخصائص السبع، تُعد "القيمة" هي الهدف النهائي. ولكن إذا كنا نستخرج فقط البيانات التي تمتلك "قيمة فورية وملموسة"، فهل نخاطر بتجاهل المعرفة الكامنة التي لا تتكشف أهميتها الحقيقية إلا بعد سنوات؟
+        </div>
+    </section>
+
+    <!-- ثالثاً -->
+    <section id="lakes">
+        <h2>ثالثًا: بحيرات البيانات (المرونة والتخزين الخام)</h2>
+        <p>بحيرات البيانات (Data Lakes) هي بيئات تخزين مرنة تستوعب جميع أنواع البيانات بصيغها الأصلية دون الحاجة إلى تنظيمها مسبقاً. تعتمد على مبدأ "التخزين أولاً ثم المعالجة عند الحاجة" (Schema-on-Read)، مما يجعلها البيئة المثالية لتطبيقات الذكاء الاصطناعي التي تحتاج إلى بيانات خام متنوعة.</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            بحيرة البيانات تخزن كل شيء "لربما نحتاجه لاحقاً". هل يعكس هذا النهج سعيًا حكيمًا لاكتشاف المعرفة، أم أنه "شراهة رقمية" تؤدي إلى تلوث البيانات (Data Swamp) وصعوبة العثور على الجوهر؟
+        </div>
+    </section>
+
+    <!-- رابعاً -->
+    <section id="warehouses">
+        <h2>رابعًا: مستودعات البيانات (البنية والتنظيم)</h2>
+        <p>مستودعات البيانات (Data Warehouses) هي قواعد بيانات مركزية تُجمع فيها البيانات من مصادر متعددة بعد تنقيتها وتنظيمها وفق نموذج موحد. تعتمد على مبدأ "المعالجة والتنظيم أولاً ثم التخزين" (Schema-on-Write)، وتُعد العمود الفقري لعمليات ذكاء الأعمال وإعداد التقارير الاستراتيجية.</p>
+        
+        <h3>مقارنة بين بحيرات البيانات ومستودعاتها:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>وجه المقارنة</th>
+                    <th>بحيرات البيانات (Data Lakes)</th>
+                    <th>مستودعات البيانات (Data Warehouses)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>الهدف الأساسي</strong></td><td>تخزين كميات ضخمة ومتنوعة من البيانات الخام.</td><td>توفير بيانات منظمة وموثوقة لإعداد التقارير ودعم القرار.</td></tr>
+                <tr><td><strong>نوع البيانات</strong></td><td>كل أنواع البيانات (مهيكلة، شبه مهيكلة، غير مهيكلة).</td><td>بيانات مهيكلة ومنظمة مسبقاً.</td></tr>
+                <tr><td><strong>منهجية المعالجة</strong></td><td>التخزين أولاً ثم المعالجة (Schema-on-Read).</td><td>المعالجة والتنظيم أولاً ثم التخزين (Schema-on-Write).</td></tr>
+                <tr><td><strong>المرونة</strong></td><td>عالية جداً، تتكيف مع أي بيانات جديدة.</td><td>صارمة نسبياً، تتطلب هيكلة محددة مسبقاً.</td></tr>
+                <tr><td><strong>المستخدمون</strong></td><td>علماء البيانات، محللو الذكاء الاصطناعي.</td><td>مديرو الأعمال، محللو ذكاء الأعمال (BI).</td></tr>
+            </tbody>
+        </table>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            مستودعات البيانات تفرض قواعد وهيكلية صارمة قبل تخزين البيانات. هل تضمن هذه "الصرامة" وصولنا إلى الحقيقة، أم أنها تقوم بتصفية وتهميش "الفوضى الواقعية" للسلوك البشري التي قد تحمل أهم الرؤى؟
+        </div>
+    </section>
+
+    <!-- خامساً -->
+    <section id="mining">
+        <h2>خامسًا: تنقيب البيانات (اكتشاف المخبأ)</h2>
+        <p>تنقيب البيانات (Data Mining) هو عملية اكتشاف الأنماط، والعلاقات، والقواعد المخفية داخل مجموعات البيانات الكبيرة باستخدام الإحصاء والتعلم الآلي. يهدف إلى تحويل البيانات الخام إلى معرفة قابلة للتطبيق في التنبؤ، التصنيف، واكتشاف الحالات الشاذة.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            تنقيب البيانات يكتشف "الارتباطات" (Correlations). ولكن كما يقول المثل العلمي: "الارتباط لا يعني السببية". هل نخاطر ببناء مستقبل نتخذ فيه قرارات مصيرية بناءً على "مصادفات رياضية" نعتقد خطأً أنها حقائق مطلقة؟
+        </div>
+    </section>
+
+    <!-- سادساً -->
+    <section id="predictive">
+        <h2>سادسًا: التحليلات التنبؤية (استشراف المستقبل)</h2>
+        <p>التحليلات التنبؤية (Predictive Analytics) تستخدم البيانات التاريخية والنماذج الإحصائية والتعلم الآلي للإجابة عن سؤال: <strong>"ماذا قد يحدث في المستقبل؟"</strong>. تساعد المؤسسات على استشراف الاتجاهات، التنبؤ بالطلب، وإدارة المخاطر بشكل استباقي.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت التحليلات التنبؤية قادرة على توقع السلوك البشري بدقة متزايدة بناءً على بياناته الماضية، فهل نمتلك حقاً "إرادة حرة"، أم أننا مجرد خوارزميات بيولوجية تنفذ سيناريو كُتب لها مسبقاً؟
+        </div>
+    </section>
+
+    <!-- سابعاً -->
+    <section id="prescriptive">
+        <h2>سابعًا: التحليلات التوجيهية (صناعة القرار)</h2>
+        <p>تمثل قمة الهرم التحليلي. لا تكتفي بالتنبؤ، بل تجيب عن سؤال: <strong>"ما الإجراء الأنسب الذي ينبغي اتخاذه؟"</strong>. تستخدم المحاكاة، والتحسين الرياضي، والذكاء الاصطناعي لتقييم البدائل واقتراح أفضل مسار للعمل لتحقيق الأهداف.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            عندما توصي الخوارزمية بالقرار "الأمثل" رياضياً، من يتحمل المسؤولية الأخلاقية إذا أدى هذا القرار إلى نتيجة غير إنسانية أو ظالمة؟ الآلة، أم المبرمج، أم المدير الذي أطاع التوصية بشكل أعمى؟
+        </div>
+    </section>
+
+    <!-- ثامناً -->
+    <section id="dashboards">
+        <h2>ثامنًا: لوحات المعلومات (الواجهة البصرية)</h2>
+        <p>لوحات المعلومات (Dashboards) هي واجهات رقمية تفاعلية تترجم نتائج التحليلات المعقدة إلى مؤشرات مرئية (رسوم بيانية، خرائط، مؤشرات أداء KPIs). تتيح لمتخذي القرار استيعاب الأداء واتخاذ القرارات بسرعة، وتنقسم إلى لوحات استراتيجية، إدارية، وتشغيلية.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            لوحات المعلومات تختصر التعقيد إلى مؤشرات "أخضر وأحمر". وفي سياق تبسيطها هذا، هل نفقد "التدرجات الرمادية" الدقيقة التي تمثل غالباً جوهر المشكلات الاستراتيجية الحقيقية؟
+        </div>
+    </section>
+
+    <!-- تاسعاً -->
+    <section id="bi">
+        <h2>تاسعًا: ذكاء الأعمال (المنظومة المتكاملة)</h2>
+        <p>ذكاء الأعمال (Business Intelligence) ليس أداة واحدة، بل هو الإطار الشامل الذي يجمع بين البيانات، ومستودعاتها، وتقنيات التنقيب، والتحليلات، ولوحات المعلومات. هدفه النهائي هو تمكين المؤسسات من اتخاذ قرارات دقيقة، استباقية، ومبنية على الأدلة.</p>
+        <p>واليوم، يندمج ذكاء الأعمال مع الذكاء الاصطناعي لتوليد منصات ذكية لا تعرض التقارير فحسب، بل تفسرها وتجيب عن استفسارات المستخدمين بلغة طبيعية.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            ذكاء الأعمال يحول البيانات إلى "معلومات قابلة للتنفيذ". ولكن الذكاء بدون "حكمة" يمكن أن يكون مدمراً. كيف نضمن أن "ذكاءنا المؤسسي" يظل خاضعاً لـ "الحكمة الإنسانية" والقيم الأخلاقية؟
+        </div>
+    </section>
+
+    <div class="footer">
+        <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+        <a href="#top">↑ العودة للأعلى</a>
+        <p>© 2026 البيانات الضخمة والتحليلات الذكية</p>
+    </div>
+</div>
+
 </body>
 </html>
