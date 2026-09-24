@@ -4,98 +4,260 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الذكاء الاصطناعي وتقنياته في نظم المعلومات</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
-            margin: 0; padding: 0;
-            color: #2c3e50;
-            background-color: #f4f7f9;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
         }
-        .container { width: 90%; max-width: 1100px; margin: auto; padding: 20px 15px; }
-        header {
-            background: linear-gradient(90deg, #34495e, #2c3e50);
-            color: white; padding: 30px 0; text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
-        h1 { margin: 0; font-size: 2.1em; }
-        .week-badge {
-            display: inline-block; margin-top: 10px;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 3px solid #2b6cb0;
+            padding-bottom: 10px;
+            font-size: 2em;
         }
         h2 {
-            color: #2c3e50; border-bottom: 3px solid #3498db;
-            padding-bottom: 8px; margin-bottom: 20px;
+            color: #2b6cb0;
+            margin-top: 30px;
+            border-right: 5px solid #2b6cb0;
+            padding-right: 10px;
+            font-size: 1.5em;
         }
-        .section {
-            background: white; margin: 30px 0; padding: 25px;
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        h3 {
+            color: #2c5282;
+            margin-top: 20px;
         }
-        ul { padding-right: 20px; }
-        li { margin-bottom: 8px; }
-        .activity-box {
-            background: #eaf4fc; border-right: 4px solid #3498db;
-            border-radius: 8px; padding: 16px 20px; margin-top: 8px;
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05em;
         }
-        .activity-box strong { color: #2471a3; }
-        .placeholder-note {
-            border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-            padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-top: 20px;
+        .toc {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
-        .placeholder-note strong { color: #2980b9; }
-        footer { text-align: center; padding: 25px; background: #2c3e50; color: white; margin-top: 40px; }
-        #topBtn {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100;
-            background-color: #3498db; color: white; border: none;
-            padding: 12px 18px; font-size: 16px; border-radius: 50px;
-            cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .toc ul {
+            list-style-type: none;
+            padding: 0;
         }
-        .home-icon {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #3498db; color: white; font-size: 20px;
-            text-decoration: none; border-radius: 50%; padding: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #2b6cb0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .toc a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+        .socratic {
+            background: linear-gradient(135deg, #fffaf0 0%, #fefcbf 100%);
+            border-right: 5px solid #d69e2e;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #744210;
+        }
+        .socratic strong {
+            font-style: normal;
+            color: #975a16;
+        }
+        .tool-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .tool-card strong {
+            color: #2b6cb0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: right;
+        }
+        th {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #2b6cb0;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>الذكاء الاصطناعي وتقنياته في نظم المعلومات</h1>
-            <span class="week-badge">الأسبوع 4 — نظم المعلومات الذكية</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>المحاور الفرعية</h2>
-            <ul>
-                <li>مفهوم الذكاء الاصطناعي وتطوره</li>
-                <li>النماذج الذكية الحديثة</li>
-                <li>أدوات الذكاء الاصطناعي</li>
-                <li>تطبيقاته في علم المعلومات</li>
-                <li>التحديات والاتجاهات المستقبلية</li>
-            </ul>
-        </section>
+<div class="container">
+    <h1 id="top">الذكاء الاصطناعي وتقنياته في نظم المعلومات</h1>
+    <h2 style="text-align: center; border: none; color: #4a5568;">من تحليل البيانات إلى منظومات المعرفة والوكلاء الأذكياء</h2>
 
-        <section class="section">
-            <h2>ملاحظة</h2>
-            <div class="activity-box"><strong>◾</strong> —</div>
-        </section>
-
-        <div class="placeholder-note">
-            📝 هذا الهيكل مبني مباشرةً على التوصيف الأكاديمي المعتمد للمقرر. أضف هنا الشرح التفصيلي لكل محور
-            (نصوصاً وأمثلة وخاتمة) بنفس أسلوب محاضرات مرحلة البكالوريوس.
-        </div>
+    <div class="toc">
+        <h3>📑 المحاور الفرعية</h3>
+        <ul>
+            <li>◾ <a href="#intro">تمهيد: من أتمتة العمليات إلى صناعة المعرفة</a></li>
+            <li>◾ <a href="#concept">أولاً: مفهوم الذكاء الاصطناعي وتطوره التقني</a></li>
+            <li>◾ <a href="#models">ثانياً: النماذج الذكية الحديثة (التوليدي والوكلاء)</a></li>
+            <li>◾ <a href="#tools">ثالثاً: أدوات الذكاء الاصطناعي في نظم المعلومات</a></li>
+            <li>◾ <a href="#apps">رابعاً: تطبيقات الذكاء الاصطناعي في علم المعلومات</a></li>
+            <li>◾ <a href="#challenges">خامساً: التحديات والاتجاهات المستقبلية</a></li>
+            <li>◾ <a href="#conclusion">خاتمة الفصل</a></li>
+        </ul>
     </div>
 
-    <button id="topBtn" onclick="scrollToTop()">↑</button>
-    <a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
-    <footer>
-        <div class="container"><p>© 2025 ملخص محاضرة الذكاء الاصطناعي وتقنياته في نظم المعلومات</p></div>
-    </footer>
-    <script>function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}</script>
+    <!-- تمهيد -->
+    <section id="intro">
+        <h2>تمهيد: من أتمتة العمليات إلى صناعة المعرفة</h2>
+        <p>يمثل الذكاء الاصطناعي (AI) المرتكز الأساسي الذي أتاح لنظم المعلومات الانتقال من مجرد مستودعات للبيانات إلى منظومات قادرة على التحليل، والتعلم، واستخلاص المعرفة، ودعم اتخاذ القرار. لم تعد قيمة النظام المعلوماتي تُقاس بقدرته على التخزين فحسب، بل بقدرته على تفسير البيانات، واكتشاف الأنماط الكامنة فيها، والتنبؤ بالاتجاهات المستقبلية.</p>
+        <p>وفي مجال علم المعلومات، اكتسب الذكاء الاصطناعي أهمية خاصة لأنه يستثمر البيانات والمعرفة بوصفها موارده الرئيسة، مما أسهم في تطوير عمليات البحث، والفهرسة الآلي، وتحليل الوثائق الرقمية، وتقديم خدمات معلوماتية تتجاوز حدود التشغيل التقليدي.</p>
+        
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كان الذكاء الاصطناعي يحول "البيانات الصامتة" إلى "معرفة ناطقة" توصي وتتنبأ، فهل تتغير فلسفة مؤسسات المعلومات من "حراسة المحتوى" إلى "صناعة الذكاء"؟ وأين يقع الحد الفاصل بين "محاكاة" الآلة للتفكير و"إدراكه" الحقيقي للمعنى؟
+        </div>
+    </section>
+
+    <!-- أولاً -->
+    <section id="concept">
+        <h2>أولاً: مفهوم الذكاء الاصطناعي وتطوره التقني</h2>
+        <p>يُشير الذكاء الاصطناعي إلى مجموعة النظريات والخوارزميات التي تهدف لتصميم أنظمة تحاكي القدرات الذهنية البشرية (كالتعلم، والاستدلال، وحل المشكلات). وهو لا يقتصر على كونه تقنية حاسوبية، بل هو منظومة متكاملة تستثمر البيانات والقدرة الحاسوبية لإنتاج نتائج تعزز عمليات المؤسسة.</p>
+        
+        <h3>أبرز التقنيات المكونة للذكاء الاصطناعي:</h3>
+        <ul>
+            <li><strong>1. تعلم الآلة (ML):</strong> الانتقال من البرمجة المباشرة إلى تعلم الأنظمة من البيانات واكتشاف الأنماط تلقائياً (خاضع للإشراف، غير خاضع، ومعزز).</li>
+            <li><strong>2. التعلم العميق (DL):</strong> استخدام شبكات عصبية اصطناعية متعددة الطبقات لمحاكاة الدماغ البشري، والتعامل مع البيانات المعقدة وغير المنظمة (نصوص، صور، أصوات).</li>
+            <li><strong>3. معالجة اللغة الطبيعية (NLP):</strong> تمكين الحاسوب من فهم اللغة البشرية، تحليلها، استخراج المعلومات منها، وتوليد استجابات سياقية.</li>
+            <li><strong>4. الرؤية الحاسوبية (CV):</strong> تفسير الصور والوسائط المرئية، وتمكين الأنظمة من التعرف على الكائنات، رقمنة الوثائق، والبحث البصري.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت خوارزميات "تعلم الآلة" تتغذى على بيانات من صنع البشر، وتحمل في طياتها تاريخاً من قراراتنا، فهل نحن نعلم الآلات "الحياد" أم أننا نعيد إنتاج "تحيزاتنا" التاريخية عبر أدوات تبدو موضوعية؟
+        </div>
+    </section>
+
+    <!-- ثانياً -->
+    <section id="models">
+        <h2>ثانياً: النماذج الذكية الحديثة</h2>
+        <p>أدت التكاملات بين التعلم العميق ومعالجة اللغة إلى ظهور جيل جديد من النماذج لا يقتصر على التحليل فحسب، بل يمتلك القدرة على الفهم، التوليد، والتفاعل المرن:</p>
+        <ul>
+            <li><strong>النماذج اللغوية الكبيرة (LLMs):</strong> نماذج تعتمد على الشبكات العصبية العميقة، تدربت على كميات هائلة من النصوص لفهم البنية الإحصائية والدلالية للغة، مما يمكنها من التلخيص، الإجابة، واستكمال النصوص بسياق عالي الدقة.</li>
+            <li><strong>الذكاء الاصطناعي التوليدي (Generative AI):</strong> يتجاوز التحليل إلى "إنتاج محتوى جديد" (نصوص، صور، أكواد) بناءً على الأنماط التي تعلمها، مما يفتح آفاقاً للإبداع الرقمي ودعم البحث العلمي.</li>
+            <li><strong>الوكلاء الأذكياء (Intelligent Agents):</strong> أنظمة مستقلة نسبياً تدرك بيئتها، تخطط للمهام، تتخذ الإجراءات، وتتفاعل مع أنظمة أخرى لإنجاز أهداف محددة دون الحاجة لتدخل بشري مستمر.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            عندما يتحول النظام من "أداة تُستخدم عند الطلب" إلى "وكيل ذكي" يتخذ إجراءات مستقلة ويخطط للمهام؛ من يتحمل المسؤولية الأخلاقية والقانونية عن خطأ يرتكبه هذا الوكيل؟ صانع الخوارزمية، أم مدير النظام، أم الوكيل نفسه؟
+        </div>
+    </section>
+
+    <!-- ثالثاً -->
+    <section id="tools">
+        <h2>ثالثاً: أدوات الذكاء الاصطناعي في نظم المعلومات</h2>
+        <p>ظهرت أدوات تعتمد على النماذج اللغوية الكبيرة لتصبح جزءاً من بيئات العمل الأكاديمي والمعلوماتي. إليك أبرزها:</p>
+        
+        <div class="tool-card"><strong>1. شات جي بي تي (ChatGPT):</strong> الأكثر انتشاراً، يدعم المحادثة التفاعلية، تلخيص الوثائق، وإعداد المسودات الأولية.</div>
+        <div class="tool-card"><strong>2. جيميناي (Gemini):</strong> يتميز بالتعامل مع البيانات متعددة الوسائط (نصوص، صور) والتكامل مع البيئات السحابية.</div>
+        <div class="tool-card"><strong>3. كلود (Claude):</strong> يتفوق في تحليل النصوص والوثائق المطولة مع المحافظة على ترابط السياق.</div>
+        <div class="tool-card"><strong>4. كوبايلوت (Copilot):</strong> أداة ذكية لدعم الإنتاجية، كتابة الأكواد البرمجية، وأتمتة الإجراءات المكتبية.</div>
+        <div class="tool-card"><strong>5. نوت بوك إل إم (NotebookLM):</strong> يعتمد على المصادر التي يرفعها المستخدم لضمان دقة المخرجات وإمكانية التحقق منها (مثالي للبحث الأكاديمي).</div>
+        <div class="tool-card"><strong>6. ديب سيك (DeepSeek):</strong> يتميز بكفاءة عالية في الاستدلال المنطقي، وتحليل النصوص، وكتابة الأكواد (نماذج مفتوحة المصدر).</div>
+        <div class="tool-card"><strong>7. كيمي (Kimi AI) و 8. كوين (Qwen):</strong> يتفوقان في التعامل مع الوثائق طويلة الحجم، ودعم لغات متعددة (بما فيها العربية والصينية).</div>
+        <div class="tool-card"><strong>9. إيرني (ERNIE):</strong> نموذج متقدم يتكامل مع منظومة خدمات واسعة، ويدعم المحتوى متعدد اللغات.</div>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت هذه الأدوات قادرة على تلخيص الأدبيات، صياغة التقارير، واقتراح الحلول في ثوانٍ؛ فماذا يتبقى كـ "جوهر" لا يمكن تفويضه للإنسان الباحث أو أخصائي المعلومات؟ هل هو "التفكير النقدي" أم "حس المسؤولية"؟
+        </div>
+    </section>
+
+    <!-- رابعاً -->
+    <section id="apps">
+        <h2>رابعاً: تطبيقات الذكاء الاصطناعي في علم المعلومات</h2>
+        <p>أدى توظيف الذكاء الاصطناعي إلى إعادة تعريف وظائف علم المعلومات، حيث أصبحت الأنظمة الذكية شريكة في العمليات الأساسية:</p>
+        <ul>
+            <li><strong>البحث والاسترجاع الذكي:</strong> فهم المقصد الدلالي للمستفيد بدلاً من المطابقة الحرفية، وتصحيح الأخطاء، وترتيب النتائج حسب الملاءمة.</li>
+            <li><strong>الفهرسة والتصنيف الذكي:</strong> تحليل المحتوى تلقائياً، واستخراج الكلمات المفتاحية، وربط الوثائق ذات العلاقة، مما يدعم أخصائي المعلومات ولا يلغي دوره.</li>
+            <li><strong>تحليل المحتوى الرقمي وإدارة المعرفة:</strong> استخراج المفاهيم، اكتشاف الاتجاهات البحثية، وتحويل المعلومات المتفرقة إلى هياكل معرفية منظمة.</li>
+            <li><strong>المساعدات الرقمية ودعم البحث:</strong> تقديم خدمات مرجعية على مدار الساعة، ومساعدة الباحثين في استكشاف الأدبيات وتنظيم المراجع.</li>
+            <li><strong>دعم اتخاذ القرار:</strong> تحليل البيانات التشغيلية والتنبؤ باحتياجات المستفيدين لتعزيز الكفاءة المؤسسية.</li>
+        </ul>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كانت الآلة تستطيع الفهرسة، الاسترجاع، وتحليل المحتوى بدقة تفوق البشر أحياناً؛ فهل سيتحول أخصائي المعلومات من "منفذ للعمليات الفنية" إلى "فيلسوف للمعرفة" يراقب، يقيّم، ويوجه؟ أم أن هناك خطراً من تهميش العنصر البشري؟
+        </div>
+    </section>
+
+    <!-- خامساً -->
+    <section id="challenges">
+        <h2>خامساً: التحديات والاتجاهات المستقبلية</h2>
+        <p>رغم الإمكانيات الهائلة، يواجه التطبيق الواسع للذكاء الاصطناعي تحديات جوهرية:</p>
+        <ul>
+            <li><strong>جودة البيانات والتحيز:</strong> البيانات غير الدقيقة أو المتحيزة تؤدي حتماً إلى مخرجات مضللة.</li>
+            <li><strong>البنية التحتية:</strong> الحاجة لقدرات حاسوبية ضخمة وتخزين كفؤ لتشغيل النماذج المعقدة.</li>
+            <li><strong>الخصوصية والأمن:</strong> حماية البيانات الحساسة والشخصية من الاستغلال أو التسريب.</li>
+            <li><strong>الشفافية (الصندوق الأسود):</strong> صعوبة تفسير كيفية وصول نماذج التعلم العميق إلى نتائجها، مما يؤثر على الثقة.</li>
+            <li><strong>الجاهزية البشرية:</strong> الحاجة المستمرة لتطوير مهارات العاملين لمواكبة هذا التحول.</li>
+        </ul>
+        <p><strong>الاتجاهات المستقبلية:</strong> تشير إلى زيادة تكامل النظم مع الوكلاء الأذكياء، والربط بين النماذج اللغوية والرسوم البيانية المعرفية، وتحول أخصائي المعلومات إلى مدير للمعرفة الرقمية ومشرف على النظم الذكية.</p>
+
+        <div class="socratic">
+            <strong>🧠 إستفهام سقراطي:</strong><br>
+            إذا كنا لا نستطيع دائماً تفسير "كيف" توصل النظام الذكي إلى قراره (مشكلة الصندوق الأسود)، فهل يحق لنا أخلاقياً أن نسلّمه زمام القرارات المصيرية في مؤسساتنا؟ أم أن "الشفافية" شرط مسبق لـ "الموثوقية"؟
+        </div>
+    </section>
+
+    <!-- خاتمة -->
+    <section id="conclusion">
+        <h2>🎯 خاتمة الفصل</h2>
+        <p>تكتمل بذلك الصورة حول كيف مثل الذكاء الاصطناعي نقلة نوعية لنظم المعلومات، من أدوات معالجة إلى بيئات معرفية قادرة على التعلم والتفاعل وإنتاج المعرفة. إن فهم هذه التقنيات، وأدواتها، وتطبيقاتها، وتحدياتها، ليس ترفاً أكاديمياً، بل هو شرط أساسي لبناء مؤسسات معلوماتية ذكية قادرة على المنافسة في اقتصاد المعرفة.</p>
+        <p>وفي الفصل التالي، سنتعمق في "الحوكمة الرقمية وأخلاقيات الذكاء الاصطناعي"، لنطرح الإطار الفلسفي والقانوني الذي يضمن توظيف هذه القوة الهائلة بمسؤولية وموضوعية.</p>
+    </section>
+
+    <div class="footer">
+        <a href="../index.html">🏠 الصفحة الرئيسية</a> | 
+        <a href="#top">↑ العودة للأعلى</a>
+        <p>© 2026 الذكاء الاصطناعي وتقنياته في نظم المعلومات</p>
+    </div>
+</div>
+
 </body>
 </html>
