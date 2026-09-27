@@ -1,106 +1,417 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>أسئلة تفاعلية - نظم دعم القرار الذكية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif; background-color: #f4f7f9; color: #2c3e50;
-      max-width: 1200px; margin: auto; padding: 20px; font-size: 16px; line-height: 1.8;
-    }
-    header {
-      background: linear-gradient(90deg, #34495e, #2c3e50); color: white;
-      padding: 30px; text-align: center; border-radius: 10px; margin-bottom: 30px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1 { margin: 0; font-size: 2em; }
-    section {
-      background-color: white; padding: 25px; border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
-    }
-    h2 {
-      color: #2c3e50; font-size: 1.4em; border-bottom: 3px solid #3498db;
-      padding-bottom: 8px; margin-bottom: 20px;
-    }
-    .question {
-      margin-bottom: 25px; padding: 15px; background-color: #f9f9f9;
-      border-radius: 8px; border-left: 4px solid #3498db;
-    }
-    .covered-list { padding-right: 20px; margin-bottom: 0; }
-    .covered-list li { margin-bottom: 6px; }
-    .placeholder-note {
-      border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-      padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-bottom: 20px;
-    }
-    .placeholder-note strong { color: #2980b9; }
-    label { display: block; margin: 8px 0; cursor: pointer; }
-    input[type="radio"] { margin-left: 8px; }
-    button {
-      background-color: #3498db; color: white; border: none; padding: 10px 15px;
-      border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Cairo', sans-serif; margin-top: 10px;
-    }
-    .result { margin-top: 10px; padding: 8px; border-radius: 4px; font-weight: bold; }
-    .correct { background-color: #d4edda; color: #155724; }
-    .incorrect { background-color: #f8d7da; color: #721c24; }
-    .home-icon {
-      position: fixed; bottom: 20px; right: 20px; background: #3498db; color: white;
-      font-size: 20px; text-decoration: none; border-radius: 50%; padding: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    #topBtn {
-      position: fixed; bottom: 20px; left: 20px; z-index: 100; background-color: #3498db;
-      color: white; border: none; padding: 12px 18px; font-size: 16px; border-radius: 50px;
-      cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار تفاعلي - الحوكمة الرقمية والأخلاقيات في النظم الذكية</title>
+    <style>
+        body {
+            font-family: "Simplified Arabic","Traditional Arabic","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
+            background: #f0ede3;
+            color: #1b2432;
+            line-height: 1.9;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(14,35,64,0.08);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #c8a04b;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: #0e2340;
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+            font-weight: 800;
+        }
+        header p {
+            color: #5b6472;
+            margin: 0;
+        }
+        h2 {
+            color: #0e2340;
+            margin-top: 40px;
+            border-right: 5px solid #c8a04b;
+            padding-right: 15px;
+            font-size: 1.35em;
+            font-weight: 800;
+        }
+        .question-card {
+            background: #fbf9f3;
+            border: 1px solid #e3ddcc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .question-card:hover {
+            box-shadow: 0 4px 10px rgba(14,35,64,0.06);
+            border-color: #c8a04b;
+        }
+        .question-text {
+            font-weight: 700;
+            font-size: 1.08em;
+            margin-bottom: 15px;
+            color: #0e2340;
+        }
+        .options label {
+            display: block;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background: #fffdf6;
+            border-color: #c8a04b;
+        }
+        input[type="radio"] {
+            margin-left: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .btn {
+            background: #0e2340;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            transition: 0.3s;
+            margin-top: 10px;
+            font-family: inherit;
+        }
+        .btn:hover {
+            background: #153154;
+        }
+        .feedback {
+            margin-top: 15px;
+            font-weight: 700;
+            display: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f1f1f1;
+        }
+        .model-answer {
+            display: none;
+            margin-top: 15px;
+            background: #fbf3df;
+            border-right: 5px solid #c8a04b;
+            padding: 15px;
+            border-radius: 8px;
+            color: #1b2432;
+            line-height: 1.9;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
 
-<header><h1>اختبار الأسبوع 10: نظم دعم القرار الذكية</h1></header>
+<div class="container">
+    <header>
+        <h1>اختبار تفاعلي</h1>
+        <p>الحوكمة الرقمية والأخلاقيات في النظم الذكية</p>
+    </header>
 
-<section>
-  <h2>المحاور المشمولة بالاختبار</h2>
-  <ul class="covered-list">
-                <li>نظم دعم القرار</li>
-                <li>نظم دعم الإدارة التنفيذية</li>
-                <li>النظم الخبيرة</li>
-                <li>ذكاء القرار</li>
-                <li>التنبؤ والمحاكاة</li>
-                <li>اتخاذ القرار المعتمد على البيانات</li>
-  </ul>
-</section>
+    <main>
+        <h2>أسئلة اختيار من متعدد</h2>
 
-<section>
-  <h2>نموذج سؤال</h2>
-  <div class="placeholder-note">
-    📝 استبدل السؤال أدناه بأسئلة فعلية تغطي محاور «<strong>نظم دعم القرار الذكية</strong>» أعلاه، بنفس تنسيق اختبارات مرحلة البكالوريوس.
-  </div>
-  <div class="question">
-    <p>1. (سؤال نموذجي) — عدّل هذا النص وأضف الخيارات المناسبة.</p>
-    <form>
-      <label><input type="radio" name="q1" value="1"> الخيار الأول</label>
-      <label><input type="radio" name="q1" value="0"> الخيار الثاني</label>
-      <label><input type="radio" name="q1" value="0"> الخيار الثالث</label>
-      <button type="button" onclick="checkAnswer('q1', 1)">تحقق من الإجابة</button>
-      <div class="result" id="res_q1"></div>
-    </form>
-  </div>
-</section>
+        <div class="question-card">
+            <div class="question-text">1. ما المرحلة الرابعة والأحدث في تطور مفهوم الحوكمة الرقمية وفق جدول المحاضرة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> حوكمة تقنية المعلومات</label>
+                <label><input type="radio" name="q1" value="b"> الخدمات الإلكترونية</label>
+                <label><input type="radio" name="q1" value="c"> التحول الرقمي</label>
+                <label><input type="radio" name="q1" value="d"> الحوكمة الذكية (حوكمة البيانات والخوارزميات والأنظمة الذكية)</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q1', 'd')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q1"></div>
+        </div>
 
-<button id="topBtn" onclick="scrollToTop()">↑</button>
-<a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
+        <div class="question-card">
+            <div class="question-text">2. أي هدف من أهداف الحوكمة الرقمية يتعلق بـ"ضمان أن الاستثمارات الرقمية تخدم رسالة المؤسسة"؟</div>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> مواءمة التقنية مع الاستراتيجية</label>
+                <label><input type="radio" name="q2" value="b"> تعزيز الشفافية</label>
+                <label><input type="radio" name="q2" value="c"> إدارة المخاطر الرقمية</label>
+                <label><input type="radio" name="q2" value="d"> الامتثال للتشريعات</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q2', 'a')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q2"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">3. من بين مبادئ الحوكمة الرقمية العشرة، أي مبدأ ينص على أن "المسؤولية النهائية تبقى على الإنسان"؟</div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> الاستدامة</label>
+                <label><input type="radio" name="q3" value="b"> المساءلة</label>
+                <label><input type="radio" name="q3" value="c"> إدارة المخاطر</label>
+                <label><input type="radio" name="q3" value="d"> التحسين المستمر</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q3', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q3"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">4. ما الهدف من "حوكمة البيانات" (Data Governance) وفق تشبيه المحاضرة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> زيادة حجم البيانات المخزنة إلى أقصى حد ممكن</label>
+                <label><input type="radio" name="q4" value="b"> أن تكون "مصفاة" تضمن جودة البيانات وخلوها من التحيز، بوصف البيانات "وقود" الذكاء الاصطناعي</label>
+                <label><input type="radio" name="q4" value="c"> حذف جميع البيانات القديمة بشكل دوري</label>
+                <label><input type="radio" name="q4" value="d"> منع أي جهة من الوصول إلى البيانات نهائياً</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q4', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q4"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">5. أي مبدأ من مبادئ أخلاقيات الذكاء الاصطناعي يتعلق بمنع التمييز بسبب الجنس أو العرق أو اللغة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> الشفافية والتفسير</label>
+                <label><input type="radio" name="q5" value="b"> الأمن والموثوقية</label>
+                <label><input type="radio" name="q5" value="c"> العدالة والإنصاف</label>
+                <label><input type="radio" name="q5" value="d"> الخصوصية</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q5', 'c')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q5"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">6. ما الذي تمثله عناصر "مثلث أمن المعلومات" (CIA Triad) وفق المحاضرة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> السرعة، الدقة، والتكلفة</label>
+                <label><input type="radio" name="q6" value="b"> السرية (Confidentiality)، السلامة (Integrity)، والتوافر (Availability)</label>
+                <label><input type="radio" name="q6" value="c"> الشفافية، المساءلة، والاستدامة</label>
+                <label><input type="radio" name="q6" value="d"> الحوكمة، الإدارة، والتنفيذ</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q6', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q6"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">7. ما التحدي الجوهري المرتبط بالشفافية وقابلية التفسير (XAI) وفق المحاضرة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> عدم وجود أي علاقة بين تعقيد النموذج ودقته</label>
+                <label><input type="radio" name="q7" value="b"> المفاضلة بين الدقة والوضوح: كلما زاد تعقيد النموذج قلّت قابليته للتفسير</label>
+                <label><input type="radio" name="q7" value="c"> استحالة بناء أي نموذج قابل للتفسير على الإطلاق</label>
+                <label><input type="radio" name="q7" value="d"> أن الشفافية لا علاقة لها بثقة المستخدم بالنظام</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q7', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q7"></div>
+        </div>
+
+        <h2>أسئلة إكمال الفراغ</h2>
+
+        <div class="question-card">
+            <div class="question-text">8. طورت منظمة ______ معياري ISO/IEC 27001 وISO/IEC 27701 لإدارة أمن المعلومات والخصوصية.</div>
+            <input type="text" id="input-q8" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q8', ['المنظمة الدولية للمعايير', 'iso'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q8"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">9. يهدف إطار ______ الصادر عن المعهد الوطني الأمريكي إلى إدارة مخاطر الأمن السيبراني عبر مراحل التعرف والحماية والاكتشاف والاستجابة والتعافي.</div>
+            <input type="text" id="input-q9" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q9', ['nist'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q9"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">10. التلاعب ببيانات تدريب نماذج الذكاء الاصطناعي بقصد إفساد مخرجاتها يُعرف بمصطلح: Data ______</div>
+            <input type="text" id="input-q10" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q10', ['poisoning', 'التسميم'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q10"></div>
+        </div>
+
+        <h2>أسئلة صح أو خطأ</h2>
+
+        <div class="question-card">
+            <div class="question-text">11. أمن المعلومات (Information Security) والأمن السيبراني (Cybersecurity) مصطلحان مترادفان تماماً بلا أي فرق بينهما.</div>
+            <div class="options">
+                <label><input type="radio" name="q11" value="true"> صح</label>
+                <label><input type="radio" name="q11" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q11', 'false')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q11"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">12. من مبادئ حماية البيانات الشخصية: "تحديد الغرض"، أي عدم استخدام البيانات لأغراض غير التي جُمعت من أجلها.</div>
+            <div class="options">
+                <label><input type="radio" name="q12" value="true"> صح</label>
+                <label><input type="radio" name="q12" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q12', 'true')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q12"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">13. النماذج الأكثر تعقيداً كالتعلم العميق والنماذج اللغوية الكبيرة هي الأسهل تفسيراً مقارنة بالنماذج البسيطة.</div>
+            <div class="options">
+                <label><input type="radio" name="q13" value="true"> صح</label>
+                <label><input type="radio" name="q13" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q13', 'false')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q13"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">14. أصدرت اليونسكو (UNESCO) توصيات تتعلق بأخلاقيات الذكاء الاصطناعي تشمل حقوق الإنسان والعدالة والتنوع.</div>
+            <div class="options">
+                <label><input type="radio" name="q14" value="true"> صح</label>
+                <label><input type="radio" name="q14" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q14', 'true')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q14"></div>
+        </div>
+
+        <h2>أسئلة مقالية</h2>
+
+        <div class="question-card">
+            <div class="question-text">15. إذا كانت التقنية تتطور بسرعة "أُسّية" بينما تتطور التشريعات والأخلاق بسرعة "خطية"، فهل نعيش في "فجوة حوكمة" تتسع كل يوم؟ ومن يتحمل مسؤولية الفوضى التي قد تنتج في هذه الفجوة؟</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a15')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a15">
+                <strong>الإجابة النموذجية:</strong><br>
+                نعم، هذه الفجوة واقعية وموثقة، إذ تحتاج التشريعات إلى سنوات من النقاش والتشاور بينما تتغير التقنية كل أشهر. المسؤولية عن سد هذه الفجوة لا تقع على المشرّع وحده، بل تتوزع بين المطورين (بتبني "الأخلاقيات بالتصميم" قبل صدور أي قانون) والمؤسسات (بوضع سياسات داخلية استباقية تتجاوز الحد الأدنى القانوني) والمجتمع المدني (بالمساءلة العلنية). الحوكمة الذاتية المؤسسية تصبح بذلك جسراً مؤقتاً يقلل فجوة الحوكمة ريثما تلحق التشريعات بالتقنية.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">16. عندما تتعارض "الشفافية" مع "أمن المعلومات"، أو تتعارض "العدالة" مع "الكفاءة"، أي المبادئ من بين مبادئ الحوكمة الرقمية العشرة يُقدَّم على الآخر؟ ومن يملك السلطة لترتيب هذه الأولويات؟</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a16')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a16">
+                <strong>الإجابة النموذجية:</strong><br>
+                لا يوجد ترتيب ثابت وصالح لكل السياقات؛ فالأولوية بين المبادئ ينبغي أن تُحسم حسب طبيعة القرار وحساسيته لا بقاعدة عامة جامدة. على سبيل المثال، في بيانات أمنية حساسة قد يُقدَّم "أمن المعلومات" على "الشفافية الكاملة"، بينما في قرار يؤثر مباشرة على حياة الأفراد (كقبول أكاديمي) تُقدَّم "العدالة" على "الكفاءة". السلطة المخوَّلة لهذا الترتيب ينبغي أن تكون لجنة حوكمة مؤسسية متعددة التخصصات (تقنية وقانونية وأخلاقية)، لا فريقاً تقنياً منفرداً يتخذ القرار وحده.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">17. عندما تستخدم مكتبة ذكية سجلات بحثك لتخصيص خدماتها لك، هل هي "تنتهك" خصوصيتك أم "تحترم" تفضيلاتك؟ أين ينتهي "التخصيص الذكي" ويبدأ "التنميط الرقمي"؟</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a17')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a17">
+                <strong>الإجابة النموذجية:</strong><br>
+                الفيصل هو "الموافقة الواعية" و"الغرض المعلن": إذا علم المستفيد أن سجل بحثه يُستخدم لتحسين توصياته ووافق على ذلك صراحة، فهذا تخصيص مشروع يحترم تفضيلاته. أما إذا استُخدمت البيانات نفسها لاستنتاج خصائص حساسة عنه (كميوله السياسية أو حالته الصحية) دون علمه أو لأغراض لم يُخبَر بها، فقد تحول التخصيص إلى تنميط رقمي ينتهك خصوصيته. الحد الفاصل عملياً هو مبدأ "تحديد الغرض" المذكور في مبادئ حماية البيانات.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">18. إذا كان "الصندوق الأسود" الذكي يتخذ قرارات أدق من أي خبير بشري، لكن لا أحد يفهم "كيف"، فهل نقبل قراراته؟ أم نفضل قراراً بشرياً "مفهوماً" لكنه "خاطئ"؟ هل الفهم شرط مسبق للثقة أم أن النتائج تكفي؟</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a18')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a18">
+                <strong>الإجابة النموذجية:</strong><br>
+                الإجابة تتوقف على حجم الأثر ونوع القرار: في قرارات منخفضة المخاطر (كتوصية كتاب) قد تكفي دقة النتائج دون الحاجة لفهم كامل للآلية. لكن في قرارات ذات أثر مباشر وجسيم على حياة الأفراد (كرفض قرض، أو تشخيص طبي، أو قرار قضائي)، يصبح "الفهم" شرطاً أخلاقياً لا غنى عنه، لأن غياب القدرة على مساءلة القرار يحرم المتضرر من حقه في الطعن أو التصحيح. لذلك يُفضَّل عملياً استخدام نماذج "صندوق أسود" عالية الدقة في المجالات منخفضة المخاطر، مع الإصرار على نماذج قابلة للتفسير في المجالات عالية الحساسية، حتى لو كانت أقل دقة قليلاً.</div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 الحوكمة الرقمية والأخلاقيات في النظم الذكية - اختبار تفاعلي</p>
+    </footer>
+</div>
 
 <script>
-  function checkAnswer(questionName, correctValue) {
-    const selected = document.querySelector(`input[name="${questionName}"]:checked`);
-    const resultDiv = document.getElementById(`res_${questionName}`);
-    if (!selected) { resultDiv.textContent = "الرجاء اختيار إجابة"; resultDiv.className = "result incorrect"; return; }
-    if (selected.value == correctValue) { resultDiv.textContent = "إجابة صحيحة! ✓"; resultDiv.className = "result correct"; }
-    else { resultDiv.textContent = "إجابة خاطئة! ✗"; resultDiv.className = "result incorrect"; }
-  }
-  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function checkMCQ(id, correctOption) {
+        const selected = document.querySelector(`input[name="${id}"]:checked`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        if (!selected) {
+            feedback.textContent = "الرجاء اختيار إجابة أولاً.";
+            feedback.style.color = "#b8860b";
+        } else if (selected.value === correctOption) {
+            feedback.textContent = "إجابة صحيحة! أحسنت.";
+            feedback.style.color = "#2f6b4f";
+        } else {
+            feedback.textContent = "إجابة خاطئة. حاول مرة أخرى أو راجع النص.";
+            feedback.style.color = "#9c3b3b";
+        }
+        feedback.style.display = "block";
+    }
+
+    function checkFill(id, acceptableAnswers) {
+        const input = document.getElementById(`input-${id}`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        const userAnswer = input.value.trim();
+        if (!userAnswer) {
+            feedback.textContent = "الرجاء كتابة الإجابة.";
+            feedback.style.color = "#b8860b";
+        } else {
+            const isCorrect = acceptableAnswers.some(ans => userAnswer.includes(ans));
+            if (isCorrect) {
+                feedback.textContent = "إجابة صحيحة! أحسنت.";
+                feedback.style.color = "#2f6b4f";
+            } else {
+                feedback.textContent = `إجابة خاطئة. الإجابة الصحيحة هي: ${acceptableAnswers[0]}`;
+                feedback.style.color = "#9c3b3b";
+            }
+        }
+        feedback.style.display = "block";
+    }
+
+    function checkTF(id, correctOption) {
+        const selected = document.querySelector(`input[name="${id}"]:checked`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        if (!selected) {
+            feedback.textContent = "الرجاء اختيار إجابة أولاً.";
+            feedback.style.color = "#b8860b";
+        } else if (selected.value === correctOption) {
+            feedback.textContent = "إجابة صحيحة!";
+            feedback.style.color = "#2f6b4f";
+        } else {
+            feedback.textContent = "إجابة خاطئة.";
+            feedback.style.color = "#9c3b3b";
+        }
+        feedback.style.display = "block";
+    }
+
+    function toggleAnswer(id) {
+        const answerDiv = document.getElementById(`answer-${id}`);
+        if (answerDiv.style.display === "block") {
+            answerDiv.style.display = "none";
+        } else {
+            answerDiv.style.display = "block";
+        }
+    }
 </script>
+
 </body>
 </html>

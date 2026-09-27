@@ -1,105 +1,417 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>أسئلة تفاعلية - المؤسسات المعلوماتية الذكية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif; background-color: #f4f7f9; color: #2c3e50;
-      max-width: 1200px; margin: auto; padding: 20px; font-size: 16px; line-height: 1.8;
-    }
-    header {
-      background: linear-gradient(90deg, #34495e, #2c3e50); color: white;
-      padding: 30px; text-align: center; border-radius: 10px; margin-bottom: 30px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1 { margin: 0; font-size: 2em; }
-    section {
-      background-color: white; padding: 25px; border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-bottom: 30px;
-    }
-    h2 {
-      color: #2c3e50; font-size: 1.4em; border-bottom: 3px solid #3498db;
-      padding-bottom: 8px; margin-bottom: 20px;
-    }
-    .question {
-      margin-bottom: 25px; padding: 15px; background-color: #f9f9f9;
-      border-radius: 8px; border-left: 4px solid #3498db;
-    }
-    .covered-list { padding-right: 20px; margin-bottom: 0; }
-    .covered-list li { margin-bottom: 6px; }
-    .placeholder-note {
-      border: 2px dashed #b8c4d0; background: #fbfcfe; color: #6b7a8d;
-      padding: 16px 20px; border-radius: 10px; font-size: 14px; margin-bottom: 20px;
-    }
-    .placeholder-note strong { color: #2980b9; }
-    label { display: block; margin: 8px 0; cursor: pointer; }
-    input[type="radio"] { margin-left: 8px; }
-    button {
-      background-color: #3498db; color: white; border: none; padding: 10px 15px;
-      border-radius: 5px; cursor: pointer; font-size: 16px; font-family: 'Cairo', sans-serif; margin-top: 10px;
-    }
-    .result { margin-top: 10px; padding: 8px; border-radius: 4px; font-weight: bold; }
-    .correct { background-color: #d4edda; color: #155724; }
-    .incorrect { background-color: #f8d7da; color: #721c24; }
-    .home-icon {
-      position: fixed; bottom: 20px; right: 20px; background: #3498db; color: white;
-      font-size: 20px; text-decoration: none; border-radius: 50%; padding: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    #topBtn {
-      position: fixed; bottom: 20px; left: 20px; z-index: 100; background-color: #3498db;
-      color: white; border: none; padding: 12px 18px; font-size: 16px; border-radius: 50px;
-      cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار تفاعلي - نظم دعم القرار الذكية</title>
+    <style>
+        body {
+            font-family: "Simplified Arabic","Traditional Arabic","Noto Naskh Arabic",Tahoma,Arial,sans-serif;
+            background: #f0ede3;
+            color: #1b2432;
+            line-height: 1.9;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(14,35,64,0.08);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #c8a04b;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: #0e2340;
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+            font-weight: 800;
+        }
+        header p {
+            color: #5b6472;
+            margin: 0;
+        }
+        h2 {
+            color: #0e2340;
+            margin-top: 40px;
+            border-right: 5px solid #c8a04b;
+            padding-right: 15px;
+            font-size: 1.35em;
+            font-weight: 800;
+        }
+        .question-card {
+            background: #fbf9f3;
+            border: 1px solid #e3ddcc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .question-card:hover {
+            box-shadow: 0 4px 10px rgba(14,35,64,0.06);
+            border-color: #c8a04b;
+        }
+        .question-text {
+            font-weight: 700;
+            font-size: 1.08em;
+            margin-bottom: 15px;
+            color: #0e2340;
+        }
+        .options label {
+            display: block;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background: #fffdf6;
+            border-color: #c8a04b;
+        }
+        input[type="radio"] {
+            margin-left: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .btn {
+            background: #0e2340;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            transition: 0.3s;
+            margin-top: 10px;
+            font-family: inherit;
+        }
+        .btn:hover {
+            background: #153154;
+        }
+        .feedback {
+            margin-top: 15px;
+            font-weight: 700;
+            display: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f1f1f1;
+        }
+        .model-answer {
+            display: none;
+            margin-top: 15px;
+            background: #fbf3df;
+            border-right: 5px solid #c8a04b;
+            padding: 15px;
+            border-radius: 8px;
+            color: #1b2432;
+            line-height: 1.9;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
 
-<header><h1>اختبار الأسبوع 9: المؤسسات المعلوماتية الذكية</h1></header>
+<div class="container">
+    <header>
+        <h1>اختبار تفاعلي</h1>
+        <p>نظم دعم القرار الذكية</p>
+    </header>
 
-<section>
-  <h2>المحاور المشمولة بالاختبار</h2>
-  <ul class="covered-list">
-                <li>المكتبات الذكية</li>
-                <li>الجامعات الذكية</li>
-                <li>الأرشيفات الذكية</li>
-                <li>مراكز المعلومات الذكية</li>
-                <li>المدن الذكية</li>
-  </ul>
-</section>
+    <main>
+        <h2>أسئلة اختيار من متعدد</h2>
 
-<section>
-  <h2>نموذج سؤال</h2>
-  <div class="placeholder-note">
-    📝 استبدل السؤال أدناه بأسئلة فعلية تغطي محاور «<strong>المؤسسات المعلوماتية الذكية</strong>» أعلاه، بنفس تنسيق اختبارات مرحلة البكالوريوس.
-  </div>
-  <div class="question">
-    <p>1. (سؤال نموذجي) — عدّل هذا النص وأضف الخيارات المناسبة.</p>
-    <form>
-      <label><input type="radio" name="q1" value="1"> الخيار الأول</label>
-      <label><input type="radio" name="q1" value="0"> الخيار الثاني</label>
-      <label><input type="radio" name="q1" value="0"> الخيار الثالث</label>
-      <button type="button" onclick="checkAnswer('q1', 1)">تحقق من الإجابة</button>
-      <div class="result" id="res_q1"></div>
-    </form>
-  </div>
-</section>
+        <div class="question-card">
+            <div class="question-text">1. متى ظهرت نظم دعم القرار (DSS) ولأي غرض أساسي وفق المحاضرة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> في التسعينيات لأتمتة المهام الروتينية المهيكلة</label>
+                <label><input type="radio" name="q1" value="b"> في السبعينيات لمساعدة المديرين في المشكلات شبه المهيكلة وغير المهيكلة</label>
+                <label><input type="radio" name="q1" value="c"> في العصر الحالي فقط مع ظهور الذكاء الاصطناعي التوليدي</label>
+                <label><input type="radio" name="q1" value="d"> لاستبدال الحدس البشري كلياً في جميع القرارات</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q1', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q1"></div>
+        </div>
 
-<button id="topBtn" onclick="scrollToTop()">↑</button>
-<a href="../index.html" class="home-icon" title="العودة للصفحة الرئيسية">🏠</a>
+        <div class="question-card">
+            <div class="question-text">2. أي نوع من أنواع نظم دعم القرار يعتمد على القواعد المنطقية والنظم الخبيرة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> المعتمدة على البيانات</label>
+                <label><input type="radio" name="q2" value="b"> المعتمدة على النماذج</label>
+                <label><input type="radio" name="q2" value="c"> المعتمدة على المعرفة</label>
+                <label><input type="radio" name="q2" value="d"> المعتمدة على التواصل</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q2', 'c')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q2"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">3. لمن تُصمم نظم دعم الإدارة التنفيذية (ESS) خصيصاً؟</div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> الموظفين الجدد فقط</label>
+                <label><input type="radio" name="q3" value="b"> القمم الإدارية وكبار المتخذين للقرار الاستراتيجي</label>
+                <label><input type="radio" name="q3" value="c"> عامة المستفيدين من الخدمة</label>
+                <label><input type="radio" name="q3" value="d"> فرق الدعم الفني فقط</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q3', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q3"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">4. على ماذا تعتمد النظم الخبيرة (ES) بشكل أساسي؟</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> قاعدة المعرفة ومحرك الاستدلال</label>
+                <label><input type="radio" name="q4" value="b"> لوحات المعلومات ومؤشرات الأداء فقط</label>
+                <label><input type="radio" name="q4" value="c"> النمذجة الرياضية للمخاطر المالية حصراً</label>
+                <label><input type="radio" name="q4" value="d"> منصات التواصل الجماعي فقط</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q4', 'a')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q4"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">5. ما المقصود بـ"ذكاء القرار" (Decision Intelligence) وفق المحاضرة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> برنامج حاسوبي بسيط لعرض التقارير المالية</label>
+                <label><input type="radio" name="q5" value="b"> إطار يجمع علوم البيانات والذكاء الاصطناعي وعلوم القرار وعلم السلوك التنظيمي كنظام ديناميكي مغلق الحلقة</label>
+                <label><input type="radio" name="q5" value="c"> نظام خبير قديم لا يزال يستخدم القواعد المنطقية فقط</label>
+                <label><input type="radio" name="q5" value="d"> أداة لتخزين البيانات التاريخية فقط دون تحليل</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q5', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q5"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">6. ما الفرق الجوهري بين "التنبؤ" (Forecasting) و"المحاكاة" (Simulation) وفق جدول المقارنة؟</div>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> لا فرق بينهما، وهما مصطلح واحد</label>
+                <label><input type="radio" name="q6" value="b"> التنبؤ يجيب "ماذا قد يحدث" اعتماداً على الأنماط التاريخية، بينما المحاكاة تجيب "ماذا سيحدث إذا اتخذنا هذا القرار" عبر النمذجة الرقمية</label>
+                <label><input type="radio" name="q6" value="c"> المحاكاة تعتمد فقط على الحدس البشري دون أي بيانات</label>
+                <label><input type="radio" name="q6" value="d"> التنبؤ لا يستخدم البيانات التاريخية إطلاقاً</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q6', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q6"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">7. ما الفلسفة الإدارية التي يمثلها اتخاذ القرار المعتمد على البيانات (DDDM)؟</div>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> الاعتماد الكامل على حدس المدير دون أي بيانات</label>
+                <label><input type="radio" name="q7" value="b"> الانتقال من ثقافة "أنا أرى" (الحدس) إلى ثقافة "البيانات تُظهر" (الأدلة)</label>
+                <label><input type="radio" name="q7" value="c"> إلغاء أي دور للقيادة البشرية في اتخاذ القرار</label>
+                <label><input type="radio" name="q7" value="d"> الاكتفاء بجمع البيانات دون تحليلها أو استخدامها</label>
+            </div>
+            <button class="btn" onclick="checkMCQ('q7', 'b')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q7"></div>
+        </div>
+
+        <h2>أسئلة إكمال الفراغ</h2>
+
+        <div class="question-card">
+            <div class="question-text">8. نظم دعم القرار المعتمدة على ______ تحلل النصوص غير المهيكلة، كاستخلاص الاتجاهات من رسائل شكاوى المستفيدين.</div>
+            <input type="text" id="input-q8" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q8', ['الوثائق'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q8"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">9. تعتمد نظم دعم الإدارة التنفيذية (ESS) على لوحات المعلومات ومؤشرات ______ لتقديم رؤية استراتيجية شاملة ومختصرة.</div>
+            <input type="text" id="input-q9" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q9', ['الأداء', 'kpi', 'kpis'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q9"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">10. اتخاذ القرار المعتمد على البيانات (DDDM) هو فلسفة إدارية تنقل المؤسسات من ثقافة الحدس إلى ثقافة "البيانات ______"</div>
+            <input type="text" id="input-q10" placeholder="اكتب الإجابة هنا...">
+            <button class="btn" onclick="checkFill('q10', ['تُظهر', 'تظهر'])">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q10"></div>
+        </div>
+
+        <h2>أسئلة صح أو خطأ</h2>
+
+        <div class="question-card">
+            <div class="question-text">11. تهدف نظم دعم القرار (DSS) إلى استبدال الحدس البشري كلياً بدلاً من توسيع مداركه.</div>
+            <div class="options">
+                <label><input type="radio" name="q11" value="true"> صح</label>
+                <label><input type="radio" name="q11" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q11', 'false')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q11"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">12. تعتمد النظم الخبيرة على قاعدة معرفة ومحرك استدلال لتحويل خبرة الخبراء البشريين إلى قواعد منطقية من نوع "إذا-فإن" (If-Then).</div>
+            <div class="options">
+                <label><input type="radio" name="q12" value="true"> صح</label>
+                <label><input type="radio" name="q12" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q12', 'true')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q12"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">13. المحاكاة (Simulation) تعتمد أساساً على الأنماط التاريخية والبيانات الضخمة للإجابة عن سؤال "ماذا قد يحدث؟".</div>
+            <div class="options">
+                <label><input type="radio" name="q13" value="true"> صح</label>
+                <label><input type="radio" name="q13" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q13', 'false')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q13"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">14. اتخاذ القرار المعتمد على البيانات (DDDM) يعني أن البيانات تخبرنا دائماً بما "ينبغي" أن نفعله دون الحاجة إلى القيادة البشرية.</div>
+            <div class="options">
+                <label><input type="radio" name="q14" value="true"> صح</label>
+                <label><input type="radio" name="q14" value="false"> خطأ</label>
+            </div>
+            <button class="btn" onclick="checkTF('q14', 'false')">تحقق من الإجابة</button>
+            <div class="feedback" id="feedback-q14"></div>
+        </div>
+
+        <h2>أسئلة مقالية</h2>
+
+        <div class="question-card">
+            <div class="question-text">15. إذا كانت النظم الذكية قادرة على تحليل ملايين البدائل في ثوانٍ، فهل يتحول المدير من "صانع للقرار" إلى مجرد "مُوقِّع" على توصيات الخوارزمية؟ أين يقع الحد الفاصل بين "الدعم" و"الإملاء"؟</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a15')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a15">
+                <strong>الإجابة النموذجية:</strong><br>
+                الحد الفاصل يكمن في وجود "استجواب حقيقي" للتوصية: إذا كان المدير يفهم منطق التوصية ويستطيع تفنيدها أو تعديلها بناءً على سياق لا يراه النظام، فإننا أمام "دعم" حقيقي. أما إذا أصبحت الموافقة إجراءً شكلياً روتينياً دون مراجعة فعلية، فقد تحول الدعم فعلياً إلى إملاء. الضمانة العملية هي إلزام المدير بتوثيق سبب أي قرار يخالف فيه توصية النظام، مما يبقي المساءلة والتفكير النقدي حاضرين.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">16. النظام الذكي يعرض "البدائل المتاحة" بناءً على البيانات التي يُغذى بها. لكن من يقرر أي البيانات تُغذى للنظام وأيها يُحذف؟ أليس "تحديد إطار الخيارات" هو الشكل الأخطر من أشكال السيطرة على القرار؟</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a16')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a16">
+                <strong>الإجابة النموذجية:</strong><br>
+                نعم، هذا شكل خفي وقوي من السيطرة يُسمى أحياناً "تأطير الخيارات" (Framing)؛ فمن يحدد مصادر البيانات ومعايير تنقيتها يحدد فعلياً حدود ما هو "ممكن" في نظر صانع القرار. لتقليل هذا الخطر، ينبغي توثيق وشفافية معايير اختيار البيانات المُدخلة للنظام (من يقرر، ولماذا استُبعدت بيانات معينة)، وإخضاع هذه المعايير لمراجعة دورية من جهة مستقلة عن الفريق التقني الذي يدير النظام.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">17. النظم الخبيرة "تُجمِّد" خبرة الماضي في قواعد منطقية. كيف سيتصرف النظام الخبير عندما يواجه "مأزقاً معرفياً" لم يسبق للخبراء البشريين أن رأوا مثيلاً؟ أليس الجمود هو عدو المعرفة؟</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a17')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a17">
+                <strong>الإجابة النموذجية:</strong><br>
+                النظام الخبير التقليدي سيفشل غالباً أو يعطي إجابة غير مناسبة أمام حالة خارج قواعده المبرمجة مسبقاً، لأنه لا يمتلك القدرة على "الاستنباط الإبداعي" خارج قاعدة معرفته. لهذا السبب، يجب ألا تُستخدم النظم الخبيرة بمعزل عن إشراف بشري يقظ في الحالات الحدّية أو غير المسبوقة، مع آلية واضحة تُنبّه المستخدم عندما تكون الحالة المطروحة خارج نطاق ثقة النظام، بدل أن يقدم إجابة واثقة لكنها قد تكون خاطئة.</div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text">18. نقول دائماً "البيانات لا تكذب". ولكن من يجمع البيانات؟ ومن ينظفها؟ ومن يختار الخوارزمية التي تحللها؟ ألسنا في الواقع نقوم بـ"غسل التحيزات البشرية" وإلباسها ثوباً رياضياً نسميه "موضوعية رقمية"؟</div>
+            <textarea placeholder="اكتب إجابتك هنا..."></textarea>
+            <button class="btn" onclick="toggleAnswer('a18')">عرض إجابة نموذجية</button>
+            <div class="model-answer" id="answer-a18">
+                <strong>الإجابة النموذجية:</strong><br>
+                نعم، هذا الخطر حقيقي وموثق في أدبيات علم البيانات؛ فكل خطوة من جمع البيانات إلى تنظيفها إلى اختيار الخوارزمية تنطوي على قرارات بشرية قد تحمل تحيزات ضمنية غير مقصودة. "الموضوعية الرقمية" ليست معطى تلقائياً بل نتيجة لجهد واعٍ: توثيق منهجية جمع البيانات، مراجعة الخوارزميات دورياً لاكتشاف تحيزات في مخرجاتها، وإشراك فرق متنوعة في تصميم الأنظمة لتقليل احتمال أن يتحول تحيز فردي إلى "حقيقة رياضية" غير قابلة للتشكيك.</div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 نظم دعم القرار الذكية - اختبار تفاعلي</p>
+    </footer>
+</div>
 
 <script>
-  function checkAnswer(questionName, correctValue) {
-    const selected = document.querySelector(`input[name="${questionName}"]:checked`);
-    const resultDiv = document.getElementById(`res_${questionName}`);
-    if (!selected) { resultDiv.textContent = "الرجاء اختيار إجابة"; resultDiv.className = "result incorrect"; return; }
-    if (selected.value == correctValue) { resultDiv.textContent = "إجابة صحيحة! ✓"; resultDiv.className = "result correct"; }
-    else { resultDiv.textContent = "إجابة خاطئة! ✗"; resultDiv.className = "result incorrect"; }
-  }
-  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function checkMCQ(id, correctOption) {
+        const selected = document.querySelector(`input[name="${id}"]:checked`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        if (!selected) {
+            feedback.textContent = "الرجاء اختيار إجابة أولاً.";
+            feedback.style.color = "#b8860b";
+        } else if (selected.value === correctOption) {
+            feedback.textContent = "إجابة صحيحة! أحسنت.";
+            feedback.style.color = "#2f6b4f";
+        } else {
+            feedback.textContent = "إجابة خاطئة. حاول مرة أخرى أو راجع النص.";
+            feedback.style.color = "#9c3b3b";
+        }
+        feedback.style.display = "block";
+    }
+
+    function checkFill(id, acceptableAnswers) {
+        const input = document.getElementById(`input-${id}`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        const userAnswer = input.value.trim();
+        if (!userAnswer) {
+            feedback.textContent = "الرجاء كتابة الإجابة.";
+            feedback.style.color = "#b8860b";
+        } else {
+            const isCorrect = acceptableAnswers.some(ans => userAnswer.includes(ans));
+            if (isCorrect) {
+                feedback.textContent = "إجابة صحيحة! أحسنت.";
+                feedback.style.color = "#2f6b4f";
+            } else {
+                feedback.textContent = `إجابة خاطئة. الإجابة الصحيحة هي: ${acceptableAnswers[0]}`;
+                feedback.style.color = "#9c3b3b";
+            }
+        }
+        feedback.style.display = "block";
+    }
+
+    function checkTF(id, correctOption) {
+        const selected = document.querySelector(`input[name="${id}"]:checked`);
+        const feedback = document.getElementById(`feedback-${id}`);
+        if (!selected) {
+            feedback.textContent = "الرجاء اختيار إجابة أولاً.";
+            feedback.style.color = "#b8860b";
+        } else if (selected.value === correctOption) {
+            feedback.textContent = "إجابة صحيحة!";
+            feedback.style.color = "#2f6b4f";
+        } else {
+            feedback.textContent = "إجابة خاطئة.";
+            feedback.style.color = "#9c3b3b";
+        }
+        feedback.style.display = "block";
+    }
+
+    function toggleAnswer(id) {
+        const answerDiv = document.getElementById(`answer-${id}`);
+        if (answerDiv.style.display === "block") {
+            answerDiv.style.display = "none";
+        } else {
+            answerDiv.style.display = "block";
+        }
+    }
 </script>
+
 </body>
 </html>
